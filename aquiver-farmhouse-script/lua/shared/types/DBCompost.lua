@@ -1,0 +1,4 @@
+---@class DBCompost
+---@field id number
+---@field houseId number
+---@field count number

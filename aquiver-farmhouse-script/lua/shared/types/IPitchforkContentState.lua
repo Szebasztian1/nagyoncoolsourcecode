@@ -1,0 +1,3 @@
+---@class IPitchforkContentState
+---@field id ePitchforkContent
+---@field count number

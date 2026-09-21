@@ -1,0 +1,728 @@
+/* ============================================================
+   Crafting table NUI — BC design (matches the `crafting` resource).
+   Everything is scoped under #craft-root so the Bootstrap admin
+   panel styles in index.css can't leak into it (and vice versa).
+   Tokens (--bg-modal, --acc, ...) come from index.css :root.
+   ============================================================ */
+
+#craft-root {
+    display: none;
+    /* opened by craft.js */
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    align-items: center;
+    justify-content: center;
+    /* everything sizes in em off this one value */
+    font-size: min(1.45vw, 15px);
+    color: var(--txt);
+    /* in-game: transparent stage, only the panel shows */
+    background: transparent;
+}
+
+#craft-root.open {
+    display: flex;
+}
+
+#craft-root .c-modal {
+    width: 64em;
+    max-width: 97vw;
+    height: 45em;
+    max-height: 96vh;
+    background: var(--bg-modal);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2.5em 6em rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+    animation: cScaleIn .22s ease;
+}
+
+@keyframes cScaleIn {
+    0% {
+        transform: scale(.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- header ---------- */
+#craft-root .c-bar {
+    display: flex;
+    align-items: center;
+    gap: .8em;
+    background: var(--bg-bar);
+    height: 3.5em;
+    padding-inline: 1em;
+    flex: 0 0 auto;
+}
+
+#craft-root .c-logo {
+    width: 2.1em;
+    height: 2.1em;
+    border-radius: .35em;
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+#craft-root .c-logo svg {
+    width: 1.3em;
+    height: 1.3em;
+}
+
+#craft-root .c-k {
+    font-size: .72em;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--txt4);
+    margin-bottom: -.1em;
+}
+
+#craft-root .c-name {
+    font-size: 1.35em;
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+#craft-root .c-name b {
+    color: var(--acc-lt);
+}
+
+#craft-root .c-spacer {
+    flex: 1 1 auto;
+}
+
+#craft-root .c-badge {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    background: #00000030;
+    border: 1px solid #ffffff12;
+    border-radius: .35em;
+    padding: .4em .75em;
+    font-weight: 600;
+    font-size: .85em;
+    color: var(--txt2);
+    max-width: 16em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#craft-root .c-dot {
+    width: .5em;
+    height: .5em;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 .6em var(--ok);
+    flex: 0 0 auto;
+}
+
+#craft-root .c-close {
+    width: 2em;
+    height: 2em;
+    border-radius: var(--radius);
+    background: #d1d1d130;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .25s;
+    color: var(--txt2);
+    flex: 0 0 auto;
+}
+
+#craft-root .c-close svg {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+#craft-root .c-close:hover {
+    background: var(--danger-tint);
+    color: var(--danger-lt);
+}
+
+/* ---------- body / panels ---------- */
+#craft-root .c-body {
+    display: grid;
+    grid-template-columns: 21em 1fr 16.5em;
+    gap: 1em;
+    padding: 1em;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+#craft-root .c-panel {
+    position: relative;
+    background: var(--bg-bar);
+    border-radius: .5em;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#craft-root .c-phead {
+    display: flex;
+    align-items: center;
+    gap: .6em;
+    padding: .85em .9em .7em;
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+#craft-root .c-pico {
+    width: 1.9em;
+    height: 1.9em;
+    border-radius: .4em;
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+#craft-root .c-pico svg {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+#craft-root .c-pt {
+    font-weight: 700;
+    font-size: 1.05em;
+    line-height: 1;
+}
+
+#craft-root .c-ps {
+    font-size: .72em;
+    color: var(--txt4);
+    margin-top: .15em;
+}
+
+#craft-root .c-wm {
+    position: absolute;
+    top: -.15em;
+    right: .1em;
+    z-index: 0;
+    opacity: .08;
+    transform: skew(-22deg, 22deg);
+    color: #fff;
+    pointer-events: none;
+}
+
+#craft-root .c-wm svg {
+    width: 9em;
+    height: 9em;
+}
+
+/* scroll areas — the only scrollers, BC-blue bar */
+#craft-root .c-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    scrollbar-width: thin;
+    scrollbar-color: var(--acc) #ffffff10;
+}
+
+#craft-root .c-scroll::-webkit-scrollbar {
+    width: .6em;
+}
+
+#craft-root .c-scroll::-webkit-scrollbar-track {
+    background: #ffffff0a;
+    border-radius: 1em;
+    margin: .35em;
+}
+
+#craft-root .c-scroll::-webkit-scrollbar-thumb {
+    background: var(--acc);
+    border-radius: 1em;
+    border: .14em solid transparent;
+    background-clip: padding-box;
+}
+
+#craft-root .c-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--acc-lt);
+}
+
+/* ---------- item icon (ox_inventory image + monogram fallback) ---------- */
+#craft-root .c-ico {
+    position: relative;
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: .35em;
+    background: #00000030;
+    border: 1px solid var(--bd);
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .82em;
+    color: var(--txt3);
+    overflow: hidden;
+}
+
+#craft-root .c-ico img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: .18em;
+    /* hidden until decoded, so a broken image never flashes over the monogram */
+    opacity: 0;
+    transition: opacity .12s ease;
+}
+
+#craft-root .c-ico img.ok {
+    opacity: 1;
+}
+
+/* ---------- recipe list ---------- */
+#craft-root .c-list {
+    padding: 0 .7em .8em;
+}
+
+#craft-root .c-card {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .45em;
+    padding: .45em .5em;
+    margin-bottom: .4em;
+    cursor: pointer;
+    transition: .16s;
+    display: flex;
+    align-items: center;
+    gap: .6em;
+}
+
+#craft-root .c-card:hover {
+    background: #2b3242;
+    border-color: var(--acc-bd);
+}
+
+#craft-root .c-card.on {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+}
+
+#craft-root .c-card.off {
+    opacity: .62;
+}
+
+#craft-root .c-card.on .c-ico {
+    border-color: var(--acc-bd);
+    color: var(--acc-lt);
+}
+
+#craft-root .c-meta {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+#craft-root .c-cname {
+    font-weight: 700;
+    font-size: .92em;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#craft-root .c-csub {
+    font-size: .72em;
+    color: var(--txt4);
+    margin-top: .1em;
+}
+
+#craft-root .c-csub b {
+    color: var(--ok-lt);
+    font-weight: 700;
+}
+
+#craft-root .c-csub i {
+    color: var(--danger-lt);
+    font-style: normal;
+    font-weight: 700;
+}
+
+/* weapon marker */
+#craft-root .c-tag {
+    font-size: .62em;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #e0b34d;
+    background: #e0b34d22;
+    border-radius: .3em;
+    padding: .1em .45em;
+    margin-left: .4em;
+    vertical-align: .12em;
+}
+
+/* ---------- result header ---------- */
+#craft-root .c-result {
+    display: flex;
+    align-items: center;
+    gap: .8em;
+    margin: 0 .9em .8em;
+    padding: .75em .8em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    position: relative;
+    z-index: 1;
+}
+
+#craft-root .c-rico {
+    position: relative;
+    width: 3.4em;
+    height: 3.4em;
+    border-radius: .45em;
+    background: var(--acc-tint);
+    border: 1px solid var(--acc-bd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--acc-lt);
+    font-weight: 700;
+    font-size: 1em;
+    flex: 0 0 auto;
+    overflow: hidden;
+}
+
+#craft-root .c-rico img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: .25em;
+    opacity: 0;
+    transition: opacity .12s ease;
+}
+
+#craft-root .c-rico img.ok {
+    opacity: 1;
+}
+
+#craft-root .c-rn {
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+#craft-root .c-rs {
+    font-size: .78em;
+    color: var(--txt3);
+    margin-top: .2em;
+    display: flex;
+    gap: .9em;
+    flex-wrap: wrap;
+}
+
+#craft-root .c-rs span {
+    display: flex;
+    align-items: center;
+    gap: .3em;
+}
+
+#craft-root .c-rs svg {
+    width: .95em;
+    height: .95em;
+    color: var(--txt4);
+}
+
+/* ---------- ingredient rows ---------- */
+#craft-root .c-ings {
+    padding: 0 .9em .9em;
+}
+
+#craft-root .c-ing {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .45em;
+    padding: .55em .65em;
+    margin-bottom: .45em;
+}
+
+#craft-root .c-iname {
+    font-weight: 600;
+    font-size: .92em;
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#craft-root .c-barwrap {
+    width: 6.5em;
+    height: .32em;
+    border-radius: 1em;
+    background: #00000045;
+    overflow: hidden;
+    flex: 0 0 auto;
+}
+
+#craft-root .c-barfill {
+    height: 100%;
+    border-radius: 1em;
+    background: var(--ok);
+    transition: width .18s;
+}
+
+#craft-root .c-ing.miss .c-barfill {
+    background: var(--danger);
+}
+
+#craft-root .c-cnt {
+    font-size: .82em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-radius: .3em;
+    padding: .1em .55em;
+    min-width: 4.8em;
+    text-align: center;
+    flex: 0 0 auto;
+    background: var(--ok-tint);
+    color: var(--ok-lt);
+}
+
+#craft-root .c-ing.miss .c-cnt {
+    background: var(--danger-tint);
+    color: var(--danger-lt);
+}
+
+/* ---------- craft column ---------- */
+#craft-root .c-craftbody {
+    padding: .2em .9em .9em;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+#craft-root .c-qty {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .7em .75em;
+    margin-bottom: .7em;
+}
+
+#craft-root .c-ql {
+    font-size: .7em;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt4);
+    margin-bottom: .5em;
+}
+
+#craft-root .c-qrow {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+#craft-root .c-step {
+    width: 2.1em;
+    height: 2.1em;
+    border-radius: .4em;
+    background: #ffffff0d;
+    border: 1px solid #ffffff1f;
+    color: var(--txt2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: .15s;
+}
+
+#craft-root .c-step:hover {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+    color: var(--acc-lt);
+}
+
+#craft-root .c-qnum {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+#craft-root .c-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: .35em;
+    border-radius: 1em;
+    background: #00000045;
+    margin-top: .7em;
+    accent-color: var(--acc);
+    cursor: pointer;
+}
+
+#craft-root .c-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.05em;
+    height: 1.05em;
+    border-radius: 50%;
+    background: var(--acc);
+    border: 2px solid #cfe0fb;
+}
+
+#craft-root .c-sum {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .6em .75em;
+    margin-bottom: .7em;
+}
+
+#craft-root .c-sum .c-r {
+    display: flex;
+    justify-content: space-between;
+    font-size: .85em;
+    padding: .2em 0;
+}
+
+#craft-root .c-sum .c-r span:first-child {
+    color: var(--txt3);
+}
+
+#craft-root .c-sum .c-r span:last-child {
+    font-weight: 700;
+}
+
+#craft-root .c-sum .c-r.total span:last-child {
+    color: var(--ok-lt);
+}
+
+#craft-root .c-hint {
+    font-size: .72em;
+    color: var(--txt4);
+    line-height: 1.35;
+    background: #00000030;
+    border: 1px solid #ffffff10;
+    border-radius: .4em;
+    padding: .5em .6em;
+    margin-bottom: .7em;
+}
+
+#craft-root .c-hint b {
+    color: var(--acc-lt);
+}
+
+#craft-root .c-grow {
+    flex: 1 1 auto;
+}
+
+#craft-root .c-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45em;
+    height: 2.7em;
+    border-radius: .45em;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: .16s;
+    user-select: none;
+}
+
+#craft-root .c-btn svg {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+#craft-root .c-btn.green {
+    background: var(--ok-tint);
+    color: var(--ok-lt);
+    border-color: rgba(76, 219, 40, .5);
+}
+
+#craft-root .c-btn.green:hover {
+    background: rgba(76, 219, 40, .24);
+    color: #fff;
+}
+
+#craft-root .c-btn.ghost {
+    background: #ffffff08;
+    color: var(--txt2);
+    border-color: #ffffff14;
+    margin-bottom: .5em;
+    height: 2.3em;
+    font-size: .9em;
+}
+
+#craft-root .c-btn.ghost:hover {
+    background: #ffffff14;
+    color: #fff;
+}
+
+#craft-root .c-btn.disabled {
+    background: #ffffff08;
+    color: var(--txt4);
+    border-color: #ffffff14;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ---------- empty state ---------- */
+#craft-root .c-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .6em;
+    height: 100%;
+    padding: 1.5em;
+    text-align: center;
+    color: var(--txt4);
+    font-size: .9em;
+    position: relative;
+    z-index: 1;
+}
+
+#craft-root .c-empty svg {
+    width: 2.6em;
+    height: 2.6em;
+    opacity: .5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #craft-root .c-modal,
+    #craft-root .c-btn,
+    #craft-root .c-card {
+        animation: none;
+        transition: none;
+    }
+}

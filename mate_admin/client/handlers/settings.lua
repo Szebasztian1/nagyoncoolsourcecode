@@ -1,0 +1,5 @@
+Rpc:RegisterServerProxy('settings:getRankPermissions')
+Rpc:RegisterServerProxy('settings:getSystemSettings')
+Rpc:RegisterServerProxy('settings:updateRankPermissions')
+Rpc:RegisterServerProxy('settings:updateSystemSettings')
+Rpc:RegisterServerProxy('ranks:getMeta')

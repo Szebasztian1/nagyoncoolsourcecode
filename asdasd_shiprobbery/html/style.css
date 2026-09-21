@@ -1,0 +1,36 @@
+body {
+    display: none;
+}
+
+.statheader {
+    color: white;
+    font-size: 1.0vw;
+    text-align: center;
+}
+
+.statcontainer {
+    position: absolute;
+    top: 10vw;
+    width: 15vw;
+    height: 30vh;
+    border-radius: 0.5vw;
+    background-color: rgba(0, 0, 0, 200);
+    border-bottom: 0.5vh solid rgb(0, 140, 255);
+    opacity: 0.8;
+}
+
+.playerstat {
+    color: white;
+    background-color: rgb(0, 140, 255);
+    padding-left: 1.0vw;
+    margin-top: 0.5vw;
+}
+
+.playerstatremaining {
+    color: white;
+    background-color: rgb(0, 140, 255);
+    padding-left: 1.0vw;
+    margin-top: 0.5vw;
+}
+
+

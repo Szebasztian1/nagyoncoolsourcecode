@@ -1,0 +1,894 @@
+/* Player-facing shop UI — BC design (docs/bc-design-system.md).
+   Everything sizes in em off the .main-container root font-size. */
+
+.main-container {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bc-scrim);
+    font-family: var(--bc-font);
+    font-size: clamp(11px, 1.25vh, 22px);
+    /* explicit: Bootstrap sets 1.5 on body, which would inflate every em-sized box */
+    line-height: 1.35;
+    color: var(--txt);
+    overflow: hidden;
+}
+
+/* ── Modal shell ──────────────────────────────────────────────────────── */
+
+.main-container .shop-page,
+.main-container .buy-shop,
+.main-container .shop-settings,
+.main-container .shop-permissions,
+.main-container .inputMenu,
+.main-container .filter-modal {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: 97vw;
+    max-height: 96vh;
+    background: var(--bg-modal);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2.5em 6em rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+    animation: bcScaleIn .22s ease;
+}
+
+.main-container .shop-page { width: 84em; height: 52em }
+.main-container .buy-shop { width: 72em; height: 46em }
+.main-container .shop-settings { width: 62em; height: 44em }
+.main-container .shop-permissions { width: 46em; height: 46em }
+.main-container .filter-modal { width: 34em; height: 42em }
+.main-container .inputMenu { width: 32em }
+
+/* ── Header bar ───────────────────────────────────────────────────────── */
+
+.main-container .bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8em;
+    height: 4.4em;
+    padding-inline: 1em;
+    background: var(--bg-bar);
+}
+
+.main-container .bar .brand {
+    display: flex;
+    align-items: center;
+    gap: .75em;
+    min-width: 0;
+}
+
+.main-container .bar .logo {
+    flex: 0 0 auto;
+    width: 2.4em;
+    height: 2.4em;
+    border-radius: .35em;
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+}
+
+.main-container .bar .name {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.main-container .bar .name .k {
+    font-size: .8em;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--txt4);
+    line-height: 1.2;
+}
+
+.main-container .bar .name .shop-title,
+.main-container .bar .name h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--txt);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-container .bar-right {
+    display: flex;
+    align-items: center;
+    gap: .6em;
+    flex: 0 0 auto;
+}
+
+.main-container .plate {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    background: #00000030;
+    border: 1px solid #ffffff12;
+    border-radius: .35em;
+    padding: .35em .7em;
+    font-weight: 600;
+    color: var(--txt2);
+}
+
+.main-container .plate .dot {
+    width: .5em;
+    height: .5em;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 .6em var(--ok);
+}
+
+.main-container .bc-close {
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: var(--radius);
+    background: #d1d1d130;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .25s;
+    color: var(--txt2);
+    font-size: .95em;
+}
+
+.main-container .bc-close:hover {
+    background: var(--danger-tint);
+    color: var(--danger-lt);
+}
+
+/* ── Body: sidebar | main ─────────────────────────────────────────────── */
+
+.main-container .body {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 17em minmax(0, 1fr);
+    gap: 1em;
+    padding: 1em;
+}
+
+.main-container .side {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--bg-bar);
+    border-radius: .5em;
+    padding: .6em;
+    overflow: hidden;
+}
+
+.main-container .main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--bg-bar);
+    border-radius: .5em;
+    overflow: hidden;
+}
+
+/* skewed watermark — the VMS signature */
+.main-container .wm {
+    position: absolute;
+    top: -.15em;
+    right: .1em;
+    z-index: 0;
+    opacity: .06;
+    transform: skew(-22deg, 22deg);
+    color: #fff;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.main-container .wm i { font-size: 11em }
+
+/* the ONLY scroll area of a panel */
+.main-container .page {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 1.1em 1.2em 1.4em;
+}
+
+.main-container .foot {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    padding: .85em 1.1em;
+    border-top: 1px solid #ffffff0d;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+
+.main-container .bc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45em;
+    height: 2.75em;
+    padding: 0 1.1em;
+    border-radius: .45em;
+    border: 1px solid transparent;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    transition: .18s;
+    white-space: nowrap;
+}
+
+.main-container .bc-btn:active { transform: scale(.97) }
+.main-container .bc-btn p { font-weight: 700 }
+
+.main-container .bc-btn.blue {
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    border-color: var(--acc-bd);
+}
+
+.main-container .bc-btn.blue:hover { background: var(--acc-tint-h) }
+
+.main-container .bc-btn.green {
+    background: var(--ok-tint);
+    color: var(--ok-lt);
+    border-color: rgba(76, 219, 40, .5);
+}
+
+.main-container .bc-btn.green:hover { background: rgba(76, 219, 40, .24) }
+
+.main-container .bc-btn.ghost {
+    background: #ffffff08;
+    color: var(--txt2);
+    border-color: #ffffff14;
+}
+
+.main-container .bc-btn.ghost:hover { background: #ffffff12 }
+
+.main-container .bc-btn.filter-btn.active {
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    border-color: var(--acc-bd);
+}
+
+/* ── Sidebar nav button (shop action modes) ───────────────────────────── */
+
+.main-container .options-menu {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    gap: .55em;
+}
+
+.main-container .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    flex: 0 0 auto;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    padding: .5em;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: .22s;
+}
+
+.main-container .nav-btn .ico {
+    flex: 0 0 auto;
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: .5em;
+    background: rgba(134, 142, 150, .15);
+    color: #8b8b8b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .22s;
+}
+
+.main-container .nav-btn .t {
+    font-weight: 700;
+    font-size: .95em;
+    line-height: 1.15;
+    color: var(--txt);
+}
+
+.main-container .nav-btn:hover { border-color: #565656 }
+
+.main-container .nav-btn.selected-btn {
+    background: #2b3242;
+    border-color: var(--acc-bd);
+}
+
+.main-container .nav-btn.selected-btn .ico {
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+}
+
+/* ── Info box (sidebar footer) ────────────────────────────────────────── */
+
+.main-container .info-box {
+    flex: 0 0 auto;
+    margin-top: auto;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .7em .8em;
+}
+
+.main-container .info-box .ih {
+    font-size: .7em;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt4);
+    margin-bottom: .5em;
+}
+
+.main-container .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .6em;
+    font-size: .85em;
+    padding: .18em 0;
+}
+
+.main-container .info-row span:first-child {
+    color: var(--txt3);
+    flex: 0 0 auto;
+}
+
+.main-container .info-row span:last-child {
+    font-weight: 600;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main-container .bc-badge {
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    border-radius: .3em;
+    padding: .05em .55em;
+}
+
+/* ── Item grid ────────────────────────────────────────────────────────── */
+
+.main-container .items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10.5em, 1fr));
+    align-content: start;
+    gap: .85em;
+    list-style: none;
+}
+
+/* min-height gives the column slack: without it the grid row can end up shorter
+   than the content and `overflow: hidden` silently eats the name and the price */
+.main-container .item-element {
+    position: relative;
+    display: flex;
+    min-height: 11em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .45em;
+    cursor: pointer;
+    transition: .18s;
+    overflow: hidden;
+}
+
+.main-container .item-element:hover { border-color: #565656 }
+
+.main-container .item-element.on {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+}
+
+/* the shop buys / the shop sells — semantic stripe, not a second accent */
+.main-container .item-element.m-buy { box-shadow: inset .22em 0 0 var(--acc) }
+.main-container .item-element.m-sell { box-shadow: inset .22em 0 0 var(--ok) }
+
+.main-container .inner-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .35em;
+    width: 100%;
+    padding: .5em .6em .7em;
+}
+
+/* in flow, not absolute — a long "out of stock" label must never sit on the name */
+.main-container .item-count {
+    flex: 0 0 auto;
+    align-self: flex-end;
+    max-width: 100%;
+    font-size: .72em;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--txt4);
+    background: #00000038;
+    border-radius: .3em;
+    padding: .05em .45em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* fixed box: the card keeps its shape even when no inventory image resolves */
+.main-container .item-thumb {
+    flex: 0 0 auto;
+    width: 4.4em;
+    height: 4.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .15em 0 .1em;
+}
+
+.main-container .item-img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.main-container .item-thumb i { display: none; font-size: 2.3em; color: #5a5a5a }
+.main-container .item-thumb.empty i { display: block }
+.main-container .item-element.on .item-thumb i { color: var(--acc-lt) }
+
+.main-container .item-info {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+    line-height: 1.25;
+}
+
+.main-container .item-info br { display: none }
+
+.main-container .item-name {
+    display: block;
+    font-size: .85em;
+    font-weight: 600;
+    color: var(--txt2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main-container .item-price {
+    display: inline-block;
+    font-size: .9em;
+    font-weight: 700;
+    color: var(--ok-lt);
+}
+
+.main-container .item-element.on .item-name { color: #fff }
+
+/* ── Amount input ─────────────────────────────────────────────────────── */
+
+.main-container #amount-input,
+.main-container .inputField {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 2.75em;
+    padding: 0 .8em;
+    border-radius: .45em;
+    background: #00000038;
+    border: 1px solid #ffffff14;
+    color: var(--txt);
+    font-family: var(--bc-font);
+    font-size: 1em;
+    font-weight: 600;
+    outline: none;
+    transition: .18s;
+}
+
+.main-container #amount-input::placeholder,
+.main-container .inputField::placeholder { color: var(--txt4) }
+
+.main-container #amount-input:focus,
+.main-container .inputField:focus {
+    border-color: var(--acc-bd);
+    box-shadow: 0 0 0 2px var(--acc-tint);
+}
+
+/* ── Filter overlay ───────────────────────────────────────────────────── */
+
+.main-container .filter-page {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .6);
+    animation: bcFadeIn .18s ease;
+}
+
+.main-container .filter-description {
+    flex: 0 0 auto;
+    padding: 1em 1.2em .2em;
+    font-size: .8em;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--txt4);
+}
+
+.main-container .filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    list-style: none;
+}
+
+.main-container .filter-element {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .4em;
+    padding: .7em .8em;
+    font-weight: 600;
+    color: var(--txt2);
+    cursor: pointer;
+    transition: .18s;
+}
+
+.main-container .filter-element:hover { border-color: #565656 }
+
+.main-container .filter-element.on {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+    color: #fff;
+}
+
+.main-container .filter-buttons { justify-content: flex-end }
+.main-container .filter-buttons .bc-btn { flex: 1 1 0 }
+
+/* ── Shop settings / employees ────────────────────────────────────────── */
+
+.main-container .left-settings {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    min-height: 0;
+    overflow-y: auto;
+    list-style: none;
+    background: var(--bg-bar);
+    border-radius: .5em;
+    padding: .6em;
+}
+
+.main-container .setting-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5em;
+    flex: 0 0 auto;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .75em .85em;
+    cursor: pointer;
+    transition: .22s;
+}
+
+.main-container .setting-element p {
+    font-weight: 600;
+    font-size: .95em;
+    color: var(--txt2);
+    line-height: 1.2;
+}
+
+.main-container .setting-element::after {
+    content: "";
+    flex: 0 0 auto;
+    width: .5em;
+    height: .5em;
+    border-right: .15em solid var(--txt4);
+    border-bottom: .15em solid var(--txt4);
+    transform: rotate(-45deg);
+    transition: .22s;
+}
+
+.main-container .setting-element:hover { border-color: #565656 }
+
+.main-container .setting-element.selected {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+}
+
+.main-container .setting-element.selected p { color: #fff }
+.main-container .setting-element.selected::after { border-color: var(--acc-lt) }
+
+.main-container .right-options {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 1.1em 1.2em;
+    list-style: none;
+}
+
+.main-container .stored-money {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .9em 1em;
+}
+
+.main-container .stored-money .sm-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-container .stored-money-title {
+    font-size: .72em;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt4);
+}
+
+.main-container .money-icon {
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: .4em;
+    background: var(--ok-tint);
+    color: var(--ok-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container .money-icon.people {
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+}
+
+.main-container .stored-money-amount {
+    margin-top: .25em;
+    font-size: 2.2em;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ok-lt);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-container .stored-money-amount.count { color: var(--acc-lt) }
+
+.main-container .option-element.clickable {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .8em .9em;
+    cursor: pointer;
+    transition: .22s;
+}
+
+.main-container .option-element.clickable:hover { border-color: #565656 }
+
+.main-container .option-element.clickable i { color: var(--txt4) }
+.main-container .option-element.clickable:hover i { color: var(--acc-lt) }
+
+.main-container .option-element.clickable p {
+    font-weight: 600;
+    color: var(--txt2);
+}
+
+.main-container .right-options .seperator {
+    flex: 0 0 auto;
+    height: 1px;
+    background: #ffffff12;
+    margin-top: auto;
+}
+
+.main-container .right-options #cancelBtn { justify-content: center }
+
+/* ── Permissions ──────────────────────────────────────────────────────── */
+
+.main-container .shop-permissions .foot .bc-btn { flex: 1 1 0 }
+
+.main-container .permissions-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    list-style: none;
+}
+
+.main-container .permission-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .45em;
+    padding: .65em .8em;
+}
+
+.main-container .permission-text {
+    font-size: .92em;
+    font-weight: 600;
+    color: var(--txt2);
+}
+
+.main-container .switch {
+    position: relative;
+    flex: 0 0 auto;
+    width: 2.9em;
+    height: 1.5em;
+    background: #00000045;
+    border: 1px solid #ffffff1a;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: .22s;
+}
+
+/* JS keeps the two <a> halves for its true/false state — they carry no visuals */
+.main-container .switch > * { display: none }
+
+.main-container .switch::after {
+    content: "";
+    position: absolute;
+    width: 1.05em;
+    height: 1.05em;
+    left: .18em;
+    top: .16em;
+    background: #9a9a9a;
+    border-radius: 50%;
+    transition: .22s;
+}
+
+.main-container .switch[id="true"] {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+}
+
+.main-container .switch[id="true"]::after {
+    transform: translateX(1.35em);
+    background: var(--acc);
+    box-shadow: 0 0 .5em var(--acc);
+}
+
+/* ── Input / confirm dialog ───────────────────────────────────────────── */
+
+.main-container .inputMenu .ibody {
+    display: flex;
+    flex-direction: column;
+    gap: .9em;
+    padding: 1.2em;
+}
+
+.main-container .inputMenuDesc {
+    font-size: .95em;
+    color: var(--txt3);
+    line-height: 1.35;
+}
+
+.main-container .inputMenu .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+}
+
+.main-container .inputMenu .brow {
+    display: flex;
+    gap: .7em;
+}
+
+.main-container .inputMenu .brow .bc-btn { flex: 1 1 0 }
+
+/* ── Buy shop dialog ──────────────────────────────────────────────────── */
+
+.main-container .buy-shop .body { grid-template-columns: minmax(0, 1fr) 22em }
+
+.main-container .preview-image {
+    position: relative;
+    border-radius: .5em;
+    border: 1px solid var(--bd);
+    overflow: hidden;
+    min-height: 0;
+}
+
+.main-container .shop-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-container .adress-text {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 1.2em 1.4em;
+    text-align: right;
+    background: linear-gradient(to top, rgba(0, 0, 0, .8), transparent);
+    width: 100%;
+}
+
+.main-container .adress-text h2 {
+    font-weight: 700;
+    font-size: 1.8em;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.main-container .adress-text .shop-id {
+    font-size: .8em;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--txt4);
+}
+
+.main-container .buy-shop .right-side {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    min-height: 0;
+}
+
+.main-container .buy-shop .info-box { margin-top: 0 }
+
+.main-container .info-text {
+    font-size: .9em;
+    line-height: 1.4;
+    color: var(--txt2);
+}
+
+.main-container .buy-shop .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: .6em;
+    margin-top: auto;
+}
+
+.main-container .buy-shop .buttons .bc-btn { height: 3.2em }
+
+/* ── Misc ─────────────────────────────────────────────────────────────── */
+
+.main-container .side-fill { flex: 1 1 auto; min-height: .7em }
+.main-container .clickable { cursor: pointer }
+
+/* nothing to navigate: the rail becomes a details panel, so pull the box up */
+.main-container .side.no-options .side-fill { order: 1 }
+.main-container .side.no-options .info-box { margin-top: 0 }
+
+.main-container :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--acc-bd);
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpawnSelector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- háttér: éjszakai légi városkép a játékkamera helyett (a töltés elsötétülésekor tűnik el) -->
+    <div class="bgcity" id="bg" hidden></div>
+
+    <div class="stage" id="stage" hidden>
+        <div class="top">
+            <div class="keys" data-move="keys" data-label="Billentyű-tippek">
+                <span class="hint"><span class="kc">←</span><span class="kc">→</span> Választás</span>
+                <span class="hint"><span class="kc">1–9</span> Gyorsválasztás</span>
+                <span class="hint"><span class="kc">Enter</span> Megjelenés</span>
+                <span class="hint cam-only"><span class="kc">Egér</span> Húzd: forgatás</span>
+                <span class="hint cam-only"><span class="kc">Görgő</span> Előre / hátra</span>
+            </div>
+            <button class="hint custom-btn" id="customBtn" type="button"><svg viewBox="0 0 24 24"><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M6 4v4"/><path d="M6 12v8"/><path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M12 4v10"/><path d="M12 18v2"/><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M18 4v1"/><path d="M18 9v11"/></svg> Testreszabás</button>
+        </div>
+
+        <div class="lower">
+            <div class="headrow">
+                <div class="hero" data-move="hero" data-label="Cím">
+                    <div class="k">Üdvözlünk vissza <i></i> Black City</div>
+                    <div class="ttl">Hol <b>kezdesz?</b></div>
+                    <div class="sub">Válassz egy helyszínt, vagy folytasd ott, ahol legutóbb abbahagytad.</div>
+                </div>
+                <div class="cta" id="cta" data-move="cta" data-label="Kiválasztva doboz"></div>
+            </div>
+            <div class="rail" id="rail" data-move="rail" data-label="Kártyák"></div>
+        </div>
+
+        <!-- Testreszabás: méretek, láthatóság, hangerő; nyitva a kijelölt részek egérrel mozgathatók -->
+        <div class="cust-panel" id="custom" hidden>
+            <div class="c-head">
+                <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M6 4v4"/><path d="M6 12v8"/><path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M12 4v10"/><path d="M12 18v2"/><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M18 4v1"/><path d="M18 9v11"/></svg></div>
+                <div><div class="k">Saját felület</div><div class="ttl">Testre<b>szabás</b></div></div>
+                <span class="c-grip" title="A panel is áthúzható"><i></i><i></i><i></i></span>
+                <button class="c-close" id="customClose" type="button" title="Bezárás"><svg viewBox="0 0 24 24"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg></button>
+            </div>
+            <div class="c-body" id="customBody"></div>
+            <div class="c-foot">
+                <button class="btn ghost" id="customReset" type="button"><svg viewBox="0 0 24 24"><path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5"/></svg>Alaphelyzet</button>
+                <button class="btn green" id="customDone" type="button"><svg viewBox="0 0 24 24"><path d="M5 12l5 5l10 -10"/></svg>Kész</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="arrive" id="arrive" hidden>
+        <div class="a-k">Üdvözlünk a szerveren!</div>
+        <div class="a-ttl">BLACK <b>CITY</b></div>
+        <div class="a-line"><i></i></div>
+        <div class="a-sub" id="arriveSub"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

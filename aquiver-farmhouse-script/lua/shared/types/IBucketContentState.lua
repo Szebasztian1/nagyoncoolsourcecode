@@ -1,0 +1,3 @@
+---@class IBucketContentState
+---@field id string
+---@field count number

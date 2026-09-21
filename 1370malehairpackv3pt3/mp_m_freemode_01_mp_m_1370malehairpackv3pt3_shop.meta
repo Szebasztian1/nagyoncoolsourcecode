@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ShopPedApparel>
+	<pedName>mp_m_freemode_01</pedName>
+	<dlcName>mp_m_1370malehairpackv3pt3</dlcName>
+	<fullDlcName>mp_m_freemode_01_mp_m_1370malehairpackv3pt3</fullDlcName>
+	<eCharacter>SCR_CHAR_MULTIPLAYER</eCharacter>
+	<creatureMetaData>MP_CreatureMetadata_1</creatureMetaData>
+	<pedOutfits>
+	</pedOutfits>
+	<pedComponents>
+        <!-- Hair: Hair - hair_diff_007_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_0_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="0" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_007_b_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_0_1_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="0" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="1" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_000_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_1_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="1" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_005_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_2_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="2" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_007_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_3_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="3" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_008_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_4_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="4" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_015_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_5_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="5" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_016_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_6_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="6" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_021_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_7_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="7" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_022_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_8_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="8" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_027_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_9_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="9" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_029_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_10_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="10" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_031_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_11_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="11" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_033_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_12_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="12" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_036_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_13_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="13" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_038_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_14_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="14" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_039_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_15_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="15" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_041_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_16_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="16" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_042_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_17_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="17" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_045_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_18_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="18" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_050_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_19_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="19" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_051_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_20_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="20" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_054_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_21_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="21" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_055_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_22_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="22" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_057_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_23_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="23" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_058_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_24_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="24" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_062_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_25_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="25" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_068_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_26_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="26" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_074_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_27_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="27" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_075_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_28_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="28" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_081_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_29_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="29" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_083_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_30_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="30" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_091_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_31_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="31" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_093_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_32_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="32" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_095_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_33_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="33" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_101_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_34_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="34" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_105_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_35_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="35" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_106_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_36_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="36" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_109_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_37_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="37" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_116_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_38_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="38" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_121_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_39_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="39" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_124_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_40_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="40" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_125_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_41_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="41" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - mp_m_freemode_01_mp_m_snowrellampmaleclothes^hair_diff_040_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_42_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="42" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_031_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_43_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="43" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_004_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_44_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="44" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_004_b_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_44_1_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="44" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="1" />
+			<isInOutfit value="false" />
+		</Item>
+        <!-- Hair: Hair - hair_diff_001_a_uni -->
+		<Item>
+			<lockHash />
+			<cost value="0"/>
+			<textLabel />
+			<uniqueNameHash>CLO_DCT_HAIR_45_0_M</uniqueNameHash>
+			<eShopEnum>CLO_SHOP_NONE</eShopEnum>
+			<locate value="-99" />
+			<scriptSaveData value="0" />
+			<restrictionTags>
+			</restrictionTags>
+            <forcedComponents />
+            <variantComponents />
+			<drawableIndex value="0" />
+			<localDrawableIndex value="45" />
+			<eCompType>PV_COMP_HAIR</eCompType>
+			<textureIndex value="0" />
+			<isInOutfit value="false" />
+		</Item>
+	</pedComponents>
+	<pedProps>
+	</pedProps>
+</ShopPedApparel>

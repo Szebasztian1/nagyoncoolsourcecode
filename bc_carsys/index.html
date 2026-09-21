@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bc_enginesys</title>
+    <style>
+        #main {
+            position: absolute;
+            bottom: 5%;
+            right: 25%;
+            display: flex;
+            align-items: center;
+            height: 6vh;
+            width: 10vw;
+            background-color: #202020b3;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            font-family: monospace;
+            border-radius: 1vh;
+            color: white;
+        }
+        #checkengine {
+            max-width: 4vw;
+            max-height: 5vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div>
+            <p id="milage">0 km</p>
+            <p id="inspection">0km/20.000km</p>
+        </div>
+        <img id="checkengine" src="data:image/png;base64,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">
+        
+    </div>
+    <script>
+        window.addEventListener('message', function(event) {
+            var data = event.data;
+            if (data.type === 'data') {
+                if (!data.show) {
+                    document.getElementById('main').style.display = 'none';
+                    return;
+                }
+                document.getElementById('main').style.display = 'flex';
+
+                document.getElementById('milage').innerText = Intl.NumberFormat('de-DE').format(Math.round(data.milage)) + ' km';
+                document.getElementById('inspection').innerText = Math.round((data.milage - data.lastinspection)) + ' km/'+data.nextinspection+'km';
+                if (data.checkengine) {
+                    document.getElementById('checkengine').style.display = 'block';
+                } else {
+                    document.getElementById('checkengine').style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

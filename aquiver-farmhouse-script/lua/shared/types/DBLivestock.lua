@@ -1,0 +1,10 @@
+---@class DBLivestock
+---@field id number
+---@field houseId number
+---@field type eLivestock
+---@field age number
+---@field health number
+---@field quality number
+---@field requirements number
+---@field gather number
+---@field boughtAt number

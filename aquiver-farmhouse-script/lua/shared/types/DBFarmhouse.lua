@@ -1,0 +1,9 @@
+---@class DBFarmhouse
+---@field id number
+---@field name string
+---@field positionX number
+---@field positionY number
+---@field positionZ number
+---@field lockState boolean
+---@field price number
+---@field ownership string | nil

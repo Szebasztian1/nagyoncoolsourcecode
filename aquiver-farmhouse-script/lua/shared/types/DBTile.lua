@@ -1,0 +1,5 @@
+---@class DBTile
+---@field id number
+---@field houseId number
+---@field strawState boolean
+---@field dirtiness number

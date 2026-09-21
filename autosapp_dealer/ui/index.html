@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Használtautó</title>
+</head>
+<body>
+  <div id="root" class="hidden">
+    <div class="phone">
+
+      <!-- Fejléc: márkanév + tagsági chip (18), beállítások és bezárás -->
+      <header class="topbar">
+        <div class="brand">Használtautó</div>
+        <button class="tier-chip" id="tierChip" title="Tagságom">—</button>
+        <button class="icon-mini" id="settingsBtn" title="Beállítások">⚙</button>
+        <button class="close-btn" id="closeBtn" title="Bezárás">✕</button>
+      </header>
+
+      <!-- Tartalom -->
+      <main class="content" id="content"></main>
+
+      <!-- Alsó menü -->
+      <nav class="tabbar" id="tabbar">
+        <button class="tab active" data-tab="market"><span>🏷️</span>Piactér</button>
+        <button class="tab" data-tab="favorites"><span>⭐</span>Kedvencek</button>
+        <button class="tab" data-tab="upload"><span>➕</span>Feltöltés</button>
+        <button class="tab" data-tab="mine"><span>📋</span>Autóim</button>
+      </nav>
+
+      <!-- Toast -->
+      <div id="toast" class="toast"></div>
+    </div>
+  </div>
+
+  <!-- Fotó-jelző: a #root-on KÍVÜL, hogy a kép készítése közben (amikor a root rejtve van) is látszódjon -->
+  <div id="photoOverlay" class="photo-overlay hidden">⏳ Fotó készül — kérlek várj…</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+---@class DBStorageUnit
+---@field id eStorageUnit
+---@field houseId number
+---@field count number

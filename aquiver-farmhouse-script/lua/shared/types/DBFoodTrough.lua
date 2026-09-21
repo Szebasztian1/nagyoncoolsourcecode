@@ -1,0 +1,5 @@
+---@class DBFoodTrough
+---@field id number
+---@field houseId number
+---@field count number
+---@field content string

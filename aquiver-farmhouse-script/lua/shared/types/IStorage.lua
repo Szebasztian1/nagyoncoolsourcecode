@@ -1,0 +1,10 @@
+---@class IStorage
+---@field id eStorageUnit
+---@field count number
+---@field modelHash string
+---@field positionX number
+---@field positionY number
+---@field positionZ number
+---@field rotationX number
+---@field rotationY number
+---@field rotationZ number

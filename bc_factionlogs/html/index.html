@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frakció Tároló Monitor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: none;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #mainContainer {
+            display: none;
+        }
+        .container {
+            background: rgba(8, 20, 40, 0.95);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+            
+        }
+
+        .header {
+            background: linear-gradient(90deg, #0066cc 0%, #0099ff 100%);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .storage-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .storage-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .storage-item.unlocked {
+            border-color: rgba(0, 150, 255, 0.4);
+            background: rgba(0, 150, 255, 0.05);
+        }
+
+        .storage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .storage-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0099ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lock-icon {
+            font-size: 18px;
+            color: #ff3b30;
+        }
+
+        .unlock-icon {
+            font-size: 18px;
+            color: #4cd964;
+        }
+
+        .storage-status {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(76, 217, 100, 0.2);
+            color: #4cd964;
+        }
+
+        .status-inactive {
+            background: rgba(255, 59, 48, 0.2);
+            color: #ff3b30;
+        }
+
+        .storage-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .detail-label {
+            opacity: 0.7;
+        }
+
+        .detail-value {
+            font-weight: 600;
+        }
+
+        .webhook-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .webhook-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .webhook-input {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .webhook-input:focus {
+            outline: none;
+            border-color: #0099ff;
+        }
+
+        .webhook-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .save-btn {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #4cd964 0%, #2ecc71 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 217, 100, 0.4);
+        }
+
+        .save-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #ff9500 0%, #ffcc00 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 149, 0, 0.4);
+        }
+
+        /* Scrollbar stílus */
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(0, 150, 255, 0.5);
+            border-radius: 4px;
+        }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 150, 255, 0.7);
+        }
+
+        .no-storages {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.7;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <div class="header">
+            <div class="title">FRAKCIÓ TÁROLÓ MONITOR</div>
+            <div class="subtitle">Tároló aktivitás naplózás Discord webhookkal</div>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        
+        <div class="content">
+            <div class="storage-list" id="storageList">
+                <!-- Tárolók itt jelennek meg -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Globális változók
+        let storages = [
+            /*{
+                unlocked: false,
+                name:"Frakció tároló 1674",
+                id: "job-stash-1435",
+                webhookUrl: false,
+                pricetxt: "25M$"
+            },
+            {
+                unlocked: true,
+                name:"Frakció tároló 9843",
+                id: 9843,
+                webhookUrl: "https://discord.com/api/webhooks/xxxxxxxxxx/xxxxxxxxxx",
+                pricetxt: "25M$"
+            },*/
+        ];
+
+        // NUI Message kezelése
+        console.log("adddddddd")
+        window.addEventListener('message', function(event) {
+            const data = event.data;
+              console.log("mess")
+              console.log(data)
+            
+            if (data.type == 'open') {
+                console.log("oppen")
+                openMonitor(data.storages);
+            } else if (data.type == 'close') {
+                document.getElementById('mainContainer').style.display = 'none';
+            } else if (data.type == 'update') {
+                updateStorages(data.storages);
+            }
+        });
+
+        // Monitor megnyitása
+        function openMonitor(storageData) {
+            storages = storageData || [];
+            
+            // UI megjelenítése
+            document.getElementById('mainContainer').style.display = 'block';
+            console.log("disp block")
+            
+            // Tárolók betöltése
+            renderStorages();
+        }
+
+        // Tárolók frissítése
+        function updateStorages(newStorages) {
+            storages = newStorages;
+            renderStorages();
+        }
+
+        // Tárolók megjelenítése
+        function renderStorages() {
+            const storageList = document.getElementById('storageList');
+            
+            if (storages.length === 0) {
+                storageList.innerHTML = '<div class="no-storages">Nincsenek elérhető tárolók</div>';
+                return;
+            }
+            
+            storageList.innerHTML = '';
+            
+            storages.forEach(storage => {
+                const storageElement = document.createElement('div');
+                storageElement.className = `storage-item ${storage.unlocked ? 'unlocked' : ''}`;
+                
+                const isUnlocked = storage.unlocked || false;
+                
+                storageElement.innerHTML = `
+                    <div class="storage-header">
+                        <div class="storage-name">
+                            ${isUnlocked ? '🔓' : '🔒'}
+                            ${storage.name}
+                        </div>
+                    </div>
+                    
+                    <div class="storage-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Státusz:</span>
+                            <span class="detail-value">${isUnlocked ? 'Feloldva' : 'Zárolva'}</span>
+                        </div>
+                    </div>
+                    
+                    ${isUnlocked ? `
+                        <div class="webhook-section">
+                            <div class="webhook-input-group">
+                                <input type="text" 
+                                       class="webhook-input" 
+                                       id="webhook-${storage.id}" 
+                                       placeholder="https://discord.com/api/webhooks/..." 
+                                       value="${storage.webhookUrl || ''}">
+                                <button class="save-btn" onclick="saveWebhook('${storage.id}')">
+                                    MENTÉS
+                                </button>
+                            </div>
+                        </div>
+                    ` : `
+                        <button class="unlock-btn" onclick="unlockStorage('${storage.id}')">
+                            TÁROLÓ FELOLDÁSA 🔓 (${storage.pricetxt})
+                        </button>
+                    `}
+                `;
+                
+                storageList.appendChild(storageElement);
+            });
+        }
+
+        //renderStorages();
+
+        // Tároló feloldása
+        function unlockStorage(storageId) {
+            fetch(`https://${GetParentResourceName()}/unlockStorage`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    storageId: storageId
+                })
+            }).then(resp => resp.json()).then(data => {
+                if (data.success) {
+                    // Sikeres feloldás
+                    const storage = storages.find(s => s.id === storageId);
+                    if (storage) {
+                        storage.unlocked = true;
+                        renderStorages();
+                    }
+                } else {
+                }
+            });
+        }
+
+        // Webhook mentése
+        function saveWebhook(storageId) {
+            const webhookInput = document.getElementById(`webhook-${storageId}`);
+            const webhookUrl = webhookInput.value.trim();
+            
+            if (!webhookUrl) {
+                //alert('Kérlek add meg a Discord webhook URL-t!');
+                return;
+            }
+            
+            // Egyszerű validáció Discord webhook URL-re
+          /*  if (!webhookUrl.includes('discord.com/api/webhooks/')) {
+                if (!confirm('Ez nem tűnik Discord webhook URL-nek. Biztosan folytatod?')) {
+                    return;
+                }
+            }*/
+            
+            fetch(`https://${GetParentResourceName()}/saveWebhook`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    storageId: storageId,
+                    webhookUrl: webhookUrl
+                })
+            }).then(resp => resp.json()).then(data => {
+                if (data.success) {
+                    webhookInput.style.borderColor = '#4cd964';
+                    setTimeout(() => {
+                        webhookInput.style.borderColor = '';
+                    }, 2000);
+                } else {
+                    //alert('Hiba történt a mentés során: ' + (data.error || 'Ismeretlen hiba'));
+                }
+            });
+        }
+
+        // Bezárás gomb
+        document.getElementById('closeBtn').onclick = function() {
+            /*document.getElementById('mainContainer').style.transform = 'scale(0.9)';
+            document.getElementById('mainContainer').style.opacity = '0';
+            
+            setTimeout(() => {
+                document.getElementById('mainContainer').style.display = 'none';
+                document.getElementById('mainContainer').style.transform = '';
+                document.getElementById('mainContainer').style.opacity = '';*/
+                
+                // Bezárás értesítése a szervernek
+                fetch(`https://${GetParentResourceName()}/closeStorageMonitor`, {
+                    method: 'POST',
+                    body: JSON.stringify({})
+                });
+           // }, 300);
+        };
+
+        // Billentyűzet események
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('closeBtn').click();
+            }
+        });
+    </script>
+</body>
+</html>

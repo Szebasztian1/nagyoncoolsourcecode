@@ -1,0 +1,192 @@
+<html>
+	<head>
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body onkeydown="TriggeredKey(this)">
+		<div class="stage">
+		<div class="dialog">
+
+			<div class="brand">
+				<div class="wm">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M8 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
+					</svg>
+				</div>
+
+				<div class="head">
+					<div class="k">Új karakter</div>
+					<div class="ttl">BLACK CITY <b>RP</b></div>
+				</div>
+
+				<div class="hints">
+					<div class="hint">
+						<div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg></div>
+						<div>
+							<div class="ht">Valódi név</div>
+							<div class="hd">Ezen a néven fog ismerni a város.</div>
+						</div>
+					</div>
+					<div class="hint">
+						<div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"/><path d="M16 3v4M8 3v4M4 11h16"/></svg></div>
+						<div>
+							<div class="ht">Születési dátum</div>
+							<div class="hd">Ez kerül a személyidre, később nem írható át.</div>
+						</div>
+					</div>
+					<div class="hint">
+						<div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l0 18"/><path d="M6 8l12 0"/><path d="M6 16l12 0"/></svg></div>
+						<div>
+							<div class="ht">Magasság</div>
+							<div class="hd">155 és 210 cm között, ahogy szeretnéd.</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="foot-note">
+					Ha a Regisztráció gomb nem indul el, ellenőrizd a nevet (szóköz nélkül elöl-hátul), az érvényes dátumot és a magasságot.
+				</div>
+			</div>
+
+			<div class="form-side">
+				<form id="register" name="register" action="#">
+
+					<div class="field">
+						<label for="lastname">Keresztnév</label>
+						<input id="lastname" type="text" name="lastname" placeholder="Max 16 karakter"
+							onKeyDown="if(this.value.length==16 && event.keyCode!=8) return false;"
+							onkeypress="if (isNumber(event) == true) return false;"
+							onKeyUp="checkLastName()" onmouseup="checkLastName()">
+					</div>
+
+					<div class="field">
+						<label for="firstname">Családnév</label>
+						<input id="firstname" type="text" name="firstname" placeholder="Max 16 karakter"
+							onKeyDown="if(this.value.length==16 && event.keyCode!=8) return false;"
+							onkeypress="if (isNumber(event) == true) return false;"
+							onKeyUp="checkFirstName()" onmouseup="checkFirstName()">
+					</div>
+
+					<div class="field">
+						<label for="dateofbirth">Születési dátum</label>
+						<input id="dateofbirth" type="text" name="dateofbirth" placeholder="NN/HH/ÉÉÉÉ"
+							dateformat="d M y" min="01/01/1900" max="12/02/2020"
+							onfocus="(this.type='date')"
+							onkeypress="if ( isNaN(String.fromCharCode(event.keyCode) )) return false;"
+							onchange="checkDOB()" onKeyUp="checkDOB()" onmouseup="checkDOB()">
+					</div>
+
+					<div class="field optional">
+						<label for="referal">Meghívókód</label>
+						<input id="referal" type="text" name="referal" placeholder="Ha kaptál valakitől">
+					</div>
+
+					<div class="field bonus">
+						<label for="consrc">Hogy kerültél hozzánk?</label>
+						<select id="consrc" value="select" name="consrc">
+							<option value="select">Válassz egyet</option>
+							<option value="fivem">FiveM lista</option>
+							<option value="ref">Ismerős ajánlotta</option>
+							<option value="stream">Streamernél</option>
+							<option value="dc">Más discord szerveren láttam</option>
+							<option value="tiktok">TikTok</option>
+							<option value="facebook">Facebook</option>
+							<option value="google">Google</option>
+							<option value="other">Egyéb</option>
+						</select>
+					</div>
+
+					<div class="group">
+						<div class="lbl">Nem</div>
+						<div class="radio-toolbar">
+							<input type="radio" id="radiom" name="sex" value="m" checked>
+							<label for="radiom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 14a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M19 5l-5.4 5.4"/><path d="M19 5h-5M19 5v5"/></svg> Férfi</label>
+
+							<input type="radio" id="radiof" name="sex" value="f">
+							<label for="radiof"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 5a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M12 9v12M9 18h6"/></svg> Nő</label>
+						</div>
+					</div>
+
+					<div class="group">
+						<div class="range-head">
+							<div class="lbl" style="margin:0">Magasság</div>
+							<span class="rv" id="heightout">160 cm</span>
+						</div>
+						<input type="range" id="height" class="range" min="155" max="210" value="160">
+					</div>
+
+					<button id="submit" type="submit">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12l5 5l10 -10"/></svg>
+						Regisztráció
+					</button>
+				</form>
+			</div>
+
+		</div>
+		</div>
+
+		<script>
+			var myFirstName = document.getElementById('firstname');
+			var myLastName = document.getElementById('lastname');
+			var myDOB = document.getElementById('dateofbirth');
+			var myHeight = document.getElementById('height');
+			var heightOut = document.getElementById('heightout');
+
+			function setHeight() { heightOut.textContent = myHeight.value + ' cm'; }
+			myHeight.addEventListener('input', setHeight);
+			setHeight();
+
+			// Keret + belso csik jelzi az ervenyesseget. A regi valtozat a mezo
+			// hatterét festette zoldre/pirosra, amitol a beirt nev olvashatatlan lett.
+			function mark(el, valid) {
+				el.classList.toggle('ok', valid === true);
+				el.classList.toggle('bad', valid === false);
+			}
+
+			function isNumber(e) {
+				var key = e.which || e.KeyCode;
+				return (key >= 48 && key <= 57);
+			}
+
+			function checkName(el) {
+				var value = el.value;
+				if (value.trim().match(/^[a-zA-Z][0-9a-zA-Z .,'-]*$/) == null) {
+					return mark(el, false);
+				}
+				mark(el, value.length > 0 && value.length < 17);
+			}
+
+			function checkFirstName() { checkName(myFirstName); }
+			function checkLastName()  { checkName(myLastName); }
+
+			function checkDOB() {
+				var date = new Date(myDOB.value);
+				var day = date.getDate();
+				var month = date.getMonth() + 1;
+				var year = date.getFullYear();
+
+				if (isNaN(month) || isNaN(day) || isNaN(year)) {
+					return mark(myDOB, false);
+				}
+
+				if (month < 1 || month > 12) return mark(myDOB, false);
+				if (day < 1 || day > 31) return mark(myDOB, false);
+				if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) return mark(myDOB, false);
+
+				if (month == 2) {
+					var isLeapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+					if (day > 29 || (day == 29 && !isLeapYear)) return mark(myDOB, false);
+				}
+
+				mark(myDOB, true);
+			}
+
+			function TriggeredKey(e) {
+				if (window.event && (window.event.keyCode == 13 || window.event.keyCode == 27)) return false;
+			}
+		</script>
+		<script src="js/script.js" type="text/javascript"></script>
+	</body>
+</html>

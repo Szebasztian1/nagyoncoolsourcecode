@@ -1,0 +1,1 @@
+AddTextEntry("WEAPON_SKY_PISTOL", "SKY_PISTOL")

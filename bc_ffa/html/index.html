@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BC FFA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ikon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="i-cross"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="2.5"/></g>
+    <g id="i-close"><path d="M18 6L6 18M6 6l12 12"/></g>
+    <g id="i-grid"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></g>
+    <g id="i-cash"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2A3 3 0 0 0 12.2 7.8h-.9a2.4 2.4 0 0 0 0 4.8h1.4a2.4 2.4 0 0 1 0 4.8h-.9a3 3 0 0 1-2.6-1.4"/><path d="M12 6v12"/></g>
+    <g id="i-nocash"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></g>
+    <g id="i-car"><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M5.5 17H3v-5.5L5 6h9l4 5.5h1a2 2 0 0 1 2 2V17h-2M9.5 17h5"/></g>
+    <g id="i-search"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M21 21l-5.8-5.8"/></g>
+    <g id="i-users"><circle cx="9" cy="7.5" r="3.5"/><path d="M2.5 20.5v-1.5a4 4 0 0 1 4-4h5a4 4 0 0 1 4 4v1.5"/><path d="M16 4.3a3.5 3.5 0 0 1 0 6.8M18.5 15.4a4 4 0 0 1 3 3.6v1.5"/></g>
+    <g id="i-shield"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 7.9-7.5 9.5-4.4-1.6-7.5-4.9-7.5-9.5V6z"/><path d="M9.5 12l1.8 1.8 3.4-3.6"/></g>
+    <g id="i-size"><path d="M16 4h4v4M20 4l-6 6M8 20H4v-4M4 20l6-6"/></g>
+    <g id="i-fall"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M4 20h16"/></g>
+    <g id="i-in"><path d="M4 12h14"/><path d="M13 7l5 5-5 5"/><path d="M20 4v16"/></g>
+    <g id="i-out"><path d="M20 12H6"/><path d="M11 17l-5-5 5-5"/><path d="M4 4v16"/></g>
+    <g id="i-refresh"><path d="M20 11a8 8 0 0 0-14.9-3M4 4.5V9h4.5"/><path d="M4 13a8 8 0 0 0 14.9 3M20 19.5V15h-4.5"/></g>
+    <g id="i-empty"><circle cx="12" cy="12" r="9"/><path d="M9 15s1.2-1.5 3-1.5S15 15 15 15"/><path d="M9 9.5h.01M15 9.5h.01"/></g>
+    <g id="i-crown"><path d="M4 18h16"/><path d="M3 7l4.5 3.5L12 4l4.5 6.5L21 7l-1.6 8.5H4.6z"/></g>
+    <g id="i-chart"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></g>
+    <g id="i-clock"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/></g>
+    <g id="i-flame"><path d="M12 3s5 4.2 5 8.6a5 5 0 0 1-10 0C7 9 9 7.5 9 7.5s.4 2 1.6 2.6C10.2 8 12 3 12 3z"/></g>
+  </defs>
+</svg>
+
+<div id="stage" class="hidden">
+  <div class="modal">
+
+    <!-- ── header ─────────────────────────────────────────── -->
+    <div class="bar">
+      <div class="brand">
+        <div class="logo"><svg viewBox="0 0 24 24"><use href="#i-cross"/></svg></div>
+        <div class="name">FFA <b>ARÉNÁK</b></div>
+      </div>
+
+      <div class="plate" id="statusPlate">
+        <span class="dot"></span>
+        <span id="statusText">Nem vagy FFA-ban</span>
+      </div>
+
+      <div class="close" id="btnClose"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></div>
+    </div>
+
+    <!-- ── body ───────────────────────────────────────────── -->
+    <div class="body">
+
+      <!-- sidebar -->
+      <div class="side">
+        <div class="nav-scroll">
+          <div class="nav-btn on" data-view="arenas">
+            <div class="ico"><svg viewBox="0 0 24 24"><use href="#i-grid"/></svg></div>
+            <div class="lbl"><div class="t">Arénák</div><div class="d"><span id="cntAll">0</span> pálya</div></div>
+          </div>
+          <div class="nav-btn" data-view="board">
+            <div class="ico"><svg viewBox="0 0 24 24"><use href="#i-crown"/></svg></div>
+            <div class="lbl"><div class="t">Ranglista</div><div class="d">Havi TOP</div></div>
+          </div>
+          <div class="nav-btn" data-view="mine">
+            <div class="ico"><svg viewBox="0 0 24 24"><use href="#i-chart"/></svg></div>
+            <div class="lbl"><div class="t">Statisztikám</div><div class="d">Saját adatok</div></div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- arénák nézet: kiválasztott pálya -->
+        <div class="info-box" id="infoBox">
+          <div class="ih">Kiválasztott pálya</div>
+          <div id="infoEmpty" class="info-empty">Válassz egy arénát a listából.</div>
+          <div id="infoRows" class="hidden">
+            <div class="info-name" id="infoName">—</div>
+            <div class="info-row"><span><svg class="ir" viewBox="0 0 24 24"><use href="#i-users"/></svg>Játékos</span><span id="infoPlayers">0</span></div>
+            <div class="info-row"><span><svg class="ir" viewBox="0 0 24 24"><use href="#i-cash"/></svg>Tét</span><span id="infoBet">—</span></div>
+            <div class="info-row"><span><svg class="ir" viewBox="0 0 24 24"><use href="#i-shield"/></svg>Spawn védelem</span><span id="infoSpawn">—</span></div>
+            <div class="info-row"><span><svg class="ir" viewBox="0 0 24 24"><use href="#i-size"/></svg>Pálya méret</span><span id="infoRange">—</span></div>
+            <div class="info-row"><span><svg class="ir" viewBox="0 0 24 24"><use href="#i-fall"/></svg>Leesés = halál</span><span id="infoFall">—</span></div>
+          </div>
+        </div>
+
+        <!-- ranglista / statisztika nézet: szezon + reset visszaszámláló -->
+        <div class="info-box hidden" id="seasonBox">
+          <div class="ih">Szezon</div>
+          <div class="info-name" id="seasonName">—</div>
+          <div class="reset-lbl">Ranglista reset</div>
+          <div class="reset-t" id="resetTime">—</div>
+          <div class="reset-hint">A hónap végén tiszta lappal indul mindenki.</div>
+        </div>
+      </div>
+
+      <!-- main -->
+      <div class="main">
+        <div class="wm"><svg viewBox="0 0 24 24"><use href="#i-cross"/></svg></div>
+
+        <!-- ══ NÉZET: ARÉNÁK ══════════════════════════════ -->
+        <div class="view" id="viewArenas">
+          <div class="tools">
+            <div class="field">
+              <svg class="fi" viewBox="0 0 24 24"><use href="#i-search"/></svg>
+              <input type="text" id="search" placeholder="Keresés pálya vagy fegyver szerint…" autocomplete="off">
+            </div>
+            <select id="sort">
+              <option value="players">Legtöbb játékos</option>
+              <option value="name">Név szerint</option>
+              <option value="bet">Tét szerint</option>
+            </select>
+          </div>
+
+          <div class="fchips">
+            <span class="fchip on" data-filter="all">Összes <b id="fcAll">0</b></span>
+            <span class="fchip" data-filter="bet">Tétes <b id="fcBet">0</b></span>
+            <span class="fchip" data-filter="free">Tét nélkül <b id="fcFree">0</b></span>
+            <span class="fchip" data-filter="veh">Járműves <b id="fcVeh">0</b></span>
+          </div>
+
+          <div class="page" id="page">
+            <div class="head">
+              <div class="k">Válassz arénát</div>
+              <div class="ttl">HOL <b>HARCOLSZ</b>?</div>
+            </div>
+            <div class="grid" id="grid"></div>
+            <div class="empty hidden" id="emptyState">
+              <svg viewBox="0 0 24 24"><use href="#i-empty"/></svg>
+              <div class="et">Nincs találat</div>
+              <div class="es">Próbálj más keresőszót vagy szűrőt.</div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <div class="btn ghost" id="btnRefresh"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Frissítés</div>
+            <div class="btn danger hidden" id="btnLeave"><svg viewBox="0 0 24 24"><use href="#i-out"/></svg>Kilépés az FFA-ból</div>
+            <div class="grow"></div>
+            <div class="btn ghost" id="btnCancel">Mégse</div>
+            <div class="btn green disabled" id="btnJoin"><svg viewBox="0 0 24 24"><use href="#i-in"/></svg>Belépés</div>
+          </div>
+        </div>
+
+        <!-- ══ NÉZET: RANGLISTA ═══════════════════════════ -->
+        <div class="view hidden" id="viewBoard">
+          <div class="page" id="pageBoard">
+            <div class="head">
+              <div class="k" id="boardSeason">Havi ranglista</div>
+              <div class="ttl">TOP <b>GYILKOSOK</b></div>
+            </div>
+
+            <div class="podium" id="podium"></div>
+
+            <div class="table" id="boardTable"></div>
+
+            <div class="empty hidden" id="boardEmpty">
+              <svg viewBox="0 0 24 24"><use href="#i-empty"/></svg>
+              <div class="et">Még nincs adat ebben a hónapban</div>
+              <div class="es">Az első kill után itt jelenik meg a lista.</div>
+            </div>
+
+            <div class="loading" id="boardLoading">Betöltés…</div>
+          </div>
+
+          <div class="foot">
+            <div class="btn ghost" id="btnBoardRefresh"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Frissítés</div>
+            <div class="grow"></div>
+            <div class="btn ghost" id="btnCancel2">Bezárás</div>
+          </div>
+        </div>
+
+        <!-- ══ NÉZET: STATISZTIKÁM ════════════════════════ -->
+        <div class="view hidden" id="viewMine">
+          <div class="page" id="pageMine">
+            <div class="head">
+              <div class="k" id="mineSeason">Saját statisztika</div>
+              <div class="ttl">A TE <b>SZÁMAID</b></div>
+            </div>
+
+            <div class="stat-grid" id="mineTop"></div>
+
+            <div class="box" id="mineDetail">
+              <div class="bh"><div class="bt">Részletek</div></div>
+              <div id="mineRows"></div>
+            </div>
+
+            <div class="box" id="mineArenasBox">
+              <div class="bh">
+                <div class="bt">Pályánkénti bontás</div>
+                <div class="bs">játékidő szerint</div>
+              </div>
+              <div class="table arenas" id="mineArenas"></div>
+            </div>
+
+            <div class="empty hidden" id="mineEmpty">
+              <svg viewBox="0 0 24 24"><use href="#i-empty"/></svg>
+              <div class="et">Még nincs statisztikád</div>
+              <div class="es">Lépj be egy arénába, és itt gyűlnek majd a számok.</div>
+            </div>
+
+            <div class="loading" id="mineLoading">Betöltés…</div>
+          </div>
+
+          <div class="foot">
+            <div class="btn ghost" id="btnMineRefresh"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Frissítés</div>
+            <div class="grow"></div>
+            <div class="btn ghost" id="btnCancel3">Bezárás</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<!-- ── HUD: a jobb szélen fut, amíg FFA-ban vagy ──────────────── -->
+<div id="hud" class="hud hidden">
+  <div class="hud-card">
+
+    <div class="hud-top">
+      <span class="hud-dot"></span>
+      <span class="hud-eyebrow">FFA aktív</span>
+    </div>
+
+    <div class="hud-name" id="hudName">—</div>
+
+    <div class="hud-players">
+      <svg class="hud-i" viewBox="0 0 24 24"><use href="#i-users"/></svg>
+      <span class="hud-num" id="hudPlayers">0</span>
+      <span class="hud-lbl">játékos</span>
+    </div>
+
+    <div class="hud-kd">
+      <div class="kd-item">
+        <div class="kd-n kill" id="hudKills">0</div>
+        <div class="kd-l">kill</div>
+      </div>
+      <div class="kd-sep"></div>
+      <div class="kd-item">
+        <div class="kd-n death" id="hudDeaths">0</div>
+        <div class="kd-l">halál</div>
+      </div>
+    </div>
+
+    <div class="hud-row hidden" id="hudStreak">
+      <svg class="hud-i" viewBox="0 0 24 24"><use href="#i-flame"/></svg>
+      <span id="hudStreakVal">—</span>
+    </div>
+
+    <div class="hud-row hidden" id="hudBet">
+      <svg class="hud-i" viewBox="0 0 24 24"><use href="#i-cash"/></svg>
+      <span id="hudBetVal">—</span>
+    </div>
+
+    <div class="hud-protect hidden" id="hudProtect">
+      <div class="hp-head">
+        <svg class="hud-i" viewBox="0 0 24 24"><use href="#i-shield"/></svg>
+        <span>Spawn védelem</span>
+        <span class="hp-t" id="hudProtectT">0.0</span>
+      </div>
+      <div class="hp-bar"><div class="hp-fill" id="hudProtectBar"></div></div>
+    </div>
+
+    <div class="hud-foot"><b>/leaveffa</b> a kilépéshez</div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

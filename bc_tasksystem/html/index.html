@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Küldetések</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+	<!-- bc_notyp's own font request, same URL: the notice probe below measures with it -->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================ POPUPS ============================ -->
+<div id="toasts" class="toasts top-center"></div>
+
+<!-- Unseen copy of the bc_notyp notice card; its height tells the popups where to stand.
+     The sample text makes the browser fetch the font faces long before the first notice. -->
+<div id="notice-probe" class="notice-probe" aria-hidden="true">
+	<div class="card"><div class="inner"><div class="icon"></div><div class="text"><span class="title">Felhívás őű</span><span class="message">Felhívás őű</span></div></div></div>
+</div>
+
+<!-- ============================ PANEL: BC KÜLDETÉSEK ============================ -->
+<div id="stage">
+<div id="panel" class="view">
+	<div class="modal">
+
+		<div class="bar">
+			<div class="brand">
+				<div class="logo" data-icon="trophy"></div>
+				<div class="name">BC <b id="menu-title">KÜLDETÉSEK</b></div>
+			</div>
+			<div class="plate" id="plate"><span class="dot"></span><span id="plate-text">—</span></div>
+			<div class="close" id="btn-close" title="Bezárás" data-icon="x"></div>
+		</div>
+
+		<div class="body">
+			<div class="side">
+				<div class="nav-group">Küldetések</div>
+				<div class="nav-btn on" data-page="daily">
+					<div class="ico"><span class="ii" data-icon="sun"></span><span class="cnt" id="cnt-daily" hidden></span></div>
+					<div class="lbl"><div class="t" id="nav-daily-t">Napi küldetések</div><div class="d" id="nav-daily-d">—</div></div>
+				</div>
+				<div class="nav-btn" data-page="weekly">
+					<div class="ico"><span class="ii" data-icon="calendarWeek"></span><span class="cnt" id="cnt-weekly" hidden></span></div>
+					<div class="lbl"><div class="t" id="nav-weekly-t">Heti küldetések</div><div class="d" id="nav-weekly-d">—</div></div>
+				</div>
+				<div class="nav-btn" data-page="permanent">
+					<div class="ico"><span class="ii" data-icon="star"></span><span class="cnt" id="cnt-permanent" hidden></span></div>
+					<div class="lbl"><div class="t" id="nav-permanent-t">Örökös küldetések</div><div class="d" id="nav-permanent-d">—</div></div>
+				</div>
+
+				<div class="nav-group">Teljesítmények</div>
+				<div class="nav-btn" data-page="overview">
+					<div class="ico" data-icon="dashboard"></div>
+					<div class="lbl"><div class="t">Áttekintés</div><div class="d">Haladás egy pillantásra</div></div>
+				</div>
+				<div class="nav-btn" data-page="list">
+					<div class="ico" data-icon="medal"></div>
+					<div class="lbl"><div class="t">Teljesítmények</div><div class="d" id="nav-list-d">Minden kihívás</div></div>
+				</div>
+				<div class="nav-btn" data-page="map">
+					<div class="ico" data-icon="map"></div>
+					<div class="lbl"><div class="t">Felfedezés</div><div class="d">Nevezetességek térképe</div></div>
+				</div>
+				<div class="nav-btn" data-page="leaderboard">
+					<div class="ico" data-icon="podium"></div>
+					<div class="lbl"><div class="t">Toplista</div><div class="d">A legjobb gyűjtők</div></div>
+				</div>
+				<div class="nav-btn" data-page="stats">
+					<div class="ico" data-icon="chart"></div>
+					<div class="lbl"><div class="t">Statisztikák</div><div class="d">Az életutad számokban</div></div>
+				</div>
+
+				<div class="spacer"></div>
+
+				<div class="info-box" data-group="tasks">
+					<div class="ih">Összesítő</div>
+					<div class="info-row"><span>Összes küldetés</span><span id="t-total">0</span></div>
+					<div class="info-row"><span>Teljesítve</span><span id="t-done">0</span></div>
+					<div class="info-row"><span>Átvehető</span><span id="t-claimable">0</span></div>
+					<div class="info-row"><span>Átvett</span><span id="t-claimed">0</span></div>
+				</div>
+				<div class="info-box" data-group="achievements" hidden>
+					<div class="ih">Játékos</div>
+					<div class="info-row"><span>Kapott jutalom</span><span id="i-earned">0 $</span></div>
+					<div class="info-row"><span>Pontszám</span><span class="badge" id="i-points">0</span></div>
+					<div class="info-row"><span>Feloldva</span><span id="i-count">0</span></div>
+					<div class="info-row"><span>Szerver-első</span><span id="i-firsts">0</span></div>
+				</div>
+			</div>
+
+			<div class="main">
+				<div class="wm" id="wm" data-icon="trophy"></div>
+
+				<div class="page" id="page">
+
+					<!-- KÜLDETÉSEK: filled by js/tasks.js -->
+					<section data-page="daily" class="on">
+						<div class="head">
+							<div class="k" data-menu-name>Küldetések</div>
+							<div class="ttl" id="ttl-daily">NAPI <b>KÜLDETÉSEK</b></div>
+						</div>
+						<div class="task-list" id="t-daily"></div>
+					</section>
+
+					<section data-page="weekly">
+						<div class="head">
+							<div class="k" data-menu-name>Küldetések</div>
+							<div class="ttl" id="ttl-weekly">HETI <b>KÜLDETÉSEK</b></div>
+						</div>
+						<div class="task-list" id="t-weekly"></div>
+					</section>
+
+					<section data-page="permanent">
+						<div class="head">
+							<div class="k" data-menu-name>Küldetések</div>
+							<div class="ttl" id="ttl-permanent">ÖRÖKÖS <b>KÜLDETÉSEK</b></div>
+						</div>
+						<div class="task-list" id="t-permanent"></div>
+					</section>
+
+					<!-- Teljesítmény-oldalak, amíg a szerver még tölti őket -->
+					<section data-page="waiting">
+						<div class="head">
+							<div class="k">Teljesítmények</div>
+							<div class="ttl">EGY <b>PILLANAT</b></div>
+						</div>
+						<div class="box"><div class="loading"><span class="spin"></span>A teljesítményeid még töltődnek, nyisd meg újra pár másodperc múlva.</div></div>
+					</section>
+
+					<!-- ÁTTEKINTÉS -->
+					<section data-page="overview">
+						<div class="head">
+							<div class="k">Összesítés</div>
+							<div class="ttl">HALADÁS <b>ÁTTEKINTÉS</b></div>
+						</div>
+
+						<div class="box hero">
+							<div class="ring" id="ov-ring"><div class="ring-in"><div class="rv" id="ov-pct">0%</div><div class="rl" id="ov-count">0 / 0</div></div></div>
+							<div class="tiles" id="ov-tiles"></div>
+							<div class="tier-rows" id="ov-tiers"></div>
+						</div>
+
+						<div class="cols">
+							<div class="box">
+								<div class="bh"><div class="bt" data-icon-before="gauge">Majdnem kész</div><div class="bs">A legközelebbi célok</div></div>
+								<div id="ov-near"></div>
+							</div>
+							<div class="box">
+								<div class="bh"><div class="bt" data-icon-before="sparkles">Legutóbb feloldva</div><div class="bs">Friss trófeák</div></div>
+								<div id="ov-recent"></div>
+							</div>
+						</div>
+
+						<div class="box">
+							<div class="bh"><div class="bt" data-icon-before="grid">Kategóriák</div><div class="bs">Kattints egy kategóriára a részletekért</div></div>
+							<div id="ov-cats"></div>
+						</div>
+					</section>
+
+					<!-- TELJESÍTMÉNYEK -->
+					<section data-page="list">
+						<div class="head">
+							<div class="k" id="l-eyebrow">Gyűjtemény</div>
+							<div class="ttl" id="l-title">MINDEN <b>TELJESÍTMÉNY</b></div>
+						</div>
+
+						<div class="toolbar">
+							<div class="chips" id="l-cats"></div>
+							<div class="tools">
+								<div class="seg" id="l-status">
+									<button data-status="all" class="on">Mind</button>
+									<button data-status="unlocked">Feloldva</button>
+									<button data-status="progress">Folyamatban</button>
+									<button data-status="locked">Zárolt</button>
+								</div>
+								<label class="search"><span data-icon="search"></span><input id="l-q" type="text" placeholder="Keresés név vagy leírás alapján…" maxlength="40"></label>
+								<select id="l-sort">
+									<option value="default">Alapsorrend</option>
+									<option value="progress">Haladás szerint</option>
+									<option value="rarity">Ritkaság szerint</option>
+									<option value="points">Pontérték szerint</option>
+									<option value="recent">Legutóbbi feloldás</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="grid" id="l-grid"></div>
+						<div class="empty" id="l-empty" hidden><span data-icon="search"></span><div>Nincs a szűrésnek megfelelő teljesítmény.</div></div>
+					</section>
+
+					<!-- FELFEDEZÉS -->
+					<section data-page="map">
+						<div class="head">
+							<div class="k">Nevezetességek</div>
+							<div class="ttl">VÁROS <b>TÉRKÉP</b></div>
+						</div>
+
+						<div class="map-layout">
+							<div class="box map-box">
+								<div class="map" id="m-map"><img src="img/map.webp" alt="" draggable="false"><div id="m-pins"></div></div>
+							</div>
+							<div class="box">
+								<div class="bh"><div class="bt" data-icon-before="pin">Helyszínek</div><div class="bs" id="m-count">0 / 0 felfedezve</div></div>
+								<div class="bar-line" style="margin-bottom:.8em"><i id="m-bar" style="width:0%"></i></div>
+								<div id="m-list"></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- TOPLISTA -->
+					<section data-page="leaderboard">
+						<div class="head">
+							<div class="k">Ranglista</div>
+							<div class="ttl">TOP <b>GYŰJTŐK</b></div>
+						</div>
+						<div id="lb-body"></div>
+					</section>
+
+					<!-- STATISZTIKÁK -->
+					<section data-page="stats">
+						<div class="head">
+							<div class="k">Életút</div>
+							<div class="ttl">SAJÁT <b>STATISZTIKÁK</b></div>
+						</div>
+						<div id="st-body"></div>
+					</section>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/core.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/panel.js"></script>
+<script src="js/tasks.js"></script>
+</body>
+</html>

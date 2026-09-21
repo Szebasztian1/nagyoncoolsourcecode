@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PedDecorationCollection>
+  <bRequiredForSync value="true" />
+  <presets>
+
+    <Item>
+      <uvPos x="-0.400000" y="0.630000" />
+      <scale x="0.199000" y="0.440000" />   <!-- BRACCIO DESTRO jessica M-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_01_M</nameHash>
+      <txdHash>jessica_tattoo_01</txdHash>
+      <txtHash>jessica_tattoo_01</txtHash>
+      <zone>ZONE_RIGHT_ARM</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+      <uvPos x="-0.400000" y="0.630000" />
+      <scale x="0.199000" y="0.440000" />  <!-- BRACCIO DESTRO jessica F-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_01_F</nameHash>
+      <txdHash>jessica_tattoo_01</txdHash>
+      <txtHash>jessica_tattoo_01</txtHash>
+      <zone>ZONE_RIGHT_ARM</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+    <Item>
+      <uvPos x="-0.400000" y="0.630000" />
+      <scale x="0.199000" y="0.440000" />    <!-- BRACCIO SINISTRO jessica M-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_02_M</nameHash>
+      <txdHash>jessica_tattoo_02</txdHash>
+      <txtHash>jessica_tattoo_02</txtHash>
+      <zone>ZONE_LEFT_ARM</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+      <uvPos x="-0.400000" y="0.630000" />
+      <scale x="0.199000" y="0.440000" />    <!-- BRACCIO SINISTRO jessica F-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_02_F</nameHash>
+      <txdHash>jessica_tattoo_02</txdHash>
+      <txtHash>jessica_tattoo_02</txtHash>
+      <zone>ZONE_LEFT_ARM</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+    <Item>
+      <uvPos x="-0.280000" y="0.450000" />   
+      <scale x="0.300000" y="0.450000" />      <!-- PETTO jessica M-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_03_M</nameHash>
+      <txdHash>jessica_tattoo_03</txdHash>
+      <txtHash>jessica_tattoo_03</txtHash>
+      <zone>ZONE_TORSO</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+      <uvPos x="-0.280000" y="0.450000" />   
+      <scale x="0.300000" y="0.450000" />     <!-- PETTO jessica F-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_03_F</nameHash>
+      <txdHash>jessica_tattoo_03</txdHash>
+      <txtHash>jessica_tattoo_03</txtHash>
+      <zone>ZONE_TORSO</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+    
+    <Item>
+      <uvPos x="0.230000" y="0.470000" />   
+      <scale x="0.260000" y="0.450000" />  <!-- SCHIENA jessica M-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_04_M</nameHash>
+      <txdHash>jessica_tattoo_04</txdHash>
+      <txtHash>jessica_tattoo_04</txtHash>
+      <zone>ZONE_TORSO</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_DONTCARE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+      <uvPos x="0.230000" y="0.470000" />   
+      <scale x="0.260000" y="0.450000" />    <!-- SCHIENA jessica F-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_04_F</nameHash>
+      <txdHash>jessica_tattoo_04</txdHash>
+      <txtHash>jessica_tattoo_04</txtHash>
+      <zone>ZONE_TORSO</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    
+    
+    <Item>
+     <uvPos x="0.300000" y="0.500000" />   
+      <scale x="0.199000" y="0.350000" />  <!-- GAMBA DESTRA jessica-->
+      <rotation value="0.00000" />
+      <nameHash>jessica_tattoo_05_M</nameHash>
+      <txdHash>jessica_tattoo_05</txdHash>
+      <txtHash>jessica_tattoo_05</txtHash>
+      <zone>ZONE_RIGHT_LEG</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+     <uvPos x="0.300000" y="0.500000" />   
+      <scale x="0.199000" y="0.350000" />  <!-- GAMBA DESTRA jessica-->
+      <rotation value="0.00000" />
+      <nameHash>jessica_tattoo_05_F</nameHash>
+      <txdHash>jessica_tattoo_05</txdHash>
+      <txtHash>jessica_tattoo_05</txtHash>
+      <zone>ZONE_RIGHT_LEG</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+    <Item>
+   <uvPos x="-0.250000" y="0.500000" />   
+      <scale x="0.199000" y="0.350000" />  <!-- GAMBA SINISTRA jessica-->
+      <rotation value="0.00000" />
+      <nameHash>jessica_tattoo_06_M</nameHash>
+      <txdHash>jessica_tattoo_06</txdHash>
+      <txtHash>jessica_tattoo_06</txtHash>
+      <zone>ZONE_LEFT_LEG</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+   <uvPos x="-0.250000" y="0.500000" />   
+      <scale x="0.199000" y="0.350000" />  <!-- GAMBA SINISTRA jessica-->
+      <rotation value="0.00000" />
+      <nameHash>jessica_tattoo_06_F</nameHash>
+      <txdHash>jessica_tattoo_06</txdHash>
+      <txtHash>jessica_tattoo_06</txtHash>
+      <zone>ZONE_LEFT_LEG</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+
+    <Item>
+      <uvPos x="0.500000" y="0.500000" />
+      <scale x="0.600000" y="0.500000" />          <!--FACCIA jessica-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_07_M</nameHash>
+      <txdHash>jessica_tattoo_07</txdHash>
+      <txtHash>jessica_tattoo_07</txtHash>
+      <zone>ZONE_HEAD</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+      <uvPos x="0.500000" y="0.500000" />
+      <scale x="0.600000" y="0.500000" />         <!--FACCIA jessica-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_07_F</nameHash>
+      <txdHash>jessica_tattoo_07</txdHash>
+      <txtHash>jessica_tattoo_07</txtHash>
+      <zone>ZONE_HEAD</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+
+    	<Item>
+      <uvPos x="0.00000" y="0.85000" />
+      <scale x="1.00000" y="1.00000" />  <!--SFUMATURA COLLO jessica-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_08_M</nameHash>
+      <txdHash>jessica_tattoo_08</txdHash>
+      <txtHash>jessica_tattoo_08</txtHash>
+      <zone>ZONE_HEAD</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_MALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+    <Item>
+      <uvPos x="0.00000" y="0.85000" />
+      <scale x="1.00000" y="1.00000" />  <!--SFUMATURA COLLO jessica-->
+      <rotation value="0.000000" />
+      <nameHash>jessica_tattoo_08_F</nameHash>
+      <txdHash>jessica_tattoo_08</txdHash>
+      <txtHash>jessica_tattoo_08</txtHash>
+      <zone>ZONE_HEAD</zone>
+      <type>TYPE_TATTOO</type>
+      <faction>FM</faction>
+      <garment>All</garment>
+      <gender>GENDER_FEMALE</gender>
+      <award />
+      <awardLevel />
+    </Item>
+
+  </presets>
+  <nameHash>jessica_overlays</nameHash>
+  <medalLocations content="vector2_array">
+    0.140000	0.070000	
+    0.370000	0.070000	
+    0.600000	0.070000	
+    0.835000	0.070000	
+    0.140000	0.150000	
+    0.370000	0.150000	
+    0.600000	0.150000	
+    0.835000	0.150000	
+    0.140000	0.230000	
+    0.370000	0.230000	
+    0.600000	0.230000	
+    0.835000	0.230000	
+    0.100000	0.700000	
+    0.300000	0.700000	
+    0.500000	0.700000	
+    0.700000	0.700000	
+  </medalLocations>
+</PedDecorationCollection>

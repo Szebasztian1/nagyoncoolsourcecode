@@ -1,0 +1,10 @@
+---@class ITile
+---@field id number
+---@field dirtiness number
+---@field strawState number
+---@field positionX number
+---@field positionY number
+---@field positionZ number
+---@field rotationX number
+---@field rotationY number
+---@field rotationZ number

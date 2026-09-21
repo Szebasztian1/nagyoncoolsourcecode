@@ -1,0 +1,150 @@
+/* Roboto betűtípus importálása */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: "Roboto", sans-serif;
+}
+
+#notification-container {
+	position: fixed;
+	/* A felhivas ALAPBOL a kepernyo legtetejen all (0.6vh).
+	   A VIP EXP sav (aty_hud/ui/css/vipxp.css) ugyanezt a helyet hasznalja, de
+	   csak XP-szerzeskor, ~6 masodpercig: amig kint van, az aty_hud kliense
+	   elkuldi a 'bc_vipxp:visible' esemenyt, a bc_notyp kliense pedig a
+	   'shiftDown' NUI uzenettel ide rakja a .shifted osztalyt -> a felhivas
+	   atmenetileg lecsuszik a masodik savba (4.6vh).
+	   HA EZT A KET ERTEKET ATIROD, a bc_tasksystem .notice-probe (es
+	   .notice-probe.shifted) top ertekét is ugyanerre kell allitani, kulonben
+	   az achievement toastok rossz helyre csusznak. */
+	top: 0.6vh;
+	transition: top 0.25s ease;
+	left: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 9999;
+	pointer-events: none;
+}
+
+/* Amig a VIP EXP sav kint van, a felhivas a masodik savba csuszik */
+#notification-container.shifted {
+	top: 4.6vh;
+}
+
+/* A kártya külső váza - vékonyított kivitel */
+.notify-card {
+	position: relative;
+	width: fit-content;
+	min-width: 280px;
+	max-width: 20vw; /* Korlátozott szélesség, hogy ne lógjon ki */
+	margin-bottom: 10px;
+	padding: 1px; /* Nagyon vékony LED keret */
+	border-radius: 6px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* Hosszabb ut + lagy fekezes: a kartya lathatoan a kepernyo teteje FOLOTTROL
+	   erkezik le, nem csak "felvillan" a helyen. */
+	animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* A kártya belső része - vékonyabb padding */
+.notify-inner {
+	position: relative;
+	background: #242424;
+	border: 1px solid #424242;
+	width: 100%;
+	padding: 8px 14px 18px; /* extra bottom padding for progress bar */
+	border-radius: 5px;
+	display: flex;
+	align-items: center; /* Ikon és szöveg egy vonalba kerül */
+	z-index: 2;
+}
+
+@keyframes rotateLED {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(-260%);
+		opacity: 0;
+	}
+	60% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideUpExit {
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(-260%);
+		opacity: 0;
+	}
+}
+
+/* Ikon doboza - kisebb méret, ragyogás nélkül */
+.icon-box {
+	font-size: 1.2rem;
+	color: white;
+	margin-right: 12px;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+/* Szövegtörés kezelése */
+.text-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	color: white;
+	width: 100%;
+	word-break: break-word;
+	white-space: normal;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 0.95rem;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
+	display: block;
+}
+
+.message {
+	font-weight: 400;
+	font-size: 0.85rem;
+	line-height: 1.2;
+	color: rgba(255, 255, 255, 0.7);
+	display: block;
+}
+
+/* Az alsó időzítő csík */
+.progress-bar {
+	position: absolute;
+	bottom: 6px;
+	left: 6px;
+	right: 6px;
+	width: calc(100% - 20px);
+	height: 4px;
+	border-radius: 2px;
+	z-index: 3;
+}

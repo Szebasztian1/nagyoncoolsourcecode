@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Műszaki Terminál</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- Inline icon sprite (self-contained: no external icon font) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+        <symbol id="ic-gauge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M13.4 10.6l2.6-2.6"/><path d="M7 12a5 5 0 0 1 5-5"/></symbol>
+        <symbol id="ic-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+        <symbol id="ic-check" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></symbol>
+        <symbol id="ic-fail" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></symbol>
+        <symbol id="ic-single" viewBox="0 0 24 24"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 14l2 2l4 -4"/></symbol>
+        <symbol id="ic-mass" viewBox="0 0 24 24"><path d="M12 3l9 5l-9 5l-9 -5l9 -5"/><path d="M3 13l9 5l9 -5"/></symbol>
+        <symbol id="ic-faction" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.5a4 4 0 0 1 0 7"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.8"/></symbol>
+        <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M20 20l-4.5 -4.5"/></symbol>
+        <symbol id="ic-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6a8 3 0 0 0 16 0v-6"/><path d="M4 11v6a8 3 0 0 0 16 0v-6"/></symbol>
+        <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v5c0 5 -3.5 8 -8 9c-4.5 -1 -8 -4 -8 -9v-5l8 -3"/><path d="M9 12l2 2l4 -4"/></symbol>
+        <symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6 -6h4a6 6 0 0 1 6 6v1"/></symbol>
+        <symbol id="ic-car" viewBox="0 0 24 24"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6"/><path d="M3 11h15"/></symbol>
+        <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M12 4l9 16h-18z"/><path d="M12 10v4M12 17h.01"/></symbol>
+        <symbol id="ic-cash" viewBox="0 0 24 24"><path d="M16.7 8a3 3 0 0 0 -2.7 -1.5h-3a2.5 2.5 0 0 0 0 5h3a2.5 2.5 0 0 1 0 5h-3a3 3 0 0 1 -2.7 -1.5"/><path d="M12 3v3M12 18v3"/></symbol>
+        <symbol id="ic-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></symbol>
+        <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0 -14 -5l-2 2"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14 5l2 -2"/><path d="M20 20v-4h-4"/></symbol>
+        <symbol id="ic-cert" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 12h8M8 15h5"/></symbol>
+    </defs></svg>
+
+    <div id="stage">
+        <div id="app" v-cloak>
+            <div class="wrap" v-if="visible">
+                <div class="overlay" @click="close"></div>
+
+                <!-- Inspection terminal -->
+                <div class="modal" v-if="screen === 'terminal'">
+                    <!-- Header -->
+                    <div class="bar">
+                        <div class="brand">
+                            <div class="logo"><svg class="ic"><use href="#ic-gauge"></use></svg></div>
+                            <div class="head">
+                                <div class="k">Járműműszaki vizsgaközpont</div>
+                                <div class="ttl">Műszaki <b>Terminál</b></div>
+                            </div>
+                        </div>
+                        <div class="hpill"><span class="dot"></span>Rendszer online</div>
+                        <div class="hpill"><svg class="ic"><use href="#ic-user"></use></svg>{{ mechanic }}</div>
+                        <div class="close" @click="close" title="Bezárás (ESC)">
+                            <svg class="ic"><use href="#ic-x"></use></svg>
+                        </div>
+                    </div>
+
+                    <!-- System line (terminal flavour) -->
+                    <div class="termline">
+                        <span>MŰSZAKI-OS <b>v2.4</b></span>
+                        <span>jogosultság: <b>{{ job }}</b></span>
+                        <span class="tl-hide">munkamenet #4213</span>
+                    </div>
+
+                    <!-- Body: sidebar | main -->
+                    <div class="body">
+                        <div class="side">
+                            <div class="nav-btn" :class="{ on: mode === 'single' }" @click="setMode('single')">
+                                <div class="ico"><svg class="ic"><use href="#ic-single"></use></svg></div>
+                                <div class="lbl"><div class="t">Egyedi vizsga</div><div class="d">Egy jármű rendszám alapján</div></div>
+                            </div>
+                            <div class="nav-btn" :class="{ on: mode === 'mass' }" @click="setMode('mass')">
+                                <div class="ico"><svg class="ic"><use href="#ic-mass"></use></svg></div>
+                                <div class="lbl"><div class="t">Tömeges vizsga</div><div class="d">Ügyfél összes autója</div></div>
+                            </div>
+                            <div class="nav-btn" :class="{ on: mode === 'faction' }" @click="setMode('faction')">
+                                <div class="ico"><svg class="ic"><use href="#ic-faction"></use></svg></div>
+                                <div class="lbl"><div class="t">Frakciós vizsga</div><div class="d">Frakció járművei</div></div>
+                            </div>
+                            <div class="spacer"></div>
+                            <div class="info-box">
+                                <div class="ih">Műhely</div>
+                                <div class="info-row"><span>Szerelő</span><span>{{ mechanic }}</span></div>
+                                <div class="info-row"><span>Díj / jármű</span><span>{{ money(fee) }}</span></div>
+                                <div class="info-row"><span>Érvényesség</span><span>{{ validDays }} nap</span></div>
+                            </div>
+                        </div>
+
+                        <div class="main">
+                            <div class="wm"><svg class="ic"><use href="#ic-car"></use></svg></div>
+
+                            <div class="page">
+                                <!-- Header (eyebrow + big title) -->
+                                <div class="phead">
+                                    <div class="k">{{ head.k }}</div>
+                                    <div class="ttl" v-html="head.ttl"></div>
+                                </div>
+
+                                <!-- Single: plate input -->
+                                <div class="box" v-if="mode === 'single'">
+                                    <div class="bh"><div class="bt">Jármű azonosítása</div></div>
+                                    <div class="platefield" :class="{ focus: plate.length }">
+                                        <span class="pi"><svg class="ic"><use href="#ic-search"></use></svg></span>
+                                        <input class="pinput" v-model="plate" @input="onPlate" maxlength="8"
+                                               placeholder="RENDSZÁM" spellcheck="false" autocomplete="off" />
+                                    </div>
+                                    <div class="fieldnote"><svg class="ic"><use href="#ic-db"></use></svg> Az ügyfél diktálja a rendszámot</div>
+                                </div>
+
+                                <!-- Mass / faction: target -->
+                                <div class="box" v-if="mode !== 'single'">
+                                    <div class="bh">
+                                        <div class="bt">Cél ügyfél</div>
+                                        <div class="refresh" @click="refreshTarget" title="Közeli ügyfél keresése">
+                                            <svg class="ic" :class="{ spin: loadingTarget }"><use href="#ic-refresh"></use></svg>
+                                        </div>
+                                    </div>
+                                    <div v-if="target" class="target">
+                                        <div class="avatar">{{ initials(target.name) }}</div>
+                                        <div class="tinfo">
+                                            <div class="tn">{{ target.name }} <span class="badge">ID {{ target.id }}</span></div>
+                                            <div class="tm" v-if="mode === 'faction'">Frakció: <b>{{ target.job || '—' }}</b> · a teljes flottára</div>
+                                            <div class="tm" v-else><span class="dot"></span> Legközelebbi ügyfél · hatótávon belül</div>
+                                        </div>
+                                    </div>
+                                    <div v-else class="empty">
+                                        <svg class="ic"><use href="#ic-alert"></use></svg>
+                                        <span>{{ targetError || 'Állj egy ügyfél mellé, majd keresd meg.' }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mass / faction: vehicle list -->
+                                <div class="box" v-if="mode !== 'single' && target">
+                                    <div class="bh">
+                                        <div class="bt">Lejárt műszakijú járművek</div>
+                                        <div class="bs">{{ target.count }} db</div>
+                                    </div>
+                                    <div v-if="target.count" class="vlist">
+                                        <div class="vrow" v-for="p in target.plates" :key="p">
+                                            <div class="vp">{{ p }}</div>
+                                            <span class="exp">Lejárt</span>
+                                        </div>
+                                    </div>
+                                    <div v-else class="fieldnote ok"><svg class="ic"><use href="#ic-check"></use></svg> Minden járművön érvényes a műszaki.</div>
+                                </div>
+
+                                <!-- Diagnostic checklist (the signature) -->
+                                <div class="box" v-if="showChecklist">
+                                    <div class="bh">
+                                        <div class="bt">Diagnosztikai jegyzőkönyv</div>
+                                        <div class="passall" @click="passAll">Mind megfelelt</div>
+                                    </div>
+                                    <div class="diaglist">
+                                        <div class="diag" v-for="(item, i) in checklist" :key="i">
+                                            <span class="dl"><span class="d3">{{ two(i + 1) }}</span> {{ item }}</span>
+                                            <div class="seg">
+                                                <button class="sg pass" :class="{ on: diag[i] === 'pass' }" @click="setDiag(i, 'pass')">
+                                                    <svg class="ic"><use href="#ic-check"></use></svg> Megfelelt
+                                                </button>
+                                                <button class="sg fail" :class="{ on: diag[i] === 'fail' }" @click="setDiag(i, 'fail')">
+                                                    <svg class="ic"><use href="#ic-fail"></use></svg> Bukott
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="diagstate" :class="diagClass">
+                                        <svg class="ic"><use :href="allPassed ? '#ic-shield' : '#ic-alert'"></use></svg>
+                                        {{ diagMessage }}
+                                    </div>
+                                </div>
+
+                                <!-- Summary -->
+                                <div class="box" v-if="showSummary">
+                                    <div class="bh"><div class="bt">Összegzés</div></div>
+                                    <div class="sum-row"><span class="sl"><svg class="ic"><use href="#ic-cal"></use></svg> Érvényesség</span><span class="sv">{{ validDays }} nap</span></div>
+                                    <div class="sum-row" v-if="mode !== 'single'"><span class="sl"><svg class="ic"><use href="#ic-car"></use></svg> Járművek</span><span class="sv">{{ target.count }} db × {{ money(fee) }}</span></div>
+                                    <div class="sum-row total"><span class="sl"><svg class="ic"><use href="#ic-cash"></use></svg> Fizetendő</span><span class="sv">{{ money(totalFee) }}</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="foot">
+                                <div class="hint"><svg class="ic"><use href="#ic-shield"></use></svg> Szerver-oldali ellenőrzés</div>
+                                <div class="spacer"></div>
+                                <button class="btn ghost" @click="close"><svg class="ic"><use href="#ic-x"></use></svg> Mégse</button>
+                                <button class="btn green" :disabled="!canIssue" @click="issue">
+                                    <svg class="ic"><use href="#ic-single"></use></svg> {{ issueLabel }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Firearms exam (clearance NPC) -->
+                <div class="modal exam" v-else-if="screen === 'exam'">
+                    <div class="bar">
+                        <div class="brand">
+                            <div class="logo"><svg class="ic"><use href="#ic-shield"></use></svg></div>
+                            <div class="head">
+                                <div class="k">{{ examEyebrow }}</div>
+                                <div class="ttl">{{ examTitle }} <b>{{ examTitleAccent }}</b></div>
+                            </div>
+                        </div>
+                        <div class="hpill"><svg class="ic"><use href="#ic-cash"></use></svg>{{ money(examCost) }}</div>
+                        <div class="close" @click="close" title="Bezárás (ESC)">
+                            <svg class="ic"><use href="#ic-x"></use></svg>
+                        </div>
+                    </div>
+                    <div class="termline">
+                        <span>ENGEDÉLY-OS <b>v1.2</b></span>
+                        <span>vizsgabiztos: <b>hatósági</b></span>
+                        <span>hibátlan vizsga jóváhagyása: <b>{{ examChance }}%</b></span>
+                    </div>
+
+                    <!-- Question screen -->
+                    <div class="exbody" v-if="!examResult">
+                        <!-- The roll is invisible otherwise: state it before the test, not just after. -->
+                        <div class="exnote">
+                            <svg class="ic"><use href="#ic-alert"></use></svg>
+                            <span>{{ examNotice }}</span>
+                        </div>
+
+                        <div class="exprog">
+                            <div class="dots">
+                                <span v-for="(q, i) in examQuestions" :key="i"
+                                      :class="{ done: !!examAnswers[i], now: i === examStep }"></span>
+                            </div>
+                            <div class="pc">{{ examStep + 1 }} / {{ examQuestions.length }}</div>
+                        </div>
+
+                        <div class="qhead">
+                            <span class="qn">{{ two(examStep + 1) }}</span>
+                            <span class="qt">{{ currentQuestion.q }}</span>
+                        </div>
+
+                        <div class="answers">
+                            <div class="ans" v-for="(a, i) in currentQuestion.answers" :key="i"
+                                 :class="{ on: examAnswers[examStep] === i + 1 }"
+                                 @click="pickAnswer(i + 1)">
+                                <span class="letter">{{ letter(i) }}</span>
+                                <span class="atext">{{ a }}</span>
+                                <span class="chk"><svg class="ic"><use href="#ic-check"></use></svg></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result screen -->
+                    <div class="exresult" v-else>
+                        <div class="ricon" :class="examResult.granted ? 'good' : 'bad'">
+                            <svg class="ic"><use :href="examResult.granted ? '#ic-shield' : '#ic-fail'"></use></svg>
+                        </div>
+                        <div class="rtitle">{{ resultTitle }}</div>
+                        <div class="rtext">{{ resultText }}</div>
+                        <div class="rbox">
+                            <div class="sum-row"><span class="sl">Helyes válaszok</span><span class="sv">{{ examResult.correct }} / {{ examResult.total }}</span></div>
+                            <div class="sum-row" v-if="!examResult.granted && examResult.perfect">
+                                <span class="sl">Jóváhagyási esély</span><span class="sv">{{ examChance }}%</span>
+                            </div>
+                            <div class="sum-row" v-if="examResult.granted"><span class="sl">Érvényes eddig</span><span class="sv">{{ examResult.validUntil }}</span></div>
+                            <div class="sum-row" v-else><span class="sl">Újra próbálhatod</span><span class="sv">{{ examResult.retryAt }}</span></div>
+                        </div>
+                    </div>
+
+                    <div class="foot">
+                        <div class="hint"><svg class="ic"><use href="#ic-shield"></use></svg> A vizsgadíj nem jár vissza</div>
+                        <div class="spacer"></div>
+                        <template v-if="!examResult">
+                            <button class="btn ghost" v-if="examStep > 0" @click="examStep--">Vissza</button>
+                            <button class="btn green" v-if="examStep < examQuestions.length - 1"
+                                    :disabled="!examAnswers[examStep]" @click="examStep++">Következő</button>
+                            <button class="btn green" v-else :disabled="!allAnswered || examSending" @click="submitExam">
+                                <svg class="ic"><use href="#ic-check"></use></svg> Beküldés
+                            </button>
+                        </template>
+                        <button class="btn ghost" v-else @click="close">Bezárás</button>
+                    </div>
+                </div>
+
+                <!-- Üzembehelyezési engedély (panel, job-tagoknak) -->
+                <div class="modal" v-else-if="screen === 'uzembe'">
+                    <div class="bar">
+                        <div class="brand">
+                            <div class="logo"><svg class="ic"><use href="#ic-cert"></use></svg></div>
+                            <div class="head">
+                                <div class="k">Forgalomba helyezési hivatal</div>
+                                <div class="ttl">Üzembehelyezési <b>Engedély</b></div>
+                            </div>
+                        </div>
+                        <div class="hpill"><span class="dot"></span>Rendszer online</div>
+                        <div class="hpill"><svg class="ic"><use href="#ic-user"></use></svg>{{ uzembeIssuer }}</div>
+                        <div class="close" @click="close" title="Bezárás (ESC)">
+                            <svg class="ic"><use href="#ic-x"></use></svg>
+                        </div>
+                    </div>
+
+                    <div class="termline">
+                        <span>ÜZEMBEHELYEZÉS-OS <b>v1.0</b></span>
+                        <span>jogosultság: <b>{{ uzembeJob }}</b></span>
+                        <span class="tl-hide">díj: vagyon {{ uzembeFeeRatePercent }}%-a (min {{ money(uzembeMinFee) }} / max {{ money(uzembeMaxFee) }})</span>
+                    </div>
+
+                    <div class="body">
+                        <div class="side">
+                            <div class="nav-btn" :class="{ on: uzembeMode === 'single' }" @click="setUzembeMode('single')">
+                                <div class="ico"><svg class="ic"><use href="#ic-single"></use></svg></div>
+                                <div class="lbl"><div class="t">Egyedi</div><div class="d">Egy jármű rendszám alapján</div></div>
+                            </div>
+                            <div class="nav-btn" :class="{ on: uzembeMode === 'mass' }" @click="setUzembeMode('mass')">
+                                <div class="ico"><svg class="ic"><use href="#ic-mass"></use></svg></div>
+                                <div class="lbl"><div class="t">Tömeges</div><div class="d">Ügyfél összes autója</div></div>
+                            </div>
+                            <div class="nav-btn" :class="{ on: uzembeMode === 'faction' }" @click="setUzembeMode('faction')">
+                                <div class="ico"><svg class="ic"><use href="#ic-faction"></use></svg></div>
+                                <div class="lbl"><div class="t">Frakciós</div><div class="d">Frakció járművei</div></div>
+                            </div>
+                            <div class="spacer"></div>
+                            <div class="info-box">
+                                <div class="ih">Díjszabás</div>
+                                <div class="info-row"><span>Vagyon alapján</span><span>{{ uzembeFeeRatePercent }}%</span></div>
+                                <div class="info-row"><span>Minimum</span><span>{{ money(uzembeMinFee) }}</span></div>
+                                <div class="info-row"><span>Maximum</span><span>{{ money(uzembeMaxFee) }}</span></div>
+                                <div class="info-row"><span>Érvényesség</span><span>{{ uzembeValidDays }} nap</span></div>
+                            </div>
+                        </div>
+
+                        <div class="main">
+                            <div class="wm"><svg class="ic"><use href="#ic-cert"></use></svg></div>
+
+                            <div class="page">
+                                <div class="phead">
+                                    <div class="k">{{ uzembeHead.k }}</div>
+                                    <div class="ttl" v-html="uzembeHead.ttl"></div>
+                                </div>
+
+                                <!-- Egyedi: plate list builder (egyszerre több rendszám) -->
+                                <div class="box" v-if="uzembeMode === 'single'">
+                                    <div class="bh"><div class="bt">Jármű(vek) azonosítása</div></div>
+                                    <div class="platefield" :class="{ focus: uzembePlate.length }">
+                                        <span class="pi"><svg class="ic"><use href="#ic-search"></use></svg></span>
+                                        <input class="pinput" v-model="uzembePlate" @input="onUzembePlate" maxlength="8"
+                                               placeholder="RENDSZÁM" spellcheck="false" autocomplete="off"
+                                               @keyup.enter="addUzembePlate" />
+                                        <button class="btn green" style="height:2.2em;padding:0 .9em" @click="addUzembePlate">Hozzáadás</button>
+                                    </div>
+                                    <div class="fieldnote" v-if="uzembePlateInfo && !uzembePlateInfo.ok">
+                                        <svg class="ic"><use href="#ic-alert"></use></svg>
+                                        <span>{{ uzembePlateErrorText }}</span>
+                                    </div>
+                                    <div class="fieldnote" v-else><svg class="ic"><use href="#ic-db"></use></svg> Add meg a rendszámot, majd Enter/Hozzáadás — egyszerre több is felvehető.</div>
+                                </div>
+
+                                <!-- Egyedi: felvett rendszámok listája -->
+                                <div class="box" v-if="uzembeMode === 'single' && uzembePlateList.length">
+                                    <div class="bh">
+                                        <div class="bt">Kiválasztott járművek</div>
+                                        <div class="bs">{{ uzembePlateList.length }} db</div>
+                                    </div>
+                                    <div class="vlist">
+                                        <div class="vrow" v-for="p in uzembePlateList" :key="p.plate">
+                                            <div>
+                                                <div class="vp">{{ p.plate }}</div>
+                                                <div class="tm" style="margin-top:.15em">{{ p.ownerName }}</div>
+                                            </div>
+                                            <div style="display:flex;align-items:center;gap:.5em">
+                                                <span class="vfee">{{ money(p.fee) }}</span>
+                                                <div class="close" style="width:1.6em;height:1.6em" @click="removeUzembePlate(p.plate)" title="Eltávolítás">
+                                                    <svg class="ic"><use href="#ic-x"></use></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tömeges / Frakciós: target -->
+                                <div class="box" v-if="uzembeMode !== 'single'">
+                                    <div class="bh">
+                                        <div class="bt">Cél ügyfél</div>
+                                        <div class="refresh" @click="refreshUzembeTarget" title="Közeli ügyfél keresése">
+                                            <svg class="ic" :class="{ spin: uzembeLoadingTarget }"><use href="#ic-refresh"></use></svg>
+                                        </div>
+                                    </div>
+                                    <div v-if="uzembeTarget" class="target">
+                                        <div class="avatar">{{ initials(uzembeTarget.name) }}</div>
+                                        <div class="tinfo">
+                                            <div class="tn">{{ uzembeTarget.name }} <span class="badge">ID {{ uzembeTarget.id }}</span></div>
+                                            <div class="tm" v-if="uzembeMode === 'faction'">Frakció: <b>{{ uzembeTarget.job || '—' }}</b> · a teljes flottára</div>
+                                            <div class="tm" v-else><span class="dot"></span> Legközelebbi ügyfél · hatótávon belül</div>
+                                        </div>
+                                    </div>
+                                    <div v-else class="empty">
+                                        <svg class="ic"><use href="#ic-alert"></use></svg>
+                                        <span>{{ uzembeTargetError || 'Állj egy ügyfél mellé, majd keresd meg.' }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tömeges / Frakciós: vehicle list -->
+                                <div class="box" v-if="uzembeMode !== 'single' && uzembeTarget">
+                                    <div class="bh">
+                                        <div class="bt">Lejárt üzembehelyezésű járművek</div>
+                                        <div class="bs">{{ uzembeTarget.count }} db</div>
+                                    </div>
+                                    <div v-if="uzembeTarget.count" class="vlist">
+                                        <div class="vrow" v-for="p in uzembeTarget.plates" :key="p">
+                                            <div class="vp">{{ p }}</div>
+                                            <span class="vfee">{{ money(uzembeTarget.fee) }}</span>
+                                        </div>
+                                    </div>
+                                    <div v-else class="fieldnote ok"><svg class="ic"><use href="#ic-check"></use></svg> Minden járművön érvényes az üzembehelyezés.</div>
+                                </div>
+
+                                <!-- Kedvezmény infó -->
+                                <div class="box discount-box" v-if="uzembeBatchEligible">
+                                    <div class="bh"><div class="bt">Több autós kedvezmény</div></div>
+                                    <div class="fieldnote ok">
+                                        <svg class="ic"><use href="#ic-cash"></use></svg>
+                                        <span>{{ uzembeDiscountChance }}% esély van {{ uzembeDiscountPercent }}% kedvezményre a végösszegből.</span>
+                                    </div>
+                                </div>
+
+                                <!-- Summary -->
+                                <div class="box" v-if="uzembeShowSummary">
+                                    <div class="bh"><div class="bt">Összegzés</div></div>
+                                    <div class="sum-row"><span class="sl"><svg class="ic"><use href="#ic-cal"></use></svg> Érvényesség</span><span class="sv">{{ uzembeValidDays }} nap</span></div>
+                                    <div class="sum-row" v-if="uzembeMode !== 'single'"><span class="sl"><svg class="ic"><use href="#ic-car"></use></svg> Járművek</span><span class="sv">{{ uzembeTarget.count }} db × {{ money(uzembeTarget.fee) }}</span></div>
+                                    <div class="sum-row" v-if="uzembeMode === 'single'"><span class="sl"><svg class="ic"><use href="#ic-car"></use></svg> Járművek</span><span class="sv">{{ uzembePlateList.length }} db</span></div>
+                                    <div class="sum-row total"><span class="sl"><svg class="ic"><use href="#ic-cash"></use></svg> Becsült összeg</span><span class="sv">{{ money(uzembeTotalFee) }}</span></div>
+                                </div>
+                            </div>
+
+                            <div class="foot">
+                                <div class="hint"><svg class="ic"><use href="#ic-shield"></use></svg> A végleges díjat a tulaj hagyja jóvá</div>
+                                <div class="spacer"></div>
+                                <button class="btn ghost" @click="close"><svg class="ic"><use href="#ic-x"></use></svg> Mégse</button>
+                                <button class="btn green" :disabled="!uzembeCanIssue" @click="issueUzembe">
+                                    <svg class="ic"><use href="#ic-single"></use></svg> {{ uzembeIssueLabel }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vue.global.prod.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

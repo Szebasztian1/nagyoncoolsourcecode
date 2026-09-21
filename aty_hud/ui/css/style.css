@@ -1,0 +1,2792 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url(https://db.onlinewebfonts.com/c/406b56da0c31245c249b3a3c61560d1a?family=Joyride+W05+STD);
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Barlow", sans-serif;
+	user-select: none;
+	-webkit-font-smoothing: antialiased;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	display: none;
+}
+
+.color-input {
+	position: absolute;
+	top: var(--y, 0);
+	left: var(--x, 0);
+	z-index: 9999;
+}
+
+.color-input-background {
+	width: 100vw;
+	height: 100vh;
+	z-index: 9998;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#nowdate {
+	position: absolute;
+	left: 3px;
+	bottom: 3px;
+	color: white;
+}
+
+.settings {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	flex-direction: column;
+	align-items: center;
+	display: none;
+}
+.settings .type-setting img {
+	height: 40px;
+}
+.settings .type-setting input:checked + label {
+	opacity: 1 !important;
+}
+.settings .type-setting label {
+	padding: 0 !important;
+	background: none !important;
+	border: none !important;
+	opacity: 0.2;
+}
+.settings .reset-btn-wrapper {
+	width: 80vw;
+	display: flex;
+	gap: 10px;
+}
+.settings .reset-btn-wrapper .btn {
+	margin-top: 65px;
+	margin-bottom: 10px;
+	padding: 10px 40px;
+	border-radius: 5px;
+	background: #1f1f1f;
+	color: #3e3e3e;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 0.2s;
+	border: 1px solid #262626;
+}
+.settings .reset-btn-wrapper .btn:hover {
+	background: #282829;
+	border: 1px solid #373737;
+	color: #838383;
+}
+.settings .stat-wrapper.red .top {
+	stroke: #4c6ef5;
+}
+.settings .stat-wrapper.pink .top {
+	stroke: #ff2b5a;
+}
+.settings .stat-wrapper.blue .top {
+	stroke: #4589ee;
+}
+.settings .stat-wrapper.yellow .top {
+	stroke: #ffb44b;
+}
+.settings .stat-wrapper.aqua .top {
+	stroke: #6efff6;
+}
+.settings .stat-wrapper.purple .top {
+	stroke: #6e7dff;
+}
+.settings .stat-wrapper.dpurple .top {
+	stroke: #924fff;
+}
+.settings .stat-wrapper.dpink .top {
+	stroke: #ff1686;
+}
+.settings .stat-wrapper .circle-stat {
+	width: 48px;
+	height: 48px;
+	position: relative;
+}
+.settings .stat-wrapper .circle-stat .percent {
+	position: absolute;
+	left: 50%;
+	bottom: -40%;
+	transform: translateX(-50%);
+	color: #cacaca;
+	font-size: 11px;
+	font-weight: 500;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.settings .stat-wrapper .circle-stat .circle-img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+}
+.settings .stat-wrapper .circle-stat .icon {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -45%);
+	display: flex;
+	align-items: center;
+}
+.settings .stat-wrapper .circle-stat svg {
+	width: 48px;
+	height: 48px;
+}
+.settings .stat-wrapper .circle-stat svg circle {
+	fill: none;
+	stroke-width: 1px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+.settings .stat-wrapper .circle-stat svg circle.under {
+	stroke: rgba(217, 217, 217, 0.1882352941);
+}
+.settings .stat-wrapper .circle-stat svg circle.top {
+	z-index: 20;
+	stroke-dasharray: 145;
+	transition: 0.5s linear stroke-dashoffset;
+}
+.settings .bg {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: -1;
+}
+.settings .bg img {
+	width: 100vw;
+	height: 100vh;
+}
+.settings .title-wrapper {
+	width: 30vw;
+	text-align: center;
+	padding-top: 5vh;
+}
+.settings .title-wrapper .title {
+	font-family: "Joyride W05 STD";
+	text-shadow: 0px 4px 137px rgba(255, 0, 57, 0.55);
+	font-size: 57px;
+	font-weight: 400;
+	background: radial-gradient(2715.55% 330.87% at 50% 50%, #4c6ef5 0%, rgba(255, 0, 57, 0) 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.settings .title-wrapper .subtitle {
+	color: rgba(255, 255, 255, 0.81);
+	font-size: 20px;
+	font-weight: 300;
+}
+.settings .settings-wrapper {
+	width: 80vw;
+	height: 77%;
+	overflow-y: scroll;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding-bottom: 20px;
+}
+.settings .settings-wrapper::-webkit-scrollbar {
+	width: 0px;
+}
+.settings .settings-wrapper .setting {
+	width: calc(25% - 15px);
+	height: 20vh;
+	min-height: 150px;
+	float: left;
+	background: rgba(32, 32, 33, 0.8);
+	border: 1px solid #313131;
+	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 5% 3%;
+	gap: 20px;
+}
+.settings .settings-wrapper .setting .circle-status-settings {
+	display: flex;
+	gap: 10px;
+	scale: 0.8;
+	cursor: pointer;
+}
+.settings .settings-wrapper .setting .circle-status-settings circle {
+	stroke-dashoffset: 0 !important;
+}
+.settings .settings-wrapper .setting .circle-status-settings .circle-img svg {
+	width: 38px !important;
+	height: 38px !important;
+}
+.settings .settings-wrapper .setting .circle-status-settings .icon svg {
+	max-width: 20px !important;
+	max-height: 20px !important;
+}
+.settings .settings-wrapper .setting .circle-status-settings .stat-wrapper {
+	transition: 0.2s;
+}
+.settings .settings-wrapper .setting .circle-status-settings .stat-wrapper:hover {
+	scale: 1.2;
+}
+.settings .settings-wrapper .setting:nth-child(4n) {
+	margin-right: 0;
+}
+.settings .settings-wrapper .setting .title-desc {
+	text-align: center;
+}
+.settings .settings-wrapper .setting .title-desc .title {
+	color: #6d6d6d;
+	font-size: 20px;
+	font-weight: 700;
+}
+.settings .settings-wrapper .setting .title-desc .desc {
+	color: rgba(255, 255, 255, 0.41);
+	font-size: 12px;
+	font-weight: 400;
+}
+.settings .settings-wrapper .setting .buttons {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	position: relative;
+}
+.settings .settings-wrapper .setting .buttons input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+}
+.settings .settings-wrapper .setting .buttons input[type="range"] {
+	width: 100%;
+}
+.settings .settings-wrapper .setting .buttons input:checked + label {
+	border-radius: 1px;
+	border: 1px solid #373737;
+	background: #282829;
+	color: #838383;
+}
+.settings .settings-wrapper .setting .buttons label,
+.settings .settings-wrapper .setting .buttons .btn {
+	border-radius: 2px;
+	border: 1px solid #262626;
+	background: #1f1f1f;
+	color: #3e3e3e;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 100%;
+	padding: 8px 0;
+	transition: 0.2s;
+}
+.settings .settings-wrapper .setting .buttons label:hover,
+.settings .settings-wrapper .setting .buttons .btn:hover {
+	background: #282829;
+	border: 1px solid #373737;
+	color: #838383;
+	scale: 1.05;
+}
+
+main {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+main .keys-wrapper {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 1.5vw;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+main .keys-wrapper .key {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+main .keys-wrapper .key .key-box {
+	width: 35px;
+	height: 35px;
+	position: relative;
+}
+main .keys-wrapper .key .key-box .key-name {
+	color: #f6f6f6;
+	font-size: 14px;
+	font-weight: 700;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 20;
+}
+main .keys-wrapper .key .key-box .key-img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+}
+main .keys-wrapper .key .title {
+	color: #f6f6f6;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: -0.32px;
+}
+main .pi-item {
+	position: absolute;
+	top: 2vh;
+	display: flex;
+	flex-direction: column;
+	/* content is right-aligned so a wide value (long job, big money) grows
+	   leftwards while the right edge stays anchored — it never pushes others */
+	align-items: flex-end;
+	background: rgba(15, 15, 18, 0.5);
+	border-radius: 12px;
+	padding: 8px 12px;
+	gap: 3px;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+	width: max-content;
+	opacity: 0;
+}
+main .pi-item.pi-no-bg {
+	background: transparent !important;
+	box-shadow: none !important;
+}
+/* Fallback anchors, right to left, starting past the logo (4vw wide, right:10px).
+   layoutInfoTiles() overwrites these with measured inline values as soon as it
+   runs; they only matter if that never happens, and then a loosely spaced row
+   beats six tiles piled on the same spot. The slots are deliberately wider than
+   the measured tiles so a long job name or a big balance still can't overlap. */
+main .pi-ping {
+	right: calc(4vw + 20px);
+}
+main .pi-players {
+	right: calc(4vw + 90px);
+}
+main .pi-id {
+	right: calc(4vw + 190px);
+}
+main .pi-money {
+	right: calc(4vw + 255px);
+}
+main .pi-bank {
+	right: calc(4vw + 400px);
+}
+main .pi-job {
+	right: calc(4vw + 545px);
+}
+main .pi-logo {
+	position: absolute;
+	top: 0.5vh;
+	right: 10px;
+	max-width: 4vw;
+	max-height: 4vh;
+}
+main .pi-label {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 9px;
+	font-weight: 500;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+}
+main .pi-label img {
+	width: 10px;
+	height: 10px;
+	z-index: 10;
+	filter: brightness(0) saturate(100%) invert(43%) sepia(82%) saturate(600%) hue-rotate(204deg) brightness(105%);
+}
+main .pi-value {
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 600;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	white-space: nowrap;
+}
+main .pi-logo img {
+	max-width: 100%;
+	max-height: 100%;
+}
+main .pi-weapon {
+	position: absolute;
+	top: 9vh;
+	right: 1vw;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+main .pi-weapon .gun-img {
+	height: 30px;
+	width: fit-content;
+	transform: scaleX(-1);
+}
+main .pi-weapon .gun-img img {
+	height: 100%;
+}
+main .pi-weapon .divider {
+	width: 1px;
+	height: 30px;
+	border-radius: 1px;
+	background: rgba(217, 217, 217, 0.5176470588);
+}
+main .pi-weapon .ammo-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+main .pi-weapon .ammo-wrapper .full-ammo-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+main .pi-weapon .ammo-wrapper .full-ammo-wrapper .full-ammo {
+	color: #dcdcdc;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 100%;
+}
+main .pi-weapon .ammo-wrapper .full-ammo-wrapper .icon {
+	display: flex;
+}
+main .pi-weapon .ammo-wrapper .clip-ammo {
+	color: #f9f9f9;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	font-size: 20px;
+	font-weight: 500;
+}
+main .map-wrapper {
+	position: absolute;
+	left: 1.5vw;
+	bottom: 2vh;
+	display: flex;
+	flex-direction: column;
+}
+main .map-wrapper .map-outline {
+	transition: 0.3s height;
+	position: relative;
+	height: 20vh;
+	width: 16.2vw;
+}
+main .map-wrapper .map-outline img {
+	width: 100%;
+	height: 100%;
+}
+/* Round minimap (joemap style).
+
+   The ring is fixed to the viewport rather than laid out in the wrapper, because it has to sit
+   exactly on top of the game's radar mask - and that one is placed by SetMinimapComponentPosition
+   in client/utils.lua, not by this flexbox.
+
+   The box below is only the 16:9 fallback, for the moment between the page loading and the
+   client's first mapGeometry message. From then on renderMapGeometry() overwrites
+   left/bottom/width/height with the box the client actually placed the radar in, offset for the
+   aspect ratio included - a stylesheet cannot know that offset, and the ring being blind to it is
+   what let the map slide out of its frame on wide screens.
+
+   Hidden until .map-wrapper gets .map-circle, which loadSetting() toggles. */
+main .map-wrapper .map-circle-outline {
+	display: none;
+	position: fixed;
+	left: 0.49vh;
+	bottom: 5.25vh;
+	width: 25.15vh;
+	height: 22.4vh;
+	border: 0.45vh solid rgba(159, 163, 171, 0.85);
+	border-radius: 50%;
+	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5) inset;
+	pointer-events: none;
+}
+main .map-wrapper.map-circle {
+	/* Only the address/time row is left in the wrapper once the squared frame is gone, so the
+	   wrapper is parked just above the ring instead of at the bottom of the screen. */
+	left: 0.49vh;
+	bottom: 28.2vh;
+	width: 25.15vh;
+}
+main .map-wrapper.map-circle .map-outline {
+	display: none;
+}
+main .map-wrapper.map-circle .map-circle-outline {
+	display: block;
+}
+main .map-wrapper.map-circle .map-top {
+	width: 100%;
+	transform: none;
+}
+main .map-wrapper .map-top {
+	display: flex;
+	transform: translateY(10px);
+	width: 16.2vw;
+	align-items: center;
+	padding: 1.5vh 0;
+	justify-content: space-between;
+	background: radial-gradient(50% 90.16% at 50% 100%, rgba(21, 0, 255, 0.1) 0%, rgba(30, 0, 255, 0) 100%);
+}
+main .map-wrapper .map-top .address-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+main .map-wrapper .map-top .address-wrapper .icon {
+	display: flex;
+}
+main .map-wrapper .map-top .address-wrapper .text-wrapper {
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+main .map-wrapper .map-top .address-wrapper .text-wrapper .title {
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 600;
+}
+main .map-wrapper .map-top .address-wrapper .text-wrapper .subtitle {
+	color: #c4c4c4;
+	font-size: 11px;
+	font-weight: 500;
+}
+main .map-wrapper .map-top .time-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+main .map-wrapper .map-top .time-wrapper .subtitle {
+	color: #c4c4c4;
+	font-size: 11px;
+	font-weight: 500;
+}
+main .map-wrapper .map-top .time-wrapper .text-wrapper {
+	display: flex;
+	align-items: center;
+	align-items: center;
+	gap: 5px;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 500;
+}
+main .map-wrapper .map-top .time-wrapper .text-wrapper .icon {
+	display: flex;
+	padding-top: 2px;
+}
+main .notification-wrapper {
+	position: absolute;
+	left: 1.5vw;
+	bottom: 30vh;
+	display: flex;
+	flex-direction: column;
+	width: 16.2vw;
+	gap: 10px;
+	transition: 0.3s;
+}
+main .notification-wrapper .notification {
+	gap: 0.8vw;
+	padding: 16px;
+	width: 100%;
+	border-radius: 5px;
+	color: #eaeaea;
+	font-size: 14px;
+	font-weight: 400;
+	position: relative;
+	overflow: hidden;
+	display: none;
+	align-items: center;
+	height: 100%;
+}
+main .notification-wrapper .notification .bar-wrapper {
+	width: 100%;
+	height: 2px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+main .notification-wrapper .notification .bar-wrapper .bar {
+	height: 100%;
+}
+main .notification-wrapper .notification.yellow {
+	background: rgba(94, 65, 26, 0.5);
+}
+main .notification-wrapper .notification.yellow .icon i {
+	color: #ffb44b;
+	text-shadow: 0px 0px 7px rgba(255, 180, 75, 0.5);
+}
+main .notification-wrapper .notification.yellow .bar-wrapper {
+	background: rgba(255, 180, 75, 0.2);
+}
+main .notification-wrapper .notification.yellow .bar-wrapper .bar {
+	background: linear-gradient(90deg, #5e411a 0%, #ffb44b 100%);
+}
+main .notification-wrapper .notification.red {
+	background: rgba(99, 20, 38, 0.5);
+}
+main .notification-wrapper .notification.red .icon i {
+	color: #ff2b5a;
+	text-shadow: 0px 0px 7px rgba(255, 43, 90, 0.5);
+}
+main .notification-wrapper .notification.red .bar-wrapper {
+	background: rgba(255, 43, 90, 0.2);
+}
+main .notification-wrapper .notification.red .bar-wrapper .bar {
+	background: linear-gradient(90deg, #631426 0%, #ff2b5a 100%);
+}
+main .notification-wrapper .notification.green {
+	background: rgba(26, 94, 28, 0.5);
+}
+main .notification-wrapper .notification.green .icon i {
+	color: #4cff0d;
+	text-shadow: 0px 0px 7px rgba(76, 255, 13, 0.5);
+}
+main .notification-wrapper .notification.green .bar-wrapper {
+	background: rgba(76, 255, 13, 0.2);
+}
+main .notification-wrapper .notification.green .bar-wrapper .bar {
+	background: linear-gradient(90deg, #2e641b 0%, #4cff0d 100%);
+}
+main .speedo-wrapper-main {
+	position: absolute;
+	bottom: 6vh;
+	right: 1.8vw;
+	min-width: 250px;
+}
+main .speedo-wrapper-main .speedo-wrapper {
+	transition: 0.3s;
+}
+main .speedo-type-one {
+	display: none;
+	width: 272px;
+	height: 272px;
+}
+main .speedo-type-one .center-wrapper {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+}
+main .speedo-type-one .center-wrapper .circle {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+	width: 118px;
+	height: 118px;
+	border-radius: 50%;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
+	display: flex;
+	overflow: hidden;
+}
+main .speedo-type-one .center-wrapper .circle .speed-type {
+	position: absolute;
+	left: 50%;
+	top: 47%;
+	transform: translate(-50%, -50%);
+	line-height: 100%;
+	z-index: 0;
+	color: rgba(222, 222, 222, 0.15);
+	font-size: 70px;
+	font-weight: 700;
+}
+main .speedo-type-one .center-wrapper .circle .text {
+	font-family: "Joyride W05 STD";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	color: #fff;
+	font-size: 36px;
+	font-weight: 300;
+	line-height: 100%;
+	z-index: 10;
+}
+main .speedo-type-one .indicators {
+	position: absolute;
+	left: 50%;
+	bottom: 7%;
+	transform: translateX(-50%);
+	width: 132px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+main .speedo-type-one .indicators .bg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+main .speedo-type-one .indicators .center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	position: relative;
+	z-index: 20;
+}
+main .speedo-type-one .indicators .signal {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	border-radius: 18px;
+	border: 0.8px solid #1c1c1c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+main .speedo-type-one .indicators .signal.right-signal {
+	left: auto;
+	right: 3px;
+}
+main .speedo-type-one .main-circle,
+main .speedo-type-one .out-circle {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+main .speedo-type-one .rpm-wrapper {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+main .speedo-type-one .rpm-wrapper svg {
+	width: 271px;
+	height: 270px;
+}
+main .speedo-type-one .rpm-wrapper svg circle {
+	fill: none;
+	stroke-width: 6px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+main .speedo-type-one .rpm-wrapper svg circle.top {
+	z-index: 20;
+	transition: linear 0.3s stroke-dashoffset;
+	stroke: #4c6ef5;
+	stroke-dasharray: 830;
+	stroke-dashoffset: 0;
+	rotate: 90deg;
+	transform-origin: center;
+	stroke-linecap: round;
+}
+main .speedo-type-one .fuel-wrapper,
+main .speedo-type-one .nitro-wrapper {
+	width: fit-content;
+	height: fit-content;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+main .speedo-type-one .fuel-wrapper.nitro-wrapper,
+main .speedo-type-one .nitro-wrapper.nitro-wrapper {
+	display: none;
+}
+main .speedo-type-one .fuel-wrapper.nitro-wrapper .icon,
+main .speedo-type-one .nitro-wrapper.nitro-wrapper .icon {
+	display: flex;
+	position: absolute;
+	right: 40%;
+	left: auto;
+}
+main .speedo-type-one .fuel-wrapper.nitro-wrapper svg,
+main .speedo-type-one .nitro-wrapper.nitro-wrapper svg {
+	transform: scaleX(-1);
+}
+main .speedo-type-one .fuel-wrapper.nitro-wrapper svg .top,
+main .speedo-type-one .nitro-wrapper.nitro-wrapper svg .top {
+	stroke: #6e7dff !important;
+}
+main .speedo-type-one .fuel-wrapper .icon,
+main .speedo-type-one .nitro-wrapper .icon {
+	display: flex;
+	position: absolute;
+	left: 40%;
+	right: auto;
+}
+main .speedo-type-one .fuel-wrapper svg,
+main .speedo-type-one .nitro-wrapper svg {
+	width: 240px;
+	height: 240px;
+}
+main .speedo-type-one .fuel-wrapper svg circle,
+main .speedo-type-one .nitro-wrapper svg circle {
+	fill: none;
+	stroke-width: 6px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+main .speedo-type-one .fuel-wrapper svg circle.top,
+main .speedo-type-one .nitro-wrapper svg circle.top {
+	z-index: 20;
+	transition: linear 0.3s stroke-dashoffset;
+	stroke: #ffb44b;
+	stroke-dasharray: 830;
+	stroke-dashoffset: 700;
+	rotate: 140deg;
+	transform-origin: center;
+	stroke-linecap: round;
+	position: relative;
+}
+main .speedo-type-one .fuel-wrapper svg circle.under,
+main .speedo-type-one .nitro-wrapper svg circle.under {
+	z-index: 10;
+	stroke: rgba(221, 221, 221, 0.1098039216);
+	stroke-dasharray: 830;
+	stroke-dashoffset: 600;
+	rotate: 140deg;
+	transform-origin: center;
+	stroke-linecap: round;
+	position: relative;
+}
+main .speedo-type-one .condition-badge,
+main .speedo-type-two .condition-badge {
+	position: absolute;
+	left: 50%;
+	top: 14%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 9px;
+	border-radius: 20px;
+	background: rgba(15, 15, 18, 0.55);
+	z-index: 999;
+	--cond-color: #4CD964;
+}
+main .speedo-type-two .condition-badge {
+	top: 24%;
+}
+main .condition-badge .condition-icon {
+	display: flex;
+	width: 11px;
+	height: 11px;
+	color: var(--cond-color, #4CD964);
+}
+main .condition-badge .condition-percent {
+	font-size: 11px;
+	font-weight: 700;
+	color: #fff;
+	line-height: 100%;
+	white-space: nowrap;
+}
+main .condition-badge.condition-good { --cond-color: #4CD964; }
+main .condition-badge.condition-mid { --cond-color: #FFB44B; }
+main .condition-badge.condition-bad { --cond-color: #FF453A; }
+main .speedo-type-two {
+	display: none;
+	width: 305px;
+	height: 305px;
+}
+main .speedo-type-two .rpm-circle .circle {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 25px;
+	background: #4c6ef5;
+	width: 25px;
+	height: 25px;
+}
+main .speedo-type-two .speed-unit-wrapper {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 58%;
+	text-align: center;
+	line-height: 100%;
+}
+main .speedo-type-two .speed-unit-wrapper .text {
+	color: #fff;
+	text-align: center;
+	font-size: 28px;
+	font-weight: 600;
+}
+main .speedo-type-two .speed-unit-wrapper .speed-type {
+	color: rgba(217, 217, 217, 0.2);
+	text-align: center;
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 0.24px;
+}
+main .speedo-type-two .indicators {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 13%;
+	line-height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+}
+main .speedo-type-two .indicators .top,
+main .speedo-type-two .indicators .bottom {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	gap: 8px;
+}
+main .speedo-type-two .rpm-circle .needle {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 50%;
+	transform-origin: 0% bottom;
+	rotate: -122deg;
+	transition: rotate 0.2s linear;
+}
+main .speedo-type-two .speedo-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 315px;
+	height: auto;
+}
+main .speedo-type-two .fuel-wrapper,
+main .speedo-type-two .nitro-wrapper {
+	width: 305px;
+	height: 305px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-51.1%, -48.7%);
+}
+main .speedo-type-two .fuel-wrapper.nitro-wrapper,
+main .speedo-type-two .nitro-wrapper.nitro-wrapper {
+	display: none;
+}
+main .speedo-type-two .fuel-wrapper.nitro-wrapper .icon,
+main .speedo-type-two .nitro-wrapper.nitro-wrapper .icon {
+	display: flex;
+	position: absolute;
+	right: 12%;
+	left: auto;
+}
+main .speedo-type-two .fuel-wrapper.nitro-wrapper svg,
+main .speedo-type-two .nitro-wrapper.nitro-wrapper svg {
+	transform: scaleX(-1);
+}
+main .speedo-type-two .fuel-wrapper.nitro-wrapper svg .top,
+main .speedo-type-two .nitro-wrapper.nitro-wrapper svg .top {
+	stroke: #6e7dff !important;
+}
+main .speedo-type-two .fuel-wrapper .icon,
+main .speedo-type-two .nitro-wrapper .icon {
+	display: flex;
+	position: absolute;
+	left: 14%;
+	top: 14%;
+	right: auto;
+}
+main .speedo-type-two .fuel-wrapper svg,
+main .speedo-type-two .nitro-wrapper svg {
+	width: 311px;
+	height: 311px;
+}
+main .speedo-type-two .fuel-wrapper svg circle,
+main .speedo-type-two .nitro-wrapper svg circle {
+	stroke-dasharray: 960;
+	stroke-dashoffset: 775;
+	fill: none;
+	rotate: 150deg;
+	transform-origin: center center;
+	position: relative;
+	stroke-linecap: round;
+	stroke-width: 6px;
+}
+main .speedo-type-two .fuel-wrapper svg circle.top,
+main .speedo-type-two .nitro-wrapper svg circle.top {
+	z-index: 20;
+	transition: linear 0.3s stroke-dashoffset;
+	stroke: #ffb44b;
+	stroke-dasharray: 960;
+	stroke-dashoffset: 775;
+}
+main .speedo-type-two .fuel-wrapper svg circle.under,
+main .speedo-type-two .nitro-wrapper svg circle.under {
+	z-index: 10;
+	stroke: rgba(221, 221, 221, 0.1098039216);
+	stroke-dasharray: 960;
+	stroke-dashoffset: 775;
+}
+main .speedo-type-two .gear-wrapper {
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	transform: translateX(-50%);
+	display: flex;
+	color: #4c6ef5;
+	gap: 5px;
+	align-items: flex-end;
+	justify-content: center;
+}
+main .speedo-type-two .gear-wrapper .gear {
+	color: #4c6ef5;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	opacity: 0.5;
+	position: relative;
+}
+main .speedo-type-two .gear-wrapper .gear.active {
+	font-size: 18px;
+	font-weight: 800;
+	opacity: 1;
+	padding-bottom: 2px;
+}
+main .speedo-type-two .gear-wrapper .gear.active::before {
+	height: 6px !important;
+}
+main .speedo-type-two .gear-wrapper .gear::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -5px;
+	transform: translateX(-50%);
+	width: 2px;
+	height: 4px;
+	background: #4c6ef5;
+	border-radius: 2px;
+}
+
+/* ====== SPEEDO TYPE THREE (Flat Bar Speedometer) ====== */
+main .speedo-type-three {
+	display: none;
+	flex-direction: column;
+	width: 420px;
+	background: rgba(15, 15, 18, 0.5);
+	border-radius: 12px;
+	padding: 10px 14px 10px 14px;
+	gap: 5px;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+}
+
+main .speedo-type-three .s3-top-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	justify-content: space-between;
+	margin-bottom: 3px;
+}
+
+main .speedo-type-three .s3-fuel-bar-left {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 1;
+	max-width: 200px;
+}
+
+main .speedo-type-three .s3-fuel-bar-left .s3-fuel-icon img {
+	width: 13px;
+	height: 13px;
+}
+
+main .speedo-type-three .s3-fuel-bar-track {
+	flex: 1;
+	height: 7px;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+main .speedo-type-three .s3-fuel-bar-fill {
+	height: 100%;
+	width: 72%;
+	background: #ffb44b;
+	border-radius: 4px;
+	transition: width 0.3s linear;
+}
+
+main .speedo-type-three .s3-fuel-value {
+	color: #ffb44b;
+	font-size: 10px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+main .speedo-type-three .s3-nitro-row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 3px;
+}
+
+main .speedo-type-three .s3-nitro-bar-left {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 1;
+	max-width: 200px;
+}
+
+main .speedo-type-three .s3-nitro-bar-left .s3-nitro-icon img {
+	width: 13px;
+	height: 13px;
+}
+
+main .speedo-type-three .s3-nitro-bar-track {
+	flex: 1;
+	height: 7px;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+main .speedo-type-three .s3-nitro-bar-fill {
+	height: 100%;
+	width: 100%;
+	background: #6e7dff;
+	border-radius: 4px;
+	transition: width 0.3s linear;
+}
+
+main .speedo-type-three .s3-nitro-value {
+	color: #6e7dff;
+	font-size: 10px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+main .speedo-type-three .s3-condition-row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 3px;
+	--cond-color: #4CD964;
+}
+
+main .speedo-type-three .s3-condition-row.condition-good { --cond-color: #4CD964; }
+main .speedo-type-three .s3-condition-row.condition-mid { --cond-color: #FFB44B; }
+main .speedo-type-three .s3-condition-row.condition-bad { --cond-color: #FF453A; }
+
+main .speedo-type-three .s3-condition-bar-left {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 1;
+	max-width: 200px;
+}
+
+main .speedo-type-three .s3-condition-bar-left .s3-condition-icon {
+	display: flex;
+	width: 13px;
+	height: 13px;
+	color: var(--cond-color, #4CD964);
+}
+
+main .speedo-type-three .s3-condition-bar-track {
+	flex: 1;
+	height: 7px;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+main .speedo-type-three .s3-condition-bar-fill {
+	height: 100%;
+	width: 100%;
+	background: var(--cond-color, #4CD964);
+	border-radius: 4px;
+	transition: width 0.3s linear, background 0.3s linear;
+}
+
+main .speedo-type-three .s3-condition-value {
+	color: var(--cond-color, #4CD964);
+	font-size: 10px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+main .speedo-type-three .s3-top-icons {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+}
+
+main .speedo-type-three .s3-top-icons svg {
+	height: 13px;
+	width: auto;
+}
+
+main .speedo-type-three .s3-top-icons svg path {
+	fill: rgba(200, 200, 200, 0.5);
+	transition: fill 0.2s;
+}
+
+main .speedo-type-three .s3-middle-row {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+main .speedo-type-three .s3-speed-block {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+main .speedo-type-three .s3-speed-value {
+	font-family: "Joyride W05 STD", sans-serif;
+	font-size: 54px;
+	font-weight: 300;
+	color: #ffffff;
+	line-height: 1;
+	letter-spacing: -2px;
+}
+
+main .speedo-type-three .s3-speed-unit {
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 2px;
+	margin-bottom: 8px;
+	margin-left: 7px;
+}
+
+main .speedo-type-three .s3-gear-box {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 8px;
+	width: 58px;
+	height: 58px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1px;
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	margin-right: 25px;
+}
+
+main .speedo-type-three .s3-gear-number {
+	color: #4c6ef5;
+	font-size: 28px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+main .speedo-type-three .s3-gear-label {
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 9px;
+	font-weight: 500;
+	letter-spacing: 2px;
+}
+
+main .speedo-type-three .s3-bottom-row {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background: rgba(255, 255, 255, 0.03);
+	border-radius: 8px;
+	padding: 6px 5px;
+	margin-top: 8px;
+}
+
+main .speedo-type-three .s3-rpm-label {
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 9px;
+	font-weight: 600;
+	letter-spacing: 1.5px;
+	min-width: 18px;
+	transform: rotate(-90deg);
+}
+
+main .speedo-type-three .s3-rpm-bar-wrapper {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+main .speedo-type-three .s3-rpm-bar-track {
+	position: relative;
+	width: 100%;
+	height: 18px;
+	background: transparent;
+	display: flex;
+	gap: 3px;
+	overflow: hidden;
+	border-radius: 3px;
+}
+
+/* Segment grid background effect */
+main .speedo-type-three .s3-rpm-bar-track::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.07) 0px, rgba(255, 255, 255, 0.07) 12px, transparent 12px, transparent 15px);
+	z-index: 0;
+}
+
+main .speedo-type-three .s3-rpm-bar-fill {
+	height: 100%;
+	width: 50%;
+	background: #4c6ef5;
+	border-radius: 2px;
+	transition: width 0.15s linear;
+	position: relative;
+	z-index: 1;
+	/* Segmented look */
+	-webkit-mask-image: repeating-linear-gradient(to right, black 0px, black 12px, transparent 12px, transparent 15px);
+	mask-image: repeating-linear-gradient(to right, black 0px, black 12px, transparent 12px, transparent 15px);
+}
+
+/* Redline coloring — last 10% of the bar */
+main .speedo-type-three .s3-rpm-bar-fill.redline {
+	background: linear-gradient(to right, #4c6ef5 80%, #ff2b5a 80%);
+}
+
+main .speedo-type-three .s3-rpm-scale {
+	display: flex;
+	justify-content: space-between;
+	color: rgba(200, 200, 200, 0.4);
+	font-size: 10px;
+	padding: 0 2px;
+}
+
+main .speedo-type-three .s3-rpm-scale .redline {
+	color: #ff2b5a;
+}
+
+main .speedo-type-three .s3-redline-label {
+	color: #ff2b5a;
+	font-size: 9px;
+	font-weight: 600;
+	letter-spacing: 1.5px;
+	min-width: 18px;
+	transform: rotate(90deg);
+}
+/* ====== END SPEEDO TYPE THREE ====== */
+
+/* ====== SPEEDO TYPE FOUR: Flat2 / D-shape with half-circle RPM ====== */
+main .speedo-type-four {
+	display: none;
+	flex-direction: row;
+	align-items: stretch;
+	height: 110px;
+	border-radius: 55px 12px 12px 55px;
+	background: rgba(15, 15, 18, 0.7);
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35);
+	overflow: hidden;
+}
+
+/* Left half-circle portion: RPM arc */
+main .speedo-type-four .s4-rpm-half {
+	width: 110px;
+	flex-shrink: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main .speedo-type-four .s4-rpm-svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+main .speedo-type-four .s4-arc-fill {
+	transition: stroke-dashoffset 0.15s linear;
+}
+
+main .speedo-type-four .s4-arc-fill.redline {
+	stroke: #ff2b5a !important;
+}
+
+main .speedo-type-four .s4-rpm-center-label {
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	pointer-events: none;
+}
+
+main .speedo-type-four .s4-max-label {
+	color: #ff2b5a;
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	pointer-events: none;
+}
+
+main .speedo-type-four .s4-gear-label {
+	position: absolute;
+	top: 58%;
+	left: 50%;
+	transform: translateX(-50%);
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 8px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	pointer-events: none;
+	white-space: nowrap;
+}
+
+main .speedo-type-four .s4-rpm-labels {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	align-self: stretch;
+	padding: 1px 4px 1px 0;
+	margin-left: -40px;
+	flex-shrink: 0;
+}
+
+main .speedo-type-four .s4-gear {
+	position: absolute;
+	top: 44%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: "Joyride W05 STD", sans-serif;
+	font-size: 32px;
+	font-weight: 300;
+	color: #ffffff;
+	line-height: 1;
+	pointer-events: none;
+}
+
+/* Main section: speed only */
+main .speedo-type-four .s4-main-section {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 12px;
+	border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Top row: icons + speed */
+main .speedo-type-four .s4-top-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* Icons: vertical column */
+main .speedo-type-four .s4-icons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 10px 8px;
+	border-left: 1px solid rgba(255, 255, 255, 0.06);
+	flex-shrink: 0;
+}
+
+main .speedo-type-four .s4-icons svg {
+	height: 12px;
+	width: auto;
+}
+
+main .speedo-type-four .s4-icons svg path {
+	fill: rgba(200, 200, 200, 0.5);
+	transition: fill 0.2s;
+}
+
+/* Speed block */
+main .speedo-type-four .s4-speed-block {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	flex-shrink: 0;
+}
+
+main .speedo-type-four .s4-speed-value {
+	font-family: "Joyride W05 STD", sans-serif;
+	font-size: 54px;
+	font-weight: 300;
+	color: #ffffff;
+	line-height: 1;
+	letter-spacing: -2px;
+	min-width: 3ch;
+	text-align: right;
+}
+
+main .speedo-type-four .s4-speed-unit {
+	color: rgba(200, 200, 200, 0.5);
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 2px;
+	margin-bottom: 8px;
+	margin-left: 7px;
+}
+
+/* Vertical side bars (fuel + nitro) */
+main .speedo-type-four .s4-vert-bar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 8px 4px 10px 4px;
+	gap: 5px;
+	border-left: 1px solid rgba(255, 255, 255, 0.05);
+	width: 18px;
+	flex-shrink: 0;
+}
+
+main .speedo-type-four .s4-vert-icon {
+	width: 13px;
+	height: 13px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+main .speedo-type-four .s4-vert-icon img {
+	width: 100%;
+	height: auto;
+}
+
+main .speedo-type-four .s4-vert-track {
+	flex: 1;
+	width: 5px;
+	background: rgba(255, 255, 255, 0.07);
+	border-radius: 4px;
+	position: relative;
+	overflow: hidden;
+}
+
+main .speedo-type-four .s4-vert-track::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: repeating-linear-gradient(to bottom, transparent 0px, transparent 8px, rgba(15, 15, 18, 0.65) 8px, rgba(15, 15, 18, 0.65) 10px);
+	z-index: 2;
+	pointer-events: none;
+}
+
+main .speedo-type-four .s4-fuel-vert-fill {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #ffb44b;
+	z-index: 1;
+}
+
+main .speedo-type-four .s4-nitro-vert-fill {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #6e7dff;
+	z-index: 1;
+}
+
+main .speedo-type-four .s4-condition-vert {
+	--cond-color: #4CD964;
+}
+main .speedo-type-four .s4-condition-vert.condition-good { --cond-color: #4CD964; }
+main .speedo-type-four .s4-condition-vert.condition-mid { --cond-color: #FFB44B; }
+main .speedo-type-four .s4-condition-vert.condition-bad { --cond-color: #FF453A; }
+
+main .speedo-type-four .s4-condition-vert .s4-vert-icon svg {
+	width: 100%;
+	height: auto;
+	color: var(--cond-color, #4CD964);
+}
+
+main .speedo-type-four .s4-condition-vert-fill {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: var(--cond-color, #4CD964);
+	z-index: 1;
+	transition: height 0.3s linear, background 0.3s linear;
+}
+/* ====== END SPEEDO TYPE FOUR ====== */
+
+/* ====== SPEEDO TYPE FIVE: Tiszta / Clean (no background) ====== */
+main .speedo-type-five {
+	display: none;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 5px;
+	width: 250px;
+	padding: 8px 12px;
+	box-sizing: content-box;
+}
+
+main .speedo-type-five .st5-top-row {
+	display: flex;
+	align-items: flex-end;
+	gap: 10px;
+	width: 100%;
+}
+
+main .speedo-type-five .st5-gear-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	padding-bottom: 10px;
+	width: 40px;
+	flex-shrink: 0;
+}
+
+main .speedo-type-five .gear-wrapper-st5 {
+	font-family: "Joyride W05 STD", sans-serif;
+	font-size: 32px;
+	font-weight: 300;
+	color: rgba(255, 255, 255, 0.7);
+	line-height: 1;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+	width: 100%;
+	text-align: center;
+}
+
+main .speedo-type-five .st5-gear-label {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+	white-space: nowrap;
+}
+
+main .speedo-type-five .st5-speed-block {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	flex: 1;
+}
+
+main .speedo-type-five .st5-speed-value {
+	font-family: "Joyride W05 STD", sans-serif;
+	font-size: 70px;
+	font-weight: 300;
+	color: #ffffff;
+	line-height: 1;
+	letter-spacing: 2px;
+	text-shadow: 0 3px 18px rgba(0, 0, 0, 0.75);
+}
+
+main .speedo-type-five .st5-speed-unit {
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 3px;
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+main .speedo-type-five .st5-bars {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	width: 100%;
+	margin-top: 2px;
+}
+
+main .speedo-type-five .st5-bar-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+main .speedo-type-five .st5-bar-label {
+	color: rgba(255, 255, 255, 0.65);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	width: 34px;
+	flex-shrink: 0;
+	text-align: right;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+main .speedo-type-five .st5-bar-endlabel {
+	color: #ff2b5a;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	width: 34px;
+	flex-shrink: 0;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+main .speedo-type-five .st5-fuel-pct,
+main .speedo-type-five .st5-nitro-pct {
+	color: rgba(255, 255, 255, 0.65);
+	font-size: 14px;
+	font-weight: 700;
+	width: 38px;
+	flex-shrink: 0;
+	text-align: right;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+main .speedo-type-five .st5-bar-icon {
+	width: 34px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main .speedo-type-five .st5-icon-img {
+	width: 13px;
+	height: auto;
+	opacity: 0.8;
+}
+
+main .speedo-type-five .st5-bar-track {
+	flex: 1;
+	height: 7px;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.1);
+	overflow: hidden;
+}
+
+main .speedo-type-five .st5-rpm-fill {
+	height: 100%;
+	width: 0%;
+	background: #4c6ef5;
+	border-radius: 4px;
+	transition: width 0.15s linear;
+}
+
+main .speedo-type-five .st5-rpm-fill.redline {
+	background: linear-gradient(to right, #4c6ef5 80%, #ff2b5a 80%);
+}
+
+main .speedo-type-five .st5-fuel-fill {
+	height: 100%;
+	width: 100%;
+	background: #ffb44b;
+	border-radius: 4px;
+	transition: width 0.3s linear;
+}
+
+main .speedo-type-five .st5-nitro-fill {
+	height: 100%;
+	width: 100%;
+	background: #6e7dff;
+	border-radius: 4px;
+	transition: width 0.3s linear;
+}
+
+main .speedo-type-five .st5-condition-row {
+	--cond-color: #4CD964;
+}
+main .speedo-type-five .st5-condition-row.condition-good { --cond-color: #4CD964; }
+main .speedo-type-five .st5-condition-row.condition-mid { --cond-color: #FFB44B; }
+main .speedo-type-five .st5-condition-row.condition-bad { --cond-color: #FF453A; }
+
+main .speedo-type-five .st5-condition-row .st5-bar-icon svg {
+	width: 13px;
+	height: auto;
+	color: var(--cond-color, #4CD964);
+}
+
+main .speedo-type-five .st5-condition-fill {
+	height: 100%;
+	width: 100%;
+	background: var(--cond-color, #4CD964);
+	border-radius: 4px;
+	transition: width 0.3s linear, background 0.3s linear;
+}
+
+main .speedo-type-five .st5-condition-pct {
+	color: var(--cond-color, #4CD964);
+	font-size: 14px;
+	font-weight: 700;
+	width: 38px;
+	flex-shrink: 0;
+	text-align: right;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+main .speedo-type-five .st5-indicators {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+main .speedo-type-five .st5-indicators svg {
+	height: 11px;
+	width: auto;
+}
+
+main .speedo-type-five .st5-indicators svg path {
+	fill: rgba(255, 255, 255, 0.5);
+	transition: fill 0.2s;
+}
+/* ====== END SPEEDO TYPE FIVE ====== */
+
+main .stat-wrapper .circle-stat {
+	width: 48px;
+	height: 48px;
+	position: relative;
+}
+main .stat-wrapper .circle-stat .percent {
+	position: absolute;
+	left: 50%;
+	bottom: -40%;
+	transform: translateX(-50%);
+	color: #cacaca;
+	font-size: 11px;
+	font-weight: 500;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+main .stat-wrapper .circle-stat .circle-img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+}
+main .stat-wrapper .circle-stat .icon {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -45%);
+	display: flex;
+	align-items: center;
+}
+main .stat-wrapper .circle-stat .icon svg {
+	width: auto !important;
+	height: auto !important;
+}
+main .stat-wrapper .circle-stat svg circle {
+	fill: none;
+	stroke-width: 1px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+main .stat-wrapper .circle-stat svg circle.under {
+	stroke: rgba(217, 217, 217, 0.1882352941);
+}
+main .stat-wrapper .circle-stat svg circle.top {
+	z-index: 20;
+	stroke-dasharray: 145;
+	stroke-dashoffset: 145;
+	transition: 0.5s linear stroke-dashoffset;
+}
+main .stat-wrapper.red .top {
+	stroke: #4c6ef5;
+}
+main .stat-wrapper.pink .top {
+	stroke: #ff2b5a;
+}
+main .stat-wrapper.blue .top {
+	stroke: #4589ee;
+}
+main .stat-wrapper.yellow .top {
+	stroke: #ffb44b;
+}
+main .stat-wrapper.aqua .top {
+	stroke: #6efff6;
+}
+main .stat-wrapper.purple .top {
+	stroke: #6e7dff;
+}
+main .stat-wrapper.dpurple .top {
+	stroke: #924fff;
+}
+main .stat-wrapper.dpink .top {
+	stroke: #ff1686;
+}
+main .player-status {
+	position: absolute;
+	left: 50%;
+	padding-bottom: 4vh;
+	transform: translateX(-50%);
+	bottom: 0;
+	height: fit-content;
+	width: fit-content;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+main .player-status::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 60vh;
+	height: 40vh;
+	z-index: -1;
+	background: radial-gradient(51.52% 48.26% at 50% 50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+}
+main .player-status .status-wrapper {
+	display: flex;
+	gap: 15px;
+}
+main .player-status .corner-stats-type-one,
+main .player-status .circle-status,
+main .player-status .circle-v2-status,
+main .player-status .corner-stats-type-two,
+main .player-status .triangle-status,
+main .player-status .hex-status {
+	display: none;
+}
+main .player-status .icon svg {
+	max-width: 30px !important;
+	max-height: 30px !important;
+}
+main .player-status .square-status {
+	scale: 0.9;
+}
+main .player-status .square-status .icon {
+	top: 50% !important;
+	left: 50% !important;
+	transform: translate(-50%, -50%) !important;
+}
+main .player-status .square-status .circle-stat {
+	width: 52px;
+	height: 52px;
+}
+main .player-status .square-status .square-stat {
+	border-radius: 5px;
+	background: rgba(255, 255, 255, 0.05);
+	display: flex;
+	justify-content: center;
+	align-items: end;
+	width: 52px;
+	height: 52px;
+	overflow: hidden;
+}
+main .player-status .square-status .square-stat svg {
+	transition: 0.2s ease all;
+}
+main .player-status .corner-stats-type-one .icon {
+	transform: translate(-50%, -35%);
+}
+main .player-status .corner-stats-type-one .percent {
+	bottom: -55%;
+}
+main .player-status .corner-stats-type-one .circle-stat {
+	width: 55px;
+	height: 55px;
+}
+main .player-status .corner-stats-type-one img.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -45%);
+	display: flex;
+}
+main .player-status .corner-stats-type-one .top-1 {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: -5%;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-one .top-2 {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: -15%;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-one .bottom-1 {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -12%;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-one .bottom-2 {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -21%;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-two .icon {
+	transform: translate(-50%, -41%);
+}
+main .player-status .corner-stats-type-two .percent {
+	bottom: -55%;
+}
+main .player-status .corner-stats-type-two .circle-stat {
+	width: 55px;
+	height: 55px;
+}
+main .player-status .corner-stats-type-two img.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -45%);
+	display: flex;
+}
+main .player-status .corner-stats-type-two .top-1 {
+	position: absolute;
+	right: 2px;
+	top: 4px;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-two .top-2 {
+	position: absolute;
+	right: -1px;
+	top: 1px;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-two .bottom-1 {
+	position: absolute;
+	left: 2px;
+	bottom: 1px;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .corner-stats-type-two .bottom-2 {
+	position: absolute;
+	left: -1px;
+	bottom: -2px;
+	display: flex;
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .triangle-status .percent {
+	bottom: -30%;
+}
+main .player-status .triangle-status .circle-stat {
+	width: 65px;
+	height: 65px;
+}
+main .player-status .triangle-status .tri-img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -46%);
+	width: 62px;
+	height: 54px;
+}
+main .player-status .triangle-status .tri-img svg {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+main .player-status .triangle-status .bg-shape,
+main .player-status .triangle-status .progress {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+main .player-status .triangle-status .bg-shape polygon {
+	fill: rgba(0, 0, 0, 0.45);
+	stroke-width: 1.5px;
+}
+main .player-status .triangle-status .progress .progress-poly {
+	transition: 0.5s linear stroke-dashoffset;
+}
+main .player-status .triangle-status .top-1,
+main .player-status .triangle-status .top-2,
+main .player-status .triangle-status .bottom-1,
+main .player-status .triangle-status .bottom-2 {
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .player-status .triangle-status .stat-wrapper:nth-child(odd) .tri-img {
+	transform: translate(-50%, -46%) rotate(180deg);
+}
+main .player-status .triangle-status .stress-stat,
+main .player-status .hex-status .stress-stat {
+	cursor: pointer;
+}
+main .player-status .triangle-status .stat-wrapper:nth-child(odd) .icon {
+	top: 67%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+}
+main .player-status .triangle-status .stat-wrapper:nth-child(even) .icon {
+	top: 40%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+}
+main .player-status .hex-status .icon {
+	top: 53%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+}
+main .player-status .hex-status .percent {
+	bottom: -27%;
+}
+main .player-status .triangle-status.status-wrapper {
+	gap: 0px;
+}
+main .player-status .triangle-status .stat-wrapper {
+	margin: 0 -5px;
+}
+main .player-status .hex-status .circle-stat {
+	width: 70px;
+	height: 70px;
+}
+main .player-status .hex-status .hex-img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -46%);
+	width: 60px;
+	height: 55px;
+}
+main .player-status .hex-status .hex-img svg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 60px;
+	height: 55px;
+}
+main .player-status .hex-status .bg-shape,
+main .player-status .hex-status .progress {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+main .player-status .hex-status .bg-shape polygon {
+	fill: rgba(0, 0, 0, 0.45);
+	stroke-width: 1.5px;
+}
+/* ====== CIRCLE V2 STATUS ====== */
+main .circle-v2-status {
+	gap: 8px;
+}
+main .circle-v2-status .circle-stat-v2 {
+	width: 46px;
+	height: 46px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	--glow-color: transparent;
+}
+main .circle-v2-status .circle-stat-v2 .cv2-bg {
+	position: absolute;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.45);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+}
+main .circle-v2-status .circle-stat-v2 .icon {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+main .circle-v2-status .circle-stat-v2 .icon svg {
+	width: auto !important;
+	height: auto !important;
+	max-width: 17px !important;
+	max-height: 17px !important;
+}
+main .circle-v2-status .circle-stat-v2 .percent {
+	position: absolute;
+	left: 50%;
+	bottom: -18px;
+	transform: translateX(-50%);
+	color: #cacaca;
+	font-size: 11px;
+	font-weight: 500;
+	white-space: nowrap;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	z-index: 5;
+}
+main .circle-v2-status .circle-stat-v2 .circle-svg-v2 {
+	width: 46px;
+	height: 46px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	overflow: visible;
+	transform: rotate(-90deg);
+	transform-origin: 23px 23px;
+}
+main .circle-v2-status .circle-stat-v2 .circle-svg-v2 circle {
+	fill: none;
+	stroke-width: 4px;
+}
+main .circle-v2-status .circle-stat-v2 .circle-svg-v2 circle.under {
+	stroke: rgba(255, 255, 255, 0.1);
+}
+main .circle-v2-status .circle-stat-v2 .circle-svg-v2 circle.top {
+	stroke-dasharray: 170;
+	stroke-dashoffset: 170;
+	stroke-linecap: round;
+	transition: stroke-dashoffset 0.5s linear;
+	filter: drop-shadow(0 0 5px var(--glow-color, transparent));
+}
+/* ====== END CIRCLE V2 STATUS ====== */
+main .player-status .hex-status .progress .progress-poly {
+	transition: 0.5s linear stroke-dashoffset;
+}
+main .player-status .hex-status .top-1,
+main .player-status .hex-status .top-2,
+main .player-status .hex-status .bottom-1,
+main .player-status .hex-status .bottom-2 {
+	transition: 0.5s linear opacity;
+	opacity: 0;
+}
+main .microphone-wrapper {
+	position: absolute;
+	top: 3vh;
+	left: 1.5vw;
+	transition: opacity 0.3s;
+}
+main .microphone-wrapper circle {
+	stroke-dashoffset: 48;
+}
+
+#range1 {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	cursor: pointer;
+	outline: none;
+	overflow: hidden;
+	border-radius: 16px;
+}
+
+#range1::-webkit-slider-runnable-track {
+	height: 15px;
+	background: rgb(38, 38, 38);
+	border-radius: 16px;
+}
+
+#range1::-moz-range-track {
+	height: 15px;
+	background: rgb(38, 38, 38);
+	border-radius: 16px;
+}
+
+#range1::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 15px;
+	width: 15px;
+	background-color: #fff;
+	border-radius: 50%;
+	border: 2px solid #535353;
+	box-shadow: -407px 0 0 400px #535353;
+}
+
+#range1::-moz-range-thumb {
+	height: 15px;
+	width: 15px;
+	background-color: #fff;
+	border-radius: 50%;
+	border: 1px solid #535353;
+	box-shadow: -407px 0 0 400px #535353;
+}
+
+@keyframes anim {
+	from {
+		transform: translateY(2px);
+	}
+	to {
+		transform: translateY(-2px);
+	}
+}
+
+/*# sourceMappingURL=style.css.map */
+
+/* ===== BIKE HUD: Cycling Computer ===== */
+main .speedo-type-bike {
+	display: none;
+}
+main .speedo-type-bike .bike-device {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	filter: drop-shadow(0 16px 42px rgba(0, 0, 0, 0.95)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
+}
+main .speedo-type-bike .bike-body {
+	width: 248px;
+	background: linear-gradient(170deg, #2b2b2b 0%, #161616 65%, #1e1e1e 100%);
+	border-radius: 14px 14px 0 0;
+	overflow: hidden;
+	border: 1.5px solid #3e3e3e;
+	border-bottom: none;
+	position: relative;
+	box-shadow: inset 3px 0 7px rgba(0,0,0,0.45), inset -3px 0 7px rgba(0,0,0,0.45), inset 0 2px 4px rgba(255,255,255,0.04);
+}
+main .speedo-type-bike .bike-body::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 2px;
+	background: linear-gradient(90deg, transparent 5%, #228be6 40%, #228be6 60%, transparent 95%);
+	z-index: 2;
+}
+main .speedo-type-bike .bike-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 11px;
+	font-weight: 800;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	padding: 13px 16px 11px;
+	border-bottom: 1px solid #2c2c2c;
+	background: linear-gradient(180deg, #1e1e1e 0%, #151515 100%);
+	position: relative;
+}
+main .speedo-type-bike .bike-header::before,
+main .speedo-type-bike .bike-header::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 0; height: 0;
+	border-style: solid;
+}
+main .speedo-type-bike .bike-header::before {
+	left: 16px;
+	border-width: 4px 0 4px 7px;
+	border-color: transparent transparent transparent #228be6;
+}
+main .speedo-type-bike .bike-header::after {
+	right: 16px;
+	border-width: 4px 7px 4px 0;
+	border-color: transparent #228be6 transparent transparent;
+}
+main .speedo-type-bike .bike-header .bh-black {
+	color: #d8d8d8;
+}
+main .speedo-type-bike .bike-header .bh-city {
+	color: #74c0fc;
+}
+main .speedo-type-bike .bike-screen {
+	margin: 10px 13px 12px;
+	border-radius: 5px;
+	overflow: hidden;
+	background: linear-gradient(155deg, #bfcdd8 0%, #97adb9 55%, #a6bbc6 100%);
+	border: 2px solid #505050;
+	box-shadow: inset 0 3px 9px rgba(0,0,0,0.5), inset 0 -1px 3px rgba(255,255,255,0.12), 0 0 0 1px #1a1a1a;
+}
+main .speedo-type-bike .bike-row {
+	display: flex;
+	align-items: center;
+	padding: 9px 15px;
+}
+main .speedo-type-bike .bike-icon {
+	color: #1b3040;
+	font-size: 11px;
+	width: 18px;
+	text-align: center;
+	flex-shrink: 0;
+	opacity: 0.7;
+}
+main .speedo-type-bike .bike-value {
+	flex: 1;
+	font-family: "Courier New", monospace;
+	font-size: 22px;
+	font-weight: 700;
+	color: #0e1e28;
+	letter-spacing: 3px;
+	text-align: center;
+	text-shadow: 0 1px 2px rgba(255,255,255,0.25);
+}
+main .speedo-type-bike .bike-unit {
+	font-size: 8px;
+	color: #1b3040;
+	font-weight: 700;
+	width: 26px;
+	text-align: right;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	opacity: 0.65;
+}
+main .speedo-type-bike .bike-time-row .bike-value {
+	font-size: 20px;
+	letter-spacing: 4px;
+}
+main .speedo-type-bike .bike-divider {
+	height: 1px;
+	background: rgba(0, 30, 50, 0.18);
+	margin: 0 12px;
+}
+main .speedo-type-bike .bike-bottom-bump {
+	width: 248px;
+	height: 76px;
+	background: linear-gradient(180deg, #1c1c1c 0%, #131313 55%, #1a1a1a 100%);
+	border-radius: 0 0 300px 300px;
+	border: 1.5px solid #3e3e3e;
+	border-top: 1px solid #2c2c2c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 14px;
+	position: relative;
+	box-shadow: inset 0 -5px 12px rgba(0,0,0,0.55);
+}
+main .speedo-type-bike .bike-bottom-bump::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 56px; height: 56px;
+	border-radius: 50%;
+	border: 1.5px solid #228be6;
+	background: #2e2e2e;
+}
+main .speedo-type-bike .bike-logo-img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-height: 50px;
+	max-width: 50px;
+	object-fit: contain;
+	z-index: 1;
+}
+
+/* ====== Motor / karosszeria kulon (2026-09-07) ====== */
+/* A vehicle_failure a karosszeria-serulest 5.9x szorzoval a MOTORBA vezeti at
+   (vehicle_failure/config.lua: damageFactorBody), a karosszeria erteket viszont nem
+   csokkenti. Az atlagolt "allapot" ezt elfedte (ep karosszeria + halott motor = 45%),
+   ezert a ket ertek kulon jelenik meg. M = motor, K = karosszeria. */
+main .speedo-type-one .engine-badge,
+main .speedo-type-two .engine-badge {
+	transform: translateX(calc(-50% - 36px));
+}
+main .speedo-type-one .body-badge,
+main .speedo-type-two .body-badge {
+	transform: translateX(calc(-50% + 36px));
+}
+main .condition-badge .cond-tag {
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 100%;
+	color: var(--cond-color, #4CD964);
+}
+main .speedo-type-three .s3-condition-bar-left .cond-tag {
+	color: var(--cond-color, #4CD964);
+	font-size: 9px;
+	font-weight: 700;
+	width: 9px;
+	flex-shrink: 0;
+	text-align: center;
+}
+main .speedo-type-four .s4-vert-tag {
+	color: var(--cond-color, #4CD964);
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 100%;
+	flex-shrink: 0;
+}
+main .speedo-type-five .st5-condition-row .cond-tag {
+	color: var(--cond-color, #4CD964);
+	font-size: 10px;
+	font-weight: 700;
+	width: 10px;
+	flex-shrink: 0;
+	text-align: center;
+}
+
+/* ====== CSIKOS (BAR) STATUSZ TIPUSOK ====== */
+main .player-status .bar-status {
+	display: none;
+}
+main .player-status .bar-status .stat-wrapper {
+	position: relative;
+}
+main .player-status .bar-status .bar-stat {
+	display: flex;
+	align-items: center;
+}
+main .player-status .bar-status .icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--bar-color, #ffffff);
+	flex: none;
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+main .player-status .bar-status .icon svg {
+	display: block;
+	fill: currentColor;
+}
+main .player-status .bar-status .percent {
+	color: #cacaca;
+	font-size: 11px;
+	font-weight: 500;
+	white-space: nowrap;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+main .player-status .bar-status .bar {
+	position: relative;
+	overflow: hidden;
+	flex: none;
+	border-radius: 99px;
+	background: rgba(255, 255, 255, 0.13);
+}
+main .player-status .bar-status .bar > i {
+	display: block;
+	border-radius: inherit;
+	background: var(--bar-color, #ffffff);
+	box-shadow: 0 0 7px var(--bar-color, transparent);
+	transition: 0.35s ease width, 0.35s ease height;
+}
+main .player-status .bar-status .bar-h > i {
+	width: 0;
+	height: 100%;
+}
+main .player-status .bar-status .bar-v {
+	display: flex;
+	align-items: flex-end;
+}
+main .player-status .bar-status .bar-v > i {
+	width: 100%;
+	height: 0;
+}
+main .player-status .bar-status .health-stat {
+	--bar-color: #ff2b5a;
+}
+main .player-status .bar-status .armor-stat {
+	--bar-color: #4589ee;
+}
+main .player-status .bar-status .hunger-stat {
+	--bar-color: #ffb44b;
+}
+main .player-status .bar-status .thirst-stat {
+	--bar-color: #6efff6;
+}
+main .player-status .bar-status .stamina-stat {
+	--bar-color: #6e7dff;
+}
+main .player-status .bar-status .oxygen-stat {
+	--bar-color: #924fff;
+}
+main .player-status .bar-status .stress-stat {
+	--bar-color: #ff1686;
+}
+
+/* 1) CSIK - SOR */
+main .player-status .bar-row-status {
+	gap: 14px;
+	align-items: flex-end;
+}
+main .player-status .bar-row-status .bar-stat {
+	flex-direction: column;
+	gap: 7px;
+	width: 52px;
+}
+main .player-status .bar-row-status .icon {
+	width: 24px;
+	height: 20px;
+}
+main .player-status .bar-row-status .icon svg {
+	width: auto !important;
+	height: auto !important;
+	max-width: 22px !important;
+	max-height: 20px !important;
+}
+main .player-status .bar-row-status .bar {
+	width: 52px;
+	height: 6px;
+}
+
+/* 2) CSIK - LISTA */
+main .player-status .bar-list-status {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 6px;
+}
+main .player-status .bar-list-status .bar-stat {
+	gap: 9px;
+}
+main .player-status .bar-list-status .icon {
+	width: 20px;
+	height: 18px;
+}
+main .player-status .bar-list-status .icon svg {
+	width: auto !important;
+	height: auto !important;
+	max-width: 19px !important;
+	max-height: 18px !important;
+}
+main .player-status .bar-list-status .bar {
+	width: 132px;
+	height: 7px;
+}
+main .player-status .bar-list-status .percent {
+	width: 36px;
+	text-align: right;
+}
+
+/* 3) VEKONY CSIK */
+main .player-status .bar-thin-status {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+}
+main .player-status .bar-thin-status .bar-stat {
+	gap: 8px;
+}
+main .player-status .bar-thin-status .icon {
+	width: 16px;
+	height: 14px;
+	opacity: 0.92;
+}
+main .player-status .bar-thin-status .icon svg {
+	width: auto !important;
+	height: auto !important;
+	max-width: 15px !important;
+	max-height: 14px !important;
+}
+main .player-status .bar-thin-status .bar {
+	width: 112px;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.17);
+}
+main .player-status .bar-thin-status .percent {
+	width: 32px;
+	font-size: 10px;
+	text-align: right;
+	color: #b6b6c2;
+}
+
+/* 4) ALLO CSIK */
+main .player-status .bar-vert-status {
+	gap: 13px;
+	align-items: flex-end;
+}
+main .player-status .bar-vert-status .bar-stat {
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+}
+main .player-status .bar-vert-status .bar {
+	width: 9px;
+	height: 48px;
+}
+main .player-status .bar-vert-status .icon {
+	width: 22px;
+	height: 18px;
+}
+main .player-status .bar-vert-status .icon svg {
+	width: auto !important;
+	height: auto !important;
+	max-width: 21px !important;
+	max-height: 18px !important;
+}
+
+/* 5) CSIK KAPSZULA */
+main .player-status .bar-pill-status {
+	gap: 8px;
+	align-items: center;
+}
+main .player-status .bar-pill-status .bar-stat {
+	gap: 8px;
+	padding: 5px 11px 5px 8px;
+	border-radius: 20px;
+	background: rgba(8, 8, 12, 0.55);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+}
+main .player-status .bar-pill-status .icon {
+	width: 18px;
+	height: 16px;
+}
+main .player-status .bar-pill-status .icon svg {
+	width: auto !important;
+	height: auto !important;
+	max-width: 17px !important;
+	max-height: 16px !important;
+}
+main .player-status .bar-pill-status .bar {
+	width: 44px;
+	height: 5px;
+}
+main .player-status .bar-pill-status .percent {
+	font-size: 10px;
+}
+
+/* a Hud Tipusa kartya: 12 gomb ket sorban */
+.settings .settings-wrapper .setting.type-setting {
+	height: auto;
+	min-height: 20vh;
+	gap: 14px;
+}
+.settings .settings-wrapper .setting.type-setting .buttons {
+	flex-wrap: wrap;
+	row-gap: 8px;
+}
+.settings .settings-wrapper .setting.type-setting .buttons label {
+	width: calc(16.6666% - 9px);
+	padding: 6px 0;
+}
+.settings .settings-wrapper .setting.type-setting .buttons label img,
+.settings .settings-wrapper .setting.type-setting .buttons label svg {
+	max-width: 100%;
+	height: auto;
+}
+/* ====== CSIKOS (BAR) STATUSZ TIPUSOK VEGE ====== */
+
+/* ===== HUD arnyek kapcsolo (settings: showHudShadow) =====
+   A status-hud mogotti sotet radialis folt (main .player-status::after).
+   Ugyanaz a HUD marad, csak a folt tunik el -- a HUD-tipus valasztast nem erinti. */
+main .player-status.no-hud-shadow::after {
+	display: none;
+}

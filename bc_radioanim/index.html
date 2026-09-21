@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Segoe UI", sans-serif;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.4);
+                user-select: none;
+            }
+            .menu-box {
+                width: 420px;
+                background-color: #1c1f24;
+                border: 2px solid #1f2731;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            }
+            .header {
+                background-color: #1f242b;
+                padding: 15px 20px;
+                color: white;
+                font-weight: bold;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #1a2027;
+            }
+            .price-tag {
+                font-size: 12px;
+                color: #4ade80;
+                display: block;
+                margin-top: 4px;
+            }
+            .close-btn {
+                cursor: pointer;
+                font-size: 22px;
+                transition: 0.2s;
+                color: #ccc;
+            }
+            .close-btn:hover {
+                color: #ff4d4d;
+            }
+            .content {
+                padding: 15px;
+                background-color: #1c2025;
+            }
+            .menu-item {
+                background-color: #244b7e;
+                color: white;
+                padding: 14px 18px;
+                margin-bottom: 8px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.2s;
+                border: 1px solid transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .menu-item:hover {
+                background-color: #2e60a1;
+                border-color: #3b82f6;
+            }
+            .menu-item.active {
+                background-color: #0099ff;
+                font-weight: bold;
+                box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
+                border-color: #fff;
+            }
+            .menu-item.active::after {
+                content: "✓";
+                font-size: 14px;
+            }
+            .menu-item.unlocked {
+                border-color: #22c55e;
+                background-color: #162d1f;
+            }
+            .menu-item.unlocked:hover {
+                background-color: #1a3d28;
+                border-color: #4ade80;
+            }
+            .badge {
+                font-size: 11px;
+                padding: 2px 8px;
+                border-radius: 3px;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            .badge-price {
+                background-color: #7c2d12;
+                color: #fbbf24;
+            }
+            .badge-free {
+                background-color: #14532d;
+                color: #4ade80;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="menu-box">
+            <div class="header">
+                <div>
+                    Rádió Animáció Választó
+                    <span id="price-display" class="price-tag"></span>
+                </div>
+                <span class="close-btn" onclick="closeMenu()">&times;</span>
+            </div>
+            <div class="content" id="button-container"></div>
+        </div>
+
+        <script>
+            window.addEventListener("message", function (event) {
+                if (event.data.type === "openUI") {
+                    document.body.style.display = "flex";
+                    const container =
+                        document.getElementById("button-container");
+                    const unlocked = event.data.unlocked || [];
+                    document.getElementById("price-display").innerText =
+                        `${event.data.price} / vásárlás`;
+
+                    container.innerHTML = "";
+                    Object.keys(event.data.config).forEach((id) => {
+                        const isActive = id === event.data.current;
+                        const isUnlocked =
+                            id === "default" || unlocked.includes(id);
+
+                        const div = document.createElement("div");
+                        if (isActive) div.className = "menu-item active";
+                        else if (isUnlocked)
+                            div.className = "menu-item unlocked";
+                        else div.className = "menu-item";
+
+                        let badge = "";
+                        if (!isActive && isUnlocked)
+                            badge =
+                                '<span class="badge badge-free">Ingyenes váltás</span>';
+                        else if (!isUnlocked)
+                            badge = `<span class="badge badge-price">${event.data.price}</span>`;
+
+                        div.innerHTML = `<span>${event.data.config[id].label}</span>${badge}`;
+                        div.onclick = () => {
+                            fetch(`https://${GetParentResourceName()}/select`, {
+                                method: "POST",
+                                body: JSON.stringify({ animation: id }),
+                            });
+                            document.body.style.display = "none";
+                            fetch(`https://${GetParentResourceName()}/close`, {
+                                method: "POST",
+                            });
+                        };
+                        container.appendChild(div);
+                    });
+                }
+            });
+
+            function closeMenu() {
+                document.body.style.display = "none";
+                fetch(`https://${GetParentResourceName()}/close`, {
+                    method: "POST",
+                });
+            }
+            window.addEventListener("keyup", (e) => {
+                if (e.key === "Escape") closeMenu();
+            });
+        </script>
+    </body>
+</html>

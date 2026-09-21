@@ -1,0 +1,39 @@
+.main-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--bc-font);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.main-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    overflow: hidden;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* BC-blue scrollbar on every scroll area inside the shop UI */
+.main-container ::-webkit-scrollbar { width: .75em }
+.main-container ::-webkit-scrollbar-track { background: #ffffff0a; border-radius: 1em; margin: .35em }
+
+.main-container ::-webkit-scrollbar-thumb {
+    background: var(--acc);
+    border-radius: 1em;
+    border: .16em solid transparent;
+    background-clip: padding-box;
+}
+
+.main-container ::-webkit-scrollbar-thumb:hover { background: var(--acc-lt) }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

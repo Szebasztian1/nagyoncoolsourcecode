@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+    <div id="app">
+
+        <section id="screen-loading" class="screen active">
+            <div class="spinner"></div>
+            <p class="muted">Betöltés…</p>
+        </section>
+
+        <section id="screen-error" class="screen">
+            <div class="empty">
+                <div class="empty-ico">⚠️</div>
+                <h2>Hiba</h2>
+                <p class="muted" id="error-text">Nem sikerült betölteni az adatokat.</p>
+                <button class="btn" onclick="App.init()">Újrapróbálás</button>
+            </div>
+        </section>
+
+        <section id="screen-lock" class="screen">
+            <header class="topbar">
+                <div class="brand"><span class="coin">₿</span> Crypto</div>
+            </header>
+            <div class="lock">
+                <div class="lock-ico">🔒</div>
+                <h2>Crypto útmutató zárolva</h2>
+                <p class="muted">Old fel az útmutatót, hogy megtudd hogyan működik a crypto bányászat: gépek, videokártyák, hűtések, hozamok és aktuális árak.</p>
+                <div class="price-tag" id="lock-price">$10 000 000</div>
+                <button class="btn btn-primary" id="lock-buy" onclick="App.buy()">Feloldás</button>
+                <p class="muted small" id="lock-msg"></p>
+            </div>
+        </section>
+
+        <section id="screen-guide" class="screen">
+            <header class="topbar">
+                <div class="brand"><span class="coin">₿</span> Crypto útmutató</div>
+            </header>
+            <div id="guide-body" class="guide-body"></div>
+        </section>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

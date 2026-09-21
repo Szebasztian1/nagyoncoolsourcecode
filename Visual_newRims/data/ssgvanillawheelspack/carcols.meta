@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CVehicleModelInfoVarGlobal>
+  <Wheels>
+    <Item> <!-- VWT_SPORT -->
+	  </Item>
+    <Item> <!-- VWT_MUSCLE -->
+	  </Item>
+    <Item> <!-- VWT_LOWRIDER -->
+	  </Item>
+    <Item> <!-- VWT_SUV -->
+	  </Item>
+    <Item> <!-- VWT_OFFROAD -->
+    </Item>
+    <Item> <!-- VWT_TUNER -->
+				<Item>
+        <wheelName>wheel_pf811_v1</wheelName>
+        <wheelVariation />
+        <modShopLabel>Pfister811 v1</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_pf811_v2</wheelName>
+        <wheelVariation />
+        <modShopLabel>Pfister811 v2</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_pf811_v3</wheelName>
+        <wheelVariation />
+        <modShopLabel>Pfister811 v3</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_vigero2</wheelName>
+        <wheelVariation />
+        <modShopLabel>Vigero2</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_vigero2_pinstripe</wheelName>
+        <wheelVariation />
+        <modShopLabel>Vigero2 Pinstripe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>Wheel_vstr</wheelName>
+        <wheelVariation />
+        <modShopLabel>V-STR</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>Wheel_vstr_color</wheelName>
+        <wheelVariation />
+        <modShopLabel>V-STR Color</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_vigilante</wheelName>
+        <wheelVariation />
+        <modShopLabel>Vigilante Color</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_vigilante_pin</wheelName>
+        <wheelVariation />
+        <modShopLabel>Vigilante Pinstripe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_eurosx32_chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>Eurosx32 Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_eurosx32_color</wheelName>
+        <wheelVariation />
+        <modShopLabel>Eurosx32 Color</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_paragon3</wheelName>
+        <wheelVariation />
+        <modShopLabel>Paragon3</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_paragon3_v2</wheelName>
+        <wheelVariation />
+        <modShopLabel>Paragon3 v2</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_niobe</wheelName>
+        <wheelVariation />
+        <modShopLabel>Niobe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_niobe_v2</wheelName>
+        <wheelVariation />
+        <modShopLabel>Niobe v2</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_baller8</wheelName>
+        <wheelVariation />
+        <modShopLabel>Baller8</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_baller8_chr</wheelName>
+        <wheelVariation />
+        <modShopLabel>Baller8 Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Forged5</wheelName>
+        <wheelVariation />
+        <modShopLabel>Forged5</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Forged5_Black</wheelName>
+        <wheelVariation />
+        <modShopLabel>Forged5 Black</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_pariah</wheelName>
+        <wheelVariation />
+        <modShopLabel>Pariah</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_cognoscenti</wheelName>
+        <wheelVariation />
+        <modShopLabel>Cognoscenti</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_castigator</wheelName>
+        <wheelVariation />
+        <modShopLabel>Castigator</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_envisage</wheelName>
+        <wheelVariation />
+        <modShopLabel>Envisage</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_hammer</wheelName>
+        <wheelVariation />
+        <modShopLabel>Hammer</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_jubilee</wheelName>
+        <wheelVariation />
+        <modShopLabel>Jubilee</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_dominator7</wheelName>
+        <wheelVariation />
+        <modShopLabel>Dominator7</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_Track14a_Pinstripe</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track14a Pinstripe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Track14a_Chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track14a Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_track13a_Chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track13a Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_track20a</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track20a</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Track17</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track17</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Track17_v2</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track17 v2</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Track28</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track28</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Track27a_Chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>Track27a Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_buffalo5</wheelName>
+        <wheelVariation />
+        <modShopLabel>BuffaloEV</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_buffalo5_Chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>BuffaloEV Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_stingertt_pinstripe</wheelName>
+        <wheelVariation />
+        <modShopLabel>StingerTT Pinstripe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_stingertt_chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>StingerTT Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_nero</wheelName>
+        <wheelVariation />
+        <modShopLabel>Nero</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_nero_chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>Nero Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Street17a_ColSpoke</wheelName>
+        <wheelVariation />
+        <modShopLabel>Street17a Black-ColorSpoke</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Street17a_pinstripe</wheelName>
+        <wheelVariation />
+        <modShopLabel>Street17a Pinstripe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Street17a_color</wheelName>
+        <wheelVariation />
+        <modShopLabel>Street17a Color</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_Street17a_chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>Street17a Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_PureBusiness15_Chrome</wheelName>
+        <wheelVariation />
+        <modShopLabel>PureBusiness15 Chrome</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+				<Item>
+        <wheelName>wheel_PureBusiness15_Color</wheelName>
+        <wheelVariation />
+        <modShopLabel>PureBusiness15 Color</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+			<Item>
+        <wheelName>wheel_PureBusiness15_Pinstripe</wheelName>
+        <wheelVariation />
+        <modShopLabel>PureBusiness15 Pinstripe</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>wheel_rmp_racing_r25_plus</wheelName>
+        <wheelVariation />
+        <modShopLabel>RMP Racing R25</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>wheel_rmp_racing_r25_plus_v2</wheelName>
+        <wheelVariation />
+        <modShopLabel>RMP Racing R25 V2</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>wheel_rmp_racing_r25_plus_v3</wheelName>
+        <wheelVariation />
+        <modShopLabel>RMP Racing R25 V3</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>wheel_topcar_shark_style_2</wheelName>
+        <wheelVariation />
+        <modShopLabel>TopCar Shark</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>wheel_topcar_shark_style_2_b</wheelName>
+        <wheelVariation />
+        <modShopLabel>TopCar Shark B</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>wheel_topcar_shark_style_2_c</wheelName>
+        <wheelVariation />
+        <modShopLabel>TopCar Shark C</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+      <Item>
+        <wheelName>Wheel_WB_MOTOR_HEARTS_MICHELIN</wheelName>
+        <wheelVariation />
+        <modShopLabel>WB Motors</modShopLabel>
+        <rimRadius value="0.348500"/>
+        <rear value="false"/>
+      </Item>
+    </Item>
+    <Item> <!-- VWT_BIKE -->
+    </Item>
+    <Item> <!-- VWT_HIEND -->
+    </Item>
+    <Item/> <!-- VWT_SUPERMOD1 -->
+    <Item/> <!-- VWT_SUPERMOD2 -->
+    <Item/>
+  </Wheels>
+</CVehicleModelInfoVarGlobal>

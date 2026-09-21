@@ -1,0 +1,198 @@
+/* FactionHQ menu — BC design (flat charcoal + BC-blue).
+   Follows docs/bc-design-system.md: tokens, Titillium Web, hairline
+   borders, no gradients/glass/glow. Transparent, centred overlay with
+   NO dim (the game stays visible around the panel — user request), and
+   NO backdrop-filter (CEF renders a black rectangle instead of a blur). */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap');
+
+:root {
+  /* surfaces (dark → light) */
+  --bg-modal: #1f1f1f;
+  --bg-bar:   #242424;
+  --bg-box:   #2e2e2e;
+  --bd:       #424242;
+
+  /* text */
+  --txt:  #e7e7e7;
+  --txt2: #c8c8c8;
+  --txt3: #b7b7b7;
+  --txt4: #8a8a8a;
+
+  /* accent = BC-blue */
+  --acc:        #2f80ed;
+  --acc-lt:     #7fb0f6;
+  --acc-tint:   rgba(47, 128, 237, .15);
+  --acc-tint-h: rgba(47, 128, 237, .24);
+  --acc-bd:     rgba(47, 128, 237, .55);
+
+  /* semantic (separate from accent) */
+  --ok:         #4cdb28;  --ok-tint: rgba(76, 219, 40, .15);  --ok-lt: #9be97f;
+  --danger:     #db2828;  --danger-tint: rgba(219, 40, 40, .16);
+  --danger-lt:  #f08a8a;  --danger-bd: rgba(219, 40, 40, .5);
+
+  --radius: .4em;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+/* One root font-size scaler — everything sizes in em, so the whole UI
+   scales by changing this single value. */
+html { font-size: min(1.5vw, 16px); }
+body {
+  width: 100%; height: 100%;
+  background: transparent; overflow: hidden;
+  font-family: 'Titillium Web', 'Segoe UI', system-ui, sans-serif;
+  color: var(--txt);
+}
+
+.hidden { display: none !important; }
+
+#menu {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  /* fully transparent overlay: the game stays visible around the panel */
+  background: transparent;
+  pointer-events: none;
+}
+
+.hqm {
+  position: relative;
+  pointer-events: auto;
+  width: 25em; max-height: 82vh;
+  display: flex; flex-direction: column;
+  background: var(--bg-modal);
+  border: 1px solid var(--bd);
+  border-radius: .6em;
+  overflow: hidden;
+  box-shadow: 0 2.5em 6em rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+  animation: scaleIn .22s ease both;
+}
+@keyframes scaleIn { 0% { scale: .9; opacity: 0; } 100% { scale: 1; opacity: 1; } }
+
+/* Header: badge + eyebrow / big title / subtitle */
+.hqm-head {
+  position: relative; z-index: 2;
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: .75em;
+  padding: .85em 1em;
+  background: var(--bg-bar);
+}
+.hqm-badge {
+  width: 2.6em; height: 2.6em; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--acc-lt);
+  background: var(--acc-tint);
+  border-radius: .5em;
+}
+.hqm-titles { min-width: 0; }
+.hqm-eyebrow {
+  font-size: .7em; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--txt4); line-height: 1;
+}
+.hqm-title {
+  font-size: 1.35em; font-weight: 700; color: var(--txt);
+  line-height: 1.15; margin-top: .15em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hqm-sub {
+  font-size: .8em; color: var(--txt3); margin-top: .1em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Skewed watermark faded in the top-right (the BC signature) */
+.hqm-wm {
+  position: absolute; top: 2.6em; right: -.4em; z-index: 0;
+  opacity: .05; transform: skew(-22deg, 22deg); color: #fff; pointer-events: none;
+}
+.hqm-wm svg { width: 9em; height: 9em; }
+
+/* Item list — the ONLY scroll area */
+.hqm-items {
+  position: relative; z-index: 1;
+  flex: 1 1 auto; min-height: 0;
+  padding: .7em;
+  display: flex; flex-direction: column; gap: .4em;
+  overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--acc) #ffffff10;
+}
+.hqm-items::-webkit-scrollbar { width: .55em; }
+.hqm-items::-webkit-scrollbar-track { background: #ffffff0a; border-radius: 1em; margin: .3em; }
+.hqm-items::-webkit-scrollbar-thumb {
+  background: var(--acc); border-radius: 1em;
+  border: .14em solid transparent; background-clip: padding-box;
+}
+.hqm-items::-webkit-scrollbar-thumb:hover { background: var(--acc-lt); }
+
+.it {
+  display: flex; align-items: center; gap: .7em;
+  padding: .55em .6em;
+  border-radius: .5em;
+  background: var(--bg-box);
+  border: 1px solid var(--bd);
+  cursor: pointer;
+  opacity: 0; transform: translateY(.4em);
+  animation: itemIn .24s ease forwards;
+  transition: background .18s, border-color .18s;
+}
+@keyframes itemIn { to { opacity: 1; transform: translateY(0); } }
+
+.it .ic {
+  width: 2.4em; height: 2.4em; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  color: #8b8b8b;
+  background: rgba(134, 142, 150, .15);
+  border-radius: .45em;
+  transition: background .18s, color .18s;
+}
+.it .tx { flex: 1; min-width: 0; }
+.it .lb {
+  font-size: .95em; font-weight: 700; color: var(--txt);
+  line-height: 1.15;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.it .ds {
+  font-size: .75em; color: var(--txt3); margin-top: .1em; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.it .rt {
+  flex: none; font-size: .8em; font-weight: 700;
+  color: var(--acc-lt); background: var(--acc-tint);
+  border-radius: .3em; padding: .1em .5em;
+}
+.it .car { flex: none; color: var(--txt4); display: flex; transition: transform .18s, color .18s; }
+
+/* Selected (keyboard focus) / hover */
+.it.sel, .it:hover:not(.disabled) {
+  background: #2b3242;
+  border-color: var(--acc-bd);
+}
+.it.sel .ic, .it:hover:not(.disabled) .ic {
+  background: var(--acc-tint); color: var(--acc-lt);
+}
+.it.sel .car, .it:hover:not(.disabled) .car { transform: translateX(.2em); color: var(--acc-lt); }
+
+.it.disabled { cursor: default; opacity: .38 !important; }
+
+/* Danger variant (destructive actions) */
+.it.danger .ic { color: var(--danger-lt); background: var(--danger-tint); }
+.it.danger.sel, .it.danger:hover:not(.disabled) {
+  background: var(--danger-tint); border-color: var(--danger-bd);
+}
+.it.danger.sel .ic, .it.danger:hover:not(.disabled) .ic { background: var(--danger); color: #fff; }
+.it.danger.sel .car, .it.danger:hover:not(.disabled) .car { color: var(--danger-lt); }
+
+/* Footer: key hints */
+.hqm-foot {
+  position: relative; z-index: 2;
+  flex: 0 0 auto;
+  display: flex; gap: 1.1em;
+  padding: .7em 1em;
+  background: var(--bg-bar);
+  border-top: 1px solid var(--bd);
+  font-size: .72em; color: var(--txt4);
+}
+.hqm-foot b {
+  color: var(--txt2); font-weight: 700;
+  background: #ffffff0d;
+  border: 1px solid #ffffff14;
+  border-radius: .3em; padding: .05em .45em; margin-right: .3em;
+}

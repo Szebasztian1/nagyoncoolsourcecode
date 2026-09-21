@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BC Express</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+    <div id="app">
+
+        <section id="screen-loading" class="screen active">
+            <div class="spinner"></div>
+            <p class="muted">Betöltés…</p>
+        </section>
+
+        <section id="screen-error" class="screen">
+            <div class="center">
+                <h2>Hiba</h2>
+                <p class="muted" id="error-text">Nem sikerült betölteni.</p>
+                <button class="link-btn" onclick="App.load()">Újra</button>
+            </div>
+        </section>
+
+        <!-- NINCS AKTÍV MUNKA -->
+        <section id="screen-nojob" class="screen">
+            <header class="head">
+                <div class="logo">BC <span>EXPRESS</span></div>
+                <button class="link-btn" onclick="App.load()">Frissítés</button>
+            </header>
+
+            <div class="level-card" id="level-card"></div>
+
+            <div class="info-box">
+                <div class="t">Nincs aktív munka</div>
+                <div class="muted">Menj a BC Express depóba, állj az indító pontra és vedd fel a kocsit. Az indulás után itt látod a címeket.</div>
+            </div>
+
+            <div class="stats" id="stats-nojob"></div>
+        </section>
+
+        <!-- AKTÍV MUNKA -->
+        <section id="screen-job" class="screen">
+            <header class="head">
+                <div class="logo">BC <span>EXPRESS</span></div>
+                <div class="size-badge" id="size-badge">0 cím</div>
+            </header>
+
+            <div class="fragile-banner" id="fragile-banner" style="display:none">
+                <b>Törékeny csomag a rakományban</b>
+                <span>Vezess lassan, különben sérül és levonnak a fizetségedből.</span>
+            </div>
+
+            <div class="progress-wrap">
+                <div class="progress-top">
+                    <span id="progress-label">0 / 0 cím</span>
+                    <span class="pending" id="pending-pay">$0</span>
+                </div>
+                <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+                <div class="deduction" id="deduction" style="display:none"></div>
+            </div>
+
+            <div class="list-title">Címek</div>
+            <div class="addr-list" id="addr-list"></div>
+
+            <div class="job-note" id="job-note"></div>
+            <button class="link-btn center-btn" onclick="App.load()">Frissítés</button>
+        </section>
+
+        <!-- CÉG (csak nézet) -->
+        <section id="screen-company" class="screen">
+            <header class="head">
+                <div class="logo">BC <span>EXPRESS</span></div>
+                <button class="link-btn" onclick="App.loadCompany()">Frissítés</button>
+            </header>
+            <div class="co-wrap" id="company-body"></div>
+        </section>
+
+        <!-- MUNKAHELY (csak nézet — ahol alkalmazott vagy) -->
+        <section id="screen-employment" class="screen">
+            <header class="head">
+                <div class="logo">BC <span>EXPRESS</span></div>
+                <button class="link-btn" onclick="App.loadEmployment()">Frissítés</button>
+            </header>
+            <div class="co-wrap" id="employment-body"></div>
+        </section>
+
+        <!-- ALSÓ FÜLEK -->
+        <nav class="tabbar" id="tabbar">
+            <button class="tab active" data-tab="work" onclick="App.tab('work')">Munka</button>
+            <button class="tab" data-tab="company" onclick="App.tab('company')">Cég</button>
+            <button class="tab" data-tab="employment" onclick="App.tab('employment')">Munkahely</button>
+        </nav>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

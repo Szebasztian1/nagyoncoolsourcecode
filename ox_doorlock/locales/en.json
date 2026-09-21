@@ -1,0 +1,18 @@
+{
+  "unlocked_door": "Nyitott ajtó",
+  "locked_door": "Zárt ajtó",
+  "lock_door": "[E] Zárja be az ajtót",
+  "unlock_door": "[E] Nyissa ki az ajtót",
+  "door_lock": "Ajtózár",
+  "passcode": "Jelszó",
+  "lockpick_broke": "Elromlott a zárócsavarod",
+  "pick_lock": "Feltörés",
+  "add_lock": "Adjon hozzá ajtózárat",
+  "edit_lock": "Ajtózár szerkesztése",
+  "remove_lock": "Távolítsa el az ajtózárat",
+  "cannot_unlock": "Nem sikerült kinyitni az ajtót",
+  "cannot_lock": "Nem lehet bezárni az ajtót",
+  "create_modify_lock": "Hozzon létre ajtózárat, vagy módosítson egy meglévőt",
+  "add_door_textui": "**Hozzon létre új ajtót**  \nKapcsolatba lép [LMB]  \nMégsem ezzel [RMB]",
+  "command_closest": "Nyissa meg közvetlenül a felhasználói felületet a legközelebbi ajtózárhoz"
+}

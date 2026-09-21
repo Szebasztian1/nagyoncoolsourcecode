@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="container" style="display: none;">
+        <div class="main-panel">
+            <div class="sidebar">
+                <h2><i class="fas fa-shield-alt"></i> FEGYVER TILTÁS</h2>
+                <div class="ban-list-container">
+                    <h3>Aktív tiltások</h3>
+                    <div id="ban-list">
+                        </div>
+                </div>
+                <button id="close-btn">Bezárás</button>
+            </div>
+
+            <div class="content">
+                <div class="header">
+                    <h1>Admin Kezelőfelület</h1>
+                    <p>Fegyverhasználati korlátozások kezelése</p>
+                </div>
+
+                <div class="input-section">
+                    <h3>Új tiltás kiosztása</h3>
+                    <div class="input-group">
+                        <label>Játékos ID</label>
+                        <input type="number" id="target-id" placeholder="Pl. 1">
+                    </div>
+                    <div class="input-group">
+                        <label>Időtartam (Perc)</label>
+                        <input type="number" id="ban-time" placeholder="Pl. 60">
+                    </div>
+                    <div class="input-group">
+                        <label>Indok</label>
+                        <textarea id="ban-reason" placeholder="Add meg az indokot..."></textarea>
+                    </div>
+                    <button id="submit-ban" class="btn-primary">Tiltás érvényesítése</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

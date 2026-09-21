@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CWeaponComponentInfoBlob><Infos><Item type="CWeaponComponentClipInfo">
+			<Name>did_devilswitch_mag1</Name>
+			<Model>did_devilswitch_mag1</Model>
+			<LocName>WCT_CLIP1</LocName>
+			<LocDesc>WCD_AP_CLIP1</LocDesc>
+			<AttachBone>AAPClip</AttachBone>
+			<WeaponAttachBone>WAPClip</WeaponAttachBone>
+			<AccuracyModifier type="NULL" />
+			<DamageModifier type="NULL" />
+			<bShownOnWheel value="false" />
+			<CreateObject value="true" />
+			<HudDamage value="0" />
+			<HudSpeed value="0" />
+			<HudCapacity value="0" />
+			<HudAccuracy value="0" />
+			<HudRange value="0" />
+			<AmmoInfo />
+			<ClipSize value="50" />
+			<ReloadData ref="RELOAD_DEFAULT_WITH_EMPTIES" />
+		</Item>
+	<Item type="CWeaponComponentInfo">
+			<Name>did_devilswitch_camo1</Name>
+			<Model>did_devilswitch_camo1</Model>
+			<LocName>WCT_CAMO_1</LocName>
+			<LocDesc>WCD_INVALID</LocDesc>
+			<AttachBone>AAPCamo</AttachBone>
+			<WeaponAttachBone>gun_root</WeaponAttachBone>
+			<AccuracyModifier type="CWeaponAccuracyModifier" />
+			<DamageModifier type="NULL" />
+			<bShownOnWheel value="true" />
+			<CreateObject value="true" />
+			<HudDamage value="0" />
+			<HudSpeed value="0" />
+			<HudCapacity value="0" />
+			<HudAccuracy value="-1" />
+			<HudRange value="0" />
+		</Item>
+	</Infos><InfoBlobName /></CWeaponComponentInfoBlob>

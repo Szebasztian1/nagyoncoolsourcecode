@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF - 8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<Item>
+			<modelName>fiveseven_tan</modelName>
+			<txdName>fiveseven_tan</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_supp_03</modelName>
+			<txdName>fiveseven_supp</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_supp_02</modelName>
+			<txdName>fiveseven_supp</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_supp_01</modelName>
+			<txdName>fiveseven_supp</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_scope_01</modelName>
+			<txdName>fiveseven_scope</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_mag_01</modelName>
+			<txdName>fiveseven_mag</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_flsh_04</modelName>
+			<txdName>fiveseven_flsh</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_flsh_03</modelName>
+			<txdName>fiveseven_flsh</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_flsh_02</modelName>
+			<txdName>fiveseven_flsh</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_flsh_01</modelName>
+			<txdName>fiveseven_flsh</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+		<Item>
+			<modelName>fiveseven_blk</modelName>
+			<txdName>fiveseven_blk</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="50"/>
+		</Item>
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>
+

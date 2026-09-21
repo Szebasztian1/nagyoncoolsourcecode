@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BC Garázs</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Inline icon sprite (no external icon font: self-contained) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+        <symbol id="ic-car" viewBox="0 0 24 24"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0H9"/></symbol>
+        <symbol id="ic-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+        <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M21 21l-5.6-5.6"/></symbol>
+        <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+        <symbol id="ic-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></symbol>
+        <symbol id="ic-garage" viewBox="0 0 24 24"><path d="M3 21V9l9-5 9 5v12"/><path d="M7 21v-7h10v7M7 17.5h10"/></symbol>
+        <symbol id="ic-road" viewBox="0 0 24 24"><path d="M4 21L7 3M20 21L17 3M12 5v2M12 11v2M12 17v2"/></symbol>
+        <symbol id="ic-out" viewBox="0 0 24 24"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/></symbol>
+        <symbol id="ic-in" viewBox="0 0 24 24"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><path d="M12 15V3"/><path d="M8 11l4 4 4-4"/></symbol>
+        <symbol id="ic-tag" viewBox="0 0 24 24"><path d="M3 11V5a2 2 0 0 1 2-2h6l10 10-8 8L3 11z"/><circle cx="7.5" cy="7.5" r="1.2"/></symbol>
+        <symbol id="ic-receipt" viewBox="0 0 24 24"><path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+        <symbol id="ic-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+        <symbol id="ic-fuel" viewBox="0 0 24 24"><path d="M4 20V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v15"/><path d="M3 20h12M6.5 8h5"/><path d="M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9.5L18 6"/></symbol>
+        <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+        <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></symbol>
+        <symbol id="ic-disc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/></symbol>
+        <symbol id="ic-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></symbol>
+        <symbol id="ic-wind" viewBox="0 0 24 24"><path d="M4 8h9a3 3 0 1 0-3-3"/><path d="M3 13h13a3 3 0 1 1-3 3"/><path d="M5 18h5"/></symbol>
+        <symbol id="ic-check" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></symbol>
+        <symbol id="ic-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+        <symbol id="ic-empty" viewBox="0 0 24 24"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0H9"/><path d="M3 3l18 18"/></symbol>
+    </defs></svg>
+
+    <div id="stage" v-cloak>
+        <div class="wrap" v-if="open">
+            <div class="modal">
+
+                <!-- ── header ─────────────────────────────────────────────── -->
+                <header class="bar">
+                    <div class="brand">
+                        <span class="logo"><svg class="ic"><use href="#ic-car"/></svg></span>
+                        <span class="name">BC <b>GARÁZS</b></span>
+                    </div>
+
+                    <span class="loc">{{ label }}</span>
+
+                    <span class="plate-badge">
+                        <span class="dot"></span>{{ cars.length }} jármű
+                    </span>
+
+                    <button class="close" @click="close" title="Bezárás (ESC)">
+                        <svg class="ic"><use href="#ic-x"/></svg>
+                    </button>
+                </header>
+
+                <!-- ── body ───────────────────────────────────────────────── -->
+                <div class="body">
+
+                    <!-- sidebar: filters + summary -->
+                    <nav class="side">
+                        <button v-for="f in filters" :key="f.key"
+                                class="nav-btn" :class="{ on: filter === f.key }"
+                                @click="filter = f.key">
+                            <span class="ico"><svg class="ic"><use :href="'#' + f.icon"/></svg></span>
+                            <span class="lbl">
+                                <span class="t">{{ f.title }}</span>
+                                <span class="d">{{ f.desc }}</span>
+                            </span>
+                            <span class="cnt">{{ counts[f.key] }}</span>
+                        </button>
+
+                        <div class="spacer"></div>
+
+                        <div class="info-box">
+                            <div class="ih">Összesítő</div>
+                            <div class="info-row"><span>Garázsban</span><span class="badge ok">{{ counts.stored }}</span></div>
+                            <div class="info-row"><span>Kint</span><span class="badge bad">{{ counts.out }}</span></div>
+                            <div class="info-row"><span>Kedvenc</span><span class="badge">{{ counts.fav }}</span></div>
+                        </div>
+                    </nav>
+
+                    <!-- list column -->
+                    <section class="main">
+                        <div class="wm"><svg><use href="#ic-car"/></svg></div>
+
+                        <div class="toolbar">
+                            <div class="search">
+                                <svg class="ic"><use href="#ic-search"/></svg>
+                                <input type="text" v-model="search" placeholder="Keresés rendszám vagy név alapján…">
+                                <button v-if="search" class="clear" @click="search = ''">
+                                    <svg class="ic"><use href="#ic-x"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="thead cols">
+                            <span></span>
+                            <span>Rendszám</span>
+                            <span>Jármű</span>
+                            <span>Tank</span>
+                            <span>Állapot</span>
+                        </div>
+
+                        <div class="page">
+                            <div v-for="car in filteredList" :key="car.plate"
+                                 class="car cols" :class="{ on: selectedPlate === car.plate }"
+                                 @click="selectCar(car)">
+
+                                <span class="dot" :class="car.stored ? 'ok' : 'bad'"
+                                      :title="car.stored ? 'Garázsban' : 'Kint'"></span>
+
+                                <span class="plate">{{ car.plate }}</span>
+
+                                <span class="nm">
+                                    <svg v-if="car.fav" class="ic fav"><use href="#ic-star"/></svg>
+                                    <span class="t">{{ cleanLabel(car) }}</span>
+                                    <span v-if="rarity(car)" class="tag">{{ rarity(car) }}</span>
+                                </span>
+
+                                <span class="meter">
+                                    <span class="mbar"><i :style="{ width: fuelPct(car) + '%' }"
+                                                         :class="fuelClass(car)"></i></span>
+                                    <span class="v">{{ fuelText(car) }}</span>
+                                </span>
+
+                                <span class="meter">
+                                    <span class="mbar"><i :style="{ width: healthPct(car) + '%' }"
+                                                         :class="healthClass(car)"></i></span>
+                                    <span class="v">{{ healthPct(car) }}%</span>
+                                </span>
+                            </div>
+
+                            <div v-if="!filteredList.length" class="empty small">
+                                <svg class="ic"><use href="#ic-empty"/></svg>
+                                <p>Nincs a szűrésnek megfelelő jármű.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- detail column -->
+                    <aside class="detail">
+                        <template v-if="selected">
+                            <div class="page">
+                                <div class="shot">
+                                    <img :src="selected.img" alt="">
+                                </div>
+
+                                <div class="head">
+                                    <div class="k">Kiválasztott jármű</div>
+                                    <div class="ttl">{{ cleanLabel(selected) }}</div>
+                                    <div class="model">Modell: <span>{{ selected.model || '?' }}</span></div>
+                                </div>
+
+                                <div class="meta">
+                                    <span class="plate lg">{{ selected.plate }}</span>
+                                    <span class="pill" :class="selected.stored ? 'ok' : 'bad'">
+                                        <span class="dot" :class="selected.stored ? 'ok' : 'bad'"></span>
+                                        {{ selected.stored ? 'Garázsban' : 'Kint' }}
+                                    </span>
+                                    <span v-if="rarity(selected)" class="tag">{{ rarity(selected) }}</span>
+                                </div>
+
+                                <div class="box">
+                                    <div class="bh"><span class="bt">Állapot</span></div>
+
+                                    <div class="stat">
+                                        <div class="sh">
+                                            <span><svg class="ic"><use href="#ic-fuel"/></svg> Üzemanyag</span>
+                                            <span class="sv">{{ fuelText(selected) }}</span>
+                                        </div>
+                                        <span class="mbar lg"><i :style="{ width: fuelPct(selected) + '%' }"
+                                                                :class="fuelClass(selected)"></i></span>
+                                    </div>
+
+                                    <div class="stat">
+                                        <div class="sh">
+                                            <span><svg class="ic"><use href="#ic-shield"/></svg> Karosszéria</span>
+                                            <span class="sv">{{ healthPct(selected) }}%</span>
+                                        </div>
+                                        <span class="mbar lg"><i :style="{ width: healthPct(selected) + '%' }"
+                                                                :class="healthClass(selected)"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="box">
+                                    <div class="bh"><span class="bt">Tuning</span></div>
+                                    <div class="mods">
+                                        <div class="mod" v-for="m in mods" :key="m.key">
+                                            <span class="mi"><svg class="ic"><use :href="'#' + m.icon"/></svg></span>
+                                            <span class="ml">
+                                                <span class="mt">{{ m.title }}</span>
+                                                <span class="mv">{{ m.value }}</span>
+                                            </span>
+                                            <span v-if="m.pips !== null" class="pips">
+                                                <i v-for="n in 3" :key="n" :class="{ on: n <= m.pips }"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <footer class="foot">
+                                <button v-if="selected.stored" class="btn green wide" @click="takeout">
+                                    <svg class="ic"><use href="#ic-out"/></svg> Kivétel
+                                </button>
+                                <button v-else class="btn blue wide" @click="takeoutimpound">
+                                    <svg class="ic"><use href="#ic-in"/></svg> Visszatérítés a garázsba
+                                </button>
+
+                                <button class="btn ghost" @click="fav">
+                                    <svg class="ic" :class="{ fav: selected.fav }"><use href="#ic-star"/></svg>
+                                    {{ selected.fav ? 'Kedvencből ki' : 'Kedvencekhez' }}
+                                </button>
+                                <button class="btn ghost" :disabled="!selected.stored" @click="rename">
+                                    <svg class="ic"><use href="#ic-tag"/></svg> Elnevezés
+                                </button>
+                                <!--<button class="btn ghost" :disabled="!selected.stored" @click="taxmenu">
+                                    <svg class="ic"><use href="#ic-receipt"/></svg> Adózás
+                                </button>-->
+                                <button class="btn danger" :disabled="!selected.stored" @click="deletecar">
+                                    <svg class="ic"><use href="#ic-trash"/></svg> Törlés
+                                </button>
+                            </footer>
+                        </template>
+
+                        <div v-else class="empty">
+                            <svg class="ic"><use href="#ic-car"/></svg>
+                            <p>Nincs kiválasztott jármű</p>
+                            <span>Válassz egyet a listából a részletekhez.</span>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vue.global.prod.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+/* BC design for the Bootstrap-based creator panel (admin side).
+   Loaded after theme.bundle.css so it wins; see docs/bc-design-system.md. */
+
+body,
+.tooltip,
+.modal,
+.ts-dropdown,
+.flatpickr-calendar,
+.btn,
+input,
+select,
+textarea,
+.form-control,
+.form-select {
+    font-family: var(--bc-font) !important;
+}
+
+/* ── Panel shell ──────────────────────────────────────────────────────── */
+
+#shops-creator.bg-white {
+    width: min(94vw, 1180px);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 0 0 1rem;
+    background: var(--bg-modal) !important;
+    color: var(--txt);
+    border-radius: var(--radius) !important;
+    box-shadow: 0 2.5rem 6rem rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+    animation: bcScaleIn .22s ease;
+}
+
+#main-bar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.75rem;
+    margin: 0 !important;
+    padding: 0 1rem;
+    background: var(--bg-bar);
+    text-align: left !important;
+}
+
+#shops-creator-label.script-name {
+    display: flex !important;
+    align-items: baseline;
+    gap: .5rem;
+    margin: 0;
+    font-family: var(--bc-font);
+    font-size: 1.4rem !important;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--txt);
+}
+
+#shops-creator-version {
+    font-size: .85rem !important;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--acc-lt);
+}
+
+/* ── Sidebar nav ──────────────────────────────────────────────────────── */
+
+#shops-creator .nav-pills {
+    flex: 0 0 auto;
+    width: 15rem;
+    gap: .7rem;
+    margin: 0 0 0 1rem !important;
+    padding: 0;
+}
+
+#shops-creator .nav-pills .nav-link {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .8rem .9rem;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5rem;
+    color: var(--txt2);
+    font-weight: 700;
+    text-align: left;
+    transition: .22s;
+}
+
+#shops-creator .nav-pills .nav-link:hover { border-color: #565656 }
+
+#shops-creator .nav-pills .nav-link.active {
+    background: #2b3242 !important;
+    border-color: var(--acc-bd);
+    color: #fff;
+}
+
+#shops-creator .nav-pills .nav-link.active i { color: var(--acc-lt) }
+
+#shops-creator .tab-content {
+    background: var(--bg-bar);
+    border-radius: .5rem;
+    margin-right: 1rem;
+    padding: .5rem 1rem 1rem;
+}
+
+/* ── Typography inside the panel ──────────────────────────────────────── */
+
+#shops-creator .fs-3,
+#shops-creator .fs-4,
+#shops-creator .fs-5,
+.modal .fs-3,
+.modal .fs-4,
+.modal .fs-5 {
+    color: var(--txt);
+}
+
+/* Section headings only — `fs-3` also sizes switch rows, which must stay sentence-case */
+#shops-creator p.fs-3.text-center,
+.modal p.fs-3.text-center {
+    font-size: .8rem !important;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--txt4) !important;
+}
+
+#shops-creator hr,
+.modal hr {
+    border: 0;
+    border-top: 1px solid #ffffff12;
+    opacity: 1;
+    color: transparent;
+}
+
+/* ── Tables ───────────────────────────────────────────────────────────── */
+
+#shops-creator .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--txt2);
+    --bs-table-hover-bg: var(--acc-tint);
+    --bs-table-hover-color: #fff;
+    --bs-table-border-color: #ffffff12;
+    font-size: 1rem !important;
+    margin-bottom: 0;
+}
+
+#shops-creator .table thead th {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt4);
+    border-bottom-color: var(--bd);
+}
+
+#shops-creator .table tbody tr { cursor: pointer }
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate { color: var(--txt3) }
+
+.dataTables_wrapper .page-link {
+    background: var(--bg-box);
+    border-color: var(--bd);
+    color: var(--txt2);
+}
+
+.dataTables_wrapper .page-item.active .page-link {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+    color: var(--acc-lt);
+}
+
+/* ── Modals ───────────────────────────────────────────────────────────── */
+
+.modal-content {
+    background: var(--bg-modal) !important;
+    border: 1px solid rgba(255, 255, 255, .05);
+    border-radius: var(--radius);
+    color: var(--txt);
+    box-shadow: 0 2.5rem 6rem rgba(0, 0, 0, .6);
+}
+
+.modal-header,
+.modal-footer {
+    background: var(--bg-bar);
+    border-color: #ffffff0d;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: var(--txt);
+}
+
+.modal-body { background: var(--bg-modal) }
+
+/* ── Form controls ────────────────────────────────────────────────────── */
+
+.form-control,
+.form-select {
+    background-color: #00000038 !important;
+    border: 1px solid #ffffff14 !important;
+    border-radius: .45rem;
+    color: var(--txt) !important;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.form-control::placeholder { color: var(--txt4) !important }
+
+/* a floating label doubles as the placeholder — keep the real one invisible */
+.form-floating > .form-control::placeholder { color: transparent !important }
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--acc-bd) !important;
+    box-shadow: 0 0 0 2px var(--acc-tint) !important;
+}
+
+.form-select option { background: var(--bg-box); color: var(--txt) }
+
+.input-group-text {
+    background: var(--bg-box) !important;
+    border: 1px solid var(--bd) !important;
+    color: var(--txt3) !important;
+    font-weight: 600;
+}
+
+.form-floating > label { color: var(--txt4) }
+.form-floating > .form-control:focus ~ label { color: var(--acc-lt) }
+
+.form-check-input {
+    background-color: #00000045;
+    border-color: #ffffff26;
+}
+
+.form-check-input:checked {
+    background-color: var(--acc);
+    border-color: var(--acc);
+}
+
+.form-check-input:focus {
+    border-color: var(--acc-bd);
+    box-shadow: 0 0 0 2px var(--acc-tint);
+}
+
+.form-check-label { color: var(--txt2) }
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+
+.btn {
+    border-radius: .45rem;
+    font-weight: 700;
+    transition: .18s;
+}
+
+.btn:active { transform: scale(.97) }
+
+.btn-success {
+    background: var(--ok-tint) !important;
+    border-color: rgba(76, 219, 40, .5) !important;
+    color: var(--ok-lt) !important;
+}
+
+.btn-success:hover { background: rgba(76, 219, 40, .24) !important }
+
+.btn-secondary {
+    background: #ffffff08 !important;
+    border-color: #ffffff14 !important;
+    color: var(--txt2) !important;
+}
+
+.btn-secondary:hover { background: #ffffff12 !important }
+
+.btn-primary {
+    background: var(--acc-tint) !important;
+    border-color: var(--acc-bd) !important;
+    color: var(--acc-lt) !important;
+}
+
+.btn-danger {
+    background: var(--danger-tint) !important;
+    border-color: rgba(219, 40, 40, .5) !important;
+    color: var(--danger-lt) !important;
+}
+
+.btn-danger:hover { background: rgba(219, 40, 40, .26) !important }
+
+/* background-color only — the shorthand would wipe Bootstrap's inlined × glyph */
+.btn-close {
+    width: 2rem !important;
+    height: 2rem !important;
+    padding: 0 !important;
+    background-color: #d1d1d130 !important;
+    background-size: .8em auto;
+    border-radius: var(--radius);
+    opacity: 1;
+    transition: .25s;
+}
+
+.btn-close:hover { background-color: var(--danger-tint) !important }
+
+/* ── Lists, tooltips, third-party widgets ─────────────────────────────── */
+
+.list-group-item {
+    background: var(--bg-box);
+    border-color: var(--bd);
+    color: var(--txt2);
+}
+
+.tooltip-inner {
+    background: #0e1116;
+    border: 1px solid var(--acc-bd);
+    color: var(--txt);
+    font-weight: 600;
+}
+
+.tooltip .tooltip-arrow::before { border-top-color: var(--acc-bd) }
+
+.ts-wrapper .ts-control,
+.ts-dropdown {
+    background: #00000038 !important;
+    border: 1px solid #ffffff14 !important;
+    color: var(--txt) !important;
+}
+
+.ts-dropdown { background: var(--bg-box) !important }
+.ts-dropdown .option { color: var(--txt2) }
+
+.ts-dropdown .active {
+    background: var(--acc-tint) !important;
+    color: var(--acc-lt) !important;
+}
+
+.flatpickr-calendar {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    color: var(--txt);
+}
+
+.flatpickr-time input,
+.flatpickr-time .flatpickr-time-separator { color: var(--txt) !important }
+
+/* ── Progress bar ─────────────────────────────────────────────────────── */
+
+#progressbar-div {
+    background: var(--bg-bar) !important;
+    border: 1px solid var(--bd) !important;
+    border-radius: .45rem;
+    overflow: hidden;
+}
+
+#progressbar.bg-success { background: var(--acc) !important }
+#progressbar-text { color: #fff }
+
+/* ── Scrollbars ───────────────────────────────────────────────────────── */
+
+#shops-creator,
+.modal-body,
+.scrollbar,
+#single-jobs-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--acc) #ffffff10;
+}
+
+#shops-creator::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar,
+#single-jobs-list::-webkit-scrollbar { width: .75rem }
+
+#shops-creator::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track,
+#single-jobs-list::-webkit-scrollbar-track {
+    background: #ffffff0a;
+    border-radius: 1rem;
+    margin: .35rem;
+}
+
+#shops-creator::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb,
+#single-jobs-list::-webkit-scrollbar-thumb {
+    background: var(--acc);
+    border-radius: 1rem;
+    border: .16rem solid transparent;
+    background-clip: padding-box;
+}

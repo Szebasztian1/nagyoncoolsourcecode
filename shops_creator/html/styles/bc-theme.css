@@ -1,0 +1,63 @@
+/* BC Design System — shared tokens & primitives. See docs/bc-design-system.md */
+
+:root {
+    /* surfaces (dark -> light) */
+    --bg-modal: #1f1f1f;
+    --bg-bar: #242424;
+    --bg-box: #2e2e2e;
+    --bd: #424242;
+
+    /* text */
+    --txt: #e7e7e7;
+    --txt2: #c8c8c8;
+    --txt3: #b7b7b7;
+    --txt4: #8a8a8a;
+
+    /* accent = BC-blue */
+    --acc: #2f80ed;
+    --acc-lt: #7fb0f6;
+    --acc-tint: rgba(47, 128, 237, .15);
+    --acc-tint-h: rgba(47, 128, 237, .24);
+    --acc-bd: rgba(47, 128, 237, .55);
+
+    /* semantic */
+    --ok: #4cdb28;
+    --ok-tint: rgba(76, 219, 40, .15);
+    --ok-lt: #9be97f;
+    --danger: #db2828;
+    --danger-tint: rgba(219, 40, 40, .16);
+    --danger-lt: #f08a8a;
+
+    --radius: .4em;
+
+    --bc-font: 'Titillium Web', 'Segoe UI', system-ui, sans-serif;
+    --bc-scrim: radial-gradient(1100px 560px at 50% -6%, rgba(18, 32, 58, .88) 0%, rgba(7, 10, 17, .92) 58%, rgba(4, 6, 10, .94) 100%);
+}
+
+@keyframes bcScaleIn {
+    0% { scale: .85; opacity: 0 }
+    100% { scale: 1; opacity: 1 }
+}
+
+@keyframes bcFadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+/* BC-blue scrollbar. Apply to every scroll area — a thin default reads as "not scrollable". */
+.bc-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--acc) #ffffff10;
+}
+
+.bc-scroll::-webkit-scrollbar { width: .75em; height: .75em }
+.bc-scroll::-webkit-scrollbar-track { background: #ffffff0a; border-radius: 1em; margin: .35em }
+
+.bc-scroll::-webkit-scrollbar-thumb {
+    background: var(--acc);
+    border-radius: 1em;
+    border: .16em solid transparent;
+    background-clip: padding-box;
+}
+
+.bc-scroll::-webkit-scrollbar-thumb:hover { background: var(--acc-lt) }

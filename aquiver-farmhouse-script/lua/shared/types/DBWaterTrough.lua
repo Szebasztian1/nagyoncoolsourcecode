@@ -1,0 +1,4 @@
+---@class DBWaterTrough
+---@field id number
+---@field houseId number
+---@field count number

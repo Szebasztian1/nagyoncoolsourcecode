@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+            integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" type="text/css" href="css/main.css?v=5" />
+    </head>
+    <body>
+        <div class="stage" id="stage">
+            <div class="modal">
+                <!-- header -->
+                <div class="bar">
+                    <div class="brand">
+                        <div class="logo"><i class="fa-solid fa-clock"></i></div>
+                        <div class="name"><span id="brandName">BlackCity</span> <b id="brandTitle">Játékidő shop</b></div>
+                    </div>
+                    <div class="bar-right">
+                        <div class="plate" id="coinBadge">
+                            <img class="coin-ico" src="./images/coin.png" alt="" />
+                            <span id="coinBalance">0</span>
+                            <span class="plate-unit" id="coinUnit">érme</span>
+                        </div>
+                        <div class="close" id="btnClose"><i class="fa-solid fa-xmark"></i></div>
+                    </div>
+                </div>
+
+                <div class="body">
+                    <!-- sidebar: categories + player -->
+                    <aside class="side">
+                        <div class="nav-list" id="navList"></div>
+                        <div class="spacer"></div>
+                        <div class="info-box">
+                            <div class="ih" id="lblPlayer">Játékos</div>
+                            <div class="profile">
+                                <img class="avatar" id="avatar" src="./images/pp.png" alt="" />
+                                <div class="profile-txt">
+                                    <div class="pname" id="playerName">—</div>
+                                    <div class="pcoin">
+                                        <img class="coin-ico sm" src="./images/coin.png" alt="" />
+                                        <span id="coinBalance2">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- shop -->
+                    <section class="main">
+                        <div class="wm"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <div class="head">
+                            <div class="k" id="shopEyebrow">Elérhető termékek</div>
+                            <div class="ttl" id="shopTitle">BOLT</div>
+                        </div>
+                        <div class="page" id="itemGrid"></div>
+                        <div class="foot">
+                            <div class="btn ghost" id="btnPrev">
+                                <i class="fa-solid fa-arrow-left"></i><span id="lblPrev">Előző</span>
+                            </div>
+                            <div class="pager">
+                                <span id="currentPage">1</span><span class="sep">/</span><span id="totalPage">1</span>
+                            </div>
+                            <div class="btn ghost" id="btnNext">
+                                <span id="lblNext">Következő</span><i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- rail: reward timer + leaderboard -->
+                    <aside class="rail">
+                        <div class="box reward-box">
+                            <div class="ih" id="lblNextReward">Következő érmejutalomig</div>
+                            <div class="countdown" id="countdown">--:--</div>
+                            <div class="reward-row">
+                                <span id="lblReward">Jutalom</span>
+                                <span class="reward-val">
+                                    <img class="coin-ico sm" src="./images/coin.png" alt="" />
+                                    <b id="rewardAmount">0</b>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box top-box">
+                            <div class="head sm">
+                                <div class="k" id="topEyebrow">Ranglista</div>
+                                <div class="ttl" id="topTitle">TOP JÁTÉKOSOK</div>
+                            </div>
+                            <div class="top-list" id="topList"></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- purchase confirm -->
+            <div class="overlay" id="confirmOverlay">
+                <div class="dialog">
+                    <div class="dlg-ico"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div class="dlg-title" id="confirmTitle">Megerősíted a vásárlást?</div>
+                    <div class="dlg-item">
+                        <img class="dlg-img" id="confirmImg" src="./images/box.png" alt="" />
+                        <div class="dlg-item-txt">
+                            <div class="dlg-name" id="confirmName">—</div>
+                            <div class="dlg-meta">
+                                <span class="chip-count" id="confirmCount">1x</span>
+                                <span class="chip-price">
+                                    <img class="coin-ico sm" src="./images/coin.png" alt="" />
+                                    <b id="confirmPrice">0</b>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dlg-foot">
+                        <div class="btn ghost" id="btnCancel">Mégse</div>
+                        <div class="btn green" id="btnConfirm">Vásárlás</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- purchase success -->
+            <div class="overlay" id="successOverlay">
+                <div class="dialog success">
+                    <div class="dlg-ico ok"><i class="fa-solid fa-check"></i></div>
+                    <div class="dlg-title" id="successTitle">Sikeres vásárlás</div>
+                    <img class="dlg-img lg" id="successImg" src="./images/box.png" alt="" />
+                    <div class="dlg-name" id="successName">—</div>
+                </div>
+            </div>
+
+            <div class="toast" id="toast"></div>
+        </div>
+        <script src="js/app.js?v=5"></script>
+    </body>
+</html>

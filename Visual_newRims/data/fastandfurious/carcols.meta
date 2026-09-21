@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CVehicleModelInfoVarGlobal>    
+  <Wheels>
+    <Item/> <!-- VWT_SPORT -->
+    <Item/> <!-- VWT_MUSCLE -->
+    <Item/> <!-- VWT_LOWRIDER -->
+    <Item/> <!-- VWT_SUV -->
+    <Item/> <!-- VWT_OFFROAD -->
+    <Item> <!-- VWT_TUNER -->
+	    <Item>
+			<wheelName>Wheel_AXIS_SE7EN_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>AXIS SE7EN MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_AXIS_SE7EN_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>AXIS SE7EN MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_LOWENHART_BR5_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>LOWENHART BR5 MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_LOWENHART_BR5_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>LOWENHART BR5 MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_OZ_SUPERLEGGERA_III_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>OZ SUPERLEGGERA III MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_OZ_SUPERLEGGERA_III_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>OZ SUPERLEGGERA III MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RACING_HART_M5_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>RACING HART M5</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RACING_HART_M5_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>RACING HART M5 MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RO_JA_MOTEGI_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>RO JA MOTEGI MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RO_JA_MOTEGI_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>RO JA MOTEGI MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+
+		<Item>
+			<wheelName>Wheel_VEILSIDE_ANDREW_F_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>VEILSIDE ANDREW F MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_VEILSIDE_ANDREW_F_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>VEILSIDE ANDREW F MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_VEILSIDE_FORTUNE_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>VEILSIDE FORTUNE MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_VEILSIDE_FORTUNE_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>VEILSIDE FORTUNE MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_WORK_REZAX_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>WORK REZAX MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_WORK_REZAX_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>WORK REZAX MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_MOTEGI_FF5_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>MOTEGI FF5 MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_MOTEGI_FF5_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>MOTEGI FF5 MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RAYS_99B_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>RAYS 99B MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RAYS_99B_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>RAYS 99B MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RAYS_VOLK_RACING_GT_C_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>RAYS VOLK RACING GT C MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_RAYS_VOLK_RACING_GT_C_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>RAYS VOLK RACING GT C MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_VEILSIDE_ANDREW_V_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>VEILSIDE ANDREW V MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>VEILSIDE ANDREW V MICHELIN4 CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel></modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_VOLK_RACE_RE30_MICHELIN4</wheelName>
+			<wheelVariation />
+			<modShopLabel>VOLK RACE RE30 MICHELIN4</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+		<Item>
+			<wheelName>Wheel_VOLK_RACE_RE30_MICHELIN4_CHROM</wheelName>
+			<wheelVariation />
+			<modShopLabel>VOLK RACE RE30 MICHELIN4 CHROM</modShopLabel>
+			<rimRadius value="0.348500"/>
+			<rear value="false"/>
+	    </Item>
+	</Item>
+    <Item/> <!-- VWT_BIKE -->
+    <Item/> <!-- VWT_HIEND -->
+  </Wheels>
+</CVehicleModelInfoVarGlobal>

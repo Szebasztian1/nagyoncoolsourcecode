@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="breach.css">
+</head>
+<body>
+<div id="menu" class="hidden">
+  <div class="hqm" id="hqm">
+    <div class="hqm-head">
+      <div class="hqm-badge">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+      </div>
+      <div class="hqm-titles">
+        <div class="hqm-eyebrow">Frakció HQ</div>
+        <div class="hqm-title" id="m-title"></div>
+        <div class="hqm-sub" id="m-sub"></div>
+      </div>
+    </div>
+    <div class="hqm-wm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+    </div>
+    <div class="hqm-items" id="m-items"></div>
+    <div class="hqm-foot">
+      <span><b>&#8593;&#8595;</b> navigálás</span>
+      <span><b>Enter</b> választás</span>
+      <span><b>ESC</b> vissza</span>
+    </div>
+  </div>
+</div>
+
+<!-- Police breach minigame overlay (self-contained lockpick) -->
+<div id="breach" class="hidden">
+  <div class="brc-card" id="brc-card">
+    <div class="brc-head">
+      <div class="brc-badge">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="brc-titles">
+        <div class="brc-eyebrow">Rendvédelem</div>
+        <div class="brc-title">Behatolás</div>
+        <div class="brc-sub">Zárszerkezet feltörése</div>
+      </div>
+    </div>
+
+    <div class="brc-meta">
+      <div class="brc-pins" id="brc-pins"></div>
+      <div class="brc-strikes" id="brc-strikes"></div>
+    </div>
+
+    <div class="brc-track" id="brc-track">
+      <div class="brc-zone" id="brc-zone"></div>
+      <div class="brc-needle" id="brc-needle"></div>
+    </div>
+
+    <div class="brc-status" id="brc-status">Zár #1</div>
+    <div class="brc-hint"><b>SPACE</b> rögzítés · <b>ESC</b> megszakítás</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="breach.js"></script>
+</body>
+</html>

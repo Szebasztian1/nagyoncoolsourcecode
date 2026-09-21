@@ -1,0 +1,1 @@
+AddTextEntry("WEAPON_HFSMGV2", "HFSMGV2")

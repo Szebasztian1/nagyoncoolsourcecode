@@ -1,0 +1,194 @@
+/* Bolti kedvezmények — BC design (styles/bc-theme.css tokenjeire épül).
+   Minden em-ben méreteződik a .main-container gyökér font-size-jából. */
+
+/* ── Vásárlói nézet ───────────────────────────────────────────────────── */
+
+/* áthúzott alapár a kedvezményes mellett */
+.main-container .item-price.old {
+    color: var(--txt4);
+    text-decoration: line-through;
+    text-decoration-thickness: .08em;
+    font-weight: 600;
+    margin-right: .3em;
+}
+
+.main-container .item-element .disc-badge {
+    position: absolute;
+    top: .35em;
+    left: .35em;
+    z-index: 2;
+    font-size: .68em;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #0d1b0b;
+    background: var(--ok);
+    border-radius: .3em;
+    padding: .05em .4em;
+}
+
+.main-container .info-row.disc span:last-child { color: var(--ok-lt) }
+
+/* ── Kezelő oldal (tulaj) ─────────────────────────────────────────────── */
+
+/* a hozzáadó sornak (ID + % + lejárat + gomb) nem elég a 62em-es alap panel */
+.main-container .shop-settings.disc-page {
+    width: 76em;
+    height: 46em;
+}
+
+.main-container .disc-field {
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+}
+
+.main-container .disc-label {
+    font-size: .72em;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt4);
+}
+
+.main-container .disc-hint {
+    font-size: .74em;
+    color: var(--txt4);
+    line-height: 1.45;
+}
+
+.main-container .disc-hint b { color: var(--acc-lt) }
+
+.main-container .disc-add {
+    display: flex;
+    gap: .6em;
+    align-items: flex-end;
+}
+
+.main-container .disc-add .disc-field { flex: 1 1 0 }
+.main-container .disc-add .narrow { flex: 0 0 7.5em }
+.main-container .disc-add .bc-btn { flex: 0 0 auto }
+
+.main-container .disc-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    list-style: none;
+}
+
+.main-container .disc-row {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .6em .75em;
+}
+
+.main-container .disc-row.expired { opacity: .55 }
+
+.main-container .disc-row .av {
+    flex: 0 0 auto;
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: .4em;
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container .disc-row .who {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.main-container .disc-row .who b {
+    font-size: .95em;
+    font-weight: 700;
+    color: var(--txt);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main-container .disc-row .who span {
+    font-size: .72em;
+    color: var(--txt4);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main-container .disc-row .pct {
+    margin-left: auto;
+    flex: 0 0 auto;
+    font-weight: 700;
+    color: var(--ok-lt);
+    background: var(--ok-tint);
+    border-radius: .3em;
+    padding: .1em .55em;
+}
+
+.main-container .disc-row .revoke {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: .35em;
+    font-size: .8em;
+    font-weight: 700;
+    color: var(--txt4);
+    border: 1px solid #ffffff20;
+    border-radius: .4em;
+    padding: .3em .6em;
+    cursor: pointer;
+    transition: .18s;
+}
+
+.main-container .disc-row .revoke:hover {
+    color: var(--danger-lt);
+    border-color: rgba(219, 40, 40, .55);
+    background: var(--danger-tint);
+}
+
+.main-container .disc-empty {
+    text-align: center;
+    color: var(--txt4);
+    font-size: .9em;
+    padding: 1.5em 0;
+}
+
+/* ── Szavatosság-jelvény a tárgykártyán ──────────────────────────────────
+   Csak a romlandó árun jelenik meg, és azt mutatja, hány százalékos az az
+   adag, amit a következő vevő kapna. A bolt mindig a legjobbat adja ki. */
+.main-container .life-badge {
+    /* saját sorban, középre — az ár mellé szorítva összenyomná a kártyát */
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: .25em;
+    margin: .3em auto 0;
+    font-size: .72em;
+    font-weight: 700;
+    line-height: 1.3;
+    border-radius: .3em;
+    padding: .05em .45em;
+    white-space: nowrap;
+}
+
+.main-container .life-badge.good {
+    color: var(--ok-lt);
+    background: var(--ok-tint);
+}
+
+.main-container .life-badge.mid {
+    color: #f0c419;
+    background: rgba(240, 196, 25, .15);
+}
+
+.main-container .life-badge.low {
+    color: var(--danger-lt);
+    background: var(--danger-tint);
+}

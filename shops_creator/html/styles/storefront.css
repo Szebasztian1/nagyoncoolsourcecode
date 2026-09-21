@@ -1,0 +1,246 @@
+/* Bolti kirakat (hirdetés) — BC design (styles/bc-theme.css tokenjeire épül). */
+
+/* Ha van kirakat, a bal oszlop és vele a panel is szélesebb — az árulista
+   ugyanannyi helyet kap, mint kirakat nélkül. */
+.main-container .shop-page.has-sf { width: 90em }
+.main-container .shop-page.has-sf .body { grid-template-columns: 21em minmax(0, 1fr) }
+
+.main-container .sf-card {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    overflow: hidden;
+    margin-bottom: .6em;
+}
+
+.main-container .sf-photo {
+    position: relative;
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 9;
+    background: #14161d;
+    overflow: hidden;
+}
+
+.main-container .sf-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Törött vagy lassú link: a doboz megtartja az alakját, ikon jön a kép helyére. */
+.main-container .sf-photo.empty img { display: none }
+.main-container .sf-photo i.ph { display: none }
+
+.main-container .sf-photo.empty i.ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 3em;
+    color: #4a4a4a;
+}
+
+.main-container .sf-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: .5em;
+    padding: .7em .8em .8em;
+}
+
+.main-container .sf-name {
+    font-size: 1.05em;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--txt);
+}
+
+.main-container .sf-owner {
+    display: flex;
+    align-items: center;
+    gap: .35em;
+    font-size: .78em;
+    font-weight: 600;
+    color: var(--txt4);
+}
+
+.main-container .sf-desc {
+    min-height: 0;
+    max-height: 10em;
+    overflow-y: auto;
+    font-size: .85em;
+    line-height: 1.45;
+    color: var(--txt3);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* hely a bolt neve alatt — a nevet a fejléc írja ki, itt csak a helyszín van */
+.main-container .sf-loc {
+    display: flex;
+    align-items: center;
+    gap: .35em;
+    font-size: .8em;
+    font-weight: 600;
+    color: var(--acc-lt);
+    line-height: 1.2;
+}
+
+/* egy sorban: kedvezmény, meddig szól, bolt ID, és a tulaj saját címkéi */
+.main-container .sf-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35em;
+}
+
+.main-container .sf-badge {
+    font-size: .72em;
+    font-weight: 700;
+    color: var(--txt3);
+    background: #ffffff0f;
+    border: 1px solid var(--bd);
+    border-radius: .3em;
+    padding: .1em .5em;
+    white-space: nowrap;
+}
+
+/* csak a kedvezmény kap kiemelést, hogy legyen sorrend a szemnek */
+.main-container .sf-badge.acc {
+    color: var(--acc-lt);
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+}
+
+.main-container .sf-rows {
+    border-top: 1px solid #ffffff0d;
+    padding-top: .45em;
+}
+
+/* ── Szerkesztő oldal (tulaj) ─────────────────────────────────────────── */
+
+.main-container .shop-settings.sf-page {
+    width: 76em;
+    height: 46em;
+}
+
+/* a lap alján egy sorban a gombok — külön sorokban a "Mégse" kilógna */
+.main-container .sf-actions {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+}
+
+.main-container .sf-actions .grow { flex: 1 1 auto }
+
+.main-container .sf-field {
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+}
+
+.main-container .sf-label {
+    font-size: .72em;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt4);
+}
+
+.main-container .sf-hint {
+    font-size: .74em;
+    color: var(--txt4);
+    line-height: 1.45;
+}
+
+.main-container .sf-hint b { color: var(--acc-lt) }
+
+/* figyelmeztetés a kép alatt, ha a link nem tölthető be a játékban */
+.main-container .sf-warn {
+    display: flex;
+    align-items: center;
+    gap: .4em;
+    font-size: .78em;
+    font-weight: 700;
+    color: var(--danger-lt);
+    background: var(--danger-tint);
+    border: 1px solid rgba(219, 40, 40, .45);
+    border-radius: .4em;
+    padding: .35em .6em;
+    margin-top: .2em;
+}
+
+.main-container textarea.inputField {
+    height: 7.5em;
+    padding: .6em .8em;
+    resize: none;
+    line-height: 1.45;
+    font-weight: 400;
+}
+
+.main-container .sf-counter {
+    align-self: flex-end;
+    font-size: .7em;
+    color: var(--txt4);
+}
+
+.main-container .sf-preview {
+    display: flex;
+    gap: .8em;
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5em;
+    padding: .7em;
+}
+
+.main-container .sf-preview .thumb {
+    position: relative;
+    flex: 0 0 auto;
+    width: 12em;
+    aspect-ratio: 16 / 9;
+    border-radius: .4em;
+    overflow: hidden;
+    background: #14161d;
+}
+
+.main-container .sf-preview .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Ugyanaz a tartalék, mint a vásárlói kártyán: ha a link nem tölt be, a doboz
+   megmarad és ikon kerül a helyére — enélkül a törött kép és az ikon egyszerre
+   látszott, és úgy tűnt, mintha semmi sem történt volna. */
+.main-container .sf-preview .thumb i.ph { display: none }
+.main-container .sf-preview .thumb.empty img { display: none }
+
+.main-container .sf-preview .thumb.empty i.ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 2em;
+    color: #4a4a4a;
+}
+
+.main-container .sf-preview .meta {
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+    min-width: 0;
+}
+
+.main-container .sf-row2 {
+    display: flex;
+    gap: .7em;
+}
+
+.main-container .sf-row2 .sf-field { flex: 1 1 0 }

@@ -1,0 +1,4 @@
+---@class DBWarehouseUnit
+---@field id eWarehouseUnit
+---@field houseId number
+---@field count number

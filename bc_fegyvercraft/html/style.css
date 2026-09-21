@@ -1,0 +1,966 @@
+/* ============================================================
+   Fegyvercraft NUI — BC design (charcoal + BC-blue).
+   Same visual system as the crafting table panels in
+   `crafting` / `esx_job_creator`; see docs/bc-design-system.md.
+   ============================================================ */
+
+:root {
+	/* surfaces (dark -> light) */
+	--bg-modal: #1f1f1f;
+	--bg-bar: #242424;
+	--bg-box: #2e2e2e;
+	--bd: #424242;
+
+	/* text */
+	--txt: #e7e7e7;
+	--txt2: #c8c8c8;
+	--txt3: #b7b7b7;
+	--txt4: #8a8a8a;
+
+	/* accent = BC-blue */
+	--acc: #2f80ed;
+	--acc-lt: #7fb0f6;
+	--acc-tint: rgba(47, 128, 237, .15);
+	--acc-tint-h: rgba(47, 128, 237, .24);
+	--acc-bd: rgba(47, 128, 237, .55);
+
+	/* semantic */
+	--ok: #4cdb28;
+	--ok-tint: rgba(76, 219, 40, .15);
+	--ok-lt: #9be97f;
+	--danger: #db2828;
+	--danger-tint: rgba(219, 40, 40, .16);
+	--danger-lt: #f08a8a;
+
+	--radius: .4em;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	overflow: hidden;
+	-webkit-user-select: none;
+	user-select: none;
+	font-family: "Titillium Web", "Segoe UI", system-ui, sans-serif;
+}
+
+/* in-game NUI: transparent stage, only the panel shows */
+#stage {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	font-size: min(1.45vw, 15px);
+	background: transparent;
+	color: var(--txt);
+}
+
+#stage.open {
+	display: flex;
+}
+
+.modal {
+	position: relative;
+	width: 72em;
+	max-width: 97vw;
+	height: 46em;
+	max-height: 96vh;
+	background: var(--bg-modal);
+	border-radius: var(--radius);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 2.5em 6em rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+	animation: scaleIn .22s ease;
+}
+
+@keyframes scaleIn {
+	0% {
+		scale: .85;
+		opacity: 0;
+	}
+
+	100% {
+		scale: 1;
+		opacity: 1;
+	}
+}
+
+/* ---------- header ---------- */
+.bar {
+	display: flex;
+	align-items: center;
+	gap: .8em;
+	background: var(--bg-bar);
+	height: 3.5em;
+	padding-inline: 1em;
+	flex: 0 0 auto;
+}
+
+.bar .logo {
+	width: 2.1em;
+	height: 2.1em;
+	border-radius: .35em;
+	background: var(--acc-tint);
+	color: var(--acc-lt);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+}
+
+.bar .logo svg {
+	width: 1.25em;
+	height: 1.25em;
+}
+
+.bar .k {
+	font-size: .72em;
+	font-weight: 700;
+	letter-spacing: .16em;
+	text-transform: uppercase;
+	color: var(--txt4);
+	margin-bottom: -.1em;
+}
+
+.bar .name {
+	font-size: 1.35em;
+	font-weight: 700;
+	line-height: 1.05;
+}
+
+.bar .name b {
+	color: var(--acc-lt);
+}
+
+.spacer {
+	flex: 1 1 auto;
+}
+
+.badge {
+	display: flex;
+	align-items: center;
+	gap: .5em;
+	background: #00000030;
+	border: 1px solid #ffffff12;
+	border-radius: .35em;
+	padding: .4em .75em;
+	font-weight: 600;
+	font-size: .85em;
+	color: var(--txt2);
+	max-width: 16em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.badge .dot {
+	width: .5em;
+	height: .5em;
+	border-radius: 50%;
+	background: var(--ok);
+	box-shadow: 0 0 .6em var(--ok);
+	flex: 0 0 auto;
+}
+
+.close {
+	width: 2em;
+	height: 2em;
+	border-radius: var(--radius);
+	background: #d1d1d130;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: .25s;
+	color: var(--txt2);
+	flex: 0 0 auto;
+}
+
+.close svg {
+	width: 1.1em;
+	height: 1.1em;
+}
+
+.close:hover {
+	background: var(--danger-tint);
+	color: var(--danger-lt);
+}
+
+/* ---------- panels ---------- */
+.body {
+	display: grid;
+	grid-template-columns: 19em 1fr 17em;
+	gap: 1em;
+	padding: 1em;
+	flex: 1 1 auto;
+	min-height: 0;
+}
+
+.panel {
+	position: relative;
+	background: var(--bg-bar);
+	border-radius: .5em;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.phead {
+	display: flex;
+	align-items: center;
+	gap: .6em;
+	padding: .85em .9em .7em;
+	flex: 0 0 auto;
+	position: relative;
+	z-index: 1;
+}
+
+.pico {
+	width: 1.9em;
+	height: 1.9em;
+	border-radius: .4em;
+	background: var(--acc-tint);
+	color: var(--acc-lt);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+}
+
+.pico svg {
+	width: 1.1em;
+	height: 1.1em;
+}
+
+.pt {
+	font-weight: 700;
+	font-size: 1.05em;
+	line-height: 1;
+}
+
+.ps {
+	font-size: .72em;
+	color: var(--txt4);
+	margin-top: .15em;
+}
+
+.wm {
+	position: absolute;
+	top: -.15em;
+	right: .1em;
+	z-index: 0;
+	opacity: .08;
+	transform: skew(-22deg, 22deg);
+	color: #fff;
+	pointer-events: none;
+}
+
+.wm svg {
+	width: 9em;
+	height: 9em;
+}
+
+/* scroll areas — the only scrollers, BC-blue bar */
+.scroll {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-y: auto;
+	position: relative;
+	z-index: 1;
+	scrollbar-width: thin;
+	scrollbar-color: var(--acc) #ffffff10;
+}
+
+.scroll::-webkit-scrollbar {
+	width: .6em;
+}
+
+.scroll::-webkit-scrollbar-track {
+	background: #ffffff0a;
+	border-radius: 1em;
+	margin: .35em;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	background: var(--acc);
+	border-radius: 1em;
+	border: .14em solid transparent;
+	background-clip: padding-box;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+	background: var(--acc-lt);
+}
+
+/* ---------- item icon (ox_inventory image + monogram fallback) ---------- */
+.ico {
+	position: relative;
+	width: 2.6em;
+	height: 2.6em;
+	border-radius: .35em;
+	background: #00000030;
+	border: 1px solid var(--bd);
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: .82em;
+	color: var(--txt3);
+	overflow: hidden;
+}
+
+.ico img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: .18em;
+	/* hidden until decoded, so a broken image never flashes over the monogram */
+	opacity: 0;
+	transition: opacity .12s ease;
+}
+
+.ico img.ok {
+	opacity: 1;
+}
+
+/* ---------- job list ---------- */
+.list {
+	padding: 0 .7em .8em;
+}
+
+/* full-height wrappers so an empty state can centre itself */
+.list,
+.ings {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+	gap: .5em;
+	font-size: .68em;
+	font-weight: 700;
+	letter-spacing: .13em;
+	text-transform: uppercase;
+	color: var(--txt4);
+	margin: .7em .15em .45em;
+}
+
+.group::after {
+	content: "";
+	flex: 1 1 auto;
+	height: 1px;
+	background: #ffffff12;
+}
+
+.card {
+	background: var(--bg-box);
+	border: 1px solid var(--bd);
+	border-radius: .45em;
+	padding: .45em .5em;
+	margin-bottom: .4em;
+	cursor: pointer;
+	transition: .16s;
+	display: flex;
+	align-items: center;
+	gap: .6em;
+}
+
+.card:hover {
+	background: #343434;
+	border-color: #5a5a5a;
+}
+
+/* opaque on purpose: a tinted card would let the watermark bleed through */
+.card.on {
+	background: #2b3242;
+	border-color: var(--acc-bd);
+}
+
+.card.off {
+	opacity: .62;
+}
+
+.card.on .ico {
+	border-color: var(--acc-bd);
+	color: var(--acc-lt);
+}
+
+.meta {
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.cname {
+	font-weight: 700;
+	font-size: .92em;
+	line-height: 1.15;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.csub {
+	font-size: .72em;
+	color: var(--txt4);
+	margin-top: .1em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.csub b {
+	color: var(--ok-lt);
+	font-weight: 700;
+}
+
+.csub i {
+	color: var(--danger-lt);
+	font-style: normal;
+	font-weight: 700;
+}
+
+/* ---------- result header ---------- */
+.result {
+	display: flex;
+	align-items: center;
+	gap: .8em;
+	margin: 0 .9em .8em;
+	padding: .75em .8em;
+	background: var(--bg-box);
+	border: 1px solid var(--bd);
+	border-radius: .5em;
+	position: relative;
+	z-index: 1;
+}
+
+.rico {
+	position: relative;
+	width: 3.4em;
+	height: 3.4em;
+	border-radius: .45em;
+	background: var(--acc-tint);
+	border: 1px solid var(--acc-bd);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--acc-lt);
+	font-weight: 700;
+	flex: 0 0 auto;
+	overflow: hidden;
+}
+
+.rico img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: .25em;
+	opacity: 0;
+	transition: opacity .12s ease;
+}
+
+.rico img.ok {
+	opacity: 1;
+}
+
+.rn {
+	font-size: 1.25em;
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.rs {
+	font-size: .78em;
+	color: var(--txt3);
+	margin-top: .2em;
+	display: flex;
+	gap: .9em;
+	flex-wrap: wrap;
+}
+
+.rs span {
+	display: flex;
+	align-items: center;
+	gap: .3em;
+}
+
+.rs svg {
+	width: .95em;
+	height: .95em;
+	color: var(--txt4);
+}
+
+/* ---------- ingredient rows ---------- */
+.ings {
+	padding: 0 .9em .9em;
+}
+
+.ing {
+	display: flex;
+	align-items: center;
+	gap: .7em;
+	background: var(--bg-box);
+	border: 1px solid var(--bd);
+	border-radius: .45em;
+	padding: .55em .65em;
+	margin-bottom: .45em;
+}
+
+.iname {
+	font-weight: 600;
+	font-size: .92em;
+	flex: 1 1 auto;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.barwrap {
+	width: 5em;
+	height: .32em;
+	border-radius: 1em;
+	background: #00000045;
+	overflow: hidden;
+	flex: 0 0 auto;
+}
+
+.barfill {
+	height: 100%;
+	border-radius: 1em;
+	background: var(--ok);
+	transition: width .18s;
+}
+
+.ing.miss .barfill {
+	background: var(--danger);
+}
+
+.cnt {
+	font-size: .82em;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	border-radius: .3em;
+	padding: .1em .55em;
+	min-width: 5.4em;
+	text-align: center;
+	flex: 0 0 auto;
+	background: var(--ok-tint);
+	color: var(--ok-lt);
+}
+
+.ing.miss .cnt {
+	background: var(--danger-tint);
+	color: var(--danger-lt);
+}
+
+/* ---------- action column ---------- */
+.side {
+	padding: 0 .9em .9em;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.box {
+	background: var(--bg-box);
+	border: 1px solid var(--bd);
+	border-radius: .5em;
+	padding: .7em .75em;
+	margin-bottom: .7em;
+}
+
+.box.gap {
+	margin-top: .7em;
+}
+
+.bl {
+	font-size: .7em;
+	font-weight: 700;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--txt4);
+	margin-bottom: .5em;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	gap: .8em;
+	font-size: .85em;
+	padding: .2em 0;
+}
+
+.row span:first-child {
+	color: var(--txt3);
+	flex: 0 0 auto;
+}
+
+.row span:last-child {
+	font-weight: 700;
+	text-align: right;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.row.ok span:last-child {
+	color: var(--ok-lt);
+}
+
+.row.bad span:last-child {
+	color: var(--danger-lt);
+}
+
+.hint {
+	font-size: .72em;
+	color: var(--txt4);
+	line-height: 1.4;
+	background: #00000030;
+	border: 1px solid #ffffff10;
+	border-radius: .4em;
+	padding: .5em .6em;
+	margin-bottom: .7em;
+}
+
+.hint b {
+	color: var(--acc-lt);
+	font-weight: 700;
+}
+
+/* helper roster */
+.helper {
+	display: flex;
+	align-items: center;
+	gap: .5em;
+	background: #00000030;
+	border: 1px solid #ffffff10;
+	border-radius: .4em;
+	padding: .35em .5em;
+	margin-bottom: .35em;
+	font-size: .85em;
+}
+
+.helper .hn {
+	flex: 1 1 auto;
+	min-width: 0;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.helper .hx {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: .3em;
+	background: #ffffff0d;
+	color: var(--txt4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: .15s;
+	flex: 0 0 auto;
+}
+
+.helper .hx svg {
+	width: .9em;
+	height: .9em;
+}
+
+.helper .hx:hover {
+	background: var(--danger-tint);
+	color: var(--danger-lt);
+}
+
+.none {
+	font-size: .78em;
+	color: var(--txt4);
+	padding: .15em 0 .3em;
+}
+
+/* player id field */
+.field {
+	display: flex;
+	gap: .4em;
+	margin-bottom: .5em;
+}
+
+.field input {
+	flex: 1 1 auto;
+	min-width: 0;
+	height: 2.2em;
+	border-radius: .4em;
+	background: #00000045;
+	border: 1px solid #ffffff14;
+	color: var(--txt);
+	font-family: inherit;
+	font-size: .9em;
+	font-weight: 600;
+	padding: 0 .6em;
+	outline: none;
+	transition: .15s;
+}
+
+.field input::placeholder {
+	color: var(--txt4);
+	font-weight: 400;
+}
+
+.field input:focus {
+	border-color: var(--acc-bd);
+	box-shadow: 0 0 0 2px var(--acc-tint);
+}
+
+/* hide the number spinners — the value is typed, not stepped */
+.field input::-webkit-outer-spin-button,
+.field input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* pickup amount stepper */
+.qty {
+	display: flex;
+	align-items: center;
+	gap: .35em;
+	margin-bottom: .5em;
+}
+
+.qty input {
+	flex: 1 1 auto;
+	width: 3em;
+	min-width: 0;
+	height: 2.4em;
+	border-radius: .4em;
+	background: #00000045;
+	border: 1px solid #ffffff14;
+	color: var(--txt);
+	font-family: inherit;
+	font-size: 1em;
+	font-weight: 700;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+	padding: 0 .2em;
+	outline: none;
+	transition: .15s;
+}
+
+.qty input:focus {
+	border-color: var(--acc-bd);
+	box-shadow: 0 0 0 2px var(--acc-tint);
+}
+
+.qty input::-webkit-outer-spin-button,
+.qty input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.qb {
+	width: 2.4em;
+	height: 2.4em;
+	border-radius: .4em;
+	background: #ffffff08;
+	border: 1px solid #ffffff14;
+	color: var(--txt2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: .15s;
+	flex: 0 0 auto;
+	font-weight: 700;
+	font-size: .95em;
+}
+
+.qb svg {
+	width: 1.05em;
+	height: 1.05em;
+}
+
+.qb:hover {
+	background: var(--acc-tint);
+	border-color: var(--acc-bd);
+	color: var(--acc-lt);
+}
+
+.qb.wide {
+	width: auto;
+	padding: 0 .7em;
+	font-size: .85em;
+}
+
+.grow {
+	flex: 1 1 auto;
+	min-height: .3em;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: .45em;
+	height: 2.7em;
+	border-radius: .45em;
+	font-weight: 700;
+	cursor: pointer;
+	border: 1px solid transparent;
+	transition: .16s;
+	user-select: none;
+	text-align: center;
+	padding: 0 .6em;
+}
+
+.btn svg {
+	width: 1.1em;
+	height: 1.1em;
+	flex: 0 0 auto;
+}
+
+.btn:active {
+	transform: scale(.98);
+}
+
+.btn:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--acc-bd);
+}
+
+.btn.green {
+	background: var(--ok-tint);
+	color: var(--ok-lt);
+	border-color: rgba(76, 219, 40, .5);
+}
+
+.btn.green:hover {
+	background: rgba(76, 219, 40, .24);
+	color: #fff;
+}
+
+.btn.blue {
+	background: var(--acc-tint);
+	color: var(--acc-lt);
+	border-color: var(--acc-bd);
+}
+
+.btn.blue:hover {
+	background: var(--acc-tint-h);
+	color: #fff;
+}
+
+.btn.ghost {
+	background: #ffffff08;
+	color: var(--txt2);
+	border-color: #ffffff14;
+	height: 2.3em;
+	font-size: .9em;
+	margin-bottom: .45em;
+}
+
+.btn.ghost:hover {
+	background: #ffffff14;
+	color: #fff;
+}
+
+.btn.confirm {
+	background: var(--danger-tint);
+	color: var(--danger-lt);
+	border-color: rgba(219, 40, 40, .5);
+}
+
+.btn.disabled {
+	background: #ffffff08;
+	color: var(--txt4);
+	border-color: #ffffff14;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+/* ---------- empty state ---------- */
+.empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: .6em;
+	flex: 1 1 auto;
+	min-height: 8em;
+	padding: 1.5em;
+	text-align: center;
+	color: var(--txt4);
+	font-size: .9em;
+	line-height: 1.45;
+	position: relative;
+	z-index: 1;
+}
+
+.empty svg {
+	width: 2.6em;
+	height: 2.6em;
+	opacity: .5;
+}
+
+.empty b {
+	color: var(--acc-lt);
+	font-weight: 700;
+}
+
+/* ---------- toast ---------- */
+.toast {
+	position: absolute;
+	bottom: 1.2em;
+	left: 50%;
+	transform: translateX(-50%) translateY(1.5em);
+	background: #0e1116;
+	border: 1px solid var(--acc-bd);
+	color: var(--txt);
+	padding: .6em 1.1em;
+	border-radius: .5em;
+	font-weight: 600;
+	font-size: .95em;
+	max-width: 34em;
+	text-align: center;
+	opacity: 0;
+	transition: .28s;
+	pointer-events: none;
+	z-index: 5;
+}
+
+.toast.show {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+}
+
+.toast.bad {
+	border-color: rgba(219, 40, 40, .5);
+	color: var(--danger-lt);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.modal,
+	.btn,
+	.card,
+	.barfill,
+	.toast {
+		animation: none;
+		transition: none;
+	}
+}

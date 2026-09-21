@@ -1,0 +1,687 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: none;
+	background-color: transparent;
+	user-select: none;
+}
+
+#app {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(6, 6, 10, 0.88);
+	font-family: "Montserrat", sans-serif;
+	color: #c1c2c5;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+/* ─── Vignette pulse ─── */
+.vignette-overlay {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: radial-gradient(ellipse at center, transparent 35%, rgba(140, 0, 0, 0.35) 100%);
+	animation: vignettePulse 2.6s ease-in-out infinite;
+	z-index: 0;
+}
+
+@keyframes vignettePulse {
+	0%,
+	100% {
+		opacity: 0.5;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+/* ─── Particles ─── */
+.particles {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 0;
+}
+
+.particles span {
+	position: absolute;
+	bottom: -8px;
+	display: block;
+	width: 4px;
+	height: 4px;
+	background: rgba(190, 15, 15, 0.45);
+	border-radius: 50%;
+	animation: floatUp linear infinite;
+}
+
+.particles span:nth-child(1) {
+	left: 5%;
+	animation-duration: 8s;
+	animation-delay: 0s;
+	width: 3px;
+	height: 3px;
+}
+.particles span:nth-child(2) {
+	left: 11%;
+	animation-duration: 10s;
+	animation-delay: 1.5s;
+	width: 5px;
+	height: 5px;
+}
+.particles span:nth-child(3) {
+	left: 19%;
+	animation-duration: 7s;
+	animation-delay: 3s;
+}
+.particles span:nth-child(4) {
+	left: 28%;
+	animation-duration: 13s;
+	animation-delay: 0.5s;
+	width: 2px;
+	height: 2px;
+}
+.particles span:nth-child(5) {
+	left: 38%;
+	animation-duration: 9s;
+	animation-delay: 2s;
+}
+.particles span:nth-child(6) {
+	left: 50%;
+	animation-duration: 11s;
+	animation-delay: 4s;
+	width: 3px;
+	height: 3px;
+}
+.particles span:nth-child(7) {
+	left: 58%;
+	animation-duration: 8s;
+	animation-delay: 1s;
+}
+.particles span:nth-child(8) {
+	left: 67%;
+	animation-duration: 14s;
+	animation-delay: 2.5s;
+	width: 6px;
+	height: 6px;
+	background: rgba(100, 0, 0, 0.3);
+}
+.particles span:nth-child(9) {
+	left: 74%;
+	animation-duration: 7s;
+	animation-delay: 0.8s;
+}
+.particles span:nth-child(10) {
+	left: 82%;
+	animation-duration: 10s;
+	animation-delay: 3.5s;
+	width: 2px;
+	height: 2px;
+}
+.particles span:nth-child(11) {
+	left: 91%;
+	animation-duration: 9s;
+	animation-delay: 1.2s;
+}
+.particles span:nth-child(12) {
+	left: 23%;
+	animation-duration: 12s;
+	animation-delay: 5s;
+	width: 5px;
+	height: 5px;
+}
+.particles span:nth-child(13) {
+	left: 44%;
+	animation-duration: 6s;
+	animation-delay: 0.3s;
+	width: 3px;
+	height: 3px;
+}
+.particles span:nth-child(14) {
+	left: 63%;
+	animation-duration: 11s;
+	animation-delay: 4.5s;
+}
+.particles span:nth-child(15) {
+	left: 87%;
+	animation-duration: 9s;
+	animation-delay: 2.8s;
+}
+
+@keyframes floatUp {
+	0% {
+		transform: translateX(0) scale(1);
+		opacity: 0;
+		bottom: -10px;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 0.5;
+	}
+	100% {
+		transform: translateX(25px) scale(0.4);
+		opacity: 0;
+		bottom: 105%;
+	}
+}
+
+/* ─── Centre section ─── */
+.up-section {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.2vh;
+	animation: fadeInDown 0.7s ease-out both;
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-28px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ─── Death title ─── */
+.death-title {
+	font-size: 3.8vw;
+	font-weight: 900;
+	letter-spacing: 0.15em;
+	color: #c41a1a;
+	text-shadow:
+		0 0 12px rgba(220, 30, 30, 0.9),
+		0 0 35px rgba(200, 0, 0, 0.6),
+		0 0 70px rgba(170, 0, 0, 0.3);
+	animation: titleFlicker 4s ease-in-out infinite;
+}
+
+@keyframes titleFlicker {
+	0%,
+	89%,
+	100% {
+		opacity: 1;
+		text-shadow:
+			0 0 12px rgba(220, 30, 30, 0.9),
+			0 0 35px rgba(200, 0, 0, 0.6);
+	}
+	90% {
+		opacity: 0.6;
+		text-shadow: 0 0 4px rgba(220, 30, 30, 0.3);
+	}
+	91% {
+		opacity: 1;
+		text-shadow:
+			0 0 22px rgba(220, 30, 30, 1),
+			0 0 60px rgba(200, 0, 0, 0.9);
+	}
+	93% {
+		opacity: 0.8;
+		text-shadow: 0 0 7px rgba(220, 30, 30, 0.5);
+	}
+	94% {
+		opacity: 1;
+		text-shadow:
+			0 0 12px rgba(220, 30, 30, 0.9),
+			0 0 35px rgba(200, 0, 0, 0.6);
+	}
+}
+
+/* ─── Killer text ─── */
+.killer-text {
+	font-size: 1.1vw;
+	color: #e05252;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	min-height: 1.5em;
+}
+
+/* ─── EKG line ─── */
+.ekg-container {
+	width: 34vw;
+	height: 5vh;
+	margin: 0.4vh 0;
+}
+
+.ekg-svg {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+.ekg-path {
+	fill: none;
+	stroke: #c41a1a;
+	stroke-width: 2.2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-dasharray: 600;
+	stroke-dashoffset: 600;
+	filter: drop-shadow(0 0 5px rgba(210, 0, 0, 0.85));
+	animation: ekgScan 3.2s ease-in-out infinite;
+}
+
+@keyframes ekgScan {
+	0% {
+		stroke-dashoffset: 600;
+		opacity: 1;
+	}
+	55% {
+		stroke-dashoffset: 0;
+		opacity: 1;
+	}
+	75% {
+		stroke-dashoffset: 0;
+		opacity: 0.9;
+	}
+	90% {
+		stroke-dashoffset: 0;
+		opacity: 0.2;
+	}
+	100% {
+		stroke-dashoffset: 0;
+		opacity: 0;
+	}
+}
+
+/* ─── Respawn timer ─── */
+.respawn-text {
+	font-size: 1vw;
+	font-weight: 700;
+	color: #d4d5d8;
+	animation: respawnPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes respawnPulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.6;
+	}
+}
+
+/* ─── Ambulance count ─── */
+.ambulance-text {
+	font-size: 0.88vw;
+	color: #606265;
+}
+
+/* ─── Early respawn hint ─── */
+.respawn-prompt-text {
+	font-size: 0.85vw;
+	font-weight: 600;
+	color: #808285;
+	min-height: 1.2em;
+}
+
+/* ─── TextUI bar ─── */
+.textui-bar.hidden {
+	animation: none;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.textui-bar {
+	position: absolute;
+	/* Clear of the aty_hud status row drawn above this screen. That row sits on a 4vh padding
+	   and is a fixed pixel height tall - 162px for the tallest type (bar-list), 46-49px for the
+	   usual ones - so the gap is expressed the same way and holds at every resolution. */
+	bottom: calc(4vh + 176px);
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+
+	display: inline-flex;
+	align-items: center;
+	gap: 0;
+
+	overflow: hidden;
+
+	animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateX(-50%) translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+.textui-item {
+	display: flex;
+	align-items: center;
+	gap: 0.55em;
+	padding: 0.9vh 1.6vw;
+	font-size: 0.85vw;
+	color: #b0b1b5;
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	white-space: nowrap;
+}
+
+.textui-divider {
+	width: 1px;
+	height: 2.4vh;
+	background: rgba(255, 255, 255, 0.1);
+	flex-shrink: 0;
+}
+
+.textui-label {
+	color: #c8c9cc;
+}
+
+/* ─── Key badges ─── */
+.key {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.7em;
+	height: 1.7em;
+	padding: 0 0.3em;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+	border-radius: 5px;
+	color: #e8e9ec;
+	font-weight: 900;
+	font-size: 0.82em;
+	letter-spacing: 0;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Tags ─── */
+.tag {
+	font-size: 0.68em;
+	border-radius: 4px;
+	padding: 0.15em 0.5em;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+}
+
+.tag.live {
+	background: rgba(180, 0, 0, 0.2);
+	border: 1px solid rgba(180, 0, 0, 0.45);
+	color: #e05252;
+}
+
+.tag.npc {
+	background: rgba(50, 50, 80, 0.35);
+	border: 1px solid rgba(100, 100, 160, 0.35);
+	color: #8888cc;
+}
+
+/* ─── Call modal ─── */
+.modal-overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.55);
+}
+
+.modal-overlay.visible {
+	display: flex;
+	animation: modalOverlayIn 0.2s ease-out both;
+}
+
+@keyframes modalOverlayIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.modal-card {
+	position: relative;
+	width: 440px;
+	font-family: "Montserrat", sans-serif;
+	background: #16161b;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7);
+	animation: modalCardIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalCardIn {
+	from {
+		opacity: 0;
+		transform: translateY(16px) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* header */
+.modal-head {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 22px 24px 16px;
+}
+
+.modal-icon-ring {
+	flex-shrink: 0;
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 20px;
+	background: radial-gradient(circle at 30% 30%, #d42020, #8a0f0f);
+	box-shadow: 0 0 0 4px rgba(196, 26, 26, 0.12);
+	animation: ringPulse 2s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 4px rgba(196, 26, 26, 0.12);
+	}
+	50% {
+		box-shadow: 0 0 0 8px rgba(196, 26, 26, 0.05);
+	}
+}
+
+.modal-title {
+	font-family: "Montserrat", sans-serif;
+	font-size: 19px;
+	font-weight: 900;
+	color: #f1f2f4;
+	letter-spacing: 0.01em;
+}
+
+.modal-sub {
+	font-family: "Montserrat", sans-serif;
+	margin-top: 3px;
+	font-size: 12.5px;
+	font-weight: 400;
+	color: #6c6e73;
+	line-height: 1.4;
+}
+
+/* body */
+.modal-body {
+	padding: 4px 24px 8px;
+}
+
+.modal-field {
+	position: relative;
+	background: #0e0e12;
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 10px;
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+.modal-field:focus-within {
+	border-color: rgba(196, 26, 26, 0.55);
+	box-shadow: 0 0 0 3px rgba(196, 26, 26, 0.1);
+}
+
+.modal-input {
+	display: block;
+	width: 100%;
+	height: 96px;
+	resize: none;
+	background: transparent;
+	border: none;
+	padding: 14px 16px 24px;
+	font-family: "Montserrat", sans-serif;
+	font-size: 13.5px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #d4d5d8;
+	outline: none;
+}
+
+.modal-input::placeholder {
+	color: #3a3b3f;
+}
+
+.modal-counter {
+	position: absolute;
+	bottom: 8px;
+	right: 12px;
+	font-size: 11px;
+	color: #45464a;
+	pointer-events: none;
+}
+
+/* footer */
+.modal-actions {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 10px;
+	padding: 16px 24px 22px;
+}
+
+.btn-cancel,
+.btn-submit {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 10px 18px;
+	border-radius: 9px;
+	font-family: "Montserrat", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	border: none;
+	transition:
+		background 0.15s,
+		color 0.15s,
+		transform 0.08s;
+}
+
+.btn-cancel:active,
+.btn-submit:active {
+	transform: scale(0.96);
+}
+
+.btn-cancel {
+	background: transparent;
+	color: #6c6e73;
+}
+
+.btn-cancel:hover {
+	background: rgba(255, 255, 255, 0.05);
+	color: #b0b1b5;
+}
+
+.btn-submit {
+	background: linear-gradient(180deg, #d42020, #b81818);
+	color: #fff;
+	box-shadow: 0 4px 14px rgba(196, 26, 26, 0.35);
+}
+
+.btn-submit:hover {
+	background: linear-gradient(180deg, #e23b3b, #c41a1a);
+}
+
+/* ─── Azonnali éledés Premium Pontért (K) ─── */
+.tag.pp {
+	background: linear-gradient(135deg, rgba(255, 196, 61, 0.22), rgba(255, 138, 0, 0.16));
+	border: 1px solid rgba(255, 190, 70, 0.45);
+	color: #ffce6a;
+	text-shadow: 0 0 10px rgba(255, 190, 70, 0.35);
+}
+
+.textui-item.pp-item .key {
+	border-color: rgba(255, 190, 70, 0.4);
+	color: #ffdd9a;
+}
+
+.textui-item.pp-item .textui-label {
+	color: #e9d4a8;
+}
+
+/* Rövid üzenet a sáv fölött (nincs elég PP, sikeres levonás, stb.) */
+.death-toast {
+	position: absolute;
+	bottom: calc(4vh + 176px + 5.2vh);
+	left: 50%;
+	transform: translateX(-50%) translateY(6px);
+	z-index: 3;
+
+	padding: 0.85vh 1.5vw;
+	border-radius: 8px;
+	background: rgba(14, 14, 18, 0.88);
+	border: 1px solid rgba(255, 190, 70, 0.3);
+	box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+
+	color: #ffce6a;
+	font-size: 0.82vw;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.death-toast.visible {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+}
+
+.death-toast.error {
+	border-color: rgba(224, 82, 82, 0.4);
+	color: #ff9a9a;
+}

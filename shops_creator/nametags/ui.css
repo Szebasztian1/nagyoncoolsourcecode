@@ -1,0 +1,355 @@
+/* Shop name plate editor — BC design.
+   Everything is scoped under #shopnames: this page also carries Bootstrap and
+   shops_creator's own stylesheets, so nothing here may leak out of the panel. */
+
+#shopnames {
+    --sn-bg-modal: #1f1f1f;
+    --sn-bg-bar: #242424;
+    --sn-bg-box: #2e2e2e;
+    --sn-bd: #424242;
+
+    --sn-txt: #e7e7e7;
+    --sn-txt2: #c8c8c8;
+    --sn-txt3: #b7b7b7;
+    --sn-txt4: #8a8a8a;
+
+    --sn-acc: #2f80ed;
+    --sn-acc-lt: #7fb0f6;
+    --sn-acc-tint: rgba(47, 128, 237, .15);
+    --sn-acc-bd: rgba(47, 128, 237, .55);
+
+    --sn-ok: #4cdb28;
+    --sn-ok-tint: rgba(76, 219, 40, .15);
+    --sn-ok-lt: #9be97f;
+    --sn-danger: #db2828;
+    --sn-danger-tint: rgba(219, 40, 40, .16);
+    --sn-danger-lt: #f08a8a;
+
+    --sn-radius: .4em;
+
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;          /* the game must stay visible behind it */
+    font-family: 'Titillium Web', 'Segoe UI', system-ui, sans-serif;
+    font-size: min(1.5vw, 15px);
+    color: var(--sn-txt);
+}
+
+#shopnames.open { display: flex }
+
+#shopnames *,
+#shopnames *::before,
+#shopnames *::after { box-sizing: border-box }
+
+/* ── modal ──────────────────────────────────────────────────────────────── */
+
+#shopnames .sn-modal {
+    width: 34em;
+    max-width: 94vw;
+    max-height: 92vh;
+    background: var(--sn-bg-modal);
+    border-radius: var(--sn-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    box-shadow: 0 2.5em 6em rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+    animation: sn-scale-in .22s ease;
+}
+
+@keyframes sn-scale-in {
+    0% { scale: .85; opacity: 0 }
+    100% { scale: 1; opacity: 1 }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #shopnames .sn-modal { animation: none }
+}
+
+/* ── header ─────────────────────────────────────────────────────────────── */
+
+#shopnames .sn-bar {
+    display: flex;
+    align-items: center;
+    gap: .8em;
+    background: var(--sn-bg-bar);
+    height: 3.5em;
+    padding: 0 1em;
+    flex: 0 0 auto;
+}
+
+#shopnames .sn-logo {
+    width: 2em;
+    height: 2em;
+    border-radius: .35em;
+    background: var(--sn-acc-tint);
+    color: var(--sn-acc-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05em;
+}
+
+#shopnames .sn-name { font-size: 1.4em; font-weight: 700; line-height: 1 }
+#shopnames .sn-name b { color: var(--sn-acc-lt); font-weight: 700 }
+
+#shopnames .sn-close {
+    margin-left: auto;
+    width: 2em;
+    height: 2em;
+    border: 0;
+    border-radius: var(--sn-radius);
+    background: #d1d1d130;
+    color: var(--sn-txt2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .25s;
+}
+
+#shopnames .sn-close:hover { background: var(--sn-danger-tint); color: var(--sn-danger-lt) }
+
+/* ── body ───────────────────────────────────────────────────────────────── */
+
+#shopnames .sn-body {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    background: var(--sn-bg-bar);
+    margin: 1em;
+    border-radius: .5em;
+    overflow: hidden;
+}
+
+#shopnames .sn-wm {
+    position: absolute;
+    top: -.3em;
+    right: -.2em;
+    z-index: 0;
+    opacity: .10;
+    transform: skew(-22deg, 22deg);
+    color: #fff;
+    font-size: 8em;
+    line-height: 1;
+    pointer-events: none;
+}
+
+#shopnames .sn-page {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: .35em;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sn-acc) #ffffff10;
+}
+
+#shopnames .sn-page::-webkit-scrollbar { width: .75em }
+#shopnames .sn-page::-webkit-scrollbar-track { background: #ffffff0a; border-radius: 1em; margin: .35em }
+#shopnames .sn-page::-webkit-scrollbar-thumb {
+    background: var(--sn-acc);
+    border-radius: 1em;
+    border: .16em solid transparent;
+    background-clip: padding-box;
+}
+#shopnames .sn-page::-webkit-scrollbar-thumb:hover { background: var(--sn-acc-lt) }
+
+#shopnames .sn-head { margin-bottom: 1em }
+#shopnames .sn-head .sn-k {
+    font-size: .85em;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sn-txt4);
+}
+#shopnames .sn-head .sn-ttl { font-size: 1.9em; font-weight: 700; line-height: 1; margin-top: .1em }
+#shopnames .sn-head .sn-ttl b { color: var(--sn-acc-lt); font-weight: 700 }
+
+#shopnames .sn-box {
+    background: var(--sn-bg-box);
+    border: 1px solid var(--sn-bd);
+    border-radius: .5em;
+    padding: 1em 1.1em;
+    margin-bottom: 1em;
+}
+
+#shopnames .sn-bh {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .75em;
+}
+
+#shopnames .sn-bt { font-weight: 700; font-size: 1.05em }
+#shopnames .sn-bs { font-size: .8em; color: var(--sn-txt3) }
+#shopnames .sn-bs.over { color: var(--sn-danger-lt); font-weight: 700 }
+
+/* ── purchase view ──────────────────────────────────────────────────────── */
+
+#shopnames .sn-note { font-size: .92em; color: var(--sn-txt3); line-height: 1.45 }
+
+#shopnames .sn-buy {
+    display: flex;
+    align-items: center;
+    gap: .85em;
+    width: 100%;
+    text-align: left;
+    background: var(--sn-bg-box);
+    border: 1px solid var(--sn-bd);
+    border-radius: .5em;
+    padding: .8em .9em;
+    margin-bottom: .8em;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1em;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#shopnames .sn-buy:hover { background: #2b3242; border-color: var(--sn-acc-bd) }
+#shopnames .sn-buy:hover .sn-buy-ico { background: var(--sn-acc-tint); color: var(--sn-acc-lt) }
+#shopnames .sn-buy:hover .sn-buy-go { color: var(--sn-acc-lt); transform: translateX(.2em) }
+#shopnames .sn-buy:active { transform: scale(.99) }
+#shopnames .sn-buy:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--sn-acc-bd) }
+#shopnames .sn-buy[disabled] { opacity: .45; cursor: progress; transform: none }
+
+#shopnames .sn-buy-ico {
+    flex: 0 0 auto;
+    width: 2.8em;
+    height: 2.8em;
+    border-radius: .5em;
+    background: rgba(134, 142, 150, .15);
+    color: #8b8b8b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15em;
+    transition: .2s;
+}
+
+#shopnames .sn-buy-t { font-size: 1.2em; font-weight: 700; line-height: 1.15 }
+#shopnames .sn-buy-d { font-size: .8em; color: var(--sn-txt3); line-height: 1.2 }
+#shopnames .sn-buy-go { margin-left: auto; color: var(--sn-txt4); transition: .2s }
+
+/* ── name field ─────────────────────────────────────────────────────────── */
+
+#shopnames .sn-input {
+    width: 100%;
+    background: #232323;
+    border: 1px solid var(--sn-bd);
+    border-radius: .4em;
+    color: var(--sn-txt);
+    font-family: inherit;
+    font-size: 1.05em;
+    font-weight: 600;
+    padding: .6em .75em;
+    outline: none;
+    transition: .18s;
+}
+
+#shopnames .sn-input::placeholder { color: var(--sn-txt4); font-weight: 400 }
+#shopnames .sn-input:focus { border-color: var(--sn-acc-bd); box-shadow: 0 0 0 2px var(--sn-acc-bd) }
+
+#shopnames .sn-hint { font-size: .8em; color: var(--sn-txt4); margin-top: .55em }
+
+/* ── colour swatches ────────────────────────────────────────────────────── */
+
+#shopnames .sn-swatches {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: .55em;
+}
+
+#shopnames .sn-sw {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: .45em;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 0;
+    transition: .15s;
+    /* hairline so the near-black swatch is still a swatch on charcoal */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
+}
+
+#shopnames .sn-sw:hover { transform: translateY(-2px) }
+
+/* The dark inset ring separates the white selection border from a light fill,
+   so the state reads on the white swatch as well as the black one. */
+#shopnames .sn-sw.on {
+    border-color: #fff;
+    box-shadow: inset 0 0 0 .2em var(--sn-bg-box), 0 0 0 .18em rgba(255, 255, 255, .18);
+}
+
+#shopnames .sn-sw:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--sn-acc-bd) }
+
+/* ── preview ────────────────────────────────────────────────────────────── */
+
+/* Mid grey, not charcoal: in the world the plate is drawn over daylight with a
+   dark outline, so a near-black panel would flatter light colours and hide dark
+   ones. This shows both honestly. */
+#shopnames .sn-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.4em;
+    background: #54585c;
+    border: 1px solid #ffffff14;
+    border-radius: .45em;
+    padding: .5em;
+}
+
+#shopnames .sn-preview span {
+    font-size: 1.5em;
+    font-weight: 700;
+    text-shadow: 0 0 .12em #000, 0 .06em .1em #000;
+    word-break: break-word;
+    text-align: center;
+}
+
+#shopnames .sn-preview.empty { background: #1a1a1a; border-style: dashed; border-color: var(--sn-bd) }
+#shopnames .sn-preview.empty span { font-size: .95em; font-weight: 400; color: var(--sn-txt4); text-shadow: none }
+
+/* ── footer ─────────────────────────────────────────────────────────────── */
+
+#shopnames .sn-foot {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: .6em;
+    padding-top: 1em;
+    position: relative;
+    z-index: 1;
+}
+
+#shopnames .sn-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45em;
+    height: 2.55em;
+    padding: 0 1.1em;
+    border-radius: .45em;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: .18s;
+}
+
+#shopnames .sn-btn:active { transform: scale(.97) }
+#shopnames .sn-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--sn-acc-bd) }
+#shopnames .sn-btn.green { background: var(--sn-ok-tint); color: var(--sn-ok-lt); border-color: rgba(76, 219, 40, .5) }
+#shopnames .sn-btn.ghost { background: #ffffff08; color: var(--sn-txt2); border-color: #ffffff14 }
+#shopnames .sn-btn.danger { background: var(--sn-danger-tint); color: var(--sn-danger-lt); border-color: rgba(219, 40, 40, .5) }
+#shopnames .sn-btn.right { margin-left: auto }
+#shopnames .sn-btn[disabled] { opacity: .45; cursor: not-allowed; transform: none }

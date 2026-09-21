@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+	<meta charset="utf-8">
+	<title>Forgalmi enged&eacute;ly</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="wrap" class="hidden">
+		<div id="stage">
+			<div id="doc">
+				<div class="guilloche"></div>
+				<div class="watermark">SAN ANDREAS</div>
+				<div class="expired-stamp" id="expiredStamp">
+					<span>LEJ&Aacute;RT</span>
+				</div>
+
+				<div class="content">
+					<div class="cardhead">
+						<div class="agency">
+							<div class="state">SAN ANDREAS</div>
+							<div class="dept">K&Ouml;ZLEKED&Eacute;SI HAT&Oacute;S&Aacute;G &middot; J&Aacute;RMŰNYILV&Aacute;NTART&Oacute;</div>
+						</div>
+						<div class="doctitle">
+							<div class="t1">FORGALMI ENGED&Eacute;LY</div>
+							<div class="t2">A J&Aacute;RMŰBEN TARTAND&Oacute;</div>
+						</div>
+						<div class="validbox">
+							<div class="vb">
+								<span class="lbl">&Eacute;RV&Eacute;NYES ETTŐL</span>
+								<span class="val" data-field="ervenyes_tol"></span>
+							</div>
+							<div class="vb">
+								<span class="lbl">&Eacute;RV&Eacute;NYES EDDIG</span>
+								<span class="val" data-field="ervenyes_ig"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="body">
+						<div class="left">
+							<div class="fields">
+								<div class="f w2"><span class="lbl">RENDSZ&Aacute;M</span><span class="val big" data-field="rendszam"></span></div>
+								<div class="f w3"><span class="lbl">ALV&Aacute;ZSZ&Aacute;M (VIN)</span><span class="val big" data-field="alvazszam"></span></div>
+								<div class="f"><span class="lbl">&Eacute;VJ&Aacute;RAT</span><span class="val" data-field="evjarat"></span></div>
+
+								<div class="f w2"><span class="lbl">GY&Aacute;RTM&Aacute;NY</span><span class="val" data-field="gyartmany"></span></div>
+								<div class="f w2"><span class="lbl">T&Iacute;PUS</span><span class="val" data-field="tipus"></span></div>
+								<div class="f w2"><span class="lbl">KAROSSZ&Eacute;RIA</span><span class="val" data-field="karosszeria"></span></div>
+
+								<div class="f w2"><span class="lbl">J&Aacute;RMŰFAJTA</span><span class="val" data-field="jarmufajta"></span></div>
+								<div class="f"><span class="lbl">HAJT&Oacute;ANYAG</span><span class="val" data-field="hajtoanyag"></span></div>
+								<div class="f"><span class="lbl">KATEG&Oacute;RIA</span><span class="val" data-field="kategoria"></span></div>
+								<div class="f"><span class="lbl">TENGELYEK</span><span class="val" data-field="tengelyek"></span></div>
+								<div class="f"><span class="lbl">SZ&Iacute;N</span><span class="val" data-field="szin"></span></div>
+
+								<div class="f w2"><span class="lbl">HENGERŰRTARTALOM</span><span class="val" data-field="hengerurtartalom"></span></div>
+								<div class="f"><span class="lbl">SAJ&Aacute;T T&Ouml;MEG</span><span class="val" data-field="sajat_tomeg"></span></div>
+								<div class="f"><span class="lbl">KM &Oacute;RA &Aacute;LL&Aacute;S</span><span class="val" data-field="km_ora"></span></div>
+								<div class="f w2"><span class="lbl">ELSŐ FORGALOMBA HELYEZ&Eacute;S</span><span class="val" data-field="elso_forgalomba"></span></div>
+
+								<div class="f w2"><span class="lbl">KI&Aacute;LL&Iacute;TVA</span><span class="val" data-field="kiallitva"></span></div>
+								<div class="f w2"><span class="lbl">T&Ouml;RZSK&Ouml;NYV SZ&Aacute;MA</span><span class="val" data-field="torzskonyv_szam"></span></div>
+								<div class="f w2"><span class="lbl">MŰSZAKI VIZSGA LEJ&Aacute;RATA</span><span class="val" data-field="muszaki_lejarat"></span></div>
+							</div>
+
+							<div class="party">
+								<div class="ptitle">BEJEGYZETT TULAJDONOS</div>
+								<div class="pline val" data-field="tulajdonos_nev"></div>
+								<div class="pline val" data-field="tulajdonos_cim"></div>
+								<div class="pline val" data-field="tulajdonos_varos"></div>
+							</div>
+
+						</div>
+
+						<div class="right">
+							<div class="feetitle">BEFIZETETT D&Iacute;J</div>
+							<div class="fee total"><span class="lbl">G&Eacute;PJ&Aacute;RMŰAD&Oacute;</span><span class="val" data-field="gepjarmuado"></span></div>
+							<div class="fee"><span class="lbl">FIZETVE</span><span class="val" data-field="befizetes_datuma"></span></div>
+
+							<div class="seal">
+								<div class="seal-in">
+									<span>SAN&nbsp;ANDREAS</span>
+									<b>KH</b>
+									<span>HIVATALOS</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="cardfoot">
+						<div class="barcode" id="barcode"></div>
+						<div class="footinfo">
+							<div class="f wide"><span class="lbl">OKM&Aacute;NYAZONOS&Iacute;T&Oacute;</span><span class="val" data-field="okmanyazonosito"></span></div>
+							<div class="fineprint">
+								AZ OKM&Aacute;NYT AL&Aacute;&Iacute;RVA, A J&Aacute;RMŰBEN KELL TARTANI &Eacute;S HAT&Oacute;S&Aacute;GI FELSZ&Oacute;L&Iacute;T&Aacute;SRA BE KELL MUTATNI.
+								A TULAJDONOS ADATAINAK V&Aacute;LTOZ&Aacute;S&Aacute;T 10 NAPON BEL&Uuml;L BE KELL JELENTENI A J&Aacute;RMŰNYILV&Aacute;NTART&Oacute;NAK.
+							</div>
+						</div>
+						<div class="sign">
+							<div class="sigline"></div>
+							<div class="siglbl">A TULAJDONOS AL&Aacute;&Iacute;R&Aacute;SA</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="actions">
+				<button id="showBtn" type="button">Megmutat&aacute;s a legk&ouml;zelebbi j&aacute;t&eacute;kosnak</button>
+				<button id="closeBtn" type="button">Bez&aacute;r&aacute;s (ESC)</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="index.js"></script>
+</body>
+</html>

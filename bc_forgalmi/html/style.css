@@ -1,0 +1,399 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: transparent;
+	font-family: Arial, Helvetica, sans-serif;
+	user-select: none;
+}
+
+.hidden { display: none !important; }
+
+#wrap {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	pointer-events: none;
+	animation: fade .18s ease;
+}
+
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+
+#stage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	pointer-events: auto;
+	transform-origin: center center;
+	animation: pop .2s ease;
+}
+
+@keyframes pop {
+	from { opacity: 0; transform: scale(.94) }
+	to   { opacity: 1; transform: scale(1) }
+}
+
+/* ------------------------------------------------------------ card ---- */
+
+#doc {
+	position: relative;
+	width: 810px;
+	padding: 12px 14px 10px;
+	overflow: hidden;
+	border-radius: 2px;
+	color: #101820;
+	box-shadow: 0 18px 46px rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 0, 0, .4);
+	background:
+		linear-gradient(180deg, #f7f5e8 0%, #f2f0df 40%, #eef2e6 70%, #f6f4e9 100%);
+}
+
+.guilloche {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	opacity: .5;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23678a9c' stroke-width='.4' opacity='.5'%3E%3Cellipse cx='60' cy='60' rx='56' ry='16'/%3E%3Cellipse cx='60' cy='60' rx='56' ry='16' transform='rotate(45 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='56' ry='16' transform='rotate(90 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='56' ry='16' transform='rotate(135 60 60)'/%3E%3Ccircle cx='60' cy='60' r='28'/%3E%3C/g%3E%3C/svg%3E");
+	background-size: 120px 120px;
+}
+
+.watermark {
+	position: absolute;
+	left: 50%;
+	top: 52%;
+	transform: translate(-50%, -50%) rotate(-8deg);
+	font-size: 86px;
+	font-weight: 900;
+	letter-spacing: 6px;
+	color: rgba(45, 92, 66, .07);
+	white-space: nowrap;
+	pointer-events: none;
+}
+
+.content { position: relative; z-index: 2; }
+
+/* ------------------------------------------------------- LEJART pecset - */
+
+.expired-stamp {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 5;
+	transform: translate(-50%, -50%) rotate(-19deg);
+	pointer-events: none;
+	display: none;
+}
+
+#doc.expired .expired-stamp { display: block; }
+
+.expired-stamp span {
+	display: block;
+	padding: 10px 46px 12px;
+	border: 7px solid rgba(168, 22, 30, .72);
+	border-radius: 8px;
+	color: rgba(168, 22, 30, .72);
+	font-size: 74px;
+	font-weight: 900;
+	letter-spacing: 12px;
+	line-height: 1;
+	text-transform: uppercase;
+	text-shadow: 0 0 2px rgba(168, 22, 30, .35);
+	box-shadow: 0 0 0 2px rgba(168, 22, 30, .18) inset;
+}
+
+#doc.expired .content { opacity: .82; }
+
+#doc.expired .vb:last-child { border-color: #a8161e; }
+#doc.expired .vb:last-child .val { color: #a8161e; }
+
+/* ------------------------------------------------------------ head ---- */
+
+.cardhead {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 14px;
+	padding-bottom: 7px;
+	border-bottom: 2px solid #1b3a5c;
+}
+
+.state {
+	font-size: 19px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	color: #1b3a5c;
+	line-height: 1;
+}
+
+.dept {
+	margin-top: 2px;
+	font-size: 8.4px;
+	line-height: 1.4;
+	font-weight: 700;
+	letter-spacing: 1.6px;
+	color: #3c5a72;
+}
+
+.doctitle { text-align: center; padding-top: 2px; }
+
+.doctitle .t1 {
+	white-space: nowrap;
+	font-size: 14px;
+	font-weight: 800;
+	letter-spacing: 2.4px;
+	color: #7a1620;
+}
+
+.doctitle .t2 {
+	margin-top: 2px;
+	font-size: 7.5px;
+	font-weight: 700;
+	letter-spacing: 1.4px;
+	color: #4a5560;
+}
+
+.validbox { display: flex; gap: 6px; }
+
+.vb {
+	min-width: 114px;
+	padding: 3px 6px 4px;
+	border: 1px solid #1b3a5c;
+	background: rgba(255, 255, 255, .6);
+	text-align: center;
+}
+
+.vb .lbl { display: block; }
+.vb .val { font-size: 12px; }
+
+/* ------------------------------------------------------------ body ---- */
+
+.body {
+	display: grid;
+	grid-template-columns: 1fr 182px;
+	gap: 10px;
+	margin-top: 8px;
+}
+
+.fields {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 5px 6px;
+}
+
+.f {
+	min-width: 0;
+	padding: 2px 5px 3px;
+	border: 1px solid rgba(27, 58, 92, .45);
+	background: rgba(255, 255, 255, .55);
+}
+
+.f.w2 { grid-column: span 2; }
+.f.w3 { grid-column: span 3; }
+.f.w4 { grid-column: span 4; }
+.f.wide { flex: 1 1 auto; }
+
+.lbl {
+	display: block;
+	font-size: 7px;
+	line-height: 1.45;
+	font-weight: 700;
+	letter-spacing: .8px;
+	color: #56646f;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.val {
+	display: block;
+	font-family: 'Lucida Console', 'Courier New', monospace;
+	font-size: 11px;
+	font-weight: 700;
+	color: #14181c;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1.25;
+}
+
+.val.big { font-size: 13px; letter-spacing: .6px; }
+.val.empty { color: #8b949c; font-weight: 400; }
+
+/* ------------------------------------------------- owner / lienholder - */
+
+.party {
+	margin-top: 8px;
+	padding: 4px 6px 5px;
+	border: 1px solid rgba(27, 58, 92, .45);
+	background: rgba(255, 255, 255, .55);
+}
+
+.ptitle {
+	margin-bottom: 2px;
+	font-size: 7.4px;
+	line-height: 1.45;
+	font-weight: 800;
+	letter-spacing: 1.4px;
+	color: #1b3a5c;
+}
+
+.pline {
+	font-family: 'Lucida Console', 'Courier New', monospace;
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.4;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* ------------------------------------------------------------ fees ---- */
+
+.right {
+	display: flex;
+	flex-direction: column;
+	padding: 5px 7px 7px;
+	border: 1px solid rgba(27, 58, 92, .45);
+	background: rgba(255, 255, 255, .5);
+}
+
+.feetitle {
+	margin-bottom: 4px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid rgba(27, 58, 92, .35);
+	font-size: 7.6px;
+	line-height: 1.45;
+	font-weight: 800;
+	letter-spacing: 1.4px;
+	color: #1b3a5c;
+}
+
+.fee {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 6px;
+	padding: 2px 0;
+	border-bottom: 1px dotted rgba(27, 58, 92, .3);
+}
+
+.fee .lbl { display: inline; }
+.fee .val { display: inline; font-size: 10.5px; }
+
+.fee.total {
+	margin-top: 2px;
+	border-bottom: 2px solid #1b3a5c;
+}
+
+.fee.total .lbl { color: #1b3a5c; }
+.fee.total .val { font-size: 12px; }
+
+.seal {
+	margin: 10px auto 0;
+	width: 84px;
+	height: 84px;
+	border: 2px solid rgba(122, 22, 32, .45);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: rotate(-9deg);
+	opacity: .6;
+}
+
+.seal-in {
+	width: 72px;
+	height: 72px;
+	border: 1px dashed rgba(122, 22, 32, .5);
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1px;
+	color: #7a1620;
+	text-align: center;
+}
+
+.seal-in span { font-size: 6px; font-weight: 800; letter-spacing: .8px; }
+.seal-in b { font-size: 15px; letter-spacing: 1px; }
+
+/* ------------------------------------------------------------ foot ---- */
+
+.cardfoot {
+	display: grid;
+	grid-template-columns: 190px 1fr 180px;
+	gap: 10px;
+	align-items: end;
+	margin-top: 9px;
+	padding-top: 7px;
+	border-top: 1px solid rgba(27, 58, 92, .45);
+}
+
+.barcode {
+	height: 38px;
+	display: flex;
+	align-items: stretch;
+	gap: 1px;
+	padding: 2px 3px;
+	background: #fdfdf8;
+	border: 1px solid rgba(27, 58, 92, .3);
+	overflow: hidden;
+}
+
+.barcode i { display: block; height: 100%; background: #101510; }
+
+.footinfo { display: flex; flex-direction: column; gap: 4px; }
+
+.fineprint {
+	font-size: 6.2px;
+	line-height: 1.6;
+	letter-spacing: .2px;
+	color: #5a6670;
+}
+
+.sign { text-align: center; }
+
+.sigline {
+	height: 20px;
+	border-bottom: 1px solid #1b3a5c;
+}
+
+.siglbl {
+	margin-top: 3px;
+	font-size: 6.6px;
+	line-height: 1.45;
+	font-weight: 700;
+	letter-spacing: 1px;
+	color: #56646f;
+}
+
+/* ---------------------------------------------------------- buttons --- */
+
+#actions { display: flex; gap: 8px; }
+
+#actions button {
+	padding: 7px 14px;
+	border: 0;
+	border-radius: 4px;
+	background: rgba(27, 58, 92, .94);
+	color: #eef4f9;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: .3px;
+	cursor: pointer;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+	transition: background .12s ease, transform .12s ease;
+}
+
+#actions button:hover { background: #2c5f92; transform: translateY(-1px); }
+#actions button:active { transform: translateY(0); }
+
+#closeBtn { background: rgba(30, 30, 30, .9); }
+#closeBtn:hover { background: #7a1620; }

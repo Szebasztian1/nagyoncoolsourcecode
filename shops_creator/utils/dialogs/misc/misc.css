@@ -1,0 +1,64 @@
+/* BC design for the sweetalert dialogs. See docs/bc-design-system.md */
+
+.swal-overlay {
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.swal-modal {
+    background-color: var(--bg-modal) !important;
+    border: 1px solid rgba(255, 255, 255, .05);
+    border-radius: var(--radius);
+    box-shadow: 0 2.5rem 6rem rgba(0, 0, 0, .6);
+    color: var(--txt);
+    font-family: var(--bc-font);
+}
+
+.swal-icon--success:before,
+.swal-icon--success:after,
+.swal-icon--success__hide-corners {
+    background: none !important;
+}
+
+.swal-title {
+    color: var(--txt) !important;
+    font-weight: 700;
+}
+
+.swal-text {
+    color: var(--txt3) !important;
+    text-align: center;
+}
+
+.swal-footer { text-align: center }
+
+.swal-button {
+    border-radius: .45rem;
+    font-weight: 700;
+    transition: .18s;
+}
+
+.swal-button:active { transform: scale(.97) }
+
+.swal-button--confirm {
+    background: var(--ok-tint);
+    border: 1px solid rgba(76, 219, 40, .5);
+    color: var(--ok-lt);
+}
+
+.swal-button--confirm:not([disabled]):hover { background: rgba(76, 219, 40, .24) }
+
+.swal-button--cancel {
+    background: #ffffff08;
+    border: 1px solid #ffffff14;
+    color: var(--txt2);
+}
+
+.swal-button--cancel:not([disabled]):hover { background: #ffffff12 }
+
+.swal-button--danger {
+    background: var(--danger-tint);
+    border: 1px solid rgba(219, 40, 40, .5);
+    color: var(--danger-lt);
+}
+
+.swal-button:focus { box-shadow: 0 0 0 2px var(--acc-bd) }

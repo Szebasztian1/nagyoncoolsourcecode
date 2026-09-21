@@ -1,0 +1,13 @@
+.clickable {
+    cursor: pointer;
+}
+
+.thick-hr {
+    height: 3px !important;
+    color: black;
+    opacity: 1;
+}
+
+.swal-overlay--show-modal .swal-modal {
+    will-change: unset !important;
+}

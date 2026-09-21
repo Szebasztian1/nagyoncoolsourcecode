@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <title>BC Express Panel</title>
+    <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+    <div id="overlay">
+        <div class="modal">
+
+            <div class="bar">
+                <div class="brand">
+                    <div class="logo" id="brand-logo"></div>
+                    <div class="name">BC <b>EXPRESS</b></div>
+                </div>
+                <div class="bar-sub">Karrier &amp; menedzsment</div>
+                <div class="plate"><span class="dot"></span><span>Cégkassza</span><b id="bar-company">—</b></div>
+                <div class="close" id="btn-close" title="Bezárás (ESC)"></div>
+            </div>
+
+            <div class="body">
+                <div class="side">
+                    <!-- nav buttons are rendered by panel.js (inline SVG icons) -->
+                    <div class="nav" id="nav"></div>
+                    <div class="info-box">
+                        <div class="ih">Áttekintés</div>
+                        <div class="info-row"><span>Szint</span><span class="badge" id="i-level">0</span></div>
+                        <div class="info-row"><span>Rang</span><span id="i-tier">—</span></div>
+                        <div class="info-row"><span>Leadott fuvar</span><span id="i-deliv">0</span></div>
+                        <div class="info-row"><span>Cégkassza</span><span class="cash" id="i-company">—</span></div>
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="wm" id="wm"></div>
+
+                    <div class="page" id="page">
+
+                        <section class="pg on" data-page="career">
+                            <div class="head">
+                                <div class="k">Karrier</div>
+                                <div class="ttl">SZINT <b>&amp; RANG</b></div>
+                            </div>
+                            <div class="lvl-grid">
+                                <div class="box lvlbox">
+                                    <div class="lvl"><span id="p-level">0</span><small>. szint</small></div>
+                                    <div class="tier" id="p-tier">—</div>
+                                    <div class="xp-bar"><div class="xp-fill" id="p-xpfill"></div></div>
+                                    <div class="xp-txt" id="p-xptxt">0 / 0 EXP</div>
+                                </div>
+                                <div class="totals" id="p-totals"></div>
+                            </div>
+                            <div class="box">
+                                <div class="bh">
+                                    <div class="bt">Ranglétra</div>
+                                    <div class="bs">Mit nyitsz meg a szintekkel</div>
+                                </div>
+                                <div class="tier-table" id="p-tiers"></div>
+                            </div>
+                            <div class="note" id="p-hint"></div>
+                        </section>
+
+                        <section class="pg" data-page="depots">
+                            <div class="head">
+                                <div class="k">Infrastruktúra</div>
+                                <div class="ttl">TELEPEINK</div>
+                            </div>
+                            <div class="box">
+                                <div class="bh">
+                                    <div class="bt">Telepek</div>
+                                    <div class="bs">Sorban oldhatók fel — jobb telep, jobb sofőrök</div>
+                                </div>
+                                <div id="p-depots"></div>
+                            </div>
+                        </section>
+
+                        <section class="pg" data-page="drivers">
+                            <div class="head">
+                                <div class="k">Menedzsment</div>
+                                <div class="ttl">SOFŐRÖK <b>&amp; KASSZA</b></div>
+                            </div>
+                            <div id="p-manager"></div>
+                        </section>
+
+                        <section class="pg" data-page="ops">
+                            <div class="head">
+                                <div class="k">Telephely</div>
+                                <div class="ttl">ÜZEMELTETÉS</div>
+                            </div>
+                            <div id="p-ops"></div>
+                        </section>
+
+                        <section class="pg" data-page="employees">
+                            <div class="head">
+                                <div class="k">Csapat</div>
+                                <div class="ttl">ALKALMAZOTTAK</div>
+                            </div>
+                            <div id="p-employees"></div>
+                        </section>
+
+                        <section class="pg" data-page="employment">
+                            <div class="head">
+                                <div class="k">Ahol dolgozol</div>
+                                <div class="ttl">MUNKAHELYEM</div>
+                            </div>
+                            <div id="p-employment"></div>
+                        </section>
+
+                        <section class="pg" data-page="sell">
+                            <div class="head">
+                                <div class="k">Tulajdon</div>
+                                <div class="ttl">CÉG <b>ELADÁSA</b></div>
+                            </div>
+                            <div id="p-sell"></div>
+                        </section>
+
+                        <section class="pg" data-page="help">
+                            <div class="head">
+                                <div class="k">Hogyan működik</div>
+                                <div class="ttl">ÚTMUTATÓ</div>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Hogyan indulsz</h4>
+                                <p>Kell egy telefon (a zsebedben). A depóban állj rá az egyik <b>indító pontra</b>, és nyomd meg az <b>[E]</b>-t — kapsz egy BC Express furgont, a címeket pedig a telefon <b>BCEXPRESS</b> appjában látod.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>A kör menete</h4>
+                                <ul>
+                                    <li>Hajts a kijelölt címhez (a waypoint vezet).</li>
+                                    <li>A furgon hátuljából <b>vedd ki a dobozt</b> (célzd meg), vidd az <b>automatához</b>, és tedd be. Minden leadás pénzt és EXP-et ad.</li>
+                                    <li>Ha kiszállsz a kocsiból, egy idő után <b>visszaszámláló</b> indul — ülj vissza, különben megszakad a kör.</li>
+                                    <li>A végén vidd vissza a furgont oda, ahol felvetted — ekkor kapod meg a fizetséget. Bármikor leadhatod: a már teljesített címek díját kifizetjük.</li>
+                                </ul>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Szint és rang</h4>
+                                <p>A leadások EXP-et adnak, amitől <b>szintet lépsz</b>. Magasabb rang = több cím körönként, nagyobb pénzszorzó, és nagyobb esély értékes törékeny csomagra.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Törékeny csomag</h4>
+                                <p>Néha van a körben egy <b>törékeny, jól fizető</b> csomag. Ilyenkor vezess lassan — a sebességhatár felett a csomag sérül, és levonnak a fizetségedből. Miután leadtad, mehetsz újra gyorsan.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Telepek</h4>
+                                <p>Három céges telep oldható fel <b>sorban</b> (1 → 2 → 3). Mindegyikhez pénz és leadott fuvarszám kell; a <b>Reptéri Telephez PP is</b>. Jobb telep = jobb (több ár/km-ű) sofőrök és nagyobb kapacitás.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Sofőrök (passzív bevétel)</h4>
+                                <p>A közös jelölt-poolból veszel fel sofőröket a <b>cégkasszából</b>. A bérelt sofőrök ciklusonként passzívan termelnek a kasszába, plusz egy <b>apró EXP-et</b> neked. A bérük is a kasszából megy — ha nincs rá fedezet, abban a ciklusban nem dolgoznak.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Cégkassza</h4>
+                                <p>A cég pénze. Ide folyik be a passzív bevétel; innen megy a bér, a felvételi díj, és a gépek/kapcsolatok vétele és karbantartása. Bankból befizethetsz, és ki is vehetsz.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Telephely üzemeltetés — szortírozó vonal</h4>
+                                <ul>
+                                    <li><b>Gépek:</b> termelnek, de idővel romlanak — javítsd, mielőtt leállnak. Egy gép csak akkor termel, ha van mellé munkás.</li>
+                                    <li><b>Munkások:</b> a bérük ciklusonként a kasszából megy; ők üzemeltetik a gépeket.</li>
+                                    <li><b>Kapcsolatok:</b> idővel romlanak, ápold őket — a teli kapcsolatok megnövelik a telep bevételét.</li>
+                                </ul>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Törékeny-engedély</h4>
+                                <p>Bankból vásárolható, a telep-szinted sapkázza. Nagyobb <b>esélyt és értéket</b> ad a saját köreid törékeny csomagjaira.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Alkalmazottak (valódi játékosok)</h4>
+                                <p>Állj egy játékos mellé, és vedd fel — segít <b>karbantartani</b> a cégedet (a depón javítja a gépeidet, ápolja a kapcsolataidat a kasszádból). A pénzedhez nem fér hozzá. Fix bért kap, ami <b>offline is gyűlik</b>, és a depón veszi fel a bankjába. Egy játékos legfeljebb <b>3 cégnél</b> lehet alkalmazott. Alkalmazottként a „Munkahelyem" résznél és a telefon „Munkahely" fülén látod, kinél dolgozol.</p>
+                            </div>
+                            <div class="box help-box">
+                                <h4>Cég eladása / átadása</h4>
+                                <ul>
+                                    <li><b>Eladás:</b> a teljes céget pénzzé teszed — a kasszát 100%-ban, az eszközök egy részét visszakapod, majd minden céges adatod nullázódik.</li>
+                                    <li><b>Átadás:</b> a teljes céget egy játékosnak <b>ajánlod fel</b>; ha elfogadja, minden az övé lesz (pénz nélkül). Nála nem lehet még cég.</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <div class="foot">
+                        <span class="fhint" id="foot-hint"></span>
+                        <button class="btn btn-ghost" id="btn-close2">Bezárás (ESC)</button>
+                    </div>
+
+                    <div class="toast" id="toast"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="panel.js"></script>
+</body>
+</html>

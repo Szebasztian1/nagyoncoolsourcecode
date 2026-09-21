@@ -1,0 +1,10 @@
+---@class IPitchfork
+---@field id number
+---@field isPickedUp boolean
+---@field contentState IPitchforkContentState
+---@field positionX number
+---@field positionY number
+---@field positionZ number
+---@field rotationX number
+---@field rotationY number
+---@field rotationZ number

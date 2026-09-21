@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF - 8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<Item>
+			<modelName>did_at4s_banshee_supp</modelName>
+			<txdName>did_at4s_banshee</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>did_at4s_banshee_scope</modelName>
+			<txdName>did_at4s_banshee</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>did_at4s_banshee_mag2</modelName>
+			<txdName>did_at4s_banshee</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>did_at4s_banshee_mag1</modelName>
+			<txdName>did_at4s_banshee</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>did_at4s_banshee_flsh</modelName>
+			<txdName>did_at4s_banshee</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>did_at4s_banshee</modelName>
+			<txdName>did_at4s_banshee</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
+		</Item>
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>
+

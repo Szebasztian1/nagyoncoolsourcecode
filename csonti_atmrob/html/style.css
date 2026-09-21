@@ -1,0 +1,132 @@
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
+
+html{
+	user-select: none;
+	-moz-user-select: none;
+	background-color: transparent !important;
+}
+
+body{
+	background-color: transparent !important;
+}
+
+#container {
+	color: white !important;
+	user-select: none;
+	-moz-user-select: none;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.welding-container{
+	color: white;
+	position: absolute;
+	display: flex;
+	top: 30%;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 14vh;
+	width: 18vw;
+	background-color: rgba(94, 94, 94, 0.8);
+	border: 0.6vmin solid rgba(46, 46, 46, 0.8);
+	justify-content: center;
+	align-items: center;
+	border-radius: 1.2vmin;	
+}
+
+.welding-red {
+	color: red !important;
+	background-color: rgba(151, 0, 0, 0.8) !important;
+	border: 0.6vmin solid rgba(128, 0, 0, 0.8) !important;
+}
+
+.progressbar-container{
+	overflow: hidden;
+	position: absolute;
+	width:80%;
+	height:25%;
+	bottom: -5%;
+	transition: 0.4s;
+}
+
+.key {
+	position: absolute;
+	top:35%;
+	height: 4.5vh;
+	width: 4.5vh;
+	background-color: rgb(185, 184, 184);
+	vertical-align: middle;
+	border-radius: 1vh;
+	font-family: Arial, Helvetica, sans-serif;
+	color: rgb(70, 70, 70);
+	font-weight: bold;
+	font-size: 2.5vmin;
+	-webkit-box-shadow: 0px 0px 0.9259259259259259vh 0.09259259259259259vh rgba(0,0,0,0.76);
+	-moz-box-shadow: 0px 0px 0.9259259259259259vh 0.09259259259259259vh rgba(0,0,0,0.76);
+	box-shadow: 0px 0px 0.9259259259259259vh 0.09259259259259259vh rgba(0,0,0,0.76);
+	text-align: center;
+	vertical-align: middle;
+	line-height: 4.4vh;
+}
+
+.key-press {
+	background-color: rgb(185, 184, 184);
+	border: 0.6vmin solid rgb(70, 70, 70) !important;
+}
+
+
+.title {
+	position: absolute;
+	font-size: 2.5vmin;
+	top: 5%;
+}
+
+.cell-title{
+	font-size: 2.0vmin;
+	text-align: center;
+	padding-bottom: 1vmin;
+}
+
+
+.cells-container{
+	color: white !important;
+	transition: 0.2s !important;
+	top: 30%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 1vmin;
+	position: absolute;
+	top: 20%;
+	height: auto;
+	width: 18vw;
+	background-color: rgba(94, 94, 94, 0.8);
+	border: 0.6vmin solid rgba(46, 46, 46, 0.8);
+	border-radius: 1.2vmin;	
+}
+
+.cell{
+	padding-left: 1vmin;
+	padding-right: 1vmin;
+	text-align: center;
+	background-color: rgb(54, 54, 54);
+	font-size: 1.5vmin;
+	width: 100%;
+	height: auto;
+	margin-bottom: 1vmin;
+	border-radius: 0.5vmin;
+}
+
+.cell:hover{
+	padding-left: 1vmin;
+	padding-right: 1vmin;
+	text-align: center;
+	background-color: rgb(32, 32, 32);
+	font-size: 1.5vmin;
+	width: 100%;
+	height: auto;
+	margin-bottom: 1vmin;
+	border-radius: 0.5vmin;
+}

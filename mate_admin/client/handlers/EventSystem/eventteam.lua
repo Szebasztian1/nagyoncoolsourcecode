@@ -1,0 +1,16 @@
+Rpc:RegisterServerProxy('eventteam:getState')
+Rpc:RegisterServerProxy('eventteam:create')
+Rpc:RegisterServerProxy('eventteam:invite')
+Rpc:RegisterServerProxy('eventteam:acceptInvite')
+Rpc:RegisterServerProxy('eventteam:declineInvite')
+Rpc:RegisterServerProxy('eventteam:setReady')
+Rpc:RegisterServerProxy('eventteam:kick')
+Rpc:RegisterServerProxy('eventteam:leave')
+Rpc:RegisterServerProxy('eventteam:disband')
+Rpc:RegisterServerProxy('eventteam:enter')
+
+Rpc:Register('eventteam:invited', function(data)
+    TriggerEvent('mate-admin:eventteam:openWithInvite')
+    Rpc:Send('eventteam:invited', data)
+    return {}
+end)

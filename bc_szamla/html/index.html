@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>BC Billing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="hidden">
+    <div class="overlay"></div>
+
+    <div id="mainMenuPanel" class="panel small hidden">
+      <div class="header">
+        <div>
+          <div class="eyebrow">BLACK CITY • E-SZÁMLA</div>
+          <h1>Főmenü</h1>
+          <p>Válassz a menüpontok közül.</p>
+        </div>
+        <button class="close" onclick="closeUI()">×</button>
+      </div>
+
+      <div class="content">
+        <div id="mainMenuButtons" class="menu-grid"></div>
+      </div>
+    </div>
+
+    <div id="createPanel" class="panel hidden">
+      <div class="header">
+        <div>
+          <div class="eyebrow">BLACK CITY • E-SZÁMLA</div>
+          <h1>Számla kiállítás</h1>
+          <p>Válassz a közelben lévő játékosok közül, majd add meg a tételt és az összeget.</p>
+        </div>
+        <button class="close" onclick="openMainMenu()">←</button>
+      </div>
+
+      <div class="content grid">
+        <section class="card">
+          <div class="row-between">
+            <h2>Közeli játékosok</h2>
+            <button class="btn ghost" onclick="refreshNearby()">Frissítés</button>
+          </div>
+          <div id="nearbyPlayers" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Számla adatai</h2>
+          <label>Kiválasztott személy</label>
+          <input id="selectedPlayer" type="text" disabled placeholder="Nincs kiválasztva">
+
+          <label>Mit adott el / szolgáltatás</label>
+          <input id="reason" type="text" maxlength="120" placeholder="pl. Javítás, alkatrész, kezelés">
+
+          <label>Ár</label>
+          <input id="amount" type="number" min="1" placeholder="pl. 5000">
+
+          <button class="btn primary full" onclick="createInvoice()">Számla küldése</button>
+        </section>
+      </div>
+    </div>
+
+    <div id="incomingPanel" class="panel small hidden">
+      <div class="header">
+        <div>
+          <div class="eyebrow">BLACK CITY • ÉRKEZŐ SZÁMLA</div>
+          <h1>Új számla</h1>
+          <p>Fogadd el vagy utasítsd el.</p>
+        </div>
+        <button class="close" onclick="closeUI()">×</button>
+      </div>
+
+      <div id="incomingSummary" class="content summary"></div>
+
+      <div class="footer">
+        <button class="btn danger full" onclick="respondInvoice(false)">Elutasítom</button>
+        <button class="btn primary full" onclick="respondInvoice(true)">Elfogadom</button>
+      </div>
+    </div>
+
+    <div id="listPanel" class="panel hidden">
+      <div class="header">
+        <div>
+          <div class="eyebrow">BLACK CITY • E-SZÁMLÁK</div>
+          <h1>Számláid</h1>
+          <p>Elfogadott, elutasított és függő számlák.</p>
+        </div>
+        <button class="close" onclick="openMainMenu()">←</button>
+      </div>
+
+      <div class="content">
+        <div id="invoiceList" class="list"></div>
+      </div>
+    </div>
+
+    <div id="trackedPanel" class="panel hidden">
+      <div class="header">
+        <div>
+          <div class="eyebrow">BLACK CITY • TARTOZÁSOK</div>
+          <h1>Frakciós tartozások</h1>
+          <p>Aktív, elfogadott számlák az általad kiállító jobhoz.</p>
+        </div>
+        <button class="close" onclick="openMainMenu()">←</button>
+      </div>
+
+      <div class="content">
+        <div id="trackedList" class="list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

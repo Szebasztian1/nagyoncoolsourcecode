@@ -1,0 +1,479 @@
+/* =====================================================================
+ * Személyre szabás – kiegészítő réteg a pp-shop NUI-hoz.
+ * Csak megjelenés: a shop saját BC tokenjeit (--acc, --bg-*, --radius)
+ * írja felül futásidőben, a panel maga külön él a Vue app mellett.
+ * ===================================================================== */
+
+:root {
+  --ppui-scale: 1;
+  --ppui-dim: 0;
+  --ppui-font: 'Titillium Web', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* a shop mindent em-ben méretez, így egy font-size az egész panelt skálázza */
+body {
+  font-size: calc(min(1.5vw, 13px) * var(--ppui-scale)) !important;
+  font-family: var(--ppui-font) !important;
+}
+
+.ppui-noanim *,
+.ppui-noanim *::before,
+.ppui-noanim *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* sötétítő réteg a modal mögött (0% = teljesen tiszta játékkép) */
+.ppui-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, var(--ppui-dim));
+}
+
+/* ---------------------------------------------------------------- gomb */
+
+.ppui-open {
+  position: fixed;
+  /* a HUD jobb-felső csempéi alatt, az inventory kapcsolójánál (13vh) is lejjebb */
+  top: 20vh;
+  right: 2vw;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.6em 0.9em;
+  border: 1px solid var(--acc-bd);
+  border-radius: 0.5em;
+  background: rgba(13, 16, 22, 0.85);
+  color: #fff;
+  font-family: var(--ppui-font);
+  font-size: min(1.25vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: move;
+  user-select: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+  transition: background-color 0.18s ease;
+}
+
+.ppui-open:hover {
+  background: rgba(20, 26, 38, 0.95);
+}
+
+.ppui-open svg {
+  width: 1.15em;
+  height: 1.15em;
+  stroke: var(--acc-lt);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --------------------------------------------------------------- panel */
+
+.ppui-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  font-family: var(--ppui-font);
+  font-size: min(1.35vw, 13px);
+  color: var(--txt);
+}
+
+.ppui-overlay[hidden] {
+  display: none;
+}
+
+.ppui-modal {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 34em;
+  max-width: 94vw;
+  max-height: 86vh;
+  border-radius: 0.5em;
+  background: #1f1f1f;
+  overflow: hidden;
+  box-shadow: 0 2.5em 6em rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  animation: ppuiIn 0.22s ease;
+}
+
+@keyframes ppuiIn {
+  0% {
+    scale: 0.9;
+    opacity: 0;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+.ppui-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  flex: 0 0 auto;
+  height: 4em;
+  padding-inline: 1em;
+  background: #242424;
+}
+
+.ppui-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 0.4em;
+  background: var(--acc-tint);
+  color: var(--acc-lt);
+}
+
+.ppui-logo svg {
+  width: 1.3em;
+  height: 1.3em;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ppui-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.ppui-eyebrow {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.ppui-name {
+  font-size: 1.35em;
+  font-weight: 700;
+}
+
+.ppui-name b {
+  color: var(--acc-lt);
+}
+
+.ppui-close {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  border: none;
+  border-radius: 0.4em;
+  background: rgba(255, 255, 255, 0.07);
+  color: #c8c8c8;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.ppui-close:hover {
+  background: var(--danger-tint);
+  color: var(--danger-lt);
+}
+
+.ppui-page {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1em;
+  scrollbar-width: thin;
+}
+
+.ppui-page::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+.ppui-page::-webkit-scrollbar-track {
+  margin: 0.3em;
+  border-radius: 1em;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ppui-page::-webkit-scrollbar-thumb {
+  border: 0.16em solid transparent;
+  border-radius: 1em;
+  background: var(--acc);
+  background-clip: padding-box;
+}
+
+.ppui-box {
+  margin-bottom: 0.9em;
+  padding: 0.9em 1em;
+  border: 1px solid #424242;
+  border-radius: 0.5em;
+  background: #2e2e2e;
+}
+
+.ppui-box:last-child {
+  margin-bottom: 0;
+}
+
+.ppui-box-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+
+.ppui-box-title {
+  font-size: 1.05em;
+  font-weight: 700;
+}
+
+.ppui-box-sub {
+  font-size: 0.8em;
+  color: #b7b7b7;
+}
+
+.ppui-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.ppui-swatch {
+  width: 2.2em;
+  height: 2.2em;
+  border: 2px solid transparent;
+  border-radius: 0.45em;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.ppui-swatch:hover {
+  transform: translateY(-2px);
+}
+
+.ppui-swatch.on {
+  border-color: #fff;
+  box-shadow: 0 0 0 0.18em rgba(255, 255, 255, 0.12);
+}
+
+.ppui-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-left: auto;
+  padding: 0.35em 0.6em;
+  border: 1px solid #424242;
+  border-radius: 0.45em;
+  background: #232323;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #b7b7b7;
+  cursor: pointer;
+}
+
+.ppui-custom input {
+  width: 1.6em;
+  height: 1.6em;
+  padding: 0;
+  border: none;
+  border-radius: 0.3em;
+  background: none;
+  cursor: pointer;
+}
+
+.ppui-row {
+  margin-bottom: 0.75em;
+}
+
+.ppui-row:last-child {
+  margin-bottom: 0;
+}
+
+.ppui-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35em;
+}
+
+.ppui-label {
+  font-weight: 600;
+}
+
+.ppui-desc {
+  font-size: 0.78em;
+  line-height: 1.2;
+  color: #b7b7b7;
+}
+
+.ppui-value {
+  min-width: 3.6em;
+  padding: 0.05em 0.55em;
+  border-radius: 0.3em;
+  background: var(--acc-tint);
+  color: var(--acc-lt);
+  font-size: 0.9em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ppui-row input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.4em;
+  border-radius: 1em;
+  background: rgba(0, 0, 0, 0.27);
+  accent-color: var(--acc);
+  cursor: pointer;
+}
+
+.ppui-row input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.15em;
+  height: 1.15em;
+  border: 2px solid #cfe0fb;
+  border-radius: 50%;
+  background: var(--acc);
+}
+
+.ppui-row select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0.5em 2em 0.5em 0.7em;
+  border: 1px solid #424242;
+  border-radius: 0.4em;
+  background-color: #232323;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b7b7b7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6em center;
+  background-size: 1.1em;
+  color: var(--txt);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ppui-row select:focus {
+  border-color: var(--acc-bd);
+  outline: none;
+}
+
+.ppui-row select option {
+  background: #232323;
+  color: var(--txt);
+}
+
+.ppui-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 0.45em 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ppui-toggle-row:first-of-type {
+  border-top: none;
+}
+
+.ppui-toggle-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ppui-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.9em;
+  height: 1.5em;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1em;
+  background: rgba(0, 0, 0, 0.27);
+  cursor: pointer;
+  transition: 0.22s;
+}
+
+.ppui-switch.on {
+  background: var(--acc-tint);
+  border-color: var(--acc-bd);
+}
+
+.ppui-switch i {
+  position: absolute;
+  top: 0.18em;
+  left: 0.22em;
+  width: 1.05em;
+  height: 1.05em;
+  border-radius: 50%;
+  background: #9a9a9a;
+  transition: 0.22s;
+}
+
+.ppui-switch.on i {
+  transform: translateX(1.35em);
+  background: var(--acc);
+}
+
+.ppui-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  flex: 0 0 auto;
+  padding: 0.8em 1em;
+  background: #242424;
+}
+
+.ppui-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  height: 2.55em;
+  padding: 0 1.1em;
+  border: 1px solid transparent;
+  border-radius: 0.45em;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.18s;
+}
+
+.ppui-btn.ghost {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #c8c8c8;
+}
+
+.ppui-btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.ppui-btn.blue {
+  margin-left: auto;
+  background: var(--acc-tint);
+  border-color: var(--acc-bd);
+  color: var(--acc-lt);
+}
+
+.ppui-btn.blue:hover {
+  background: var(--acc-tint-h);
+}

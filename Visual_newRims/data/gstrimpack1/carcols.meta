@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+<CVehicleModelInfoVarGlobal>    
+  <Wheels>
+    <Item/> <!-- VWT_SPORTS -->
+    <Item/> <!-- VWT_MUSCLE -->
+    <Item/> <!-- VWT_LOWRIDER -->
+    <Item/> <!-- VWT_SUV -->
+    <Item/> <!-- VWT_OFF_ROAD -->
+    <Item/> <!-- VWT_TUNER -->
+    <Item/> <!-- VWT_BIKE -->
+    <Item/> <!-- VWT_HIEND -->
+    <Item> <!-- VWT_SUPERMOD1 --> 
+      <Item>
+          <wheelName>gst_rim1</wheelName>
+          <wheelVariation>gst_rim1_c</wheelVariation>
+          <modShopLabel>CTX Rim 1</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim2</wheelName>
+          <wheelVariation>gst_rim2_c</wheelVariation>
+          <modShopLabel>CTX Rim 2</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim3</wheelName>
+          <wheelVariation>gst_rim3_c</wheelVariation>
+          <modShopLabel>CTX Rim 3</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim4</wheelName>
+          <wheelVariation>gst_rim4_c</wheelVariation>
+          <modShopLabel>CTX Rim 4</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim5</wheelName>
+          <wheelVariation>gst_rim5_c</wheelVariation>
+          <modShopLabel>CTX Rim 5</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim6</wheelName>
+          <wheelVariation>gst_rim6_c</wheelVariation>
+          <modShopLabel>CTX Rim 6</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim7</wheelName>
+          <wheelVariation>gst_rim7_c</wheelVariation>
+          <modShopLabel>CTX Rim 7</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim8</wheelName>
+          <wheelVariation>gst_rim8_c</wheelVariation>
+          <modShopLabel>CTX Rim 8</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim12</wheelName>
+          <wheelVariation>gst_rim12_c</wheelVariation>
+          <modShopLabel>CTX Rim 9</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim13</wheelName>
+          <wheelVariation>gst_rim13_c</wheelVariation>
+          <modShopLabel>CTX Rim 10</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim9</wheelName>
+          <wheelVariation>gst_rim9_c</wheelVariation>
+          <modShopLabel>CTX Rim 11</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim10</wheelName>
+          <wheelVariation>gst_rim10_c</wheelVariation>
+          <modShopLabel>CTX Rim 12</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim11</wheelName>
+          <wheelVariation>gst_rim11_c</wheelVariation>
+          <modShopLabel>CTX Rim 13</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim14</wheelName>
+          <wheelVariation>gst_rim14_c</wheelVariation>
+          <modShopLabel>CTX Rim 14</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim15</wheelName>
+          <wheelVariation>gst_rim15_c</wheelVariation>
+          <modShopLabel>CTX Rim 15</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim16</wheelName>
+          <wheelVariation>gst_rim16_c</wheelVariation>
+          <modShopLabel>CTX Rim 16</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim17</wheelName>
+          <wheelVariation>gst_rim17_c</wheelVariation>
+          <modShopLabel>CTX Rim 17</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim18</wheelName>
+          <wheelVariation>gst_rim18_c</wheelVariation>
+          <modShopLabel>CTX Rim 18</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim19</wheelName>
+          <wheelVariation>gst_rim19_c</wheelVariation>
+          <modShopLabel>CTX Rim 19</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim20</wheelName>
+          <wheelVariation>gst_rim20_c</wheelVariation>
+          <modShopLabel>CTX Rim 20</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim21</wheelName>
+          <wheelVariation>gst_rim21_c</wheelVariation>
+          <modShopLabel>CTX Rim 21</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim22</wheelName>
+          <wheelVariation>gst_rim22_c</wheelVariation>
+          <modShopLabel>CTX Rim 22</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim23</wheelName>
+          <wheelVariation>gst_rim23_c</wheelVariation>
+          <modShopLabel>CTX Rim 23</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim24</wheelName>
+          <wheelVariation>gst_rim24_c</wheelVariation>
+          <modShopLabel>CTX Rim 24</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim25</wheelName>
+          <wheelVariation>gst_rim25_c</wheelVariation>
+          <modShopLabel>CTX Rim 25</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim26</wheelName>
+          <wheelVariation>gst_rim26_c</wheelVariation>
+          <modShopLabel>CTX Rim 26</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim27</wheelName>
+          <wheelVariation>gst_rim27_c</wheelVariation>
+          <modShopLabel>CTX Rim 27</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim28</wheelName>
+          <wheelVariation>gst_rim28_c</wheelVariation>
+          <modShopLabel>CTX Rim 28</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim29</wheelName>
+          <wheelVariation>gst_rim29_c</wheelVariation>
+          <modShopLabel>CTX Rim 29</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim30</wheelName>
+          <wheelVariation>gst_rim30_c</wheelVariation>
+          <modShopLabel>CTX Rim 30</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim31</wheelName>
+          <wheelVariation>gst_rim31_c</wheelVariation>
+          <modShopLabel>CTX Rim 31</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim32</wheelName>
+          <wheelVariation>gst_rim32_c</wheelVariation>
+          <modShopLabel>CTX Rim 32</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim33</wheelName>
+          <wheelVariation>gst_rim33_c</wheelVariation>
+          <modShopLabel>CTX Rim 33</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+      <Item>
+          <wheelName>gst_rim34</wheelName>
+          <wheelVariation>gst_rim34_c</wheelVariation>
+          <modShopLabel>CTX Rim 34</modShopLabel>
+          <rimRadius value="0.398000"/>
+          <rear value="false"/>
+      </Item>
+    </Item>
+    <Item/> <!-- VWT_SUPERMOD2 -->
+    <Item/>
+  </Wheels>
+</CVehicleModelInfoVarGlobal>

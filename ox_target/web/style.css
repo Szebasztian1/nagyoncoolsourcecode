@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap");
+
+:root {
+	--color-default: #ffffff;
+	--color-hover: #ffffff;
+}
+
+body {
+	visibility: hidden;
+	user-select: none;
+	white-space: nowrap;
+	margin: 0;
+	user-select: none;
+	overflow: hidden;
+}
+
+p {
+	margin: 0;
+}
+
+.material-symbols-outlined {
+	font-variation-settings:
+		"FILL" 0,
+		"wght" 300,
+		"GRAD" 0,
+		"opsz" 40;
+}
+
+.eye-hover {
+	color: #4c6ef5;
+}
+
+.glow {
+	transition: 0.2s;
+	text-shadow: #4c6ef5 2px 0 10px;
+}
+
+#eye {
+	position: absolute;
+	font-size: 2vh;
+	top: 50.25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#eyeSvg {
+	font-size: 1.7vh;
+}
+
+#hex::before {
+	transform: 1s;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	content: "\2B22";
+	color: rgba(36, 36, 36, 0.4);
+	font-size: 4.2vh;
+	text-shadow: rgba(36, 36, 36, 0.4) 1px 0 10px;
+	-webkit-text-stroke: 1px #4c6ef5;
+}
+
+#options-wrapper {
+	position: absolute;
+	top: calc(48.6%);
+	left: calc(50% + 20pt);
+	/* csak akkor görgethető, ha az opciók kilógnának a képernyőről */
+	max-height: calc(100vh - 48.6vh - 2vh);
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 6px;
+}
+
+#options-wrapper::-webkit-scrollbar {
+	width: 4px;
+}
+
+#options-wrapper::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+#options-wrapper::-webkit-scrollbar-thumb {
+	background: rgba(76, 110, 245, 0.7);
+	border-radius: 4px;
+}
+
+.option-container {
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: Flex start;
+	align-items: center;
+	background-color: rgba(36, 36, 36, 0.7);
+	border-radius: 5px;
+	font-size: 1.5vh;
+	font-family: "Nunito";
+	vertical-align: middle;
+	transition: 300ms;
+	transform-origin: left top;
+	scale: 1;
+	height: 25pt;
+	width: fit-content;
+	margin-top: 3px;
+	padding-right: 1vh;
+}
+
+.option-container:hover {
+	/* background: rgba(	92,124,	250, 0.5);
+  border-radius: 5px;
+  /* transform-origin: left top; */
+	text-shadow: #3b5bdb 1px 0 10px;
+	/* box-shadow: 0px 0px 15px 3px rgba(	92,	124,	250,); */
+	color: #3b5bdb;
+	/* margin-left: 4pt; */
+}
+
+.option-icon {
+	font-size: 1.6vh;
+	line-height: 22pt;
+	width: 14pt;
+	margin: 4px;
+	/* padding-left: 3px;
+  padding-right: 3.5px; */
+	color: rgba(92, 124, 250);
+}
+
+.option-label {
+	font-weight: 500;
+}
+
+.icon {
+	font-size: 2vh;
+	color: #4c6ef5;
+}

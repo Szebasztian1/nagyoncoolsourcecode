@@ -1,0 +1,2107 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap");
+
+            :root {
+                /* surfaces (dark -> light) */
+                --bg-modal: #1f1f1f;
+                --bg-bar: #242424;
+                --bg-box: #2e2e2e;
+                --bd: #424242;
+
+                /* text */
+                --txt: #e7e7e7;
+                --txt2: #c8c8c8;
+                --txt3: #b7b7b7;
+                --txt4: #8a8a8a;
+
+                /* accent = BC-blue */
+                --acc: #2f80ed;
+                --acc-lt: #7fb0f6;
+                --acc-tint: rgba(47, 128, 237, 0.15);
+                --acc-tint-h: rgba(47, 128, 237, 0.24);
+                --acc-bd: rgba(47, 128, 237, 0.55);
+
+                /* semantic */
+                --ok: #4cdb28;
+                --ok-tint: rgba(76, 219, 40, 0.15);
+                --ok-lt: #9be97f;
+                --danger: #db2828;
+                --danger-tint: rgba(219, 40, 40, 0.16);
+                --danger-lt: #f08a8a;
+
+                --radius: 0.4em;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                display: none;
+                overflow: hidden;
+                margin: 0;
+                -webkit-user-select: none;
+                user-select: none;
+                font-family: "Titillium Web", "Segoe UI", system-ui, sans-serif;
+            }
+
+            #stage {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: min(1.45vw, 15px);
+                /* In-game NUI: transparent stage so only the panel shows and the
+                   game stays visible behind it. Never paint a full-screen bg here. */
+                background: transparent;
+                color: var(--txt);
+            }
+
+            /* ---------- modal shell ---------- */
+            .modal {
+                width: 60em;
+                max-width: 97vw;
+                height: 45em;
+                max-height: 96vh;
+                background: var(--bg-modal);
+                border-radius: var(--radius);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                box-shadow:
+                    0 2.5em 6em rgba(0, 0, 0, 0.6),
+                    0 0 0 1px rgba(255, 255, 255, 0.03);
+                animation: scaleIn 0.22s ease;
+            }
+
+            @keyframes scaleIn {
+                0% {
+                    scale: 0.85;
+                    opacity: 0;
+                }
+                100% {
+                    scale: 1;
+                    opacity: 1;
+                }
+            }
+
+            /* ---------- header bar ---------- */
+            .bar {
+                display: flex;
+                align-items: center;
+                gap: 0.8em;
+                background: var(--bg-bar);
+                height: 3.5em;
+                padding-inline: 1em;
+                flex: 0 0 auto;
+            }
+            .bar .logo {
+                width: 2.1em;
+                height: 2.1em;
+                border-radius: 0.35em;
+                background: var(--acc-tint);
+                color: var(--acc-lt);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .bar .logo svg {
+                width: 1.3em;
+                height: 1.3em;
+            }
+            .bar .name {
+                font-size: 1.35em;
+                font-weight: 700;
+                letter-spacing: 0.02em;
+            }
+            .bar .name b {
+                color: var(--acc-lt);
+            }
+            .bar .k {
+                font-size: 0.72em;
+                font-weight: 700;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: var(--txt4);
+                margin-top: -0.15em;
+            }
+            .bar .spacer {
+                flex: 1 1 auto;
+            }
+            .bar .badge {
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+                background: #00000030;
+                border: 1px solid #ffffff12;
+                border-radius: 0.35em;
+                padding: 0.4em 0.75em;
+                font-weight: 600;
+                font-size: 0.85em;
+                color: var(--txt2);
+            }
+            .bar .badge .dot {
+                width: 0.5em;
+                height: 0.5em;
+                border-radius: 50%;
+                background: var(--ok);
+                box-shadow: 0 0 0.6em var(--ok);
+            }
+            .bar .badge svg {
+                width: 1em;
+                height: 1em;
+                flex: 0 0 auto;
+            }
+            .bar .badge.reset {
+                color: var(--txt4);
+                gap: 0.4em;
+            }
+            .bar .badge.reset #reset-time {
+                color: var(--acc-lt);
+                font-weight: 700;
+                font-variant-numeric: tabular-nums;
+            }
+            /* about to reshuffle: bought blueprints are about to expire */
+            .bar .badge.reset.soon {
+                border-color: rgba(219, 40, 40, 0.5);
+                background: var(--danger-tint);
+            }
+            .bar .badge.reset.soon #reset-time {
+                color: var(--danger-lt);
+            }
+            .close {
+                width: 2em;
+                height: 2em;
+                border-radius: var(--radius);
+                background: #d1d1d130;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: 0.25s;
+                color: var(--txt2);
+            }
+            .close svg {
+                width: 1.1em;
+                height: 1.1em;
+            }
+            .close:hover {
+                background: var(--danger-tint);
+                color: var(--danger-lt);
+            }
+
+            /* ---------- body: 3 columns ---------- */
+            .body {
+                display: grid;
+                grid-template-columns: 20em 1fr 16.5em;
+                gap: 1em;
+                padding: 1em;
+                flex: 1 1 auto;
+                min-height: 0;
+            }
+
+            .panel {
+                position: relative;
+                background: var(--bg-bar);
+                border-radius: 0.5em;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .phead {
+                display: flex;
+                align-items: center;
+                gap: 0.6em;
+                padding: 0.85em 0.9em 0.7em;
+                flex: 0 0 auto;
+            }
+            .phead .pico {
+                width: 1.9em;
+                height: 1.9em;
+                border-radius: 0.4em;
+                background: var(--acc-tint);
+                color: var(--acc-lt);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 0 0 auto;
+            }
+            .phead .pico svg {
+                width: 1.1em;
+                height: 1.1em;
+            }
+            .phead .pt {
+                font-weight: 700;
+                font-size: 1.05em;
+                line-height: 1;
+            }
+            .phead .ps {
+                font-size: 0.72em;
+                color: var(--txt4);
+                margin-top: 0.15em;
+            }
+
+            /* watermark */
+            .wm {
+                position: absolute;
+                top: -0.15em;
+                right: 0.1em;
+                z-index: 0;
+                opacity: 0.08;
+                transform: skew(-22deg, 22deg);
+                color: #fff;
+                pointer-events: none;
+            }
+            .wm svg {
+                width: 9em;
+                height: 9em;
+            }
+
+            /* shared scroll area treatment */
+            .scroll {
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow-y: auto;
+                position: relative;
+                z-index: 1;
+                scrollbar-width: thin;
+                scrollbar-color: var(--acc) #ffffff10;
+            }
+            .scroll::-webkit-scrollbar {
+                width: 0.6em;
+            }
+            .scroll::-webkit-scrollbar-track {
+                background: #ffffff0a;
+                border-radius: 1em;
+                margin: 0.35em;
+            }
+            .scroll::-webkit-scrollbar-thumb {
+                background: var(--acc);
+                border-radius: 1em;
+                border: 0.14em solid transparent;
+                background-clip: padding-box;
+            }
+            .scroll::-webkit-scrollbar-thumb:hover {
+                background: var(--acc-lt);
+            }
+
+            /* ---------- catalog ---------- */
+            .cat-list {
+                padding: 0 0.7em 0.8em;
+            }
+            .cat-group {
+                font-size: 0.7em;
+                font-weight: 700;
+                letter-spacing: 0.13em;
+                text-transform: uppercase;
+                color: var(--txt4);
+                margin: 0.85em 0.2em 0.45em;
+            }
+            .cat-group:first-child {
+                margin-top: 0.1em;
+            }
+            .cat-card {
+                background: var(--bg-box);
+                border: 1px solid var(--bd);
+                border-radius: 0.45em;
+                padding: 0.42em 0.5em;
+                margin-bottom: 0.4em;
+                cursor: pointer;
+                transition: 0.16s;
+            }
+            .cat-card:hover {
+                background: #2b3242;
+                border-color: var(--acc-bd);
+            }
+            .cat-top {
+                display: flex;
+                align-items: center;
+                gap: 0.6em;
+            }
+
+            /* blueprint purchase button / owned state */
+            .bp-btn {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5em;
+                margin-top: 0.45em;
+                padding: 0.38em 0.55em;
+                border-radius: 0.35em;
+                background: var(--acc-tint);
+                border: 1px solid var(--acc-bd);
+                color: var(--acc-lt);
+                font-size: 0.76em;
+                font-weight: 700;
+                transition: 0.15s;
+            }
+            .bp-btn:hover {
+                background: var(--acc-tint-h);
+            }
+            .bp-btn.confirm {
+                background: var(--danger-tint);
+                border-color: rgba(219, 40, 40, 0.5);
+                color: var(--danger-lt);
+            }
+            .bp-btn span {
+                pointer-events: none;
+            }
+            .bp-price {
+                font-variant-numeric: tabular-nums;
+                white-space: nowrap;
+            }
+            .bp-owned {
+                display: flex;
+                align-items: center;
+                gap: 0.4em;
+                margin-top: 0.45em;
+                padding: 0.38em 0.55em;
+                border-radius: 0.35em;
+                background: var(--ok-tint);
+                border: 1px solid rgba(76, 219, 40, 0.5);
+                color: var(--ok-lt);
+                font-size: 0.76em;
+                font-weight: 700;
+            }
+            .bp-owned svg {
+                width: 1em;
+                height: 1em;
+                flex: 0 0 auto;
+            }
+            .cat-ico {
+                width: 2.6em;
+                height: 2.6em;
+                border-radius: 0.35em;
+                background: #00000030 center/contain no-repeat;
+                border: 1px solid var(--bd);
+                flex: 0 0 auto;
+            }
+            .cat-meta {
+                min-width: 0;
+            }
+            .cat-name {
+                font-weight: 700;
+                font-size: 0.92em;
+                line-height: 1.15;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .cat-sub {
+                font-size: 0.72em;
+                color: var(--txt4);
+                margin-top: 0.1em;
+            }
+            .cat-sub b {
+                color: var(--ok-lt);
+            }
+            /* which faction type may craft it — green if that is us */
+            .fac-tag {
+                margin-left: auto;
+                flex: 0 0 auto;
+                align-self: flex-start;
+                font-size: 0.6em;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                border-radius: 0.3em;
+                padding: 0.2em 0.45em;
+                white-space: nowrap;
+            }
+            .fac-tag.ok {
+                color: var(--ok-lt);
+                background: var(--ok-tint);
+            }
+            .fac-tag.no {
+                color: var(--danger-lt);
+                background: var(--danger-tint);
+            }
+
+            /* pinned faction footer under the catalog list */
+            .cat-foot {
+                flex: 0 0 auto;
+                padding: 0.6em 0.7em 0.7em;
+                border-top: 1px solid var(--bd);
+            }
+            .fac-cur {
+                display: flex;
+                align-items: center;
+                gap: 0.45em;
+                font-weight: 700;
+                font-size: 0.95em;
+                color: var(--acc-lt);
+                text-transform: capitalize;
+            }
+            .fac-cur.none {
+                color: var(--txt4);
+                text-transform: none;
+            }
+            .fac-cur .tag {
+                font-size: 0.62em;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: #e0b34d;
+                background: #e0b34d22;
+                border-radius: 0.3em;
+                padding: 0.1em 0.4em;
+            }
+            .fac-note {
+                margin-top: 0.35em;
+                font-size: 0.7em;
+                color: var(--txt4);
+                line-height: 1.3;
+            }
+            .fac-btn {
+                margin-top: 0.4em;
+            }
+            .fac-target {
+                margin-top: 0.6em;
+                font-size: 0.72em;
+                color: var(--txt4);
+            }
+            .fac-target b {
+                color: var(--txt2);
+                text-transform: capitalize;
+            }
+            .fac-note b {
+                color: var(--acc-lt);
+            }
+            /* who actually pays what, so the leader is not surprised by the split */
+            .fac-split {
+                margin-top: 0.3em;
+                font-size: 0.7em;
+                color: var(--txt4);
+                display: flex;
+                justify-content: space-between;
+                gap: 0.5em;
+            }
+            .fac-split b {
+                color: var(--txt2);
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* ---------- inventory ---------- */
+            .grid-wrap {
+                padding: 0 0.9em 0.9em;
+            }
+            .inv-grid {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 0.4em;
+            }
+            .inv-slot {
+                position: relative;
+                aspect-ratio: 1 / 1;
+                background: #00000035 center/72% no-repeat;
+                border: 1px solid var(--bd);
+                border-radius: 0.4em;
+                transition:
+                    border-color 0.15s,
+                    background-color 0.15s;
+            }
+            .inv-slot.filled {
+                border-color: #55637a;
+                background-color: #1b2130;
+                cursor: grab;
+            }
+            .inv-slot.filled:hover {
+                border-color: var(--acc-bd);
+            }
+            .inv-slot .cnt {
+                position: absolute;
+                right: 0.15em;
+                bottom: 0.1em;
+                min-width: 1.15em;
+                height: 1.15em;
+                padding: 0 0.25em;
+                border-radius: 0.3em;
+                background: #0b0f18cc;
+                border: 1px solid #ffffff1a;
+                color: var(--txt);
+                font-size: 0.68em;
+                font-weight: 700;
+                line-height: 1.15em;
+                text-align: center;
+                pointer-events: none;
+            }
+            .drag-ghost {
+                background: #1b2130 center/72% no-repeat;
+                border: 1px solid var(--acc-bd);
+                border-radius: 0.4em;
+                pointer-events: none;
+                z-index: 2000;
+                opacity: 0.92;
+            }
+            .drag-ghost .cnt {
+                display: none;
+            }
+
+            /* ---------- workbench ---------- */
+            .wb-body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                /* 1em volt. A mennyiseg-sor beferesehez szukebb: merve 3 px-en
+                   mult, hogy a "Racs uritese" gomb kilogjon a panel aljan. */
+                gap: 0.7em;
+                padding: 0.4em 0.9em 0.9em;
+                position: relative;
+                z-index: 1;
+                /* A panel fix magassagu es levagja a tullogot. Kis kepernyon
+                   (max-height: 96vh) igy legrosszabb esetben is elerheto marad
+                   az Elkeszites gomb, nem tunik el a keret alatt. */
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow-y: auto;
+            }
+            .craft-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5em;
+                width: 100%;
+            }
+            .craft-slot {
+                aspect-ratio: 1 / 1;
+                background: #00000040 center/70% no-repeat;
+                border: 1px dashed #4a5468;
+                border-radius: 0.45em;
+                transition: 0.15s;
+            }
+            .craft-slot:hover {
+                border-color: var(--acc-bd);
+            }
+            .craft-slot.set {
+                border-style: solid;
+                border-color: var(--acc-bd);
+                background-color: #1b2130;
+                cursor: pointer;
+            }
+            .craft-slot.set:hover {
+                border-color: var(--danger);
+            }
+            .wb-hint {
+                font-size: 0.74em;
+                color: var(--txt4);
+                text-align: center;
+                line-height: 1.3;
+            }
+            .info-box {
+                width: 100%;
+                background: var(--bg-box);
+                border: 1px solid var(--bd);
+                border-radius: 0.5em;
+                padding: 0.6em 0.7em;
+            }
+            .info-box .ih {
+                font-size: 0.68em;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--txt4);
+                margin-bottom: 0.45em;
+            }
+            .info-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 0.5em;
+                font-size: 0.78em;
+                padding: 0.15em 0;
+            }
+            .info-row span:first-child {
+                color: var(--txt3);
+            }
+            .info-row span:last-child {
+                font-weight: 700;
+                color: var(--acc-lt);
+                font-variant-numeric: tabular-nums;
+                white-space: nowrap;
+            }
+            .info-note {
+                margin-top: 0.5em;
+                padding-top: 0.45em;
+                border-top: 1px solid var(--bd);
+                font-size: 0.7em;
+                color: var(--txt4);
+                line-height: 1.3;
+            }
+            /* Mennyiseg-csuszka: egy racskirakasbol tobb darab.
+               A Koltsegek dobozon BELUL ul, nem sajat dobozban: a munkapad oszlop
+               fix magassagu (.modal 45em, .panel overflow:hidden), es egy kulon
+               doboz a sajat keretevel es a flex-resessel kiszoritotta a
+               "Racs uritese" gombot a panel alol. */
+            .amount-slider {
+                width: 100%;
+                margin: 0.2em 0 0;
+                accent-color: var(--acc);
+                cursor: pointer;
+            }
+            .amount-slider:disabled {
+                cursor: default;
+                opacity: 0.45;
+            }
+            .wb-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 0.55em;
+                width: 100%;
+                margin-top: auto;
+            }
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.45em;
+                height: 2.7em;
+                padding: 0 1.1em;
+                border-radius: 0.45em;
+                font-weight: 700;
+                font-size: 0.95em;
+                cursor: pointer;
+                border: 1px solid transparent;
+                transition: 0.18s;
+                font-family: inherit;
+                color: var(--txt);
+            }
+            .btn svg {
+                width: 1.1em;
+                height: 1.1em;
+            }
+            .btn:active {
+                transform: scale(0.98);
+            }
+            .btn.green {
+                background: var(--ok-tint);
+                color: var(--ok-lt);
+                border-color: rgba(76, 219, 40, 0.5);
+            }
+            .btn.green:hover {
+                background: rgba(76, 219, 40, 0.24);
+            }
+            .btn.ghost {
+                background: #ffffff08;
+                color: var(--txt2);
+                border-color: #ffffff14;
+            }
+            .btn.ghost:hover {
+                background: #ffffff12;
+            }
+
+            /* ---------- catalog popover ---------- */
+            #cat-popover {
+                position: fixed;
+                z-index: 5000;
+                width: 15.5em;
+                background: var(--bg-modal);
+                border: 1px solid var(--acc-bd);
+                border-radius: 0.5em;
+                padding: 0.75em 0.85em;
+                box-shadow: 0 1em 2.5em rgba(0, 0, 0, 0.55);
+                display: none;
+                font-family: "Titillium Web", "Segoe UI", system-ui, sans-serif;
+                font-size: 13px;
+                color: var(--txt);
+            }
+            #cat-popover .pop-title {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 0.5em;
+                font-weight: 700;
+                font-size: 1.05em;
+                line-height: 1.15;
+            }
+            /* what the craft yields — green, since it is what you gain */
+            #cat-popover .pop-qty {
+                flex: 0 0 auto;
+                font-size: 0.72em;
+                font-weight: 700;
+                color: var(--ok-lt);
+                background: var(--ok-tint);
+                border-radius: 0.3em;
+                padding: 0.05em 0.5em;
+                white-space: nowrap;
+            }
+            #cat-popover .pop-fac {
+                margin-top: 0.4em;
+                font-size: 0.78em;
+                font-weight: 600;
+                border-radius: 0.3em;
+                padding: 0.25em 0.5em;
+            }
+            #cat-popover .pop-fac.ok {
+                color: var(--ok-lt);
+                background: var(--ok-tint);
+            }
+            #cat-popover .pop-fac.no {
+                color: var(--danger-lt);
+                background: var(--danger-tint);
+            }
+            #cat-popover .pop-cap {
+                font-size: 0.68em;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--txt4);
+                margin: 0.55em 0 0.45em;
+            }
+            #cat-popover .pop-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.35em;
+            }
+            #cat-popover .pop-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+            }
+            #cat-popover .pop-img {
+                width: 1.9em;
+                height: 1.9em;
+                border-radius: 0.3em;
+                background: #00000040 center/contain no-repeat;
+                border: 1px solid var(--bd);
+                flex: 0 0 auto;
+            }
+            #cat-popover .pop-n {
+                flex: 1 1 auto;
+                font-size: 0.85em;
+                color: var(--txt2);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            #cat-popover .pop-c {
+                font-size: 0.82em;
+                font-weight: 700;
+                border-radius: 0.3em;
+                padding: 0.05em 0.5em;
+                min-width: 3em;
+                text-align: center;
+            }
+            #cat-popover .pop-c.ok {
+                color: var(--ok-lt);
+                background: var(--ok-tint);
+            }
+            #cat-popover .pop-c.no {
+                color: var(--danger-lt);
+                background: var(--danger-tint);
+            }
+            /* required, but not placed on the grid (craft key, cash fee) */
+            #cat-popover .pop-img.cash {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9em;
+                font-weight: 800;
+                color: var(--acc-lt);
+            }
+            #cat-popover .pop-c.cash {
+                white-space: nowrap;
+                color: var(--txt2);
+            }
+            #cat-popover .pop-off {
+                margin-top: 0.35em;
+                font-size: 0.68em;
+                line-height: 1.3;
+                color: var(--txt4);
+            }
+            /* bought blueprint: the actual 3x3 layout */
+            #cat-popover .pop-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.28em;
+            }
+            #cat-popover .pop-cell {
+                aspect-ratio: 1 / 1;
+                border-radius: 0.3em;
+                background: #00000040 center/72% no-repeat;
+                border: 1px dashed #4a5468;
+            }
+            #cat-popover .pop-cell.has {
+                border-style: solid;
+                border-color: var(--acc-bd);
+                background-color: #1b2130;
+            }
+            /* not bought yet: what buying gets you */
+            #cat-popover .pop-buy {
+                margin-top: 0.6em;
+                padding: 0.5em 0.6em;
+                border-radius: 0.35em;
+                background: var(--acc-tint);
+                border: 1px solid var(--acc-bd);
+                color: var(--txt2);
+                font-size: 0.78em;
+                line-height: 1.35;
+            }
+            #cat-popover .pop-buy b {
+                display: block;
+                margin-top: 0.25em;
+                font-size: 1.15em;
+                color: var(--acc-lt);
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* ---------- progress overlay ---------- */
+            #progress-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+                font-size: min(1.45vw, 15px);
+            }
+            #progress-overlay.active {
+                display: flex;
+            }
+            #progress-panel {
+                width: 24em;
+                background: var(--bg-modal);
+                border-radius: 0.75em;
+                overflow: hidden;
+                box-shadow:
+                    0 2em 5em rgba(0, 0, 0, 0.7),
+                    0 0 0 1px var(--bd);
+                color: var(--txt);
+            }
+            #pp-header {
+                display: flex;
+                align-items: center;
+                padding: 0.9em 1.1em;
+                background: var(--bg-bar);
+                border-bottom: 1px solid var(--bd);
+            }
+            #pp-header-left {
+                display: flex;
+                align-items: center;
+                gap: 0.8em;
+            }
+            #pp-item-icon {
+                width: 2.9em;
+                height: 2.9em;
+                background: #00000040 center/contain no-repeat;
+                border-radius: 0.5em;
+                border: 1px solid var(--acc-bd);
+            }
+            #pp-header-info {
+                display: flex;
+                flex-direction: column;
+            }
+            #pp-item-name-small {
+                font-size: 0.98em;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: var(--txt);
+            }
+            #pp-header-sub {
+                font-size: 0.72em;
+                color: var(--txt4);
+                margin-top: 0.1em;
+            }
+            #pp-body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1.4em 1.5em 1.3em;
+                gap: 0.6em;
+            }
+            #pp-title {
+                font-size: 1.35em;
+                font-weight: 700;
+            }
+            #pp-subtitle {
+                font-size: 0.78em;
+                color: var(--txt4);
+                margin-top: -0.4em;
+            }
+            #pp-ring-wrap {
+                position: relative;
+                width: 11em;
+                height: 11em;
+                margin: 0.4em 0;
+            }
+            #pp-svg {
+                width: 11em;
+                height: 11em;
+                transform: rotate(-90deg);
+            }
+            #pp-ring-bg {
+                fill: none;
+                stroke: #1e2b3e;
+                stroke-width: 12;
+            }
+            #pp-ring-fill {
+                fill: none;
+                stroke: var(--acc);
+                stroke-width: 12;
+                stroke-linecap: round;
+                stroke-dasharray: 515.22;
+                stroke-dashoffset: 0;
+                transition: stroke-dashoffset 0.25s linear;
+                filter: drop-shadow(0 0 8px rgba(47, 128, 237, 0.55));
+            }
+            #pp-ring-inner {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.1em;
+            }
+            #pp-time {
+                font-size: 2em;
+                font-weight: 700;
+            }
+            #pp-time-label {
+                font-size: 0.62em;
+                letter-spacing: 0.18em;
+                color: var(--txt4);
+                text-transform: uppercase;
+            }
+            #pp-counter {
+                font-size: 0.85em;
+                font-weight: 700;
+                color: var(--acc-lt);
+                letter-spacing: 0.14em;
+                display: none;
+            }
+            #pp-status {
+                font-size: 0.78em;
+                color: var(--txt4);
+            }
+            #pp-btn-cancel,
+            #pp-btn-boost {
+                width: 100%;
+                padding: 0.7em 0;
+                border-radius: 0.45em;
+                font-size: 0.85em;
+                font-weight: 700;
+                cursor: pointer;
+                border: 1px solid transparent;
+                transition: 0.15s;
+                font-family: inherit;
+                margin-top: 0.35em;
+                background: transparent;
+            }
+            #pp-btn-cancel {
+                border-color: rgba(219, 40, 40, 0.5);
+                color: var(--danger-lt);
+            }
+            #pp-btn-cancel:hover {
+                background: var(--danger-tint);
+            }
+            #pp-btn-boost {
+                border-color: var(--acc-bd);
+                color: var(--acc-lt);
+            }
+            #pp-btn-boost:hover {
+                background: var(--acc-tint);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="stage">
+            <div class="modal" id="container">
+                <!-- header -->
+                <div class="bar">
+                    <div class="logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
+                            <path d="M14.5 5.5l4 4" />
+                            <path d="M12 8l-5 -5l-4 4l5 5" />
+                            <path d="M7 8l-1.5 1.5" />
+                            <path d="M16 12l5 5l-4 4l-5 -5" />
+                            <path d="M16 17l-1.5 1.5" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="k">Kézműves munkapad</div>
+                        <div class="name">CRAFT<b>OLÁS</b></div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="badge reset" id="reset-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" />
+                        </svg>
+                        <span>Átrendeződés:</span>
+                        <span id="reset-time">--:--</span>
+                    </div>
+                    <div class="badge">
+                        <span class="dot"></span><span id="craft-count">0 recept</span>
+                    </div>
+                    <div class="close" id="close-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6l-12 12" /><path d="M6 6l12 12" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- body -->
+                <div class="body">
+                    <!-- catalog -->
+                    <div class="panel">
+                        <div class="phead">
+                            <div class="pico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                                    <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                                    <path d="M3 6v13" /><path d="M12 6v13" /><path d="M21 6v13" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="pt">Recept könyv</div>
+                                <div class="ps">Vidd rá a kurzort az alapanyagokért</div>
+                            </div>
+                        </div>
+                        <div class="scroll">
+                            <div class="cat-list" id="catalog-list"></div>
+                        </div>
+                        <div class="cat-foot" id="faction-box"></div>
+                    </div>
+
+                    <!-- inventory -->
+                    <div class="panel">
+                        <div class="phead">
+                            <div class="pico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5" />
+                                    <path d="M12 12l8 -4.5" /><path d="M12 12v9" /><path d="M12 12l-8 -4.5" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="pt">Alapanyagok</div>
+                                <div class="ps">Húzd a munkapadra a hozzávalókat</div>
+                            </div>
+                        </div>
+                        <div class="scroll">
+                            <div class="grid-wrap">
+                                <div id="inventory-container" class="inv-grid" rows="8" columns="6"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- workbench -->
+                    <div class="panel">
+                        <div class="wm">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
+                                <path d="M14.5 5.5l4 4" />
+                                <path d="M12 8l-5 -5l-4 4l5 5" />
+                                <path d="M16 12l5 5l-4 4l-5 -5" />
+                            </svg>
+                        </div>
+                        <div class="phead">
+                            <div class="pico">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
+                                    <path d="M14.5 5.5l4 4" />
+                                    <path d="M12 8l-5 -5l-4 4l5 5" />
+                                    <path d="M16 12l5 5l-4 4l-5 -5" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="pt">Munkapad</div>
+                                <div class="ps">3 &times; 3 rács</div>
+                            </div>
+                        </div>
+                        <div class="wb-body">
+                            <div id="crafting-container" class="craft-grid" rows="3" columns="3"></div>
+                            <div class="wb-hint">
+                                Az elrendezést neked kell kitalálnod.<br />Kattints egy megrakott kockára a törléshez.
+                            </div>
+                            <div class="info-box">
+                                <div class="ih">Költségek</div>
+                                <div class="info-row">
+                                    <span>Fegyver craft</span><span id="cost-weapon">&ndash;</span>
+                                </div>
+                                <div class="info-row">
+                                    <span id="cost-boost-label">Gyorsítás</span><span id="cost-boost">&ndash;</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Mennyiség</span><span id="amount-value">1 db</span>
+                                </div>
+                                <input id="amount-range" class="amount-slider" type="range" min="1" max="1" step="1" value="1" />
+                                <div class="info-note">
+                                    A gyorsítás craftolás közben többször is nyomható.
+                                </div>
+                            </div>
+
+                            <div class="wb-actions">
+                                <button id="execute-button" class="btn green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9 12l2 2l4 -4" />
+                                        <path d="M12 3a9 9 0 1 0 9 9a9 9 0 0 0 -9 -9" />
+                                    </svg>
+                                    Elkészítés
+                                </button>
+                                <button id="clear-button" class="btn ghost">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 7h16" /><path d="M10 11v6" /><path d="M14 11v6" />
+                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                    </svg>
+                                    Rács ürítése
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- catalog popover (fixed, appended visually here) -->
+        <div id="cat-popover"></div>
+
+        <!-- progress overlay -->
+        <div id="progress-overlay">
+            <div id="progress-panel">
+                <div id="pp-header">
+                    <div id="pp-header-left">
+                        <div id="pp-item-icon"></div>
+                        <div id="pp-header-info">
+                            <span id="pp-item-name-small">...</span>
+                            <span id="pp-header-sub">Craftolás folyamatban...</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="pp-body">
+                    <div id="pp-title"></div>
+                    <div id="pp-subtitle"></div>
+                    <div id="pp-ring-wrap">
+                        <svg id="pp-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle id="pp-ring-bg" cx="100" cy="100" r="82" />
+                            <circle id="pp-ring-fill" cx="100" cy="100" r="82" />
+                        </svg>
+                        <div id="pp-ring-inner">
+                            <span id="pp-time">0:00</span>
+                            <span id="pp-time-label">Hátralévő</span>
+                        </div>
+                    </div>
+                    <div id="pp-counter"></div>
+                    <div id="pp-status">Összeszerelés folyamatban...</div>
+                    <button id="pp-btn-cancel"><span>&#10005;</span> Megszakítás</button>
+                    <button id="pp-btn-boost"><span>&#9889;</span> -10mp gyorsítás (50.000$)</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // ---- state ----
+            var catalog = []; // [{name, weapon, price, ingredients:[{name,count}]}]
+            var blueprints = {}; // name -> 9-slot layout, ONLY for bought blueprints
+            var byName = {};
+            var labels = {};
+            var have = {};
+            var heldItems = [];
+            var grabObj = false;
+            var offsetX = 0,
+                offsetY = 0;
+            var pendingBuy = null,
+                pendingTimer = null;
+            var faction = null;
+            var weaponCost = 0;
+            var maxCraftAmount = 1;   // crafting.MaxCraftAmount a configbol
+            var playerCash = 0;       // a fegyver-dij keszpenz-fedezetehez
+            var craftAmount = 1;      // a csuszkan beallitott darabszam
+            var pendingSwitch = null,
+                switchTimer = null;
+
+            var CHECK_SVG =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l9 -9"/></svg>';
+
+            function num(n) {
+                return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            function money(n) {
+                return num(n) + " $";
+            }
+
+            // ---- countdown to the next layout reshuffle ----
+            var resetIn = 0,
+                resetTimer = null;
+
+            function pad(n) {
+                return (n < 10 ? "0" : "") + n;
+            }
+
+            function fmtReset(s) {
+                if (s <= 0) return "most...";
+                var d = Math.floor(s / 86400);
+                var h = Math.floor((s % 86400) / 3600);
+                var m = Math.floor((s % 3600) / 60);
+                if (d > 0) return d + " nap " + pad(h) + ":" + pad(m);
+                if (h > 0) return pad(h) + ":" + pad(m) + ":" + pad(s % 60);
+                return pad(m) + ":" + pad(s % 60);
+            }
+
+            function paintReset() {
+                document.getElementById("reset-time").textContent =
+                    fmtReset(resetIn);
+                document
+                    .getElementById("reset-badge")
+                    .classList.toggle("soon", resetIn <= 300);
+            }
+
+            function startResetCountdown(seconds) {
+                resetIn = seconds || 0;
+                paintReset();
+                if (resetTimer) clearInterval(resetTimer);
+                resetTimer = setInterval(function () {
+                    resetIn = Math.max(0, resetIn - 1);
+                    paintReset();
+                }, 1000);
+            }
+
+            function stopResetCountdown() {
+                if (resetTimer) clearInterval(resetTimer);
+                resetTimer = null;
+            }
+
+            function esc(s) {
+                return String(s).replace(/[&<>"]/g, function (c) {
+                    return {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                    }[c];
+                });
+            }
+
+            function imgUrl(name) {
+                return "nui://ox_inventory/web/images/" + name + ".webp";
+            }
+
+            function GetSlotCount(container) {
+                var rows = parseInt(container.getAttribute("rows"));
+                var cols = parseInt(container.getAttribute("columns"));
+                return rows * cols;
+            }
+
+            // ---- builders ----
+            function buildInventory(list) {
+                var c = document.getElementById("inventory-container");
+                var count = GetSlotCount(c);
+                c.innerHTML = "";
+                for (var i = 0; i < count; i++) {
+                    var slot = document.createElement("div");
+                    slot.className = "inv-slot";
+                    var it = list[i];
+                    if (it && it.name) {
+                        slot.curItem = it.name;
+                        slot.classList.add("filled");
+                        slot.style.backgroundImage = "url(" + imgUrl(it.name) + ")";
+                        if (it.count) {
+                            var b = document.createElement("span");
+                            b.className = "cnt";
+                            b.textContent = it.count;
+                            slot.appendChild(b);
+                        }
+                    } else {
+                        slot.curItem = false;
+                    }
+                    c.appendChild(slot);
+                }
+            }
+
+            function buildCrafting() {
+                var c = document.getElementById("crafting-container");
+                var count = GetSlotCount(c);
+                c.innerHTML = "";
+                for (var i = 0; i < count; i++) {
+                    var slot = document.createElement("div");
+                    slot.className = "craft-slot";
+                    slot.curItem = false;
+                    slot.expectedItem = false;
+                    c.appendChild(slot);
+                }
+            }
+
+            // Which faction type may craft this, and whether that is us.
+            function canCraft(entry) {
+                if (!entry.types || !entry.types.length) return true;
+                return (
+                    !!faction &&
+                    !!faction.type &&
+                    entry.types.indexOf(faction.type) !== -1
+                );
+            }
+
+            function factionTag(entry) {
+                if (!entry.types || !entry.types.length) return "";
+                return (
+                    '<span class="fac-tag ' +
+                    (canCraft(entry) ? "ok" : "no") +
+                    '">' +
+                    entry.types.map(esc).join(" / ") +
+                    "</span>"
+                );
+            }
+
+            function makeCard(entry) {
+                var card = document.createElement("div");
+                card.className = "cat-card";
+                card.dataset.key = entry.name;
+
+                var html =
+                    '<div class="cat-top">' +
+                    '<div class="cat-ico" style="background-image:url(' +
+                    imgUrl(entry.name) +
+                    ')"></div>' +
+                    '<div class="cat-meta">' +
+                    '<div class="cat-name">' +
+                    esc(labels[entry.name] || entry.name) +
+                    "</div>" +
+                    '<div class="cat-sub">' +
+                    entry.ingredients.length +
+                    " alapanyag &middot; <b>" +
+                    (entry.reward || 1) +
+                    " db</b></div>" +
+                    "</div>" +
+                    factionTag(entry) +
+                    "</div>";
+
+                if (blueprints[entry.name]) {
+                    html +=
+                        '<div class="bp-owned">' +
+                        CHECK_SVG +
+                        "Munkapad terv megvan</div>";
+                } else {
+                    html +=
+                        '<div class="bp-btn" data-key="' +
+                        entry.name +
+                        '"><span>Munkapad terv</span><span class="bp-price">' +
+                        money(entry.price) +
+                        "</span></div>";
+                }
+
+                card.innerHTML = html;
+                card.addEventListener("mouseenter", function () {
+                    showPopover(card);
+                });
+                card.addEventListener("mouseleave", hidePopover);
+                return card;
+            }
+
+            function addGroup(list, title, entries) {
+                if (!entries.length) return;
+                var g = document.createElement("div");
+                g.className = "cat-group";
+                g.textContent = title;
+                list.appendChild(g);
+                entries.sort(function (a, b) {
+                    return (labels[a.name] || a.name).localeCompare(
+                        labels[b.name] || b.name,
+                    );
+                });
+                entries.forEach(function (e) {
+                    list.appendChild(makeCard(e));
+                });
+            }
+
+            function buildCatalog() {
+                var list = document.getElementById("catalog-list");
+                list.innerHTML = "";
+                var weapons = [],
+                    comps = [];
+                catalog.forEach(function (e) {
+                    (e.weapon ? weapons : comps).push(e);
+                });
+                addGroup(list, "Fegyverek", weapons);
+                addGroup(list, "Alkatrészek", comps);
+                document.getElementById("craft-count").textContent =
+                    catalog.length + " recept";
+            }
+
+            // ---- faction craft type ----
+            // The price is paid from the faction treasury FIRST and only the rest by the
+            // leader. Showing just the total read like a random amount was taken.
+            function facSplit() {
+                if (!faction) return "";
+                var fromSociety = Math.min(faction.price, faction.society || 0);
+                var own = faction.price - fromSociety;
+                return (
+                    '<div class="fac-split"><span>Kasszából: <b>' +
+                    money(fromSociety) +
+                    "</b></span><span>Tőled: <b>" +
+                    money(own) +
+                    "</b></span></div>"
+                );
+            }
+
+            function renderFaction() {
+                var box = document.getElementById("faction-box");
+                if (!faction) {
+                    box.innerHTML = "";
+                    return;
+                }
+
+                var cur = faction.type
+                    ? '<div class="fac-cur">' +
+                      esc(faction.type) +
+                      (faction.switched ? '<span class="tag">váltott</span>' : "") +
+                      "</div>"
+                    : '<div class="fac-cur none">Nincs (nem banda / maffia)</div>';
+
+                var html = '<div class="ih">Frakció craft típusa</div>' + cur;
+
+                if (faction.isLeader) {
+                    (faction.types || []).forEach(function (t) {
+                        if (t === faction.type) return;
+                        html +=
+                            '<div class="fac-target">Váltás erre: <b>' +
+                            esc(t) +
+                            "</b></div>" +
+                            '<div class="bp-btn fac-btn" data-type="' +
+                            esc(t) +
+                            '" data-pay="money"><span>Pénz</span><span class="bp-price">' +
+                            money(faction.price) +
+                            "</span></div>" +
+                            facSplit();
+                        if (faction.ppEnabled) {
+                            html +=
+                                '<div class="bp-btn fac-btn" data-type="' +
+                                esc(t) +
+                                '" data-pay="pp"><span>PP</span><span class="bp-price">' +
+                                num(faction.ppPrice) +
+                                " PP</span></div>";
+                        }
+                    });
+                    html +=
+                        '<div class="fac-note">Amelyikre kattintasz, abból vonja le. A váltás lecseréli a craftolható készletet. Pénznél előbb a frakció kasszájából megy, a maradék a tiédből.' +
+                        (faction.ppEnabled
+                            ? " Nálad: <b>" + num(faction.pp || 0) + " PP</b>."
+                            : "") +
+                        "</div>";
+                } else {
+                    html +=
+                        '<div class="fac-note">Váltani csak a frakcióvezető tud.</div>';
+                }
+
+                box.innerHTML = html;
+            }
+
+            function resetSwitch() {
+                if (switchTimer) clearTimeout(switchTimer);
+                switchTimer = null;
+                if (pendingSwitch) {
+                    pendingSwitch = null;
+                    renderFaction();
+                }
+            }
+
+            function onSwitchClick(btn) {
+                var type = btn.dataset.type;
+                var pay = btn.dataset.pay;
+                var key = type + "|" + pay;
+
+                if (pendingSwitch === key) {
+                    $.post(
+                        "https://crafting/switchFaction",
+                        JSON.stringify({ type: type, pay: pay }),
+                    );
+                    resetSwitch();
+                    return;
+                }
+                resetSwitch();
+                pendingSwitch = key;
+                btn.classList.add("confirm");
+                btn.innerHTML =
+                    '<span>Biztosan váltasz?</span><span class="bp-price">' +
+                    (pay === "pp"
+                        ? num(faction.ppPrice) + " PP"
+                        : money(faction.price)) +
+                    "</span>";
+                switchTimer = setTimeout(resetSwitch, 4000);
+            }
+
+            // ---- blueprint purchase (two-step confirm to avoid misclicks) ----
+            function renderBuyBtn(btn, key) {
+                btn.classList.remove("confirm");
+                btn.innerHTML =
+                    '<span>Munkapad terv</span><span class="bp-price">' +
+                    money(byName[key] ? byName[key].price : 0) +
+                    "</span>";
+            }
+
+            function resetPending() {
+                if (pendingTimer) clearTimeout(pendingTimer);
+                pendingTimer = null;
+                if (pendingBuy) {
+                    var b = document.querySelector(
+                        '.bp-btn[data-key="' + pendingBuy + '"]',
+                    );
+                    if (b) renderBuyBtn(b, pendingBuy);
+                    pendingBuy = null;
+                }
+            }
+
+            function onBuyClick(btn) {
+                var key = btn.dataset.key;
+                if (pendingBuy === key) {
+                    $.post(
+                        "https://crafting/buyBlueprint",
+                        JSON.stringify({ name: key }),
+                    );
+                    resetPending();
+                    return;
+                }
+                resetPending();
+                pendingBuy = key;
+                btn.classList.add("confirm");
+                btn.innerHTML =
+                    '<span>Biztosan megveszed?</span><span class="bp-price">' +
+                    money(byName[key] ? byName[key].price : 0) +
+                    "</span>";
+                pendingTimer = setTimeout(resetPending, 4000);
+            }
+
+            // ---- catalog popover ----
+            function showPopover(card) {
+                var key = card.dataset.key;
+                var entry = byName[key];
+                if (!entry) return;
+                var pop = document.getElementById("cat-popover");
+                var html =
+                    '<div class="pop-title">' +
+                    esc(labels[key] || key) +
+                    '<span class="pop-qty">' +
+                    (entry.reward || 1) +
+                    " db</span></div>";
+
+                if (entry.types && entry.types.length) {
+                    var types = entry.types.map(esc).join(" / ");
+                    html += canCraft(entry)
+                        ? '<div class="pop-fac ok">Craftolhatja: ' +
+                          types +
+                          " &mdash; a frakciód igen</div>"
+                        : '<div class="pop-fac no">Csak ' +
+                          types +
+                          " frakció craftolhatja</div>";
+                }
+
+                html +=
+                    '<div class="pop-cap">Szükséges alapanyagok</div>' +
+                    '<div class="pop-list">';
+                var offGrid = "";
+                entry.ingredients.forEach(function (o) {
+                    var h = have[o.name] || 0;
+                    var cls = h >= o.count ? "ok" : "no";
+                    html +=
+                        '<div class="pop-item">' +
+                        '<div class="pop-img" style="background-image:url(' +
+                        imgUrl(o.name) +
+                        ')"></div>' +
+                        '<span class="pop-n">' +
+                        esc(labels[o.name] || o.name) +
+                        "</span>" +
+                        '<span class="pop-c ' +
+                        cls +
+                        '">' +
+                        h +
+                        " / " +
+                        o.count +
+                        "</span>" +
+                        "</div>";
+                });
+                html += "</div>";
+
+                // Needed as well, but never placed on the workbench — players bought every
+                // listed material and only found out about these when the craft was refused.
+                if (entry.extra) {
+                    var eh = have[entry.extra] || 0;
+                    offGrid +=
+                        '<div class="pop-item">' +
+                        '<div class="pop-img" style="background-image:url(' +
+                        imgUrl(entry.extra) +
+                        ')"></div>' +
+                        '<span class="pop-n">' +
+                        esc(labels[entry.extra] || entry.extra) +
+                        "</span>" +
+                        '<span class="pop-c ' +
+                        (eh >= 1 ? "ok" : "no") +
+                        '">' +
+                        eh +
+                        " / 1</span>" +
+                        "</div>";
+                }
+                if (entry.weapon && weaponCost) {
+                    offGrid +=
+                        '<div class="pop-item">' +
+                        '<div class="pop-img cash">$</div>' +
+                        '<span class="pop-n">Készpénz</span>' +
+                        '<span class="pop-c cash">' +
+                        money(weaponCost) +
+                        "</span>" +
+                        "</div>";
+                }
+                if (offGrid) {
+                    html +=
+                        '<div class="pop-cap">Ezen felül szükséges</div>' +
+                        '<div class="pop-list">' +
+                        offGrid +
+                        "</div>" +
+                        '<div class="pop-off">Ezeket nem kell a munkapadra kirakni, de nélkülük nem indul el a craft.</div>';
+                }
+
+                var bp = blueprints[key];
+                if (bp) {
+                    // bought: reveal exactly which cell takes which item
+                    html +=
+                        '<div class="pop-cap">Munkapad elrendezés</div><div class="pop-grid">';
+                    for (var i = 0; i < 9; i++) {
+                        if (bp[i]) {
+                            html +=
+                                '<div class="pop-cell has" style="background-image:url(' +
+                                imgUrl(bp[i]) +
+                                ')"></div>';
+                        } else {
+                            html += '<div class="pop-cell"></div>';
+                        }
+                    }
+                    html += "</div>";
+                } else {
+                    html +=
+                        '<div class="pop-buy">Vedd meg a munkapad tervet, és látni fogod, melyik kockába mi kell — a következő átrendeződésig.<b>' +
+                        money(entry.price) +
+                        "</b></div>";
+                }
+
+                pop.innerHTML = html;
+                pop.style.display = "block";
+
+                var r = card.getBoundingClientRect();
+                var pw = pop.offsetWidth,
+                    ph = pop.offsetHeight;
+                var left = r.right + 10;
+                if (left + pw > window.innerWidth - 8) left = r.left - pw - 10;
+                if (left < 8) left = 8;
+                var top = r.top;
+                if (top + ph > window.innerHeight - 8)
+                    top = window.innerHeight - ph - 8;
+                if (top < 8) top = 8;
+                pop.style.left = left + "px";
+                pop.style.top = top + "px";
+            }
+
+            function hidePopover() {
+                document.getElementById("cat-popover").style.display = "none";
+            }
+
+            // ---- crafting logic ----
+            function setSlotImage(el, name) {
+                el.style.backgroundImage = "url(" + imgUrl(name) + ")";
+                el.classList.add("set");
+            }
+
+            function clearSlot(el) {
+                el.curItem = false;
+                el.expectedItem = false;
+                el.style.backgroundImage = "";
+                el.classList.remove("set");
+            }
+
+            function clearGrid() {
+                var c = document.getElementById("crafting-container");
+                for (var i = 0; i < c.childNodes.length; i++) {
+                    clearSlot(c.childNodes[i]);
+                }
+                refreshAmount();
+            }
+
+            // ---- mennyiseg (kotegelt craft) ----
+            //
+            // A racs TARTALMAT ismerjuk (a jatekos rakta ki), az ELRENDEZES viszont
+            // szerveroldali titok - ezert a maximumot a hozzavalokbol szamoljuk, nem
+            // abbol, hogy melyik receptet adja ki. A kulcs- es keszpenz-korlathoz a
+            // katalogusbol keresunk olyan receptet, aminek UGYANEZ a hozzavalo-keszlete
+            // (a katalogus szandekosan csak darabszamot kozol, poziciot nem), es a
+            // legmegengedobbet vesszuk: nem tudhatjuk, melyiket adja majd ki a szerver,
+            // es inkabb alljon le a koteg elobb, mint hogy jogos craftot tiltsunk le.
+            function gridNeeds() {
+                var c = document.getElementById("crafting-container");
+                var needs = {};
+                var any = false;
+                for (var i = 0; i < c.childNodes.length; i++) {
+                    var it = c.childNodes[i].curItem;
+                    if (it) {
+                        needs[it] = (needs[it] || 0) + 1;
+                        any = true;
+                    }
+                }
+                return any ? needs : null;
+            }
+
+            function sameIngredients(entry, needs) {
+                var list = entry.ingredients || [];
+                var n = 0;
+                for (var k in needs) n++;
+                if (list.length !== n) return false;
+                for (var i = 0; i < list.length; i++) {
+                    if (needs[list[i].name] !== list[i].count) return false;
+                }
+                return true;
+            }
+
+            function computeMaxAmount() {
+                var needs = gridNeeds();
+                if (!needs) return 0;
+
+                var byMaterial = maxCraftAmount;
+                for (var name in needs) {
+                    byMaterial = Math.min(
+                        byMaterial,
+                        Math.floor((have[name] || 0) / needs[name]),
+                    );
+                }
+                if (byMaterial < 1) return 0;
+
+                var best = null;
+                catalog.forEach(function (e) {
+                    if (!sameIngredients(e, needs)) return;
+                    var m = byMaterial;
+                    if (e.extra) m = Math.min(m, have[e.extra] || 0);
+                    if (e.weapon && weaponCost > 0) {
+                        m = Math.min(m, Math.floor(playerCash / weaponCost));
+                    }
+                    best = best === null ? m : Math.max(best, m);
+                });
+
+                return Math.max(0, best === null ? byMaterial : best);
+            }
+
+            // A csuszka soha nem tiltja le a gombot: ha 0 jon ki, 1-en all, es a
+            // szerver mondja meg ertheto szoveggel, mi hianyzik. Enelkul a jatekos
+            // csak annyit latna, hogy "nem megy", indoklas nelkul.
+            function refreshAmount() {
+                var max = computeMaxAmount();
+                var range = document.getElementById("amount-range");
+                var sliderMax = Math.max(1, max);
+
+                range.max = sliderMax;
+                if (parseInt(range.value, 10) > sliderMax) range.value = sliderMax;
+                range.disabled = sliderMax <= 1;
+
+                craftAmount = parseInt(range.value, 10) || 1;
+                setAmountText(max);
+            }
+
+            // "3 / 7 db" -- a masodik szam az, amennyihez alapanyag (kulcs, keszpenz)
+            // van. Ures racsnal csak a beallitott szam latszik.
+            function setAmountText(max) {
+                document.getElementById("amount-value").textContent =
+                    max > 1 ? craftAmount + " / " + max + " db" : craftAmount + " db";
+            }
+
+            function craftFromGrid() {
+                // The NUI only holds layouts of bought blueprints, so the arrangement
+                // is matched in Lua; the server then re-checks job auth and items.
+                var c = document.getElementById("crafting-container");
+                var count = GetSlotCount(c);
+                var grid = [];
+                for (var i = 0; i < count; i++) {
+                    grid[i] = c.childNodes[i].curItem || false;
+                }
+                $.post(
+                    "https://crafting/dopost",
+                    JSON.stringify({ grid: grid, amount: craftAmount }),
+                );
+            }
+
+            // keep the workbench contents across a payload refresh (e.g. after a purchase)
+            function restoreGrid(prev) {
+                var c = document.getElementById("crafting-container");
+                for (var i = 0; i < c.childNodes.length; i++) {
+                    if (prev[i]) {
+                        c.childNodes[i].curItem = prev[i];
+                        setSlotImage(c.childNodes[i], prev[i]);
+                    }
+                }
+                refreshAmount();
+            }
+
+            // ---- drag ----
+            function startDrag(slot, e) {
+                var itm = slot.cloneNode(true);
+                var r = slot.getBoundingClientRect();
+                itm.className = "drag-ghost";
+                itm.style.position = "absolute";
+                itm.style.width = r.width - 4 + "px";
+                itm.style.height = r.height - 4 + "px";
+                grabObj = itm;
+                grabObj.curItem = slot.curItem;
+                document.body.appendChild(itm);
+                offsetX = e.pageX - r.left;
+                offsetY = e.pageY - r.top;
+                itm.style.left = e.pageX - offsetX + "px";
+                itm.style.top = e.pageY - offsetY + "px";
+            }
+
+            function closeUI() {
+                $.post("https://crafting/close");
+                clearGrid();
+            }
+
+            // ---- messages from client ----
+            function onOpenUI(d) {
+                catalog = d.catalog || [];
+                blueprints = d.blueprints || {};
+                labels = d.labels || {};
+                heldItems = d.items || [];
+
+                byName = {};
+                catalog.forEach(function (e) {
+                    byName[e.name] = e;
+                });
+                have = {};
+                heldItems.forEach(function (it) {
+                    if (it && it.name) have[it.name] = it.count;
+                });
+                // craft keys are not draggable, so their counts arrive separately
+                var extras = d.extras || {};
+                for (var ek in extras) have[ek] = extras[ek];
+
+                // snapshot the workbench so a refresh doesn't wipe it
+                var prev = [];
+                var cc = document.getElementById("crafting-container");
+                for (var i = 0; i < cc.childNodes.length; i++) {
+                    prev[i] = cc.childNodes[i].curItem || false;
+                }
+
+                faction = d.faction || null;
+
+                buildInventory(heldItems);
+                buildCrafting();
+                restoreGrid(prev);
+                buildCatalog();
+                renderFaction();
+                hidePopover();
+                resetPending();
+                resetSwitch();
+
+                // costs come from the Lua config so they can never go stale here
+                var costs = d.costs || {};
+                weaponCost = costs.weapon || 0;
+                maxCraftAmount = costs.maxAmount || 1;
+                playerCash = costs.cash || 0;
+                document.getElementById("cost-weapon").textContent =
+                    costs.weapon ? money(costs.weapon) : "–";
+                document.getElementById("cost-boost").textContent =
+                    costs.boost ? money(costs.boost) : "–";
+                document.getElementById("cost-boost-label").textContent =
+                    "Gyorsítás (−" + (costs.boostSeconds || 10) + " mp)";
+
+                // after `have`, `catalog` and the costs are all in place
+                refreshAmount();
+
+                if (d.enable) startResetCountdown(d.resetIn);
+                else stopResetCountdown();
+
+                document.body.style.display = d.enable ? "block" : "none";
+                document.getElementById("container").style.display = d.enable
+                    ? ""
+                    : "none";
+            }
+
+            function formatTime(seconds) {
+                var s = Math.ceil(seconds);
+                var m = Math.floor(s / 60);
+                var sec = s % 60;
+                return m + ":" + (sec < 10 ? "0" : "") + sec;
+            }
+
+            function onStartProgress(d) {
+                document.body.style.display = "block";
+                document.getElementById("pp-item-name-small").textContent =
+                    d.itemLabel || d.itemName || "?";
+                document.getElementById("pp-title").textContent =
+                    d.itemLabel || d.itemName || "?";
+                document.getElementById("pp-subtitle").textContent =
+                    "Craftolás...";
+                document.getElementById("pp-item-icon").style.backgroundImage =
+                    "url('" + imgUrl(d.itemName || "") + "')";
+                document.getElementById("pp-ring-fill").style.strokeDashoffset =
+                    "0";
+                document.getElementById("pp-time").textContent = formatTime(
+                    d.duration,
+                );
+                document.getElementById("pp-btn-boost").innerHTML =
+                    "<span>&#9889;</span> -" +
+                    (d.boostSeconds || 10) +
+                    "mp gyorsítás (" +
+                    money(d.boostPrice || 50000) +
+                    ")";
+                var counter = document.getElementById("pp-counter");
+                if (d.total > 1) {
+                    counter.textContent = d.current + " / " + d.total;
+                    counter.style.display = "block";
+                } else {
+                    counter.style.display = "none";
+                }
+                document
+                    .getElementById("progress-overlay")
+                    .classList.add("active");
+            }
+
+            function onUpdateProgress(d) {
+                var progress = Math.min(1.0, d.elapsed / d.total);
+                var circ = 515.22;
+                document.getElementById("pp-ring-fill").style.strokeDashoffset =
+                    (circ * (1 - progress)).toFixed(2);
+                document.getElementById("pp-time").textContent = formatTime(
+                    Math.max(0, d.remaining) / 1000,
+                );
+            }
+
+            window.addEventListener("message", function (event) {
+                var d = event.data;
+                switch (d.type) {
+                    case "openUI":
+                        onOpenUI(d);
+                        break;
+                    case "hideGrid":
+                        document.getElementById("container").style.display =
+                            "none";
+                        break;
+                    case "clearGrid":
+                        clearGrid();
+                        break;
+                    case "closeUI":
+                        stopResetCountdown();
+                        document.body.style.display = "none";
+                        break;
+                    case "startProgress":
+                        onStartProgress(d);
+                        break;
+                    case "updateProgress":
+                        onUpdateProgress(d);
+                        break;
+                    case "stopProgress":
+                        document
+                            .getElementById("progress-overlay")
+                            .classList.remove("active");
+                        break;
+                }
+            });
+
+            // ---- mouse interaction ----
+            $(function () {
+                $(document).mousedown(function (event) {
+                    var el = document.elementFromPoint(
+                        event.pageX - 1,
+                        event.pageY - 1,
+                    );
+                    if (!el) return;
+
+                    var facBtn = el.closest(".fac-btn");
+                    if (facBtn) {
+                        onSwitchClick(facBtn);
+                        return;
+                    }
+                    var buyBtn = el.closest(".bp-btn");
+                    if (buyBtn) {
+                        onBuyClick(buyBtn);
+                        return;
+                    }
+                    resetPending();
+                    resetSwitch();
+
+                    if (el.closest("#execute-button")) {
+                        craftFromGrid();
+                        return;
+                    }
+                    if (el.closest("#clear-button")) {
+                        clearGrid();
+                        return;
+                    }
+                    if (el.closest("#close-btn")) {
+                        closeUI();
+                        return;
+                    }
+                    if (el.classList.contains("craft-slot")) {
+                        if (el.curItem) {
+                            clearSlot(el);
+                            refreshAmount();
+                        }
+                        return;
+                    }
+                    if (el.classList.contains("inv-slot") && el.curItem) {
+                        startDrag(el, event);
+                    }
+                });
+
+                $(document).mousemove(function (event) {
+                    if (grabObj != false) {
+                        grabObj.style.left = event.pageX - offsetX + "px";
+                        grabObj.style.top = event.pageY - offsetY + "px";
+                    }
+                });
+
+                $(document).mouseup(function (event) {
+                    if (grabObj == false) return;
+                    var el = document.elementFromPoint(
+                        event.pageX - 1,
+                        event.pageY - 1,
+                    );
+                    if (el && el.classList.contains("craft-slot")) {
+                        el.curItem = grabObj.curItem;
+                        setSlotImage(el, grabObj.curItem);
+                        refreshAmount();
+                    }
+                    grabObj.parentNode.removeChild(grabObj);
+                    grabObj = false;
+                });
+
+                document
+                    .getElementById("amount-range")
+                    .addEventListener("input", function () {
+                        craftAmount = parseInt(this.value, 10) || 1;
+                        setAmountText(parseInt(this.max, 10) || 1);
+                    });
+
+                // hide popover while scrolling the catalog
+                document
+                    .querySelector(".panel .scroll")
+                    .addEventListener("scroll", hidePopover);
+
+                document
+                    .getElementById("pp-btn-cancel")
+                    .addEventListener("click", function () {
+                        fetch("https://crafting/progressCancel", {
+                            method: "POST",
+                            body: JSON.stringify({}),
+                        });
+                    });
+
+                document
+                    .getElementById("pp-btn-boost")
+                    .addEventListener("click", function () {
+                        fetch("https://crafting/progressBoost", {
+                            method: "POST",
+                            body: JSON.stringify({}),
+                        });
+                    });
+
+                $(document).keyup(function (event) {
+                    if (event.which == 27 || event.which == 8) {
+                        closeUI();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

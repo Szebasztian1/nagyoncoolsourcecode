@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CWeaponComponentInfoBlob><Infos><Item type="CWeaponComponentClipInfo">
+			<Name>did_sky_pistol_mag1</Name>
+			<Model>did_sky_pistol_mag1</Model>
+			<LocName>WCT_CLIP1</LocName>
+			<LocDesc>WCD_CR_CLIP1</LocDesc>
+			<AttachBone>AAPClip</AttachBone>
+			<WeaponAttachBone>WAPClip</WeaponAttachBone>
+			<AccuracyModifier type="NULL" />
+			<DamageModifier type="NULL" />
+			<bShownOnWheel value="false" />
+			<CreateObject value="true" />
+			<HudDamage value="0" />
+			<HudSpeed value="0" />
+			<HudCapacity value="0" />
+			<HudAccuracy value="0" />
+			<HudRange value="0" />
+			<ClipSize value="50" />
+			<AmmoInfo />
+			<ReloadData ref="RELOAD_DEFAULT" />
+		</Item>
+	</Infos><InfoBlobName /></CWeaponComponentInfoBlob>

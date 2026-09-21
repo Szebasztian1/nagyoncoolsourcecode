@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jármű kulcsok</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+	<div class="modal" role="dialog" aria-labelledby="k-name">
+
+		<!-- ============================ HEADER ============================ -->
+		<div class="bar">
+			<div class="brand">
+				<div class="logo">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z"/><path d="M15 9h.01"/></svg>
+				</div>
+				<div class="name" id="k-name">JÁRMŰ <b>KULCSOK</b></div>
+			</div>
+			<div class="plate off" id="bar-plate"><span class="dot"></span><span id="bar-plate-txt">Nincs kiválasztott jármű</span></div>
+			<button type="button" class="close" id="btn-close" title="Bezárás" aria-label="Bezárás">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+			</button>
+		</div>
+
+		<div class="body">
+
+			<!-- ============================ JÁRMŰLISTA ============================ -->
+			<aside class="side">
+				<div class="side-head">
+					<div class="st">Járműveid <span class="count" id="car-count">…</span></div>
+					<button type="button" class="icon-btn" id="car-refresh" title="Lista frissítése" aria-label="Lista frissítése">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></svg>
+					</button>
+				</div>
+
+				<div class="search">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+					<input type="text" class="field" id="car-search" placeholder="Rendszám vagy név…" autocomplete="off" spellcheck="false">
+				</div>
+
+				<div class="car-list" id="car-list"></div>
+			</aside>
+
+			<!-- ============================ TARTALOM ============================ -->
+			<main class="main">
+
+				<!-- nincs kiválasztva -->
+				<div class="pick" id="pick">
+					<div class="p-ico">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z"/><path d="M15 9h.01"/></svg>
+					</div>
+					<div class="p-t">Válassz járművet</div>
+					<div class="p-d">A bal oldali listából válaszd ki, melyik jármű kulcsait és riasztóját szeretnéd kezelni.</div>
+				</div>
+
+				<!-- kiválasztott jármű -->
+				<div class="detail" id="detail" hidden>
+					<div class="wm">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z"/><path d="M15 9h.01"/></svg>
+					</div>
+
+					<div class="page" id="page">
+						<div class="head">
+							<div class="k"><span>Kiválasztott jármű</span><span class="tag" id="d-tag" hidden>Frakció</span></div>
+							<div class="ttl" id="d-title"></div>
+						</div>
+
+						<div class="cols">
+
+							<!-- KULCSOK -->
+							<div class="col">
+								<section class="box grow">
+									<div class="bh">
+										<div class="bt">Kulcsok <span class="count" id="k-count">…</span></div>
+										<button type="button" class="icon-btn" id="k-refresh" title="Kulcsok frissítése" aria-label="Kulcsok frissítése">
+											<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></svg>
+										</button>
+									</div>
+									<div class="rows" id="k-rows"></div>
+									<div class="hint" id="k-hint" hidden>
+										<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M12 9h.01"/><path d="M11 12h1v4h1"/></svg>
+										<span>A törölt kulcs tárgya többé nem nyitja a járművet.</span>
+									</div>
+								</section>
+							</div>
+
+							<div class="col">
+
+								<!-- ÚJ KULCS -->
+								<section class="box">
+									<div class="bh"><div class="bt">Új kulcs készítése</div></div>
+
+									<div class="fld">
+										<label class="fl" for="nk-name">Kulcs neve</label>
+										<input type="text" class="field" id="nk-name" maxlength="255" placeholder="Pl. Pótkulcs" autocomplete="off" spellcheck="false">
+									</div>
+
+									<div class="seg" data-seg="newkey" role="radiogroup" aria-label="Fizetési mód">
+										<button type="button" class="chip on" data-bank="0" role="radio" aria-checked="true">
+											<span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"/><path d="M14 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2"/></svg></span>
+											<span class="cn">Készpénz</span>
+										</button>
+										<button type="button" class="chip" data-bank="1" role="radio" aria-checked="false">
+											<span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z"/><path d="M3 10l18 0"/><path d="M7 15l.01 0"/><path d="M11 15l2 0"/></svg></span>
+											<span class="cn">Bankkártya</span>
+										</button>
+									</div>
+
+									<div class="buy">
+										<div>
+											<div class="pl">Fizetendő</div>
+											<div class="pv" id="nk-price">…</div>
+										</div>
+										<button type="button" class="btn green" id="nk-buy" disabled>Kulcs készítése</button>
+									</div>
+								</section>
+
+								<!-- RIASZTÓ -->
+								<section class="box">
+									<div class="bh">
+										<div class="bt">Riasztó</div>
+										<div class="bs none" id="al-none" hidden><span class="sdot off"></span>Nincs beszerelt riasztó</div>
+									</div>
+
+									<div class="loading" id="al-loading"><span class="spinner"></span>Betöltés…</div>
+
+									<!-- beszerelt riasztó -->
+									<div id="al-on" hidden>
+										<div class="status">
+											<span class="sdot"></span>
+											<div class="s-txt">
+												<div class="sn" id="al-label"></div>
+												<div class="ss" id="al-desc"></div>
+											</div>
+										</div>
+										<div class="btn-row">
+											<button type="button" class="btn blue" id="al-pos">
+												<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M12 12m-8 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0"/><path d="M12 2l0 2"/><path d="M12 20l0 2"/><path d="M20 12l2 0"/><path d="M2 12l2 0"/></svg>
+												Jármű bemérése
+											</button>
+											<button type="button" class="btn danger" id="al-remove" data-confirm="alarm-remove" data-armed="Biztos? Nincs visszatérítés">
+												<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/><path d="M3 3l18 18"/></svg>
+												<span class="btxt">Riasztó kiszerelése</span>
+											</button>
+										</div>
+									</div>
+
+									<!-- nincs riasztó: vásárlás -->
+									<div id="al-off" hidden>
+										<div class="opts" id="al-opts" role="radiogroup" aria-label="Riasztó típusa">
+											<button type="button" class="stage-card" data-type="alarm" role="radio" aria-checked="false">
+												<span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg></span>
+												<span class="sn">Riasztó</span>
+												<span class="sp" id="al-p-alarm">…</span>
+												<span class="ss">Hangjelzés illetéktelen nyitáskor</span>
+											</button>
+											<button type="button" class="stage-card" data-type="alarmgps" role="radio" aria-checked="false">
+												<span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg></span>
+												<span class="sn">Riasztó + GPS</span>
+												<span class="sp" id="al-p-alarmgps">…</span>
+												<span class="ss">Hangjelzés + a jármű bemérhető</span>
+											</button>
+										</div>
+
+										<div class="seg" data-seg="alarm" role="radiogroup" aria-label="Fizetési mód">
+											<button type="button" class="chip on" data-bank="0" role="radio" aria-checked="true">
+												<span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"/><path d="M14 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2"/></svg></span>
+												<span class="cn">Készpénz</span>
+											</button>
+											<button type="button" class="chip" data-bank="1" role="radio" aria-checked="false">
+												<span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z"/><path d="M3 10l18 0"/><path d="M7 15l.01 0"/><path d="M11 15l2 0"/></svg></span>
+												<span class="cn">Bankkártya</span>
+											</button>
+										</div>
+
+										<div class="buy">
+											<div>
+												<div class="pl">Fizetendő</div>
+												<div class="pv" id="al-price">—</div>
+											</div>
+											<button type="button" class="btn green" id="al-buy" disabled>Riasztó beszerelése</button>
+										</div>
+									</div>
+								</section>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</main>
+		</div>
+	</div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

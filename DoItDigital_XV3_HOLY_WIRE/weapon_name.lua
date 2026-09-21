@@ -1,0 +1,1 @@
+AddTextEntry("WEAPON_XV3_HOLY_WIRE", "XV3_HOLY_WIRE")

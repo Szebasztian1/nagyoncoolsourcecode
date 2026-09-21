@@ -1,0 +1,26 @@
+if not locales then locales = {} end
+
+locales['hu'] = {
+    ['open_cloothroom'] = '~INPUT_PICKUP~ a favágó öltöző megnyitásához',
+    ['input_cut_tree'] = '~INPUT_PICKUP~ a fa kivágásához',
+    ['input_process'] = '~INPUT_PICKUP~ a fa feldolgozásához',
+    ['input_npc'] = '~INPUT_PICKUP~ hogy beszélgess a főnökkel',
+    ['hobby_clothroom'] = 'Hobby favágó öltözö',
+    ['lumberjack_clothroom'] = 'Favágó öltöző',
+    ['civil_cloth'] = 'Civil ruha',
+    ['lumberjack_cloth'] = 'Favágó ruha',
+    ['cut_tree'] = 'Favágás',
+    ['lumberjack_leader'] = 'Favágó vezető',
+    ['process_tree'] = 'Fa feldolgozása',
+    ['buy_axe'] = 'Balta vásárlása: $"',
+    ['sell_tree'] = 'Feldolgozott fa eladása (" .. Config.Rewards.sell.price .. "$/db)',
+    ['bad_cut'] = 'Elrontottad a vágást!',
+    ['dont_have_tree'] = 'Nincs nálad fa!',
+    ['broken_axe'] = 'Eltört a baltád!',
+    ['dont_have_axe'] = 'Nincs baltád!',
+    ['minigame_tutorial'] = 'Nyomd meg az E-t amikor a zöld négyzet felvillan és a pirosba ér!',
+    ['inventory_full'] = 'Nem fér el nálad több fa!',
+    ['you_bought_axe'] = 'Vetél egy baltát!',
+    ['dont_have_money'] = 'Nincs elég pénzed!',
+    ['sold_tree_for'] = 'Nincs baltád!',
+}

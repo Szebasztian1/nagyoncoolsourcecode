@@ -1,0 +1,8 @@
+Rpc:RegisterServerProxy('managers:getJobs')
+Rpc:RegisterServerProxy('managers:accountMoney')
+Rpc:RegisterServerProxy('managers:getSchedulerJobs')
+Rpc:RegisterServerProxy('managers:addSchedulerJob')
+Rpc:RegisterServerProxy('managers:removeSchedulerJob')
+Rpc:RegisterServerProxy('managers:toggleSchedulerJob')
+Rpc:RegisterServerProxy('managers:updateSchedulerJob')
+Rpc:RegisterServerProxy('managers:changeName')

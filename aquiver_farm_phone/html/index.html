@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farmjaim</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+    <div id="app">
+
+        <section id="screen-loading" class="screen active">
+            <div class="spinner"></div>
+            <p class="muted">Betöltés…</p>
+        </section>
+
+        <section id="screen-error" class="screen">
+            <div class="empty">
+                <div class="empty-ico">⚠️</div>
+                <h2>Hiba</h2>
+                <p class="muted" id="error-text">Nem sikerült betölteni az adatokat.</p>
+                <button class="btn" onclick="App.loadList()">Újrapróbálás</button>
+            </div>
+        </section>
+
+        <section id="screen-empty" class="screen">
+            <div class="empty">
+                <div class="empty-ico">🚜</div>
+                <h2>Nincs farmod</h2>
+                <p class="muted">Jelenleg nincs farmod és nincs hozzáférésed egyikhez sem.</p>
+            </div>
+        </section>
+
+        <section id="screen-list" class="screen">
+            <header class="topbar">
+                <div class="title">Farmjaim</div>
+                <div class="sub" id="list-count"></div>
+                <button class="mute-btn" id="mute-btn" onclick="App.toggleMute()" title="Hangok">🔊</button>
+            </header>
+            <div id="list" class="list"></div>
+        </section>
+
+        <section id="screen-lock" class="screen">
+            <header class="topbar">
+                <button class="back" onclick="App.back()">‹</button>
+                <div class="title" id="lock-name">Farm</div>
+            </header>
+            <div class="lock">
+                <div class="lock-ico">🔒</div>
+                <h2>Statisztika zárolva</h2>
+                <p class="muted">A farm részletes statisztikáinak megtekintéséhez heti hozzáférést kell vásárolnod.</p>
+                <div class="price-tag" id="lock-price">$30 000 000 / hét</div>
+                <button class="btn btn-primary" id="lock-buy" onclick="App.buy()">Feloldás</button>
+                <p class="muted small" id="lock-msg"></p>
+                <button class="btn ghost" id="lock-gps" onclick="App.gpsCurrent()">📍 GPS a farmhoz</button>
+            </div>
+        </section>
+
+        <section id="screen-stats" class="screen">
+            <header class="topbar">
+                <button class="back" onclick="App.back()">‹</button>
+                <div class="title" id="stats-name">Farm</div>
+                <button class="gps-btn" onclick="App.gpsCurrent()" title="GPS">📍</button>
+            </header>
+            <div id="stats-body" class="stats-body"></div>
+            <div class="access-note muted small" id="stats-access"></div>
+        </section>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

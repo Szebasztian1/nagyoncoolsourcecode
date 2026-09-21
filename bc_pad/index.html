@@ -1,0 +1,153 @@
+<html>
+
+<body style="display:none; max-width: 60vw; max-height: 50vh; margin: auto;">
+<canvas id="dynoChart" style="background-color: white; margin-top:20vh;"></canvas>
+<button id="closeButton" style="background-color: rgb(188, 0, 0); border:none; color: white; padding: 5px 10px; cursor: pointer; border-radius:2px; margin-top:10px;">Bezárás</button>
+<button id="exportButton" style="background-color: rgb(19, 0, 188); border:none; color: white; padding: 5px 10px; cursor: pointer; border-radius:2px; margin-top:10px;">Export</button>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var rpm = []
+var hp = []
+var nm = []
+
+var canclose = false;
+
+document.getElementById("closeButton").addEventListener("click", function() {
+    if (canclose) {
+        document.body.style.display = "none";
+        fetch(`https://${GetParentResourceName()}/closeDyno`);
+        
+    }
+});
+
+const setClipboard = (value) => {
+  const clipElem = document.createElement('textarea');
+  clipElem.value = value;
+  document.body.appendChild(clipElem);
+  clipElem.select();
+  document.execCommand('copy');
+  document.body.removeChild(clipElem);
+};
+
+document.getElementById("exportButton").addEventListener("click", function() {
+var canvas = document.getElementById("dynoChart");
+
+var pngUrl = canvas.toDataURL(); // PNG is the default
+
+setClipboard(pngUrl);
+
+//var downloadLink = document.createElement("a");
+//downloadLink.href = pngUrl;
+//downloadLink.download = "dyno_chart.png";
+//document.body.appendChild(downloadLink);
+//downloadLink.click();
+//document.body.removeChild(downloadLink);
+
+});
+
+
+
+var mainchart = new Chart(document.getElementById("dynoChart"), {
+    type: 'line',
+    data: {
+        labels: rpm,
+        datasets: [
+            { label: 'HP', data: hp, yAxisID: 'y'},
+            { label: 'Nm', data: nm, yAxisID: 'y1' }
+        ]
+    },
+    options: {
+        responsive: true,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        stacked: false,
+        scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                // suggestedMin: 0,
+                //suggestedMax: 700,
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                //suggestedMin: 0,
+                //suggestedMax: 850,
+            },
+        }
+    }
+})
+function updateChart() {
+    mainchart.data.labels = rpm
+    mainchart.data.datasets[0].data = hp
+    mainchart.data.datasets[1].data = nm
+    mainchart.update()
+}
+    /*new Chart(document.getElementById("dynoChart"), {
+            type: 'line',
+            data: {
+                labels: [2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500],
+                datasets: [
+                    { label: 'HP', data: [500, 800, 1100, 1400, 1700, 2000, 2200, 2400, 2600, 2800], yAxisID: 'y'},
+                    { label: 'Nm', data: [100, 130, 160, 190, 220, 250, 270, 290, 310, 330], yAxisID: 'y1' }
+                ]
+            },
+
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                stacked: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                         suggestedMin: 0,
+                        suggestedMax: 1100,
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        suggestedMin: 0,
+                        suggestedMax: 1100,
+
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                }
+            }
+        })*/
+
+
+
+window.addEventListener("message", function(e) {
+    if (e.data.action === "resetDyno") {
+        rpm = []
+        hp = []
+        nm = []
+        document.body.style.display = "block";
+        updateChart()
+    } else if (e.data.action === "updateDyno") {
+        rpm = e.data.rpm
+        hp = e.data.hp  
+        nm = e.data.nm
+        updateChart()
+    } else if (e.data.action === "closeDyno") {
+        rpm = []
+        hp = []
+        nm = []
+        canclose = true;
+    }
+})
+</script>
+</body>
+</html>

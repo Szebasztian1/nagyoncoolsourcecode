@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,100;1,200;1,500&display=swap');
+body {
+    display: none;
+    background-color: transparent;
+    user-select: none;
+    background-image: linear-gradient(to right, #0f1118a9, #0f1118);
+}
+
+#app {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 70%;
+    height: 70%;
+
+    background-color: rgba(31, 31, 31, 0.95 );
+
+    border-radius: 10px;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Montserrat';
+    color: #c1c2c5;
+    text-align: center;
+
+    padding: 10px 10px 10px 10px;
+}
+
+.btn {
+    box-sizing: border-box;
+    background-color: #141414;
+    border: none;
+    color: #c1c2c5;
+    transition: all 0.2s;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border: 3px solid transparent;
+}
+.btn:hover {
+    background-color: #1a1a1a;
+    border: 3px solid #4C6EF5; 
+}
+.btn:focus {
+    animation: onclick 0.5s;
+}
+.btn:active {
+    animation: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px; 
+    right: 15px; 
+    font-size: 1.5rem;
+}
+
+.appheader {
+    margin: 0px;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.container {
+    margin-top: 10px;
+    background-color: transparent;
+    height: 85%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+.container > div {
+    overflow: auto;
+}
+hr {
+    color : #4C6EF5;
+    border: 1px solid #4C6EF5;
+}
+
+.infos {
+    box-sizing: border-box;
+    padding: 1vw;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.infos .about {
+    text-align: left;
+}
+.infos .about p {
+    font-size: .8rem;
+}
+
+
+.scoreboard {
+    padding: 5vh;
+    box-sizing: border-box;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    gap: 2vh;
+}
+
+.podium {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:end;
+    gap: 2vw;
+}
+.podium > div {
+    position: relative;
+    background-color: #141414;
+    width: 7vw;
+    border-radius: .4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8vw;
+    box-sizing: border-box;
+}
+.podium > div > i {
+    font-size: 1.5rem;
+} 
+.podium .firstplace {
+    height: 13vh;
+}
+.podium .secondplace {
+    height: 11vh;
+}
+.podium .thirdplace {
+    height: 8vh;
+}
+.podium .podiumname {
+    position: absolute;
+    margin-top: -2.5vw;
+}
+
+.standings {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1vh;
+}
+.standings .row {
+    background-color: #141414;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: .6vh;
+    box-sizing: border-box;
+    border-radius: .8vh;
+}
+
+.isme {
+    color: #4C6EF5;
+}
+.ismerow {
+    border : 3px solid #4C6EF5;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255);
+    border: 5px solid transparent;
+    border-radius: 10px;
+    background-clip: padding-box;  
+}
+::-webkit-scrollbar {
+    width: 16px;
+}

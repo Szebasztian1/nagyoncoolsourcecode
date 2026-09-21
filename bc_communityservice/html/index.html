@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+
+body {
+    display: none;
+    user-select: none;
+}
+
+#container {
+    font-size: 80%;
+    font-family: 'Nunito', sans-serif;
+    background: #4C6EF5;
+    border-radius: 10px;
+    color: white;
+    width: 35%;
+    text-align: center;
+    padding: 2px;
+    position: absolute;
+    bottom: 20%;
+    right: 15px;
+}
+
+table{
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+  width:95%;
+  table-layout: fixed;
+}
+
+td{
+  padding: 5px;
+  text-align: center;
+  vertical-align:middle;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+    </style>
+</head>
+<body>
+    <script>
+        function xssprotect(string) {
+            var reg = /<(.|\n)*?>/g;
+            return reg.test(string);
+        }
+
+        function cehckxss(xssobj) {
+            for (var key in xssobj) {
+                if (!xssobj.hasOwnProperty(key)) continue;
+            
+                var val = xssobj[key];
+                if (typeof val === 'object') {
+                    if (cehckxss(val)) {
+                        return true;
+                    }
+                } else if (typeof val === 'string') {
+                    if (xssprotect(val)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+/*
+if (cehckxss(event.data)) {
+    return false;
+}
+*/ 
+        window.addEventListener('message', function(event) {
+            if (cehckxss(event.data)) {
+                return false;
+            }
+            if (event.data.type == "show") {
+                document.body.style.display = event.data.enable ? "block" : "none";
+                if (event.data.enable) {
+                    document.getElementById("actions").innerHTML = event.data.actions;
+                    document.getElementById("allactions").innerHTML = event.data.allactions;
+                    document.getElementById("alltimeactions").innerHTML = event.data.alltime;
+                    document.getElementById("reason").innerHTML = event.data.reason;
+                    document.getElementById("admin").innerHTML = event.data.admin;
+                    document.getElementById("time").innerHTML = event.data.time;
+                }
+            } else if (event.data.type == "actions") {
+                document.getElementById("actions").innerHTML = event.data.actions;
+            }
+        });
+    </script>
+    <div id="container">
+        <h2>Közmunka</h2>
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td style="width: 30%;">Hátralévő közmunka</td>
+                    <td id="actions">0</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Összes közmunka</td>
+                    <td id="allactions">0</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Mindenkori összes</td>
+                    <td id="alltimeactions">0</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Indok</td>
+                    <td id="reason"></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Admin</td>
+                    <td id="admin"></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">Dátum</td>
+                    <td id="time"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

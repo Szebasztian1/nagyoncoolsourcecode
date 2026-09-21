@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Loadout</title>
+	<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet" />
+	<link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="app">
+		<div class="modal">
+
+			<!-- header -->
+			<div class="bar">
+				<div class="logo">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+						stroke-linejoin="round">
+						<path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z" />
+						<path d="M9 12l2 2 4-4" />
+					</svg>
+				</div>
+				<div>
+					<div class="k">Frakciós felszerelés</div>
+					<div class="name">LOAD<b>OUT</b></div>
+				</div>
+				<div class="spacer"></div>
+				<div class="plate"><span class="dot"></span><span id="hdrSub">—</span></div>
+				<div class="close" onclick="closeUI()" title="Bezárás">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+						<path d="M18 6 6 18M6 6l12 12" />
+					</svg>
+				</div>
+			</div>
+
+			<div class="body">
+
+				<!-- sidebar: a régi fülek helyén -->
+				<div class="side">
+					<div class="nav-btn on" data-tab="own" onclick="switchTab('own')">
+						<div class="ico">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="8" r="3.5" />
+								<path d="M5 20a7 7 0 0 1 14 0" />
+							</svg>
+						</div>
+						<div class="lbl">
+							<div class="t">Saját</div>
+							<div class="d">Általad készített</div>
+						</div>
+					</div>
+
+					<div class="nav-btn" data-tab="faction" onclick="switchTab('faction')">
+						<div class="ico">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="9" cy="8" r="3" />
+								<path d="M3 19a6 6 0 0 1 12 0" />
+								<path d="M16 6.2a3 3 0 0 1 0 5.6M17 14.5a5 5 0 0 1 4 4.5" />
+							</svg>
+						</div>
+						<div class="lbl">
+							<div class="t">Frakció</div>
+							<div class="d">Megosztott csomagok</div>
+						</div>
+					</div>
+
+					<div class="nav-btn" data-tab="new" onclick="startCreate()">
+						<div class="ico">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 5v14M5 12h14" />
+							</svg>
+						</div>
+						<div class="lbl">
+							<div class="t">Új loadout</div>
+							<div class="d">Csomag összeállítása</div>
+						</div>
+					</div>
+
+					<div class="spacer"></div>
+
+					<div class="info-box">
+						<div class="ih">Frakció</div>
+						<div class="job" id="infoJob">—</div>
+						<div class="info-row"><span>Saját csomag</span><span id="infoOwn">0</span></div>
+						<div class="info-row"><span>Megosztott</span><span id="infoShared">0</span></div>
+					</div>
+				</div>
+
+				<!-- main -->
+				<div class="main">
+					<div class="wm">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+							stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" />
+							<path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" />
+						</svg>
+					</div>
+
+					<div class="page" id="content">
+						<div class="loader">Betöltés…</div>
+					</div>
+
+					<div class="foot">
+						<div class="total" id="priceBar" style="display:none">
+							<span class="tl">Összesen</span>
+							<span class="tv" id="priceVal">$0</span>
+						</div>
+						<div class="btns" id="actionBar" style="display:none"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- megerősítés / beviteli ablak -->
+			<div class="dlg-wrap" id="modal">
+				<div class="dlg">
+					<div class="dt" id="modalTitle">Megerősítés</div>
+					<div class="dm" id="modalMsg"></div>
+					<div id="modalExtra"></div>
+					<div class="da">
+						<div class="btn ghost" id="modalCancel" onclick="closeModal()">Mégsem</div>
+						<div class="btn blue" id="modalOk" onclick="modalConfirm()">Igen</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="toasts"></div>
+		</div>
+	</div>
+
+	<script src="app.js"></script>
+</body>
+
+</html>

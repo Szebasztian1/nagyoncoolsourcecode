@@ -1,0 +1,11 @@
+---@class IWatertip
+---@field id number
+---@field isActive boolean
+---@field waterPercentage number
+---@field isOccupied boolean
+---@field positionX number
+---@field positionY number
+---@field positionZ number
+---@field rotationX number
+---@field rotationY number
+---@field rotationZ number

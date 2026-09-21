@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanted Popup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display:none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px) rotate(-3deg); }
+            to { opacity: 1; transform: translateY(0) rotate(-3deg); }
+        }
+        .wanted-paper {
+            position: fixed;
+            top: 60vh;
+            left: 1vw;
+            width: 70px;
+            height: 120px;
+            background: linear-gradient(to bottom right, #f5f0e3, #e8dfc0);
+            border-radius: 4px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 8px 8px 8px;
+            z-index: 9999;
+            transform: rotate(-3deg);
+            border: none;
+            animation: fadeIn 0.5s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        .wanted-paper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            opacity: 0.6;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .wanted-paper::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            background: #cecece;
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            z-index: 10000;
+        }
+        .stamp {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            color: rgba(178, 34, 34, 0.7);
+            font-size: 0.6em;
+            font-weight: bold;
+            border: 1px solid rgba(178, 34, 34, 0.5);
+            padding: 2px 4px;
+            border-radius: 2px;
+            transform: rotate(12deg);
+            letter-spacing: 0.5px;
+        }
+        .wanted-title {
+            font-size: 0.6em;
+            font-weight: bold;
+            color: #7a1f1f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            margin: 2px 0 12px 0;
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+        .wanted-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 15%;
+            width: 70%;
+            height: 1px;
+            background: rgba(0,0,0,0.2);
+        }
+        .photo-container {
+            position: relative;
+            margin-bottom: 5px;
+        }
+        .wanted-photo {
+            width: 50px;
+            height: 60px;
+            object-fit: cover;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            margin: 0;
+            filter: grayscale(30%) contrast(110%);
+        }
+        .corner {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: rgba(0,0,0,0.3);
+            border-style: solid;
+        }
+        .top-left {
+            top: -2px;
+            left: -2px;
+            border-width: 1px 0 0 1px;
+        }
+        .top-right {
+            top: -2px;
+            right: -2px;
+            border-width: 1px 1px 0 0;
+        }
+        .bottom-left {
+            bottom: -2px;
+            left: -2px;
+            border-width: 0 0 1px 1px;
+        }
+        .bottom-right {
+            bottom: -2px;
+            right: -2px;
+            border-width: 0 1px 1px 0;
+        }
+        .code-number {
+            font-family: monospace;
+            font-size: 0.65em;
+            color: #555;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wanted-paper">
+        <span class="stamp">SÜRGŐS</span>
+        <div class="wanted-title">Ismeretlen körözés</div>
+        <div class="photo-container">
+            <div class="corner top-left"></div>
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
+            <div class="corner bottom-right"></div>
+            <img class="wanted-photo" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Wanted Person">
+        </div>
+        <div class="code-number">ID: #R-32451</div>
+    </div>
+</body>
+
+<script>
+
+function dataURItoBlob(dataURI) {
+  const byteString = atob(dataURI.split(',')[1]);
+  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+
+  for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+  }
+
+  const blob = new Blob([ab], {type: mimeString});
+  return blob;
+}
+window.addEventListener('message', function( event ) {
+    if (event.data.type == "addpic") {
+      var photo = event.data.img;
+
+      document.querySelector('.wanted-photo').src = photo;
+      document.body.style.display = "block";
+      console.log(photo)
+      setTimeout(() => {
+        document.body.style.display = "none";
+      }, 600000);
+    }
+
+    if (event.data.type == "headshot") {
+      var webhook = event.data.webhook;
+      var txd = event.data.txdstr;
+
+      const image = new Image();
+      image.crossOrigin='anonymous';
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.height = image.naturalHeight;
+        canvas.width = image.naturalWidth;
+        ctx.drawImage(image, 0, 0);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < imageData.data.length; i += 4) {
+          if (imageData.data[i + 3] < 100) {
+            imageData.data[i + 3] = 0;
+          }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        const imageURL = canvas.toDataURL('image/png', 1.0);
+        const formData = new FormData();
+        formData.append("files[]", dataURItoBlob(imageURL), "headshot.png");
+        console.log(formData)
+        fetch(webhook, {
+          method: 'POST',
+          mode: 'cors',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(text => {
+          fetch(`https://${GetParentResourceName()}/uploadedimage`, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+              data: text
+            })
+          });
+        });
+
+        canvas.remove();
+      }
+      image.src = `https://nui-img/${txd}/${txd}`;
+    }
+  });
+</script>
+</html>

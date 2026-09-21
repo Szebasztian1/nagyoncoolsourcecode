@@ -1,0 +1,5 @@
+---@class DBPermission
+---@field identifier string
+---@field name string
+---@field permissions ePermission[]
+---@field houseId number

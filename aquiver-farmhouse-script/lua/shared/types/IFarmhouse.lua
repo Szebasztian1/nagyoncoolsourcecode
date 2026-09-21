@@ -1,0 +1,9 @@
+---@class IFarmhouse
+---@field id number
+---@field name string
+---@field lockState boolean
+---@field price number
+---@field positionX number
+---@field positionY number
+---@field positionZ number
+---@field isOwnedBySomeone boolean

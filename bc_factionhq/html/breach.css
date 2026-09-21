@@ -1,0 +1,119 @@
+/* FactionHQ breach minigame — BC design (flat charcoal, red = destructive).
+   Reuses the tokens + scaleIn keyframe from style.css (loaded first). No
+   gradients/glass/glow on surfaces; the red accent comes from the card
+   border + badge because a police raid is a destructive action. */
+
+#breach {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  pointer-events: none;
+}
+
+.brc-card {
+  position: relative;
+  pointer-events: auto;
+  width: 29em;
+  padding: 1.25em 1.35em 1.15em;
+  background: var(--bg-modal);
+  border: 1px solid var(--danger-bd);
+  border-radius: .6em;
+  box-shadow: 0 2.5em 6em rgba(0, 0, 0, .6), 0 0 0 1px rgba(219, 40, 40, .1);
+  animation: scaleIn .22s ease both;
+}
+/* Wrong-hit shake */
+.brc-card.miss { animation: brcShake .32s cubic-bezier(.36, .07, .19, .97) both; }
+@keyframes brcShake {
+  10%, 90% { transform: translateX(-.12em); }
+  20%, 80% { transform: translateX(.25em); }
+  30%, 50%, 70% { transform: translateX(-.45em); }
+  40%, 60% { transform: translateX(.45em); }
+}
+
+/* Header: badge + eyebrow / big title / subtitle */
+.brc-head { display: flex; align-items: center; gap: .75em; margin-bottom: 1.1em; }
+.brc-badge {
+  width: 2.6em; height: 2.6em; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--danger-lt);
+  background: var(--danger-tint);
+  border-radius: .5em;
+}
+.brc-eyebrow {
+  font-size: .7em; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--txt4); line-height: 1;
+}
+.brc-title { font-size: 1.35em; font-weight: 700; color: var(--txt); line-height: 1.15; margin-top: .15em; }
+.brc-sub { font-size: .8em; color: var(--txt3); margin-top: .1em; }
+
+.brc-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: .9em;
+}
+.brc-pins { display: flex; gap: .5em; }
+.brc-pins .pin {
+  width: .9em; height: .9em; border-radius: 50%;
+  background: #ffffff12;
+  border: 1px solid var(--bd);
+  transition: background .18s, border-color .18s, transform .18s;
+}
+.brc-pins .pin.done {
+  background: var(--ok);
+  border-color: var(--ok);
+  transform: scale(1.12);
+}
+.brc-pins .pin.active { border-color: var(--danger-lt); }
+.brc-strikes { display: flex; gap: .35em; }
+.brc-strikes .st {
+  width: .85em; height: .85em;
+  color: #ffffff30;
+  transition: color .18s, transform .18s;
+}
+.brc-strikes .st.used { color: var(--danger-lt); transform: scale(1.15); }
+
+/* Sweep track: ticked scale (functional gauge, not a surface gradient) */
+.brc-track {
+  position: relative;
+  height: 3em;
+  border-radius: .5em;
+  background:
+    repeating-linear-gradient(90deg, #ffffff08 0 2px, transparent 2px 26px),
+    #00000040;
+  border: 1px solid var(--bd);
+  overflow: hidden;
+}
+.brc-zone {
+  position: absolute; top: 0; bottom: 0;
+  background: var(--ok-tint);
+  border-left: 2px solid var(--ok);
+  border-right: 2px solid var(--ok);
+  transition: left .12s ease, width .12s ease;
+}
+.brc-needle {
+  position: absolute; top: -.2em; bottom: -.2em;
+  width: .25em; margin-left: -.12em;
+  background: #fff;
+  border-radius: .12em;
+  box-shadow: 0 0 .5em rgba(255, 255, 255, .6);
+}
+.brc-track.hit .brc-zone { background: var(--ok-tint); border-color: var(--ok-lt); }
+.brc-track.bad .brc-needle { background: var(--danger-lt); box-shadow: 0 0 .6em rgba(240, 138, 138, .8); }
+
+.brc-status {
+  margin-top: 1em; text-align: center;
+  font-size: .9em; font-weight: 700; letter-spacing: .02em;
+  color: var(--txt2); min-height: 1.3em;
+}
+.brc-status.ok { color: var(--ok-lt); }
+.brc-status.err { color: var(--danger-lt); }
+
+.brc-hint {
+  margin-top: .6em; text-align: center;
+  font-size: .72em; color: var(--txt4);
+}
+.brc-hint b {
+  color: var(--txt2); font-weight: 700;
+  background: #ffffff0d;
+  border: 1px solid #ffffff14;
+  border-radius: .3em; padding: .05em .45em;
+}

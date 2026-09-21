@@ -1,0 +1,26 @@
+if not locales then locales = {} end
+
+locales['en'] = {
+    ['open_cloothroom'] = '~INPUT_PICKUP~ for open cloth menu',
+    ['input_cut_tree'] = '~INPUT_PICKUP~ for cut tree',
+    ['input_process'] = '~INPUT_PICKUP~ for process tree',
+    ['input_npc'] = '~INPUT_PICKUP~ to talk with boss',
+    ['hobby_clothroom'] = 'Hobby lumberjack clothroom',
+    ['lumberjack_clothroom'] = 'Lumberjack clothroom',
+    ['civil_cloth'] = 'Civil dress',
+    ['lumberjack_cloth'] = 'Lumberjack dress',
+    ['cut_tree'] = 'Wood cutting',
+    ['lumberjack_leader'] = 'Lumberjack leader',
+    ['process_tree'] = 'Wood process',
+    ['buy_axe'] = 'Buy axe for $',
+    ['sell_tree'] = 'Sell tree for each $',
+    ['bad_cut'] = 'You messed up the cut!',
+    ['dont_have_tree'] = 'You dont have a tree!',
+    ['broken_axe'] = 'Your axe is broken!',
+    ['dont_have_axe'] = 'You dont have an axe!',
+    ['minigame_tutorial'] = 'Press E when the green square flashes and turns red!',
+    ['inventory_full'] = 'Inventory is full!',
+    ['you_bought_axe'] = 'You bought an axe!',
+    ['dont_have_money'] = 'You dont have enough money!',
+    ['sold_tree_for'] = 'Sold all tree for: $',
+}

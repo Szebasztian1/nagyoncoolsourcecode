@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<Item>
+			<modelName>w_me_bgknuckle</modelName>
+			<txdName>w_me_bgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_blgknuckle</modelName>
+			<txdName>w_me_blgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_brgknuckle</modelName>
+			<txdName>w_me_brgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_ggknuckle</modelName>
+			<txdName>w_me_ggknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_grknuckle</modelName>
+			<txdName>w_me_grknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_lbgknuckle</modelName>
+			<txdName>w_me_lbgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_lgbtqgknuckle</modelName>
+			<txdName>w_me_lgbtqgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_ogknuckle</modelName>
+			<txdName>w_me_ogknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_piknuckle</modelName>
+			<txdName>w_me_piknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_puknuckle</modelName>
+			<txdName>w_me_puknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_rgknuckle</modelName>
+			<txdName>w_me_rgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_wgknuckle</modelName>
+			<txdName>w_me_wgknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+		<Item>
+			<modelName>w_me_ygknuckle</modelName>
+			<txdName>w_me_ygknuckle</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500" />
+		</Item>
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

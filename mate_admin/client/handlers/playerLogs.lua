@@ -1,0 +1,1 @@
+Rpc:RegisterServerProxy('playerLog:getAll')

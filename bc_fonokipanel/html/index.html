@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app" class="hidden">
+  <div class="fp">
+    <div class="bar">
+      <div class="brand">
+        <div class="logo" id="hp-logo"></div>
+        <div class="name">FŐNÖKI <b>PANEL</b></div>
+      </div>
+      <div class="spacer"></div>
+      <div class="plate">
+        <span class="dot"></span>
+        <span id="hp-job">Frakció</span>
+        <span class="sep">&middot;</span>
+        <span id="hp-members">0</span> tag
+      </div>
+      <div class="plate acc" id="hp-pp-box"><b id="hp-pp">0</b> PP</div>
+      <div class="close" id="btn-close" title="Bezárás"></div>
+    </div>
+
+    <div class="body">
+      <aside class="side">
+        <nav class="fp-nav" id="fp-nav"></nav>
+        <div class="info-box">
+          <div class="ih">Frakció</div>
+          <div class="info-row"><span>Munka</span><span id="if-job">&ndash;</span></div>
+          <div class="info-row"><span>Checkpointok</span><span id="if-cps">0</span></div>
+          <div class="info-row"><span>Rangok</span><span id="if-ranks">0</span></div>
+          <div class="info-row"><span>Egyenleg</span><span class="badge" id="if-pp">0 PP</span></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="wm" id="wm"></div>
+        <div class="fp-main" id="fp-main">
+          <section class="fp-sec on" data-s="ov" id="sec-ov"></section>
+          <section class="fp-sec" data-s="act" id="sec-act"></section>
+          <section class="fp-sec" data-s="money" id="sec-money"></section>
+          <section class="fp-sec" data-s="emp" id="sec-emp"></section>
+          <section class="fp-sec" data-s="salary" id="sec-salary"></section>
+          <section class="fp-sec" data-s="rank" id="sec-rank"></section>
+          <section class="fp-sec" data-s="move" id="sec-move"></section>
+          <section class="fp-sec" data-s="buy" id="sec-buy"></section>
+          <section class="fp-sec" data-s="miss" id="sec-miss"></section>
+          <section class="fp-sec" data-s="store" id="sec-store"></section>
+          <section class="fp-sec" data-s="hq" id="sec-hq"></section>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

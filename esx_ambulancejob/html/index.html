@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="app">
+            <!-- Pulsing red vignette -->
+            <div class="vignette-overlay"></div>
+
+            <!-- Floating dark particles -->
+            <div class="particles">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <!-- Centre content -->
+            <div class="up-section">
+                <h1 class="death-title">MEGHALTÁL!</h1>
+                <p id="killer" class="killer-text"></p>
+
+                <!-- EKG flatline: two beats then silence -->
+                <div class="ekg-container">
+                    <svg class="ekg-svg" viewBox="0 0 500 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                        <polyline class="ekg-path"
+                            points="0,30 25,30 32,30 38,4 50,56 56,30 63,30
+                                    80,30 86,30 92,4 104,56 110,30 117,30
+                                    500,30"/>
+                    </svg>
+                </div>
+
+                <p id="respawn" class="respawn-text">Újraéledés 3 perc 20 másodperc múlva</p>
+                <p id="ambulance" class="ambulance-text">Elérhető mentősők: -</p>
+
+                <p id="respawn-prompt" class="respawn-prompt-text"></p>
+            </div>
+
+            <!-- TextUI-style controls bar pinned to bottom -->
+            <div class="textui-bar">
+                <div class="textui-item">
+                    <span class="key">G</span>
+                    <span class="textui-label">Mentős kihívása</span>
+                    <span class="tag live">Élő</span>
+                </div>
+                <div class="textui-divider"></div>
+                <div class="textui-item">
+                    <span class="key">H</span>
+                    <span class="textui-label">Szállítás a kórházba</span>
+                    <span class="tag npc">NPC</span>
+                </div>
+                <div class="textui-divider"></div>
+                <div class="textui-item pp-item" id="instant-item">
+                    <span class="key">K</span>
+                    <span class="textui-label">Azonnali éledés</span>
+                    <span class="tag pp">1 000 PP</span>
+                </div>
+            </div>
+
+            <!-- Rövid visszajelzés az azonnali éledéshez (pl. nincs elég PP) -->
+            <div id="death-toast" class="death-toast"></div>
+        </div>
+
+        <!-- Ambulance call modal -->
+        <div id="call-modal" class="modal-overlay">
+            <div class="modal-card">
+                <div class="modal-head">
+                    <div class="modal-icon-ring">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                    </div>
+                    <div class="modal-head-text">
+                        <h2 class="modal-title">Mentő hívása</h2>
+                        <p class="modal-sub">Írd le röviden mi történt. A mentősök ezt fogják látni.</p>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="modal-field">
+                        <textarea id="call-message" class="modal-input" maxlength="200"
+                            placeholder="Pl. lőtt seb a mellkason, eszméletemnél vagyok…"></textarea>
+                        <span id="char-count" class="modal-counter">0 / 200</span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="modal-cancel" class="btn-cancel">Mégse</button>
+                    <button id="modal-submit" class="btn-submit">
+                        <i class="bi bi-send-fill"></i> Segélyhívás küldése
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

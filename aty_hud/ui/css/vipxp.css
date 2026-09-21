@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap');
+
+/* VIP EXP sav: felul kozepen, ott ahol a regi GTA-s rangsav volt.
+   A legfelso hely (0.6vh - 3.4vh) ALAPBOL a bc_notyp felhivase, mert az
+   sokkal gyakoribb -- ez a sav viszont csak XP-szerzeskor, ~6 masodpercig
+   latszik, es olyankor ELSOBBSEGET kap:
+     0.6vh - 3.4vh   VIP EXP sav, amig kint van (ez a fajl)
+     0.6vh           bc_notyp felhivas alapbol; 4.6vh, amig a VIP sav kint van
+     7.5vh vagy a felhivas alja alatt: bc_tasksystem achievement toastok
+   Az atkapcsolast a client/vipxp.lua inditja: TriggerEvent('bc_vipxp:visible',
+   6300) -> a bc_notyp es a bc_tasksystem ennyi idore lejjebb csusztatja magat.
+   Ha ez a sav magasabb lesz, a masik ketto lecsusztatott erteket is novelni
+   kell (bc_notyp/html/style.css .shifted, bc_tasksystem .notice-probe.shifted). */
+#bcvipxp {
+	position: fixed;
+	top: 0.6vh;
+	left: 50%;
+	transform: translateX(-50%) translateY(-0.7em);
+	z-index: 600;
+	pointer-events: none;
+	width: 32vw;
+	min-width: 26em;
+	max-width: 42em;
+	box-sizing: border-box;
+	font-family: 'Titillium Web', 'Segoe UI', system-ui, sans-serif;
+	font-size: clamp(10px, 0.62vw, 16px);
+	font-variant-numeric: tabular-nums;
+	color: #e7e7e7;
+	background: rgba(31, 31, 31, 0.94);
+	border: 1px solid #424242;
+	border-radius: 0.4em;
+	padding: 0.35em 0.6em;
+	display: flex;
+	align-items: center;
+	gap: 0.7em;
+	opacity: 0;
+	transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.3s ease;
+}
+
+#bcvipxp.show {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+}
+
+#bcvipxp .vx-badge {
+	flex: 0 0 auto;
+	width: 1.95em;
+	height: 1.95em;
+	border-radius: 0.35em;
+	background: rgba(47, 128, 237, 0.15);
+	border: 1px solid rgba(47, 128, 237, 0.55);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	line-height: 1;
+	color: #7fb0f6;
+}
+
+#bcvipxp .vx-id {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: baseline;
+	gap: 0.45em;
+	white-space: nowrap;
+	min-width: 0;
+}
+
+#bcvipxp .vx-k {
+	font-size: 0.66em;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #c9d4e2;
+}
+
+#bcvipxp .vx-t {
+	font-weight: 700;
+}
+
+#bcvipxp .vx-bar {
+	flex: 1 1 auto;
+	min-width: 7em;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	gap: 0.18em;
+	height: 0.45em;
+}
+
+#bcvipxp .vx-seg {
+	position: relative;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.07);
+	border-radius: 0.1em;
+}
+
+#bcvipxp .vx-seg i,
+#bcvipxp .vx-seg b {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	display: block;
+}
+
+#bcvipxp .vx-seg i {
+	background: #7fb0f6;
+	transition: width 0.55s ease;
+}
+
+#bcvipxp .vx-seg b {
+	background: #2f80ed;
+	transition: width 0.7s ease;
+}
+
+#bcvipxp .vx-xp {
+	flex: 0 0 auto;
+	font-size: 0.74em;
+	font-weight: 700;
+	color: #c8c8c8;
+	white-space: nowrap;
+}
+
+#bcvipxp .vx-next {
+	flex: 0 0 auto;
+	font-size: 0.72em;
+	font-weight: 600;
+	color: #8a8a8a;
+	white-space: nowrap;
+}
+
+#bcvipxp .vx-gain {
+	flex: 0 0 auto;
+	font-size: 0.72em;
+	font-weight: 700;
+	color: #7fb0f6;
+	background: rgba(47, 128, 237, 0.15);
+	border: 1px solid rgba(47, 128, 237, 0.55);
+	border-radius: 0.35em;
+	padding: 0.1em 0.5em;
+	white-space: nowrap;
+}
+
+#bcvipxp.up {
+	border-color: rgba(47, 128, 237, 0.55);
+	box-shadow: inset 0 0 0 1px rgba(47, 128, 237, 0.55);
+}
+
+#bcvipxp.up .vx-t {
+	color: #7fb0f6;
+}
+
+#bcvipxp.up .vx-gain {
+	color: #f1cf7d;
+	background: rgba(224, 179, 77, 0.14);
+	border-color: rgba(224, 179, 77, 0.5);
+}
+
+#bcvipxp.max .vx-seg b {
+	background: #5f8fd6;
+}

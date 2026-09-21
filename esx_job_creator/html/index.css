@@ -1,0 +1,856 @@
+/* ============================================================
+   esx_job_creator — BC Design System skin
+   Charcoal surfaces + BC-blue accent, layered over Bootstrap 5.
+   Restyles the resource shell and every Bootstrap component the
+   NUI renders (modals, forms, tables, buttons) through tokens.
+   Loaded AFTER Bootstrap so equal-specificity rules win.
+   ============================================================ */
+
+/* 1. Design tokens ----------------------------------------- */
+:root {
+    /* surfaces (dark -> light) */
+    --bg-modal: #1f1f1f;
+    --bg-bar: #242424;
+    --bg-box: #2e2e2e;
+    --bd: #424242;
+
+    /* text */
+    --txt: #e7e7e7;
+    --txt2: #c8c8c8;
+    --txt3: #b7b7b7;
+    --txt4: #8a8a8a;
+
+    /* accent = BC-blue */
+    --acc: #2f80ed;
+    --acc-lt: #7fb0f6;
+    --acc-tint: rgba(47, 128, 237, .15);
+    --acc-tint-h: rgba(47, 128, 237, .24);
+    --acc-bd: rgba(47, 128, 237, .55);
+
+    /* semantic */
+    --ok: #4cdb28;
+    --ok-tint: rgba(76, 219, 40, .15);
+    --ok-tint-h: rgba(76, 219, 40, .24);
+    --ok-lt: #9be97f;
+    --danger: #db2828;
+    --danger-tint: rgba(219, 40, 40, .16);
+    --danger-tint-h: rgba(219, 40, 40, .26);
+    --danger-lt: #f08a8a;
+
+    --radius: .4rem;
+}
+
+/* 2. Base -------------------------------------------------- */
+* {
+    font-family: 'Titillium Web', 'Segoe UI', system-ui, sans-serif;
+}
+
+html,
+body {
+    background: transparent !important;
+}
+
+/* On-brand scrollbars for every scroll area in the panel */
+#job-creator,
+#job-markers,
+.modal,
+#not-allowed-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--acc) #ffffff10;
+}
+
+#job-creator ::-webkit-scrollbar,
+#job-markers ::-webkit-scrollbar,
+.modal ::-webkit-scrollbar {
+    width: .7rem;
+    height: .7rem;
+}
+
+#job-creator ::-webkit-scrollbar-track,
+#job-markers ::-webkit-scrollbar-track,
+.modal ::-webkit-scrollbar-track {
+    background: #ffffff0a;
+    border-radius: 1em;
+    margin: .3em;
+}
+
+#job-creator ::-webkit-scrollbar-thumb,
+#job-markers ::-webkit-scrollbar-thumb,
+.modal ::-webkit-scrollbar-thumb {
+    background: var(--acc);
+    border-radius: 1em;
+    border: .16em solid transparent;
+    background-clip: padding-box;
+}
+
+#job-creator ::-webkit-scrollbar-thumb:hover,
+#job-markers ::-webkit-scrollbar-thumb:hover,
+.modal ::-webkit-scrollbar-thumb:hover {
+    background: var(--acc-lt);
+}
+
+/* 3. Modal shell (main panel + markers panel) -------------- */
+.big-container {
+    display: none;
+    /* JS shows it via inline display:flex */
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(1180px, 94vw);
+    height: min(780px, 92vh);
+    flex-direction: column;
+    background: var(--bg-modal);
+    border: 1px solid rgba(255, 255, 255, .05);
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
+    color: var(--txt);
+    overflow: hidden;
+    padding: 0;
+    animation: bcFadeIn .2s ease;
+}
+
+@keyframes bcFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 4. Header bar (brand + actions + close) ------------------ */
+#main-bar,
+#markers-main-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 0 0 auto;
+    max-width: none;
+    margin: 0;
+    padding: .85rem 1.1rem;
+    background: var(--bg-bar);
+    border-bottom: 1px solid var(--bd);
+}
+
+.bc-brand {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    min-width: 0;
+}
+
+.bc-logo {
+    width: 2.7rem;
+    height: 2.7rem;
+    flex: 0 0 auto;
+    border-radius: .55rem;
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bc-logo svg {
+    width: 1.55rem;
+    height: 1.55rem;
+}
+
+.bc-titles {
+    min-width: 0;
+}
+
+.bc-eyebrow {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--txt4);
+    line-height: 1;
+    margin-bottom: .18rem;
+}
+
+/* Big 700 title (overrides the old vw-scaled .main-text) */
+.main-text {
+    font-family: inherit;
+    color: var(--txt);
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.05;
+    float: none;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-text b {
+    color: var(--acc-lt);
+    font-weight: 700;
+}
+
+.bc-actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-left: auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.bc-close {
+    flex: 0 0 auto;
+    width: 2.3rem;
+    height: 2.3rem;
+    border: none;
+    border-radius: .5rem;
+    background: #ffffff12;
+    color: var(--txt2);
+    font-size: 1.35rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.bc-close:hover {
+    background: var(--danger-tint);
+    color: var(--danger-lt);
+}
+
+/* 5. Search bar -------------------------------------------- */
+#jobs-search-bar {
+    flex: 0 0 auto;
+    max-width: none;
+    margin: 0;
+    padding: .75rem 1.1rem !important;
+    background: var(--bg-bar);
+    border-bottom: 1px solid var(--bd);
+}
+
+#jobs-search-input {
+    background: #00000030;
+    border: 1px solid var(--bd);
+    color: var(--txt);
+    border-radius: .45rem;
+}
+
+#jobs-search-input::placeholder {
+    color: var(--txt4);
+}
+
+#jobs-search-input:focus {
+    background: #00000045;
+    border-color: var(--acc-bd);
+    color: var(--txt);
+    box-shadow: 0 0 0 .2rem var(--acc-tint);
+}
+
+/* 5b. Markers filter bar (search + type) ------------------- */
+#markers-filter-bar {
+    display: none;
+    /* switched to flex by JS when the job has markers */
+    align-items: center;
+    gap: .6rem;
+    flex: 0 0 auto;
+    padding: .75rem 1.1rem;
+    background: var(--bg-bar);
+    border-bottom: 1px solid var(--bd);
+}
+
+#markers-search-input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+#markers-type-filter {
+    flex: 0 0 auto;
+    width: 15rem;
+}
+
+#markers-filter-count {
+    flex: 0 0 auto;
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--txt4);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 6. Scroll body (jobs list / markers table) --------------- */
+.content-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 1rem 1.1rem 1.3rem;
+    background: transparent;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* 7. Job list cards ---------------------------------------- */
+#jobs-container {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+
+#jobs-container>[data-jobname] {
+    display: block;
+    margin: 0;
+}
+
+/* Job header row (button + split dropdown act as one card bar) */
+.btn.job-btn {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    color: var(--txt);
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: .7rem 1rem;
+    margin-top: 0 !important;
+    border-radius: .5rem 0 0 .5rem;
+    transition: .18s;
+}
+
+.btn.job-btn:hover {
+    background: #343434;
+    border-color: var(--acc-bd);
+    color: #fff;
+}
+
+.job-btn.col-11 {
+    width: calc(100% - 3rem);
+    flex: 1 1 auto;
+}
+
+#jobs-container .btn-group>.dropdown-toggle-split {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-left: none;
+    color: var(--txt3);
+    margin-top: 0 !important;
+    border-radius: 0 .5rem .5rem 0;
+    transition: .18s;
+}
+
+#jobs-container .btn-group>.dropdown-toggle-split:hover {
+    background: #343434;
+    color: var(--acc-lt);
+}
+
+/* Rank table revealed under a job */
+.collapse .table,
+.collapsing .table {
+    margin-top: .55rem;
+    margin-bottom: .2rem;
+}
+
+.job-rank-row {
+    cursor: pointer;
+}
+
+/* 8. Markers table ----------------------------------------- */
+#markers-container {
+    color: var(--txt);
+}
+
+#markers-container .table {
+    margin-bottom: 0;
+}
+
+#markers-container .border-danger,
+#markers-container.border-danger {
+    border-color: var(--bd) !important;
+}
+
+#markers-content tr {
+    cursor: pointer;
+}
+
+/* Per-row teleport button — compact, but still reads as a button */
+.tp-marker-btn {
+    padding: .2rem .85rem;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+}
+
+/* 9. Bootstrap tables -> BC ------------------------------- */
+.table,
+.table-dark {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--txt2);
+    --bs-table-border-color: var(--bd);
+    --bs-table-striped-bg: #ffffff08;
+    --bs-table-striped-color: var(--txt);
+    --bs-table-hover-bg: var(--acc-tint);
+    --bs-table-hover-color: var(--txt);
+    color: var(--txt2);
+    border-color: var(--bd);
+}
+
+.table>thead th,
+.table>thead td {
+    color: var(--txt4);
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--bd);
+}
+
+.table>tbody th {
+    color: var(--txt);
+    font-weight: 600;
+}
+
+/* 10. Bootstrap modals -> BC ------------------------------ */
+.modal-content {
+    background: var(--bg-modal);
+    border: 1px solid var(--bd);
+    border-radius: .6rem;
+    color: var(--txt);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .6);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--bd);
+    padding: .95rem 1.15rem;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--bd);
+    padding: .8rem 1.15rem;
+    gap: .3rem;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: var(--txt);
+    letter-spacing: .01em;
+}
+
+.modal-body {
+    padding: 1.1rem 1.15rem;
+}
+
+.modal-backdrop.show {
+    opacity: .62;
+}
+
+/* Dialog widths: the stock 500px Bootstrap dialog is far too narrow
+   for the marker editors, so their tables spilled out and the body
+   scrolled sideways. Give the editors room, keep prompts compact. */
+.modal-dialog {
+    max-width: min(820px, calc(100vw - 3rem));
+}
+
+/* Table-heavy editors (recipes, vehicle/item lists) need the most */
+#edit-marker-dialog-modal .modal-dialog,
+#crafting-table-data-modal .modal-dialog,
+#garage-data-modal .modal-dialog,
+#garage-buyable-data-modal .modal-dialog,
+#garage-owned-data-modal .modal-dialog,
+#shop-data-modal .modal-dialog,
+#job-shop-data-modal .modal-dialog,
+#market-data-modal .modal-dialog {
+    max-width: min(1080px, calc(100vw - 3rem));
+}
+
+/* Short confirms/prompts stay at the compact default */
+#delete-dialog-modal .modal-dialog,
+#input-text-dialog-modal .modal-dialog,
+#notification-modal .modal-dialog {
+    max-width: 500px;
+}
+
+/* Content fits the dialog instead of scrolling left/right */
+.modal-body {
+    overflow-x: hidden;
+}
+
+.modal-body .container,
+.modal-body .container-fluid {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Recipe fields: Bootstrap lets input-group inputs shrink to nothing
+   (min-width: 0), so a typed value can vanish. Give every field a
+   readable floor — the group wraps instead of squeezing. */
+#craftables .result-item {
+    min-width: 16rem;
+}
+
+#craftables .result-item-quantity,
+#craftables .result-item-crafting-time {
+    flex: 0 1 7rem;
+    min-width: 5rem;
+}
+
+#craftables .crafting-table-item-id {
+    min-width: 14rem;
+}
+
+#craftables .crafting-table-item-quantity {
+    min-width: 6rem;
+}
+
+/* Editable cells in list tables (shop, market, recipes, garages):
+   compact so rows stay tight, but never squeezed unreadable */
+#shop-data-items-container .form-control,
+#market-modal-items-tbody .form-control,
+#garage-data-model-tbody .vehicle-model,
+.craft-ingredients .form-control {
+    padding: .25rem .5rem;
+    min-width: 5rem;
+}
+
+/* Bootstrap close glyph (dark SVG) -> visible on charcoal */
+.btn-close {
+    filter: invert(.85) grayscale(.4);
+    opacity: .65;
+    transition: .2s;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.btn-close.btn-close-white {
+    filter: none;
+}
+
+/* 11. Forms ------------------------------------------------ */
+.form-control,
+.form-select {
+    background-color: #00000030;
+    border: 1px solid var(--bd);
+    color: var(--txt);
+    border-radius: .4rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #00000045;
+    border-color: var(--acc-bd);
+    color: var(--txt);
+    box-shadow: 0 0 0 .2rem var(--acc-tint);
+}
+
+.form-control::placeholder {
+    color: var(--txt4);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #00000018;
+    color: var(--txt3);
+}
+
+/* light chevron for selects on dark bg */
+.form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23b7b7b7' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.form-select option {
+    background: var(--bg-box);
+    color: var(--txt);
+}
+
+.form-control-color {
+    background-color: #00000030;
+    border-color: var(--bd);
+    padding: .2rem;
+}
+
+.form-label,
+.col-form-label,
+.form-check-label,
+.input-group .form-text {
+    color: var(--txt2);
+}
+
+.form-floating>label {
+    color: var(--txt4);
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label {
+    color: var(--txt3);
+}
+
+/* input-group addons */
+.input-group-text {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    color: var(--txt3);
+}
+
+/* checkboxes + switches */
+.form-check-input {
+    background-color: #00000045;
+    border: 1px solid var(--bd);
+}
+
+.form-check-input:checked {
+    background-color: var(--acc);
+    border-color: var(--acc);
+}
+
+.form-check-input:focus {
+    border-color: var(--acc-bd);
+    box-shadow: 0 0 0 .2rem var(--acc-tint);
+}
+
+/* range slider */
+.form-range::-webkit-slider-thumb {
+    background: var(--acc);
+}
+
+.form-range::-webkit-slider-thumb:active {
+    background: var(--acc-lt);
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background: #00000045;
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--acc);
+    border: none;
+}
+
+.form-range::-moz-range-track {
+    background: #00000045;
+}
+
+/* validation */
+.invalid-feedback {
+    color: var(--danger-lt);
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid,
+.form-control.is-invalid:focus {
+    border-color: var(--danger);
+}
+
+/* 12. Buttons -> BC semantics ----------------------------- */
+.btn {
+    font-weight: 700;
+    border-radius: .45rem;
+    border: 1px solid transparent;
+    transition: .16s;
+}
+
+.btn:focus,
+.btn:focus-visible {
+    box-shadow: 0 0 0 .2rem var(--acc-tint);
+}
+
+.btn:active {
+    transform: scale(.98);
+}
+
+/* blue = primary / test / info */
+.btn-primary,
+.btn-info {
+    background: var(--acc-tint);
+    border-color: var(--acc-bd);
+    color: var(--acc-lt);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-info:hover,
+.btn-info:focus {
+    background: var(--acc-tint-h);
+    border-color: var(--acc-bd);
+    color: #fff;
+}
+
+/* green = confirm / save / add */
+.btn-success {
+    background: var(--ok-tint);
+    border-color: rgba(76, 219, 40, .5);
+    color: var(--ok-lt);
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background: var(--ok-tint-h);
+    border-color: rgba(76, 219, 40, .5);
+    color: #fff;
+}
+
+/* ghost = secondary / cancel */
+.btn-secondary {
+    background: #ffffff08;
+    border-color: #ffffff1f;
+    color: var(--txt2);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: #ffffff14;
+    border-color: #ffffff2b;
+    color: #fff;
+}
+
+/* danger = destructive */
+.btn-danger {
+    background: var(--danger-tint);
+    border-color: rgba(219, 40, 40, .5);
+    color: var(--danger-lt);
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background: var(--danger-tint-h);
+    border-color: rgba(219, 40, 40, .5);
+    color: #fff;
+}
+
+/* amber = warning */
+.btn-warning {
+    background: rgba(224, 179, 77, .16);
+    border-color: rgba(224, 179, 77, .5);
+    color: #e6c168;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background: rgba(224, 179, 77, .26);
+    border-color: rgba(224, 179, 77, .5);
+    color: #fff;
+}
+
+/* outline variants -> ghost with semantic tint */
+.btn-outline-danger {
+    background: transparent;
+    border-color: rgba(219, 40, 40, .5);
+    color: var(--danger-lt);
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+    background: var(--danger-tint);
+    border-color: rgba(219, 40, 40, .6);
+    color: #fff;
+}
+
+.btn-outline-warning {
+    background: transparent;
+    border-color: rgba(224, 179, 77, .5);
+    color: #e6c168;
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:focus {
+    background: rgba(224, 179, 77, .16);
+    border-color: rgba(224, 179, 77, .6);
+    color: #fff;
+}
+
+/* 13. Dropdown menu (job actions) ------------------------- */
+.dropdown-menu,
+.dropdown-menu-dark {
+    background: var(--bg-box);
+    border: 1px solid var(--bd);
+    border-radius: .5rem;
+    padding: .3rem;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .5);
+}
+
+.dropdown-item,
+.dropdown-menu-dark .dropdown-item {
+    color: var(--txt2);
+    border-radius: .35rem;
+    padding: .45rem .7rem;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-menu-dark .dropdown-item:hover,
+.dropdown-menu-dark .dropdown-item:focus {
+    background: var(--acc-tint);
+    color: var(--acc-lt);
+}
+
+/* 14. Progress bars --------------------------------------- */
+.progress {
+    background: #00000045;
+    border-radius: 1em;
+    border-color: var(--bd) !important;
+}
+
+.progress-bar.bg-info {
+    background-color: var(--acc) !important;
+}
+
+.progress-bar.bg-success {
+    background-color: var(--ok) !important;
+}
+
+#job-creator-progressbar-text {
+    color: var(--txt);
+}
+
+/* 15. "Not allowed" screen -------------------------------- */
+#not-allowed-container {
+    display: none;
+    /* shown by JS when the player lacks the ACE permission */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(760px, 92vw);
+    max-width: none;
+    background: var(--bg-modal);
+    color: var(--txt);
+    border-radius: 12px !important;
+    padding: 1.6rem 1.9rem 2rem;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+}
+
+#not-allowed-container.border-danger {
+    border-color: var(--danger) !important;
+}
+
+#not-allowed-container .font-monospace {
+    background: #00000045;
+    border: 1px solid var(--bd);
+    border-radius: .4rem;
+    padding: .55rem .75rem;
+    color: var(--acc-lt);
+    word-break: break-all;
+}
+
+/* Preserve original hidden-by-default sub-sections (toggled by JS) */
+#blip-data,
+#edit-marker-npc-model-div {
+    display: none;
+}
+
+/* 16. Motion preference ----------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .big-container,
+    .btn,
+    .bc-close {
+        animation: none;
+        transition: none;
+    }
+}
